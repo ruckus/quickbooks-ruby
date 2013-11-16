@@ -1,0 +1,8 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-11-15T13:37:27.016-08:00">
+	<Fault type="ValidationFault">
+		<Error code="4001">
+			<Message>Invalid query</Message>
+			<Detail>QueryValidationError: value 0 is too small. Min allowed value is 1</Detail>
+		</Error>
+	</Fault>
+</IntuitResponse>

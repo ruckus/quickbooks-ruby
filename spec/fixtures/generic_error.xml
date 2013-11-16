@@ -1,0 +1,8 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-11-15T13:16:49.528-08:00">
+	<Fault type="SystemFault">
+		<Error code="10000">
+			<Message>An application error has occurred while processing your request</Message>
+			<Detail>System Failure Error: Could not find resource for relative : some more info here</Detail>
+		</Error>
+	</Fault>
+</IntuitResponse>
