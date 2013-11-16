@@ -1,0 +1,61 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-11-16T10:26:42.762-08:00">
+	<Customer domain="QBO" sparse="false">
+		<Id>1</Id>
+		<SyncToken>1</SyncToken>
+		<MetaData>
+			<CreateTime>2013-11-15T11:50:19-08:00</CreateTime>
+			<LastUpdatedTime>2013-11-15T14:37:43-08:00</LastUpdatedTime>
+		</MetaData>
+		<GivenName>John</GivenName>
+		<FamilyName>Doe</FamilyName>
+		<FullyQualifiedName>Thrifty Meats</FullyQualifiedName>
+		<CompanyName>Thrifty Meats</CompanyName>
+		<DisplayName>Thrifty Meats</DisplayName>
+		<PrintOnCheckName>Thrifty Meats</PrintOnCheckName>
+		<Active>true</Active>
+		<PrimaryPhone>
+			<FreeFormNumber>(415) 555-1212</FreeFormNumber>
+		</PrimaryPhone>
+		<AlternatePhone>
+			<FreeFormNumber>OtherWhat</FreeFormNumber>
+		</AlternatePhone>
+		<Mobile>
+			<FreeFormNumber>(831) 330-1234</FreeFormNumber>
+		</Mobile>
+		<Fax>
+			<FreeFormNumber>(707) 560-1212</FreeFormNumber>
+		</Fax>
+		<PrimaryEmailAddr>
+			<Address>info@thriftymeats.com</Address>
+		</PrimaryEmailAddr>
+		<WebAddr>
+			<URI>http://www.google.com</URI>
+		</WebAddr>
+		<Taxable>false</Taxable>
+		<BillAddr>
+			<Id>2</Id>
+			<Line1>123 Swift St.</Line1>
+			<City>Santa Cruz</City>
+			<Country>USA</Country>
+			<CountrySubDivisionCode>CA</CountrySubDivisionCode>
+			<PostalCode>95060</PostalCode>
+			<Lat>36.9507991</Lat>
+			<Long>-122.0477003</Long>
+		</BillAddr>
+		<ShipAddr>
+			<Id>2</Id>
+			<Line1>123 Swift St.</Line1>
+			<City>Santa Cruz</City>
+			<Country>USA</Country>
+			<CountrySubDivisionCode>CA</CountrySubDivisionCode>
+			<PostalCode>95060</PostalCode>
+			<Lat>36.9507991</Lat>
+			<Long>-122.0477003</Long>
+		</ShipAddr>
+		<Job>false</Job>
+		<BillWithParent>false</BillWithParent>
+		<Balance>0</Balance>
+		<BalanceWithJobs>0</BalanceWithJobs>
+		<PreferredDeliveryMethod>Email</PreferredDeliveryMethod>
+	</Customer>
+</IntuitResponse>

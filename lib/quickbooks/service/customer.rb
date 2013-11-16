@@ -2,10 +2,12 @@ module Quickbooks
   module Service
     class Customer < BaseService
 
-      def list(query, options = {})
+      def query(customer_query = nil, options = {})
+        customer_query ||= "SELECT * FROM CUSTOMER"
+
         options[:page] ||= 1
         options[:per_page] ||= 20
-        fetch_collection(query, model, options)
+        fetch_collection(customer_query, model, options)
       end
 
       def fetch_by_id(id, options = {})
@@ -18,7 +20,7 @@ module Quickbooks
         xml = object.to_xml_ns
         response = do_http_post(url_for_resource(model.resource_for_singular), valid_xml_document(xml))
         if response.code.to_i == 200
-          model.from_xml(response.body)
+          model.from_xml(parse_singular_entity_response(model, response.body))
         else
           nil
         end

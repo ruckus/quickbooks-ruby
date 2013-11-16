@@ -51,6 +51,10 @@ module Quickbooks
         "#{@base_uri}/#{@company_id}"
       end
 
+      def url_for_query(query = "")
+        "#{url_for_base}/query?query=#{URI.encode(query)}"
+      end
+
       private
 
       def parse_xml(xml)
@@ -92,9 +96,6 @@ module Quickbooks
         parse_collection(response, model)
       end
 
-      def url_for_query(query)
-        "#{url_for_base}/query?query=#{URI.encode(query)}"
-      end
       #
       # def fetch_collection2(model, custom_field_query = nil, filters = [], page = 1, per_page = 20, sort = nil, options ={})
       #   raise ArgumentError, "missing model to instantiate" if model.nil?
@@ -138,7 +139,7 @@ module Quickbooks
               collection.max_results = query_response.attributes['maxResults'].value
             end
 
-            path_to_nodes = "//xmlns:IntuitResponse/xmlns:#{model::XML_NODE}"
+            path_to_nodes = "//xmlns:IntuitResponse//xmlns:#{model::XML_NODE}"
             collection.count = xml.xpath(path_to_nodes).count
             if collection.count > 0
               xml.xpath(path_to_nodes).each do |xa|
@@ -155,6 +156,19 @@ module Quickbooks
         else
           nil
         end
+      end
+
+      # Given an IntuitResponse which is expected to wrap a single
+      # Entity node, e.g.
+      # <IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-11-16T10:26:42.762-08:00">
+      #   <Customer domain="QBO" sparse="false">
+      #     <Id>1</Id>
+      #     ...
+      #   </Customer>
+      # </IntuitResponse>
+      def parse_singular_entity_response(model, xml)
+        xmldoc = Nokogiri(xml)
+        xmldoc.xpath("//xmlns:IntuitResponse/xmlns:#{model::XML_NODE}")[0]
       end
 
       def perform_write(model, body = "", params = {}, headers = {})
