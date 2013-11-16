@@ -9,12 +9,13 @@ module Quickbooks
   module Model
     class Invoice < BaseModel
 
+      #== Constants
       REST_RESOURCE = 'invoice'
       XML_COLLECTION_NODE = "Invoice"
       XML_NODE = "Invoice"
 
       xml_accessor :id, :from => 'Id'
-      xml_accessor :sync_token, :from => 'SyncToken'
+      xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => Quickbooks::Model::MetaData
       xml_accessor :custom_fields, :from => 'CustomField', :as => [Quickbooks::Model::CustomField]
       xml_accessor :doc_number, :from => 'DocNumber'
@@ -28,12 +29,12 @@ module Quickbooks
       xml_accessor :billing_address, :from => 'BillAddr', :as => Quickbooks::Model::PhysicalAddress
       xml_accessor :shipping_address, :from => 'ShipAddr', :as => Quickbooks::Model::PhysicalAddress
       xml_accessor :class_ref, :from => 'ClassRef'
-      xml_accessor :sales_term_ref, :from => 'SalesTermRef'
+      xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => Integer
       xml_accessor :due_date, :from => 'DueDate', :as => Date
       xml_accessor :ship_method_ref, :from => 'ShipMethodRef'
       xml_accessor :ship_date, :from => 'ShipDate', :as => Date
       xml_accessor :tracking_num, :from => 'TrackingNum'
-      xml_accessor :ar_account_ref, :from => 'ARAccountRef'
+      xml_accessor :ar_account_ref, :from => 'ARAccountRef', :as => Integer
       xml_accessor :total_amount, :from => 'TotalAmt', :as => Float
       xml_accessor :apply_tax_after_discount, :from => 'ApplyTaxAfterDiscount'
       xml_accessor :print_status, :from => 'PrintStatus'
@@ -45,6 +46,15 @@ module Quickbooks
       xml_accessor :allow_online_payment, :from => 'AllowOnlinePayment'
       xml_accessor :allow_online_credit_card_payment, :from => 'AllowOnlineCreditCardPayment'
       xml_accessor :allow_online_ach_payment, :from => 'AllowOnlineACHPayment'
+
+      #== Validations
+      validates_length_of :line_items, :minimum => 1
+      validate :existence_of_customer_ref
+
+      def initialize
+        ensure_line_items_initialization
+        super
+      end
 
       def apply_tax_after_discount?
         apply_tax_after_discount.to_s == 'true'
@@ -66,6 +76,21 @@ module Quickbooks
         allow_online_ach_payment.to_s == 'true'
       end
 
+      def customer=(customer_id)
+        self.customer_ref = Quickbooks::Model::CustomerRef.new(customer_id)
+      end
+
+      private
+
+      def existence_of_customer_ref
+        if customer_ref.nil? || (customer_ref && customer_ref.value == 0)
+          errors.add(:customer_ref, "CustomerRef is required and must be a non-zero value.")
+        end
+      end
+
+      def ensure_line_items_initialization
+        self.line_items ||= []
+      end
     end
   end
 end

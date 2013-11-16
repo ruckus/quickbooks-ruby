@@ -1,6 +1,7 @@
 module Quickbooks
   module Model
     class BaseModel
+      include ActiveModel::Validations
       include ROXML
       xml_convention :camelcase
 
@@ -17,6 +18,10 @@ module Quickbooks
         step1 = s.string.sub("<#{model_name}>", "<#{destination_name} #{Quickbooks::Service::BaseService::XML_NS} #{sparse_string}>")
         step2 = step1.sub("</#{model_name}>", "</#{destination_name}>")
         step2
+      end
+
+      def to_xml_ns(options = {})
+        to_xml_inject_ns(self.class::XML_NODE, options)
       end
 
       class << self

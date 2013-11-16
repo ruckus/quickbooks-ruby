@@ -17,7 +17,7 @@ RSpec::Core::RakeTask.new(:spec) do |t|
 end
 
 
-desc "Open an irb (or pry) session preloaded with Quickeebooks"
+desc "Open an irb (or pry) session preloaded with Quickbooks"
 task :console do
   begin
     require 'pry'

@@ -10,15 +10,13 @@
 module Quickbooks
   module Model
     class Customer < BaseModel
-      include ActiveModel::Validations
-
       XML_COLLECTION_NODE = "Customer"
       XML_NODE = "Customer"
       REST_RESOURCE = 'customer'
 
       xml_name XML_NODE
       xml_accessor :id, :from => 'Id'
-      xml_accessor :sync_token, :from => 'SyncToken'
+      xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => Quickbooks::Model::MetaData
       xml_accessor :title, :from => 'Title'
       xml_accessor :given_name, :from => 'GivenName'
@@ -32,7 +30,7 @@ module Quickbooks
       xml_accessor :alternate_phone, :from => 'AlternatePhone', :as => Quickbooks::Model::TelephoneNumber
       xml_accessor :mobile_phone, :from => 'Mobile', :as => Quickbooks::Model::TelephoneNumber
       xml_accessor :fax_phone, :from => 'Fax', :as => Quickbooks::Model::TelephoneNumber
-      xml_accessor :email, :from => 'PrimaryEmailAddr', :as => Quickbooks::Model::EmailAddress
+      xml_accessor :primary_email_address, :from => 'PrimaryEmailAddr', :as => Quickbooks::Model::EmailAddress
       xml_accessor :web_site, :from => 'WebAddr', :as => Quickbooks::Model::WebSiteAddress
       xml_accessor :billing_address, :from => 'BillAddr', :as => Quickbooks::Model::PhysicalAddress
       xml_accessor :shipping_address, :from => 'ShipAddr', :as => Quickbooks::Model::PhysicalAddress
@@ -83,12 +81,12 @@ module Quickbooks
         errors.empty?
       end
 
-      def to_xml_ns(options = {})
-        to_xml_inject_ns('Customer', options)
+      def email_address=(email_address)
+        self.primary_email_address = Quickbooks::Model::EmailAddress.new(email_address)
       end
 
-      def email_address=(email_address)
-        self.email = Quickbooks::Model::EmailAddress.new(email_address)
+      def email_address
+        primary_email_address
       end
 
       # To delete an account Intuit requires we provide Id and SyncToken fields
