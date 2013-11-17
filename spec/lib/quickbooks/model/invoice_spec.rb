@@ -19,7 +19,7 @@ describe "Quickbooks::Model::Invoice" do
     line_item1.amount.should == 50.00
     line_item1.sales_item?.should == true
     line_item1.sales_line_item_detail.should_not be_nil
-    line_item1.sales_line_item_detail.item_ref.value.should == "1"
+    line_item1.sales_line_item_detail.item_ref.should == 1
     line_item1.sales_line_item_detail.unit_price.should == 50
     line_item1.sales_line_item_detail.quantity.should == 1
     line_item1.sales_line_item_detail.tax_code_ref.should == 'NON'
@@ -53,7 +53,7 @@ describe "Quickbooks::Model::Invoice" do
     shipping_address.lon.should == -118.0395574
 
     invoice.sales_term_ref.should == 2
-    invoice.due_date.to_date == Date.civil(2013, 11, 30)
+    invoice.due_date.to_date.should == Date.civil(2013, 11, 30)
     invoice.total_amount.should == 50.00
     invoice.apply_tax_after_discount?.should == false
     invoice.print_status.should == 'NotSet'
@@ -80,7 +80,7 @@ describe "Quickbooks::Model::Invoice" do
 
   it "is valid with line_items and customer_ref" do
     invoice = Quickbooks::Model::Invoice.new
-    invoice.customer = 2
+    invoice.customer_id = 2
     invoice.line_items << Quickbooks::Model::InvoiceLineItem.new
 
     invoice.valid?.should == true

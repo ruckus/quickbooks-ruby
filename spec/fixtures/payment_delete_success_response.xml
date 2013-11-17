@@ -1,0 +1,5 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-04-23T08:30:33.626-07:00">
+  <Payment domain="QBO" status="Deleted">
+  <Id>8748</Id>
+  </Payment>
+</IntuitResponse>

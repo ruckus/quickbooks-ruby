@@ -14,7 +14,7 @@ module Quickbooks
       XML_COLLECTION_NODE = "Invoice"
       XML_NODE = "Invoice"
 
-      xml_accessor :id, :from => 'Id'
+      xml_accessor :id, :from => 'Id', :as => Integer
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => Quickbooks::Model::MetaData
       xml_accessor :custom_fields, :from => 'CustomField', :as => [Quickbooks::Model::CustomField]
@@ -76,7 +76,7 @@ module Quickbooks
         allow_online_ach_payment.to_s == 'true'
       end
 
-      def customer=(customer_id)
+      def customer_id=(customer_id)
         self.customer_ref = Quickbooks::Model::CustomerRef.new(customer_id)
       end
 

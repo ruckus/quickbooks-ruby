@@ -171,6 +171,17 @@ module Quickbooks
         xmldoc.xpath("//xmlns:IntuitResponse/xmlns:#{model::XML_NODE}")[0]
       end
 
+      # A successful delete request returns a XML packet like:
+      # <IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-04-23T08:30:33.626-07:00">
+      #   <Payment domain="QBO" status="Deleted">
+      #   <Id>8748</Id>
+      #   </Payment>
+      # </IntuitResponse>
+      def parse_singular_entity_response_for_delete(model, xml)
+        xmldoc = Nokogiri(xml)
+        xmldoc.xpath("//xmlns:IntuitResponse/xmlns:#{model::XML_NODE}[@status='Deleted']").length == 1
+      end
+
       def perform_write(model, body = "", params = {}, headers = {})
         url = url_for_resource(model::REST_RESOURCE)
         unless headers.has_key?('Content-Type')

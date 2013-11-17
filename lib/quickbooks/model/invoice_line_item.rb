@@ -25,6 +25,13 @@ module Quickbooks
         detail_type.to_s == SUB_TOTAL_LINE_DETAIL
       end
 
+      def sales_item!
+        self.detail_type = SALES_LINE_ITEM_DETAIL
+        self.sales_line_item_detail = Quickbooks::Model::SalesItemLineDetail.new
+
+        yield self.sales_line_item_detail if block_given?
+      end
+
     end
   end
 end

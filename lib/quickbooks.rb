@@ -28,6 +28,7 @@ require 'quickbooks/model/customer'
 
 #== Services
 require 'quickbooks/service/base_service'
+require 'quickbooks/service/service_crud'
 require 'quickbooks/service/customer'
 require 'quickbooks/service/invoice'
 

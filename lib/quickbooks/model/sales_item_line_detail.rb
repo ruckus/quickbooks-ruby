@@ -1,7 +1,7 @@
 module Quickbooks
   module Model
     class SalesItemLineDetail < BaseModel
-      xml_accessor :item_ref, :from => 'ItemRef', :as => Quickbooks::Model::InvoiceItemRef
+      xml_accessor :item_ref, :from => 'ItemRef', :as => Integer
       xml_accessor :class_ref, :from => 'ClassRef'
       xml_accessor :unit_price, :from => 'UnitPrice', :as => Float
       xml_accessor :quantity, :from => 'Qty', :as => Float

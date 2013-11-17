@@ -1,0 +1,65 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-11-16T10:26:42.762-08:00">
+  <Invoice domain="QBO" sparse="false">
+  	<Id>1</Id>
+  	<SyncToken>2</SyncToken>
+  	<MetaData>
+  		<CreateTime>2013-11-15T15:22:43-08:00</CreateTime>
+  		<LastUpdatedTime>2013-11-15T15:22:43-08:00</LastUpdatedTime>
+  	</MetaData>
+  	<DocNumber>1001</DocNumber>
+  	<TxnDate>2013-11-15</TxnDate>
+  	<CurrencyRef name="United States Dollar">USD</CurrencyRef>
+  	<PrivateNote>Statement Memo</PrivateNote>
+  	<Line>
+  		<Id>1</Id>
+  		<LineNum>1</LineNum>
+  		<Description>Plush Baby Doll</Description>
+  		<Amount>50.00</Amount>
+  		<DetailType>SalesItemLineDetail</DetailType>
+  		<SalesItemLineDetail>
+  			<ItemRef name="Sales">1</ItemRef>
+  			<UnitPrice>50</UnitPrice>
+  			<Qty>1</Qty>
+  			<TaxCodeRef>NON</TaxCodeRef>
+  		</SalesItemLineDetail>
+  	</Line>
+  	<Line>
+  		<Amount>50.00</Amount>
+  		<DetailType>SubTotalLineDetail</DetailType>
+  		<SubTotalLineDetail />
+  	</Line>
+  	<CustomerRef name="Sunset Bakery">2</CustomerRef>
+  	<CustomerMemo>Message to Customer</CustomerMemo>
+  	<BillAddr>
+  		<Id>6</Id>
+  		<Line1>Rebecca Clark</Line1>
+  		<Line2>Sunset Bakery</Line2>
+  		<Line3>1040 East Tasman Drive.</Line3>
+  		<Line4>Los Angeles, CA  91123 USA</Line4>
+  		<Lat>34.1426959</Lat>
+  		<Long>-118.1568847</Long>
+  	</BillAddr>
+  	<ShipAddr>
+  		<Id>3</Id>
+  		<Line1>1040 East Tasman Drive.</Line1>
+  		<City>Los Angeles</City>
+  		<Country>USA</Country>
+  		<CountrySubDivisionCode>CA</CountrySubDivisionCode>
+  		<PostalCode>91123</PostalCode>
+  		<Lat>33.739466</Lat>
+  		<Long>-118.0395574</Long>
+  	</ShipAddr>
+  	<SalesTermRef>2</SalesTermRef>
+  	<DueDate>2013-11-30</DueDate>
+  	<TotalAmt>50.00</TotalAmt>
+  	<ApplyTaxAfterDiscount>false</ApplyTaxAfterDiscount>
+  	<PrintStatus>NotSet</PrintStatus>
+  	<EmailStatus>NotSet</EmailStatus>
+  	<Balance>50.00</Balance>
+  	<Deposit>0</Deposit>
+  	<AllowIPNPayment>true</AllowIPNPayment>
+  	<AllowOnlinePayment>false</AllowOnlinePayment>
+  	<AllowOnlineCreditCardPayment>true</AllowOnlineCreditCardPayment>
+  	<AllowOnlineACHPayment>false</AllowOnlineACHPayment>
+  </Invoice>
+</IntuitResponse>

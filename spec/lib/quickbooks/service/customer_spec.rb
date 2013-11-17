@@ -7,7 +7,7 @@ describe "Quickbooks::Service::Customer" do
     xml = fixture("customers.xml")
     model = Quickbooks::Model::Customer
 
-    stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
+    stub_request(:get, @service.url_for_query, ["200", "OK"], xml, false)
     customers = @service.query
     customers.entries.count.should == 5
 
@@ -68,23 +68,34 @@ describe "Quickbooks::Service::Customer" do
     created_customer = @service.create(customer)
     created_customer.id.should == 1
   end
-  #
-  # it "can update a customer name" do
-  #   customer_xml = windowsFixture("customer.xml")
-  #   update_response_xml = windowsFixture("customer_update_success.xml")
-  #   model = Quickeebooks::Windows::Model::Customer
-  #   customer = model.from_xml(customer_xml)
-  #   customer.name.should == "Wine House"
-  #
-  #   FakeWeb.register_uri(:post, @service.url_for_resource(model::REST_RESOURCE), :status => ["200", "OK"], :body => update_response_xml)
-  #
-  #   # change the name
-  #   customer.name = "Acme Cafe"
-  #
-  #   update_response = @service.update(customer)
-  #   update_response.success?.should == true
-  #   update_response.success.party_role_ref.id.value.should == "6762304"
-  #   update_response.success.request_name.should == "CustomerMod"
-  # end
+
+  it "can sparse update a customer" do
+    model = Quickbooks::Model::Customer
+    customer = Quickbooks::Model::Customer.new
+    customer.display_name = "Thrifty Meats"
+    customer.sync_token = 2
+    customer.id = 1
+
+    xml = fixture("fetch_customer_by_id.xml")
+    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+
+    update_response = @service.update(customer, :sparse => true)
+    update_response.display_name.should == 'Thrifty Meats'
+  end
+
+  it "can delete a customer" do
+    model = Quickbooks::Model::Customer
+    customer = Quickbooks::Model::Customer.new
+    customer.display_name = "Thrifty Meats"
+    customer.sync_token = 2
+    customer.id = 1
+
+    xml = fixture("deleted_customer.xml")
+    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+
+    response = @service.delete(customer)
+    response.fully_qualified_name.should == 'Thrifty Meats (deleted)'
+    response.active?.should == false
+  end
 
 end

@@ -1,10 +1,18 @@
 module NetHelpers
-  def stub_request(method, url, status = ["200", "OK"], body = nil)
-    if url.is_a?(String)
-      url = url.gsub('?', '\?')
+
+  # +strict+ indicates whether we want to use a regex for a matching URL, which is needed
+  # for URLs that use query params. If you don't need use query params
+  # than its suggested to use strict = true
+  def stub_request(method, url, status = ["200", "OK"], body = nil, strict = true)
+    if !strict
+      if url.is_a?(String)
+        url = url.gsub('?', '\?')
+      end
+      uri = %r|#{url}|
+    else
+      uri = url
     end
-    url_regexp = %r|#{url}|
-    FakeWeb.register_uri(method, url_regexp, :status => status, :body => body)
+    FakeWeb.register_uri(method, uri, :status => status, :body => body)
   end
 end
 
