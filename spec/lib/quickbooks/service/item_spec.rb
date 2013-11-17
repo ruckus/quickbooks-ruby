@@ -54,12 +54,16 @@ describe "Quickbooks::Service::Item" do
     item.name = "Plush Baby Doll"
     item.sync_token = 2
     item.id = 1
+    # purposefully unset an element - which if we were not using
+    # sparse update would cause Intuit to unset the field remotely as well.
+    item.description = nil
 
     xml = fixture("fetch_item_by_id.xml")
     stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
 
     update_response = @service.update(item, :sparse => true)
     update_response.name.should == 'Plush Baby Doll'
+    update_response.description.should_not be_nil
   end
 
   it "can delete an Item" do

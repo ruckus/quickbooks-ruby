@@ -140,8 +140,21 @@ module Quickbooks
 
             query_response = xml.xpath("//xmlns:IntuitResponse/xmlns:QueryResponse")[0]
             if query_response
-              collection.start_position = query_response.attributes['startPosition'].value
-              collection.max_results = query_response.attributes['maxResults'].value
+
+              start_pos_attr = query_response.attributes['startPosition']
+              if start_pos_attr
+                collection.start_position = start_pos_attr.value.to_i
+              end
+
+              max_results_attr = query_response.attributes['maxResults']
+              if max_results_attr
+                collection.max_results = max_results_attr.value.to_i
+              end
+
+              total_count_attr = query_response.attributes['totalCount']
+              if total_count_attr
+                collection.total_count = total_count_attr.value.to_i
+              end
             end
 
             path_to_nodes = "//xmlns:IntuitResponse//xmlns:#{model::XML_NODE}"

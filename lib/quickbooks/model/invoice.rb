@@ -19,7 +19,7 @@ module Quickbooks
       xml_accessor :meta_data, :from => 'MetaData', :as => Quickbooks::Model::MetaData
       xml_accessor :custom_fields, :from => 'CustomField', :as => [Quickbooks::Model::CustomField]
       xml_accessor :doc_number, :from => 'DocNumber'
-      xml_accessor :txn_date, :from => 'TxnDate'
+      xml_accessor :txn_date, :from => 'TxnDate', :as => Date
       xml_accessor :private_note, :from => 'PrivateNote'
       xml_accessor :linked_transactions, :from => 'LinkedTxn', :as => [Quickbooks::Model::LinkedTransaction]
       xml_accessor :line_items, :from => 'Line', :as => [Quickbooks::Model::InvoiceLineItem]

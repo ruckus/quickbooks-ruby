@@ -75,7 +75,7 @@ module Quickbooks
     attr_accessor :count, :current_page
 
     # v3 Attributes
-    attr_accessor :start_position, :max_results
+    attr_accessor :start_position, :max_results, :total_count
   end
 
 end
