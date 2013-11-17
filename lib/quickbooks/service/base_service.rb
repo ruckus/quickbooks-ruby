@@ -300,7 +300,10 @@ module Quickbooks
 
           error_element = fault.xpath("//xmlns:Error")[0]
           if error_element
-            error[:code] = error_element.attributes['code'].value
+            code_attr = error_element.attributes['code']
+            if code_attr
+              error[:code] = code_attr.value
+            end
             error[:message] = error_element.xpath("//xmlns:Message").text
             error[:detail] = error_element.xpath("//xmlns:Detail").text
           end
