@@ -1,0 +1,15 @@
+<Invoice xmlns="http://schema.intuit.com/finance/v3" sparse="false">
+	<DocNumber>1001</DocNumber>
+	<TxnDate>2013-11-20</TxnDate>
+	<Line>
+		<Description>Plush Baby Doll</Description>
+		<Amount>50</Amount>
+		<DetailType>SalesItemLineDetail</DetailType>
+		<SalesItemLineDetail>
+			<ItemRef>1</ItemRef>
+			<UnitPrice>50</UnitPrice>
+			<Qty>1</Qty>
+		</SalesItemLineDetail>
+	</Line>
+	<CustomerRef>1</CustomerRef>
+</Invoice>

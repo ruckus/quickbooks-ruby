@@ -87,7 +87,12 @@ module Quickbooks
         page = options.fetch(:page, 1)
         per_page = options.fetch(:per_page, 20)
 
-        start_position = (page - 1) * per_page
+        if page == 1
+          start_position = 1
+        else
+          start_position = (page * per_page) + 1 # page=2, per_page=10 then we want to start at 11
+        end
+
         max_results = (page * per_page)
 
         query = "#{query} STARTPOSITION #{start_position} MAXRESULTS #{max_results}"

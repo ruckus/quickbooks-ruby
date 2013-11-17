@@ -36,9 +36,9 @@ module Quickbooks
       xml_accessor :shipping_address, :from => 'ShipAddr', :as => Quickbooks::Model::PhysicalAddress
       xml_accessor :job, :from => 'Job'
       xml_accessor :bill_with_parent, :from => 'BillWithParent'
-      xml_accessor :parent_ref, :from => 'ParentRef'
+      xml_accessor :parent_ref, :from => 'ParentRef', :as => Integer
       xml_accessor :level, :from => 'Level'
-      xml_accessor :sales_term_ref, :from => 'SalesTermRef'
+      xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => Integer
       xml_accessor :payment_method_ref, :from => 'PaymentMethodRef'
       xml_accessor :balance, :from => 'Balance', :as => Float
       xml_accessor :open_balance_date, :from => 'OpenBalanceDate', :as => Date

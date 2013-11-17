@@ -17,6 +17,11 @@ require 'quickbooks/model/invoice_item_ref'
 require 'quickbooks/model/sales_item_line_detail'
 require 'quickbooks/model/sub_total_line_detail'
 require 'quickbooks/model/customer_ref'
+require 'quickbooks/model/discount_override'
+require 'quickbooks/model/payment_line_detail'
+require 'quickbooks/model/item'
+
+
 require 'quickbooks/model/telephone_number'
 require 'quickbooks/model/email_address'
 require 'quickbooks/model/web_site_address'
@@ -31,6 +36,7 @@ require 'quickbooks/service/base_service'
 require 'quickbooks/service/service_crud'
 require 'quickbooks/service/customer'
 require 'quickbooks/service/invoice'
+require 'quickbooks/service/item'
 
 class InvalidModelException < StandardError; end
 

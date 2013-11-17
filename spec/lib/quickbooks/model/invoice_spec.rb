@@ -25,7 +25,7 @@ describe "Quickbooks::Model::Invoice" do
     line_item1.sales_line_item_detail.tax_code_ref.should == 'NON'
 
     line_item2 = invoice.line_items[1]
-    line_item2.subtotal_item?.should == true
+    line_item2.sub_total_item?.should == true
 
     invoice.customer_ref.value.should == "2"
     invoice.customer_ref.name.should == "Sunset Bakery"

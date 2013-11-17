@@ -1,0 +1,19 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-11-16T10:26:42.762-08:00">
+  <Item domain="QBO" sparse="false">
+  	<Id>2</Id>
+  	<SyncToken>0</SyncToken>
+  	<MetaData>
+  		<CreateTime>2013-11-16T17:42:03-08:00</CreateTime>
+  		<LastUpdatedTime>2013-11-16T17:42:03-08:00</LastUpdatedTime>
+  	</MetaData>
+  	<Name>Plush Baby Doll</Name>
+  	<Description>A fine baby doll - in many colors</Description>
+  	<Active>true</Active>
+  	<Taxable>false</Taxable>
+  	<UnitPrice>50</UnitPrice>
+  	<Type>Service</Type>
+  	<IncomeAccountRef name="Sales">1</IncomeAccountRef>
+  	<PurchaseCost>0</PurchaseCost>
+  	<TrackQtyOnHand>false</TrackQtyOnHand>
+  </Item>
+</IntuitResponse>

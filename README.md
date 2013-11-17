@@ -116,6 +116,8 @@ You can issue your own query by passing the complete and valid query as the firs
 customers.query("Select Id, GivenName From Customer")
 ```
 
+Each Entity has different fields you can retrieve & filter on. Refer to Intuit documentation for details.
+
 ### Pagination
 
 Do not pass pagination parameters in your query - pass them as additional options, using `:page` and `:per_page`:
@@ -125,12 +127,9 @@ Do not pass pagination parameters in your query - pass them as additional option
 customers.query(nil, :page => 2, :per_page => 25)
 
 # to use a custom query: find customers updated recently and only select a few attributes
-
 query = "Select Id, GivenName From Customer Where Metadata.LastUpdatedTime>'2013-03-13T14:50:22-08:00' Order By Metadata.LastUpdatedTime"
 customers.query(query, :page => 2, :per_page => 25)
 ```
-
-Each Entity has different fields you can retrieve & filter on. Refer to Intuit documentation for details.
 
 ## Retrieving a single object
 
@@ -170,6 +169,38 @@ customer.company_name = "New Company Name"
 service.update(customer, :sparse => true)
 ```
 
+## Generating an Invoice
+
+A complete example on generating a basic invoice:
+
+```ruby
+# Given a Customer with ID=99 lets invoice them for an Item with ID=500
+invoice = Quickbooks::Model::Invoice.new
+invoice.customer_id = 99
+invoice.txn_date = Date.civil(2013, 11, 20)
+invoice.doc_number = "1001" # my custom Invoice # - can leave blank to have Intuit auto-generate it
+
+line_item = Quickbooks::Model::InvoiceLineItem.new
+line_item.amount = 50
+line_item.description = "Plush Baby Doll"
+line_item.sales_item! do |detail|
+  detail.unit_price = 50
+  detail.quantity = 1
+  detail.item_ref = 500 # Item ID here
+end
+
+invoice.line_items << line_item
+
+service = Quickbooks::Service::Invoice.new
+service.company_id = "123"
+service.access_token = access_token
+created_invoice = service.create(invoice)
+puts created_invoice.id
+=> 234
+```
+
+**Notes**: `line_item.amount` must equal the `unit_price * quantity` in the sales detail packet - otherwise Intuit will raise an exception.
+
 ## Deleting an Object
 
 Use `Service#delete` which returns a boolean on whether the delete operation succeeded or not.
@@ -184,6 +215,10 @@ service.delete(customer)
 ```ruby
 Quickbooks.log = true
 ```
+
+## TODO
+
+* Implement other Line Item types, e.g. `DiscountLineDetail`, `DescriptionLineDetail`
 
 ## Author
 
