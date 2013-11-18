@@ -216,9 +216,50 @@ service.delete(customer)
 Quickbooks.log = true
 ```
 
+## Entities Implemented
+
+Entity            | Create | Update | Query | Delete | Fetch by ID | Other
+---               | ---    | ---    | ---  | ---    | ---         | ---
+Account           | no    | no    | no  | no    | no
+Attachable           | no    | no    | no  | no    | no
+Bill              | no    | no    | no  | no    | no
+Bill Payment      | no    | no    | no  | no    | no
+Class             | no    | no    | no  | no    | no
+Company Info | no     | no     | no   | no     | no          |
+Credit Memo | no     | no     | no   | no     | no          |
+Customer          | yes    | yes    | yes  | yes    | yes         |
+Department          | yes    | yes    | yes  | yes    | yes         |
+Employee          | no    | no    | no  | no    | no         |
+Entitlements          | no    | no    | no  | no    | no         |
+Estimate          | no    | no    | no  | no    | no         |
+Invoice           | yes    | yes    | yes  | yes    | yes         |
+Item              | yes    | yes    | yes  | yes    | yes         |
+Journal Entry     | no    | no    | no  | no    | no         |
+Job               | no    | no    | no  | no    | no         |
+Payment           | no    | no    | no  | no    | no         |
+PaymentMethod           | no    | no    | no  | no    | no         |
+Preferences           | no    | no    | no  | no    | no         |
+Purchase           | no    | no    | no  | no    | no         |
+PurchaseOrder           | no    | no    | no  | no    | no         |
+Sales Receipt     | no    | no    | no  | no    | no         |
+Sales Rep         | no     | no     | no   | no     | no          |
+Sales Tax         | no     | no     | no   | no     | no          |
+Sales Term        | no    | no    | no  | no    | no         |
+Ship Method       | no     | no     | no   | no     | no          |
+Sync Activity     | n/a    | n/a    | n/a  | n/a    | n/a         |
+Sync Status       | n/a    | n/a    | n/a  | n/a    | n/a         |
+Tax Code     | no    | no    | no  | no    | no         |
+Tax Rate     | no    | no    | no  | no    | no         |
+Term     | no    | no    | no  | no    | no         |
+Time Activity     | no    | no    | no  | no    | no         |
+Tracking Class    | no    | no    | no  | no    | no         |
+Vendor            | no    | no    | no  | no    | no         |
+VendorCredit            | no    | no    | no  | no    | no         |
+
+
 ## TODO
 
-* Implement other Line Item types, e.g. `DiscountLineDetail`, `DescriptionLineDetail`
+* Implement other Line Item types, e.g. `DiscountLineDetail`, `DescriptionLineDetail` for Invoices
 
 ## Author
 
