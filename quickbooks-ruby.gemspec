@@ -10,14 +10,13 @@ Gem::Specification.new do |gem|
   gem.homepage = "http://github.com/ruckus/quickbooks-ruby"
   gem.summary  = "REST API to Quickbooks Online via Intuit Data Services v3"
   gem.license  = 'MIT'
-  gem.description = 'Data format is XML'
+  gem.description = gem.summary
 
   gem.files = Dir['lib/**/*']
 
   gem.add_dependency 'oauth'
   gem.add_dependency 'roxml'
   gem.add_dependency 'nokogiri', '~> 1.5.9'
-  #gem.add_dependency 'nokogiri', '~> 1.5.9'
   gem.add_dependency 'activemodel'
 
   gem.add_development_dependency 'rake'
