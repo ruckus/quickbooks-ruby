@@ -228,7 +228,7 @@ Class             | no    | no    | no  | no    | no
 Company Info | no     | no     | no   | no     | no          |
 Credit Memo | no     | no     | no   | no     | no          |
 Customer          | yes    | yes    | yes  | yes    | yes         |
-Department          | yes    | yes    | yes  | yes    | yes         |
+Department          | no    | no    | no  | no    | no         |
 Employee          | no    | no    | no  | no    | no         |
 Entitlements          | no    | no    | no  | no    | no         |
 Estimate          | no    | no    | no  | no    | no         |
@@ -245,9 +245,6 @@ Sales Receipt     | no    | no    | no  | no    | no         |
 Sales Rep         | no     | no     | no   | no     | no          |
 Sales Tax         | no     | no     | no   | no     | no          |
 Sales Term        | no    | no    | no  | no    | no         |
-Ship Method       | no     | no     | no   | no     | no          |
-Sync Activity     | n/a    | n/a    | n/a  | n/a    | n/a         |
-Sync Status       | n/a    | n/a    | n/a  | n/a    | n/a         |
 Tax Code     | no    | no    | no  | no    | no         |
 Tax Rate     | no    | no    | no  | no    | no         |
 Term     | no    | no    | no  | no    | no         |
