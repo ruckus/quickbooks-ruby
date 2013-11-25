@@ -85,4 +85,16 @@ describe "Quickbooks::Model::Invoice" do
 
     invoice.valid?.should == true
   end
+
+  it "is not valid when EmailStatus is set but there is no billing email" do
+    invoice = Quickbooks::Model::Invoice.new
+    invoice.wants_billing_email_sent!
+    invoice.valid?.should == false
+    invoice.errors.keys.include?(:bill_email).should == true
+
+    # now specify an email address it will be valid for this attribute
+    invoice.billing_email_address = "foo@example.com"
+    invoice.valid?.should == false
+    invoice.errors.keys.include?(:bill_email).should == false
+  end
 end

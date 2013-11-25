@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    quickbooks-ruby (0.0.1)
+    quickbooks-ruby (0.0.2)
       activemodel
       nokogiri (~> 1.5.9)
       oauth

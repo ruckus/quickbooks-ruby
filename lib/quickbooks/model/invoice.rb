@@ -13,6 +13,7 @@ module Quickbooks
       REST_RESOURCE = 'invoice'
       XML_COLLECTION_NODE = "Invoice"
       XML_NODE = "Invoice"
+      EMAIL_STATUS_NEED_TO_SEND = 'NeedToSend'
 
       xml_accessor :id, :from => 'Id', :as => Integer
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
@@ -43,6 +44,7 @@ module Quickbooks
       xml_accessor :deposit, :from => 'Deposit', :as => Float
       xml_accessor :department_ref, :from => 'DepartmentRef'
       xml_accessor :allow_ipn_payment, :from => 'AllowIPNPayment'
+      xml_accessor :bill_email, :from => 'BillEmail', :as => Quickbooks::Model::EmailAddress
       xml_accessor :allow_online_payment, :from => 'AllowOnlinePayment'
       xml_accessor :allow_online_credit_card_payment, :from => 'AllowOnlineCreditCardPayment'
       xml_accessor :allow_online_ach_payment, :from => 'AllowOnlineACHPayment'
@@ -50,10 +52,31 @@ module Quickbooks
       #== Validations
       validates_length_of :line_items, :minimum => 1
       validate :existence_of_customer_ref
+      validate :required_bill_email_if_email_delivery
 
       def initialize
         ensure_line_items_initialization
         super
+      end
+
+      def required_bill_email_if_email_delivery
+        return unless email_status_for_delivery?
+
+        if bill_email.nil?
+          errors.add(:bill_email, "BillEmail is required if EmailStatus=NeedToSend")
+        end
+      end
+
+      def billing_email_address=(email_address_string)
+        self.bill_email = Quickbooks::Model::EmailAddress.new(email_address_string)
+      end
+
+      def wants_billing_email_sent!
+        self.email_status = EMAIL_STATUS_NEED_TO_SEND
+      end
+
+      def email_status_for_delivery?
+        email_status == EMAIL_STATUS_NEED_TO_SEND
       end
 
       def apply_tax_after_discount?
