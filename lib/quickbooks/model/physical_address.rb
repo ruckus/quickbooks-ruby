@@ -19,6 +19,22 @@ module Quickbooks
         postal_code
       end
 
+      def lat_to_f
+        BigDecimal.new(lat)
+      end
+
+      def lon_to_f
+        BigDecimal.new(lon)
+      end
+
+      def have_lat?
+        lat.to_s != "INVALID"
+      end
+
+      def have_lon?
+        lon.to_s != "INVALID"
+      end
+
     end
   end
 end
