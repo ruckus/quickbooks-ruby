@@ -22,8 +22,8 @@ describe "Quickbooks::Model::Customer" do
     customer.billing_address.city.should == "Santa Cruz"
     customer.billing_address.country.should == "USA"
     customer.billing_address.country_sub_division_code.should == "CA"
-    customer.billing_address.lat.should == 36.9507991
-    customer.billing_address.lon.should == -122.0477003
+    customer.billing_address.lat.should == "36.9507991"
+    customer.billing_address.lon.should == "-122.0477003"
 
     customer.shipping_address.should_not be_nil
     customer.shipping_address.id.should == 2
@@ -31,8 +31,8 @@ describe "Quickbooks::Model::Customer" do
     customer.shipping_address.city.should == "Santa Cruz"
     customer.shipping_address.country.should == "USA"
     customer.shipping_address.country_sub_division_code.should == "CA"
-    customer.shipping_address.lat.should == 36.9507991
-    customer.shipping_address.lon.should == -122.0477003
+    customer.shipping_address.lat.should == "36.9507991"
+    customer.shipping_address.lon.should == "-122.0477003"
 
     customer.job?.should == false
     customer.bill_with_parent?.should == false

@@ -12,8 +12,8 @@ module Quickbooks
       xml_accessor :country_sub_division_code, :from => 'CountrySubDivisionCode'
       xml_accessor :postal_code, :from => 'PostalCode'
       xml_accessor :note, :from => 'Note'
-      xml_accessor :lat, :from => 'Lat', :as => Float
-      xml_accessor :lon, :from => 'Long', :as => Float
+      xml_accessor :lat, :from => 'Lat'
+      xml_accessor :lon, :from => 'Long'
 
       def zip
         postal_code

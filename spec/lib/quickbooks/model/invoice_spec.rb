@@ -38,8 +38,8 @@ describe "Quickbooks::Model::Invoice" do
     billing_address.line2.should == "Sunset Bakery"
     billing_address.line3.should == "1040 East Tasman Drive."
     billing_address.line4.should == "Los Angeles, CA  91123 USA"
-    billing_address.lat.should == 34.1426959
-    billing_address.lon.should == -118.1568847
+    billing_address.lat.should == "34.1426959"
+    billing_address.lon.should == "-118.1568847"
 
     shipping_address = invoice.shipping_address
     shipping_address.should_not be_nil
@@ -49,8 +49,8 @@ describe "Quickbooks::Model::Invoice" do
     shipping_address.country.should == "USA"
     shipping_address.country_sub_division_code.should == "CA"
     shipping_address.postal_code.should == "91123"
-    shipping_address.lat.should == 33.739466
-    shipping_address.lon.should == -118.0395574
+    shipping_address.lat.should == "33.739466"
+    shipping_address.lon.should == "-118.0395574"
 
     invoice.sales_term_ref.should == 2
     invoice.due_date.to_date.should == Date.civil(2013, 11, 30)
