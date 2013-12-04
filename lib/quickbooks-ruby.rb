@@ -8,6 +8,7 @@ require 'date'
 require 'forwardable'
 require 'oauth'
 require 'quickbooks/util/logging'
+require 'quickbooks/util/class_util'
 
 #== Models
 require 'quickbooks/model/base_model'
@@ -38,7 +39,9 @@ require 'quickbooks/service/customer'
 require 'quickbooks/service/invoice'
 require 'quickbooks/service/item'
 
-class InvalidModelException < StandardError; end
+unless Quickbooks::Util::ClassUtil.defined?("InvalidModelException")
+  class InvalidModelException < StandardError; end
+end
 
 module Quickbooks
   @@logger = nil

@@ -2,14 +2,19 @@
 require 'uri'
 require 'cgi'
 
-class IntuitRequestException < StandardError
-  attr_accessor :message, :code, :detail, :type
-  def initialize(msg)
-    self.message = msg
-    super(msg)
+unless Quickbooks::Util::ClassUtil.defined?("InvalidModelException")
+  class IntuitRequestException < StandardError
+    attr_accessor :message, :code, :detail, :type
+    def initialize(msg)
+      self.message = msg
+      super(msg)
+    end
   end
 end
-class AuthorizationFailure < StandardError; end
+
+unless Quickbooks::Util::ClassUtil.defined?("InvalidModelException")
+  class AuthorizationFailure < StandardError; end
+end
 
 module Quickbooks
   module Service
