@@ -22,7 +22,6 @@ require 'quickbooks/model/discount_override'
 require 'quickbooks/model/payment_line_detail'
 require 'quickbooks/model/item'
 
-
 require 'quickbooks/model/telephone_number'
 require 'quickbooks/model/email_address'
 require 'quickbooks/model/web_site_address'
@@ -31,6 +30,9 @@ require 'quickbooks/model/linked_transaction'
 require 'quickbooks/model/invoice_line_item'
 require 'quickbooks/model/invoice'
 require 'quickbooks/model/customer'
+require 'quickbooks/model/ship_method_ref'
+require 'quickbooks/model/payment_method_ref'
+require 'quickbooks/model/sales_receipt'
 
 #== Services
 require 'quickbooks/service/base_service'
