@@ -1,0 +1,184 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-12-11T05:24:02.157-08:00">
+  <QueryResponse startPosition="1" maxResults="10">
+    <Account domain="QBO" sparse="false">
+      <Id>5</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-11-15T12:43:11-08:00</CreateTime>
+        <LastUpdatedTime>2013-11-15T12:43:11-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Cost of Goods Sold</Name>
+      <SubAccount>false</SubAccount>
+      <FullyQualifiedName>Cost of Goods Sold</FullyQualifiedName>
+      <Active>true</Active>
+      <Classification>Expense</Classification>
+      <AccountType>Cost of Goods Sold</AccountType>
+      <AccountSubType>SuppliesMaterialsCogs</AccountSubType>
+      <CurrentBalance>0</CurrentBalance>
+      <CurrentBalanceWithSubAccounts>0</CurrentBalanceWithSubAccounts>
+      <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+    </Account>
+    <Account domain="QBO" sparse="false">
+      <Id>6</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-11-15T12:43:11-08:00</CreateTime>
+        <LastUpdatedTime>2013-11-27T10:55:44-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Inventory Asset</Name>
+      <SubAccount>false</SubAccount>
+      <FullyQualifiedName>Inventory Asset</FullyQualifiedName>
+      <Active>true</Active>
+      <Classification>Asset</Classification>
+      <AccountType>Other Current Asset</AccountType>
+      <AccountSubType>Inventory</AccountSubType>
+      <CurrentBalance>12.00</CurrentBalance>
+      <CurrentBalanceWithSubAccounts>12.00</CurrentBalanceWithSubAccounts>
+      <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+    </Account>
+    <Account domain="QBO" sparse="false">
+      <Id>7</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-11-18T11:25:12-08:00</CreateTime>
+        <LastUpdatedTime>2013-11-18T11:25:13-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Opening Balance Equity</Name>
+      <SubAccount>false</SubAccount>
+      <FullyQualifiedName>Opening Balance Equity</FullyQualifiedName>
+      <Active>true</Active>
+      <Classification>Equity</Classification>
+      <AccountType>Equity</AccountType>
+      <AccountSubType>OpeningBalanceEquity</AccountSubType>
+      <CurrentBalance>-10.00</CurrentBalance>
+      <CurrentBalanceWithSubAccounts>-10.00</CurrentBalanceWithSubAccounts>
+      <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+    </Account>
+    <Account domain="QBO" sparse="false">
+      <Id>3</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-11-15T12:43:10-08:00</CreateTime>
+        <LastUpdatedTime>2013-11-15T12:43:10-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Purchases</Name>
+      <SubAccount>false</SubAccount>
+      <FullyQualifiedName>Purchases</FullyQualifiedName>
+      <Active>true</Active>
+      <Classification>Expense</Classification>
+      <AccountType>Expense</AccountType>
+      <AccountSubType>SuppliesMaterials</AccountSubType>
+      <CurrentBalance>0</CurrentBalance>
+      <CurrentBalanceWithSubAccounts>0</CurrentBalanceWithSubAccounts>
+      <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+    </Account>
+    <Account domain="QBO" sparse="false">
+      <Id>2</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-11-11T08:35:00-08:00</CreateTime>
+        <LastUpdatedTime>2013-11-11T08:35:00-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Retained Earnings</Name>
+      <SubAccount>false</SubAccount>
+      <FullyQualifiedName>Retained Earnings</FullyQualifiedName>
+      <Active>true</Active>
+      <Classification>Equity</Classification>
+      <AccountType>Equity</AccountType>
+      <AccountSubType>RetainedEarnings</AccountSubType>
+      <CurrentBalance>0</CurrentBalance>
+      <CurrentBalanceWithSubAccounts>0</CurrentBalanceWithSubAccounts>
+      <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+    </Account>
+    <Account domain="QBO" sparse="false">
+      <Id>4</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-11-15T12:43:10-08:00</CreateTime>
+        <LastUpdatedTime>2013-11-15T12:43:10-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Sales of Product Income</Name>
+      <SubAccount>false</SubAccount>
+      <FullyQualifiedName>Sales of Product Income</FullyQualifiedName>
+      <Active>true</Active>
+      <Classification>Revenue</Classification>
+      <AccountType>Income</AccountType>
+      <AccountSubType>SalesOfProductIncome</AccountSubType>
+      <CurrentBalance>0</CurrentBalance>
+      <CurrentBalanceWithSubAccounts>0</CurrentBalanceWithSubAccounts>
+      <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+    </Account>
+    <Account domain="QBO" sparse="false">
+      <Id>1</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-11-11T08:35:00-08:00</CreateTime>
+        <LastUpdatedTime>2013-11-11T08:35:00-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Services</Name>
+      <SubAccount>false</SubAccount>
+      <FullyQualifiedName>Services</FullyQualifiedName>
+      <Active>true</Active>
+      <Classification>Revenue</Classification>
+      <AccountType>Income</AccountType>
+      <AccountSubType>ServiceFeeIncome</AccountSubType>
+      <CurrentBalance>0</CurrentBalance>
+      <CurrentBalanceWithSubAccounts>0</CurrentBalanceWithSubAccounts>
+      <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+    </Account>
+    <Account domain="QBO" sparse="false">
+      <Id>10</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-12-10T05:00:29-08:00</CreateTime>
+        <LastUpdatedTime>2013-12-10T05:00:29-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Uncategorized Asset</Name>
+      <SubAccount>false</SubAccount>
+      <FullyQualifiedName>Uncategorized Asset</FullyQualifiedName>
+      <Active>true</Active>
+      <Classification>Asset</Classification>
+      <AccountType>Other Current Asset</AccountType>
+      <AccountSubType>OtherCurrentAssets</AccountSubType>
+      <CurrentBalance>0</CurrentBalance>
+      <CurrentBalanceWithSubAccounts>0</CurrentBalanceWithSubAccounts>
+      <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+    </Account>
+    <Account domain="QBO" sparse="false">
+      <Id>9</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-12-10T05:00:29-08:00</CreateTime>
+        <LastUpdatedTime>2013-12-10T05:00:29-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Uncategorized Expense</Name>
+      <SubAccount>false</SubAccount>
+      <FullyQualifiedName>Uncategorized Expense</FullyQualifiedName>
+      <Active>true</Active>
+      <Classification>Expense</Classification>
+      <AccountType>Expense</AccountType>
+      <AccountSubType>OtherMiscellaneousServiceCost</AccountSubType>
+      <CurrentBalance>0</CurrentBalance>
+      <CurrentBalanceWithSubAccounts>0</CurrentBalanceWithSubAccounts>
+      <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+    </Account>
+    <Account domain="QBO" sparse="false">
+      <Id>8</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-12-10T05:00:28-08:00</CreateTime>
+        <LastUpdatedTime>2013-12-10T05:00:28-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Uncategorized Income</Name>
+      <SubAccount>false</SubAccount>
+      <FullyQualifiedName>Uncategorized Income</FullyQualifiedName>
+      <Active>true</Active>
+      <Classification>Revenue</Classification>
+      <AccountType>Income</AccountType>
+      <AccountSubType>ServiceFeeIncome</AccountSubType>
+      <CurrentBalance>0</CurrentBalance>
+      <CurrentBalanceWithSubAccounts>0</CurrentBalanceWithSubAccounts>
+      <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+    </Account>
+  </QueryResponse>
+</IntuitResponse>
