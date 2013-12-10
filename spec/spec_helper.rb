@@ -10,7 +10,7 @@ require 'rubygems'
 require 'rspec'
 require 'fakeweb'
 require 'oauth'
-require 'quickbooks'
+require 'quickbooks-ruby'
 require 'json'
 
 Dir[File.expand_path('../support/**/*.rb', __FILE__)].each { |f| require f }
