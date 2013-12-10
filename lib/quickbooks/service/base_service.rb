@@ -242,12 +242,23 @@ module Quickbooks
         unless headers.has_key?('Content-Type')
           headers.merge!({'Content-Type' => HTTP_CONTENT_TYPE})
         end
-        # log "------ New Request ------"
-        # log "METHOD = #{method}"
-        # log "RESOURCE = #{url}"
-        # log "BODY(#{body.class}) = #{body == nil ? "<NIL>" : body.inspect}"
-        # log "HEADERS = #{headers.inspect}"
-        response = @oauth.request(method, url, body, headers)
+        unless headers.has_key?('Accept')
+          headers.merge!({'Accept' => HTTP_ACCEPT})
+        end
+
+        log "METHOD = #{method}"
+        log "RESOURCE = #{url}"
+        log "BODY(#{body.class}) = #{body == nil ? "<NIL>" : body.inspect}"
+        log "HEADERS = #{headers.inspect}"
+
+        response = case method
+          when :get
+            @oauth.get(url, headers)
+          when :post
+            @oauth.post(url, body, headers)
+          else
+            raise "Dont know how to perform that HTTP operation"
+          end
         check_response(response)
       end
 
