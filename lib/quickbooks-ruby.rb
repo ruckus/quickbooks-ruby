@@ -20,8 +20,8 @@ require 'quickbooks/model/sub_total_line_detail'
 require 'quickbooks/model/customer_ref'
 require 'quickbooks/model/discount_override'
 require 'quickbooks/model/payment_line_detail'
+require 'quickbooks/model/line'
 require 'quickbooks/model/item'
-
 
 require 'quickbooks/model/telephone_number'
 require 'quickbooks/model/email_address'
@@ -31,6 +31,9 @@ require 'quickbooks/model/linked_transaction'
 require 'quickbooks/model/invoice_line_item'
 require 'quickbooks/model/invoice'
 require 'quickbooks/model/customer'
+require 'quickbooks/model/ship_method_ref'
+require 'quickbooks/model/payment_method_ref'
+require 'quickbooks/model/sales_receipt'
 
 #== Services
 require 'quickbooks/service/base_service'
@@ -38,6 +41,7 @@ require 'quickbooks/service/service_crud'
 require 'quickbooks/service/customer'
 require 'quickbooks/service/invoice'
 require 'quickbooks/service/item'
+require 'quickbooks/service/sales_receipt'
 
 unless Quickbooks::Util::ClassUtil.defined?("InvalidModelException")
   class InvalidModelException < StandardError; end

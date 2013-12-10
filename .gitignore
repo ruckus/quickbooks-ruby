@@ -1,3 +1,5 @@
 tmp/
 coverage/
 quickbooks-ruby-*.gem
+
+Gemfile.lock
