@@ -52,7 +52,7 @@ module Quickbooks
       end
 
       def url_for_query(query = "")
-        "#{url_for_base}/query?query=#{URI.encode(query)}"
+        "#{url_for_base}/query?query=#{URI.encode_www_form_component(query)}"
       end
 
       private
