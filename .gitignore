@@ -3,3 +3,4 @@ coverage/
 quickbooks-ruby-*.gem
 
 Gemfile.lock
+/RubyApplication1/nbproject/private/

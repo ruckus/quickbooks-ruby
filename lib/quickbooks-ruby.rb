@@ -34,6 +34,10 @@ require 'quickbooks/model/customer'
 require 'quickbooks/model/ship_method_ref'
 require 'quickbooks/model/payment_method_ref'
 require 'quickbooks/model/sales_receipt'
+require 'quickbooks/model/payment'
+require 'quickbooks/model/term'
+require 'quickbooks/model/vendor'
+
 
 #== Services
 require 'quickbooks/service/base_service'
@@ -42,6 +46,13 @@ require 'quickbooks/service/customer'
 require 'quickbooks/service/invoice'
 require 'quickbooks/service/item'
 require 'quickbooks/service/sales_receipt'
+require 'quickbooks/service/filter'
+require 'quickbooks/service/payment'
+require 'quickbooks/service/term'
+require 'quickbooks/service/vendor'
+
+#== Shared
+require 'quickbooks/shared/service/filter'
 
 unless Quickbooks::Util::ClassUtil.defined?("InvalidModelException")
   class InvalidModelException < StandardError; end
