@@ -22,6 +22,7 @@ module Quickbooks
       xml_accessor :customer_ref, :from => 'CustomerRef', :as => Quickbooks::Model::CustomerRef
       xml_accessor :ar_account_ref, :from => 'ARAccountRef', :as => Integer
       xml_accessor :total_amount, :from => 'TotalAmt', :as => Float
+      xml_accessor :payment_method_ref, :from => 'PaymentMethodRef', :as => Quickbooks::Model::PaymentMethodRef
       
       #== Validations
       validates_length_of :line_items, :minimum => 1
