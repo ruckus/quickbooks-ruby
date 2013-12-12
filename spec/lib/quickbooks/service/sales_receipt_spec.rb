@@ -17,14 +17,14 @@ module Quickbooks
       end
 
       before do
-        subject.company_id = "123"
+        subject.company_id = "9991111222"
         subject.access_token = construct_oauth
       end
 
       it "queries for sales receipts" do
         xml = fixture("sales_receipts.xml")
         model = Model::SalesReceipt
-        stub_request(:get, subject.url_for_query, ["200", "OK"], xml, false)
+        stub_request(:get, subject.url_for_query, ["200", "OK"], xml)
 
         receipts = subject.query
         expect(receipts.entries.count).to eq 2

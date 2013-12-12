@@ -3,10 +3,6 @@ module Quickbooks
     module ServiceCrud
 
       def query(object_query = nil, options = {})
-        object_query ||= default_model_query
-
-        options[:page] ||= 1
-        options[:per_page] ||= 20
         fetch_collection(object_query, model, options)
       end
 

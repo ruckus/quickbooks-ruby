@@ -5,7 +5,7 @@ describe Quickbooks::Service::Account do
 
   it "can query for accounts" do
     xml = fixture("accounts.xml")
-    stub_request(:get, @service.url_for_query, ["200", "OK"], xml, false)
+    stub_request(:get, @service.url_for_query, ["200", "OK"], xml, true)
 
     accounts = @service.query
     accounts.entries.count.should == 10

@@ -7,7 +7,7 @@ describe "Quickbooks::Service::Item" do
     xml = fixture("items.xml")
     model = Quickbooks::Model::Item
 
-    stub_request(:get, @service.url_for_query, ["200", "OK"], xml, false)
+    stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
     items = @service.query
     items.entries.count.should == 2
 

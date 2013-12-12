@@ -1,0 +1,92 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-12-11T17:31:25.719-08:00">
+  <QueryResponse startPosition="1" maxResults="8">
+    <PaymentMethod domain="QBO" sparse="false">
+      <Id>5</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-12-09T10:44:18-08:00</CreateTime>
+        <LastUpdatedTime>2013-12-09T10:44:18-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>American Express</Name>
+      <Active>true</Active>
+      <Type>CREDIT_CARD</Type>
+    </PaymentMethod>
+    <PaymentMethod domain="QBO" sparse="false">
+      <Id>1</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-12-09T10:44:18-08:00</CreateTime>
+        <LastUpdatedTime>2013-12-09T10:44:18-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Cash</Name>
+      <Active>true</Active>
+      <Type>NON_CREDIT_CARD</Type>
+    </PaymentMethod>
+    <PaymentMethod domain="QBO" sparse="false">
+      <Id>2</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-12-09T10:44:18-08:00</CreateTime>
+        <LastUpdatedTime>2013-12-09T10:44:18-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Cheque</Name>
+      <Active>true</Active>
+      <Type>NON_CREDIT_CARD</Type>
+    </PaymentMethod>
+    <PaymentMethod domain="QBO" sparse="false">
+      <Id>6</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-12-09T10:44:18-08:00</CreateTime>
+        <LastUpdatedTime>2013-12-09T10:44:18-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Diners Club</Name>
+      <Active>true</Active>
+      <Type>CREDIT_CARD</Type>
+    </PaymentMethod>
+    <PaymentMethod domain="QBO" sparse="false">
+      <Id>8</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-12-09T10:44:18-08:00</CreateTime>
+        <LastUpdatedTime>2013-12-09T10:44:18-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Direct Debit</Name>
+      <Active>true</Active>
+      <Type>NON_CREDIT_CARD</Type>
+    </PaymentMethod>
+    <PaymentMethod domain="QBO" sparse="false">
+      <Id>7</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-12-09T10:44:18-08:00</CreateTime>
+        <LastUpdatedTime>2013-12-09T10:44:18-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Discover</Name>
+      <Active>true</Active>
+      <Type>CREDIT_CARD</Type>
+    </PaymentMethod>
+    <PaymentMethod domain="QBO" sparse="false">
+      <Id>4</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-12-09T10:44:18-08:00</CreateTime>
+        <LastUpdatedTime>2013-12-09T10:44:18-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>MasterCard</Name>
+      <Active>true</Active>
+      <Type>CREDIT_CARD</Type>
+    </PaymentMethod>
+    <PaymentMethod domain="QBO" sparse="false">
+      <Id>3</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-12-09T10:44:18-08:00</CreateTime>
+        <LastUpdatedTime>2013-12-09T10:44:18-08:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Visa</Name>
+      <Active>true</Active>
+      <Type>CREDIT_CARD</Type>
+    </PaymentMethod>
+  </QueryResponse>
+</IntuitResponse>
