@@ -22,6 +22,7 @@ require 'quickbooks/model/discount_override'
 require 'quickbooks/model/payment_line_detail'
 require 'quickbooks/model/line'
 require 'quickbooks/model/item'
+require 'quickbooks/model/account'
 
 require 'quickbooks/model/telephone_number'
 require 'quickbooks/model/email_address'
@@ -42,6 +43,7 @@ require 'quickbooks/service/customer'
 require 'quickbooks/service/invoice'
 require 'quickbooks/service/item'
 require 'quickbooks/service/sales_receipt'
+require 'quickbooks/service/account'
 
 unless Quickbooks::Util::ClassUtil.defined?("InvalidModelException")
   class InvalidModelException < StandardError; end

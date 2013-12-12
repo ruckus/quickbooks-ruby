@@ -1,0 +1,20 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-12-11T05:27:48.674-08:00">
+  <Account domain="QBO" sparse="false">
+    <Id>1</Id>
+    <SyncToken>0</SyncToken>
+    <MetaData>
+      <CreateTime>2013-11-15T12:43:10-08:00</CreateTime>
+      <LastUpdatedTime>2013-11-15T12:43:10-08:00</LastUpdatedTime>
+    </MetaData>
+    <Name>Sales of Product Income</Name>
+    <SubAccount>false</SubAccount>
+    <FullyQualifiedName>Sales of Product Income</FullyQualifiedName>
+    <Active>true</Active>
+    <Classification>Revenue</Classification>
+    <AccountType>Income</AccountType>
+    <AccountSubType>SalesOfProductIncome</AccountSubType>
+    <CurrentBalance>0</CurrentBalance>
+    <CurrentBalanceWithSubAccounts>0</CurrentBalanceWithSubAccounts>
+    <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+  </Account>
+</IntuitResponse>
