@@ -19,8 +19,9 @@ module Quickbooks
 
       xml_accessor :po_number, :from => 'PONumber'
 
-      xml_accessor :shipping_method, :from => 'ShipMethodRef', :as => Model::ShipMethodRef
+      xml_accessor :ship_method_ref, :from => 'ShipMethodRef'
       xml_accessor :ship_date, :from => 'ShipDate', :as => Time
+      xml_accessor :tracking_num, :from => 'TrackingNum'
 
       xml_accessor :payment_method_ref, :from => 'PaymentMethodRef'
       xml_accessor :payment_ref_number, :from => 'PaymentRefNum'
