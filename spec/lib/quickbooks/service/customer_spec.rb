@@ -7,7 +7,7 @@ describe "Quickbooks::Service::Customer" do
     xml = fixture("customers.xml")
     model = Quickbooks::Model::Customer
 
-    stub_request(:get, @service.url_for_query, ["200", "OK"], xml, false)
+    stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
     customers = @service.query
     customers.entries.count.should == 5
 

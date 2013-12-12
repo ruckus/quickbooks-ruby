@@ -56,7 +56,10 @@ module Quickbooks
         "#{@base_uri}/#{@company_id}"
       end
 
-      def url_for_query(query = "")
+      def url_for_query(query = nil, start_position = 1, max_results = 20)
+        query ||= default_model_query
+        query = "#{query} STARTPOSITION #{start_position} MAXRESULTS #{max_results}"
+
         "#{url_for_base}/query?query=#{URI.encode_www_form_component(query)}"
       end
 
@@ -99,9 +102,7 @@ module Quickbooks
         end
 
         max_results = (page * per_page)
-
-        query = "#{query} STARTPOSITION #{start_position} MAXRESULTS #{max_results}"
-        response = do_http_get(url_for_query(query))
+        response = do_http_get(url_for_query(query, start_position, max_results))
 
         parse_collection(response, model)
       end
