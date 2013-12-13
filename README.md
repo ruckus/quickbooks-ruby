@@ -220,12 +220,12 @@ Quickbooks.log = true
 
 Entity            | Create | Update | Query | Delete | Fetch by ID | Other
 ---               | ---    | ---    | ---  | ---    | ---         | ---
-Account           | no    | no    | no  | no    | no
-Attachable           | no    | no    | no  | no    | no
+Account           | yes    | yes    | yes  | yes    | yes
+Attachable        | no     | no     | no   | no     | no
 Bill              | no    | no    | no  | no    | no
 Bill Payment      | no    | no    | no  | no    | no
 Class             | no    | no    | no  | no    | no
-Company Info | no     | no     | no   | no     | no          |
+Company Info      | no     | no     | no   | no     | no          |
 Credit Memo | no     | no     | no   | no     | no          |
 Customer          | yes    | yes    | yes  | yes    | yes         |
 Department          | no    | no    | no  | no    | no         |
@@ -237,11 +237,11 @@ Item              | yes    | yes    | yes  | yes    | yes         |
 Journal Entry     | no    | no    | no  | no    | no         |
 Job               | no    | no    | no  | no    | no         |
 Payment           | no    | no    | no  | no    | no         |
-PaymentMethod           | no    | no    | no  | no    | no         |
+PaymentMethod     | yes    | yes    | yes  | yes    | yes         |
 Preferences           | no    | no    | no  | no    | no         |
 Purchase           | no    | no    | no  | no    | no         |
 PurchaseOrder           | no    | no    | no  | no    | no         |
-Sales Receipt     | no    | no    | no  | no    | no         |
+Sales Receipt     | yes    | yes    | yes  | yes    | yes         |
 Sales Rep         | no     | no     | no   | no     | no          |
 Sales Tax         | no     | no     | no   | no     | no          |
 Sales Term        | no    | no    | no  | no    | no         |
