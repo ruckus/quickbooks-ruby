@@ -13,11 +13,11 @@
 		<Id>1</Id>
 		<LineNum>1</LineNum>
 		<Description>Plush Baby Doll</Description>
-		<Amount>50.00</Amount>
+		<Amount>198.99</Amount>
 		<DetailType>SalesItemLineDetail</DetailType>
 		<SalesItemLineDetail>
 			<ItemRef name="Sales">1</ItemRef>
-			<UnitPrice>50</UnitPrice>
+			<UnitPrice>198.99</UnitPrice>
 			<Qty>1</Qty>
 			<TaxCodeRef>NON</TaxCodeRef>
 		</SalesItemLineDetail>

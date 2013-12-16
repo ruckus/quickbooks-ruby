@@ -40,9 +40,9 @@ module Quickbooks
       xml_accessor :level, :from => 'Level'
       xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => Integer
       xml_accessor :payment_method_ref, :from => 'PaymentMethodRef'
-      xml_accessor :balance, :from => 'Balance', :as => Float
+      xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :open_balance_date, :from => 'OpenBalanceDate', :as => Date
-      xml_accessor :balance_with_jobs, :from => 'BalanceWithJobs', :as => Float
+      xml_accessor :balance_with_jobs, :from => 'BalanceWithJobs', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :preferred_delivery_method, :from => 'PreferredDeliveryMethod'
       xml_accessor :resale_num, :from => 'ResaleNum'
       xml_accessor :suffix, :from => 'Suffix'

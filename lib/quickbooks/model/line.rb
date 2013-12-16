@@ -9,7 +9,7 @@ module Quickbooks
       xml_accessor :id, :from => 'Id', :as => Integer
       xml_accessor :line_num, :from => 'LineNum', :as => Integer
       xml_accessor :description, :from => 'Description'
-      xml_accessor :amount, :from => 'Amount', :as => Float
+      xml_accessor :amount, :from => 'Amount', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :detail_type, :from => 'DetailType'
 
       #== Various detail types

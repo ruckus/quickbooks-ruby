@@ -36,12 +36,12 @@ module Quickbooks
       xml_accessor :ship_date, :from => 'ShipDate', :as => Date
       xml_accessor :tracking_num, :from => 'TrackingNum'
       xml_accessor :ar_account_ref, :from => 'ARAccountRef', :as => Integer
-      xml_accessor :total_amount, :from => 'TotalAmt', :as => Float
+      xml_accessor :total_amount, :from => 'TotalAmt', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :apply_tax_after_discount, :from => 'ApplyTaxAfterDiscount'
       xml_accessor :print_status, :from => 'PrintStatus'
       xml_accessor :email_status, :from => 'EmailStatus'
-      xml_accessor :balance, :from => 'Balance', :as => Float
-      xml_accessor :deposit, :from => 'Deposit', :as => Float
+      xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
+      xml_accessor :deposit, :from => 'Deposit', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :department_ref, :from => 'DepartmentRef'
       xml_accessor :allow_ipn_payment, :from => 'AllowIPNPayment'
       xml_accessor :bill_email, :from => 'BillEmail', :as => Quickbooks::Model::EmailAddress

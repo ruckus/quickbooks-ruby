@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 describe "Quickbooks::Model::Invoice" do
 
   it "parse from XML" do
@@ -16,11 +18,11 @@ describe "Quickbooks::Model::Invoice" do
     line_item1.id.should == 1
     line_item1.line_num.should == 1
     line_item1.description.should == 'Plush Baby Doll'
-    line_item1.amount.should == 50.00
+    line_item1.amount.should == 198.99
     line_item1.sales_item?.should == true
     line_item1.sales_line_item_detail.should_not be_nil
     line_item1.sales_line_item_detail.item_ref.should == 1
-    line_item1.sales_line_item_detail.unit_price.should == 50
+    line_item1.sales_line_item_detail.unit_price.should == 198.99
     line_item1.sales_line_item_detail.quantity.should == 1
     line_item1.sales_line_item_detail.tax_code_ref.should == 'NON'
 
@@ -96,5 +98,19 @@ describe "Quickbooks::Model::Invoice" do
     invoice.billing_email_address = "foo@example.com"
     invoice.valid?.should == false
     invoice.errors.keys.include?(:bill_email).should == false
+  end
+
+  it "can properly convert to/from BigDecimal" do
+    input_xml = fixture("invoice.xml")
+    invoice = Quickbooks::Model::Invoice.from_xml(input_xml)
+    line1 = invoice.line_items.first
+    line1.should_not be_nil
+    line1.amount.should == 198.99
+    line1.amount.class.should == BigDecimal
+
+    xml = Nokogiri(invoice.to_xml.to_s)
+    node = xml.xpath("//Invoice/Line/Amount")[0]
+    node.should_not be_nil
+    node.content.should == "198.99"
   end
 end

@@ -34,7 +34,7 @@ module Quickbooks
       xml_accessor :acct_num, :from => 'AcctNum'
       xml_accessor :bank_num, :from => 'BankNum'
 
-      xml_accessor :opening_balance, :from => 'OpeningBalance', :as => Float
+      xml_accessor :opening_balance, :from => 'OpeningBalance', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :opening_balance_date, :from => 'OpeningBalanceDate', :as => DateTime
 
       xml_accessor :currency_ref, :from => 'CurrencyRef'
