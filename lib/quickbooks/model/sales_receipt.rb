@@ -32,6 +32,10 @@ module Quickbooks
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
 
       validates_length_of :line_items, :minimum => 1
+
+      def email=(email)
+        self.bill_email = Model::EmailAddress.new(email)
+      end
     end
   end
 end
