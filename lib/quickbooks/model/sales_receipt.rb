@@ -19,8 +19,9 @@ module Quickbooks
 
       xml_accessor :po_number, :from => 'PONumber'
 
-      xml_accessor :shipping_method, :from => 'ShipMethodRef', :as => Model::ShipMethodRef
+      xml_accessor :ship_method_ref, :from => 'ShipMethodRef'
       xml_accessor :ship_date, :from => 'ShipDate', :as => Time
+      xml_accessor :tracking_num, :from => 'TrackingNum'
 
       xml_accessor :payment_method_ref, :from => 'PaymentMethodRef'
       xml_accessor :payment_ref_number, :from => 'PaymentRefNum'
@@ -31,6 +32,10 @@ module Quickbooks
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
 
       validates_length_of :line_items, :minimum => 1
+
+      def email=(email)
+        self.bill_email = Model::EmailAddress.new(email)
+      end
     end
   end
 end

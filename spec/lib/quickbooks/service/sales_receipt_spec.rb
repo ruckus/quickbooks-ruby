@@ -46,7 +46,9 @@ module Quickbooks
         stub_request(:post, subject.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
 
         receipt = model.new
-        receipt.customer_ref = Model::CustomerRef.new(2)
+        receipt.customer_ref = 2
+        receipt.ship_method_ref = "Ship Method"
+        receipt.placed_on = Time.now
         receipt.line_items = [line]
 
         receipt = subject.create(receipt)
