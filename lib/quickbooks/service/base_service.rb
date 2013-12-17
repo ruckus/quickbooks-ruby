@@ -266,7 +266,7 @@ module Quickbooks
 
       def parse_and_raise_exception
         err = parse_intuit_error
-        ex = IntuitRequestException.new(err[:message])
+        ex = IntuitRequestException.new("#{err[:message]}:\n\t#{err[:detail]}")
         ex.code = err[:code]
         ex.detail = err[:detail]
         ex.type = err[:type]
