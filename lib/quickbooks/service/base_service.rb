@@ -177,6 +177,7 @@ module Quickbooks
         unless headers.has_key?('Content-Type')
           headers['Content-Type'] = 'text/xml'
         end
+
         response = do_http_post(url, body.strip, params, headers)
 
         result = nil
@@ -241,8 +242,6 @@ module Quickbooks
       end
 
       def check_response(response)
-        # log "RESPONSE CODE = #{response.code}"
-        # log "RESPONSE BODY = #{response.plain_body}"
         parse_xml(response.plain_body)
         status = response.code.to_i
         case status

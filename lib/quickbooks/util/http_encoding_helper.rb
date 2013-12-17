@@ -18,9 +18,9 @@
 #   content=response.plain_body     # Method from our library
 #   puts "Transferred: #{response.body.length} bytes"
 #   puts "Compression: #{response['content-encoding']}"
-#   puts "Extracted: #{response.plain_body.length} bytes"  
+#   puts "Extracted: #{response.plain_body.length} bytes"
 # end
-#	
+#
 
 require 'zlib'
 require 'stringio'
@@ -28,22 +28,27 @@ require 'stringio'
 class Net::HTTPResponse
   # Return the uncompressed content
   def plain_body
-    encoding=self['content-encoding']
-    content=nil
-    if encoding then
+
+    encoding = self['Content-Encoding']
+    @_content ||= nil
+
+    return @_content if @_content
+
+    if encoding
       case encoding
         when 'gzip'
-          i=Zlib::GzipReader.new(StringIO.new(self.body))
-          content=i.read
+          i = Zlib::GzipReader.new(StringIO.new(self.body))
+          @_content = i.read
         when 'deflate'
-          i=Zlib::Inflate.new
-          content=i.inflate(self.body)
+          i = Zlib::Inflate.new
+          @_content = i.inflate(self.body)
         else
           raise "Unknown encoding - #{encoding}"
       end
     else
-      content=self.body
+      @_content = self.body
     end
-    return content
+
+    @_content
   end
 end
