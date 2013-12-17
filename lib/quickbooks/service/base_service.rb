@@ -30,6 +30,7 @@ module Quickbooks
       XML_NS = %{xmlns="http://schema.intuit.com/finance/v3"}
       HTTP_CONTENT_TYPE = 'application/xml'
       HTTP_ACCEPT = 'application/xml'
+      HTTP_ACCEPT_ENCODING = 'gzip, deflate'
 
       def initialize()
         @base_uri = 'https://qb.sbfinance.intuit.com/v3/company'
@@ -66,12 +67,7 @@ module Quickbooks
       private
 
       def parse_xml(xml)
-        @last_response_xml =
-        begin
-          x = Nokogiri::XML(xml)
-          #x.document.remove_namespaces!
-          x
-        end
+        @last_response_xml = Nokogiri::XML(xml)
       end
 
       def valid_xml_document(xml)
@@ -106,36 +102,6 @@ module Quickbooks
 
         parse_collection(response, model)
       end
-
-      #
-      # def fetch_collection2(model, custom_field_query = nil, filters = [], page = 1, per_page = 20, sort = nil, options ={})
-      #   raise ArgumentError, "missing model to instantiate" if model.nil?
-      #
-      #   post_body_tags = []
-      #
-      #   # pagination parameters must come first
-      #   post_body_tags << "<StartPage>#{page}</StartPage>"
-      #   post_body_tags << "<ChunkSize>#{per_page}</ChunkSize>"
-      #
-      #   # ... followed by any filters
-      #   if filters.is_a?(Array) && filters.length > 0
-      #     filters = enforce_filter_order(filters).compact
-      #     post_body_tags << filters.collect { |f| f.to_xml }
-      #     post_body_tags.flatten!
-      #   end
-      #
-      #   if sort
-      #     post_body_tags << sort.to_xml
-      #   end
-      #
-      #   post_body_tags << custom_field_query
-      #
-      #   xml_query_tag = "#{model::XML_NODE}Query"
-      #   body = %Q{<?xml version="1.0" encoding="utf-8"?>\n<#{xml_query_tag} xmlns="http://www.intuit.com/sb/cdm/v2">#{post_body_tags.join}</#{xml_query_tag}>}
-      #
-      #   response = do_http_post(url_for_resource(model::REST_RESOURCE), body, {}, {'Content-Type' => 'text/xml'})
-      #   parse_collection(response, model)
-      # end
 
       def parse_collection(response, model)
         if response
@@ -217,7 +183,7 @@ module Quickbooks
         if response
           case response.code.to_i
           when 200
-            result = Quickbooks::Model::RestResponse.from_xml(response.body)
+            result = Quickbooks::Model::RestResponse.from_xml(response.plain_body)
           when 401
             raise IntuitRequestException.new("Authorization failure: token timed out?")
           when 404
@@ -241,16 +207,19 @@ module Quickbooks
           raise "OAuth client has not been initialized. Initialize with setter access_token="
         end
         unless headers.has_key?('Content-Type')
-          headers.merge!({'Content-Type' => HTTP_CONTENT_TYPE})
+          headers['Content-Type'] = HTTP_CONTENT_TYPE
         end
         unless headers.has_key?('Accept')
-          headers.merge!({'Accept' => HTTP_ACCEPT})
+          headers['Accept'] = HTTP_ACCEPT
+        end
+        unless headers.has_key?('Accept-Encoding')
+          headers['Accept-Encoding'] = HTTP_ACCEPT_ENCODING
         end
 
-        log "METHOD = #{method}"
-        log "RESOURCE = #{url}"
-        log "BODY(#{body.class}) = #{body == nil ? "<NIL>" : body.inspect}"
-        log "HEADERS = #{headers.inspect}"
+        #log "METHOD = #{method}"
+        #log "RESOURCE = #{url}"
+        #log "BODY(#{body.class}) = #{body == nil ? "<NIL>" : body.inspect}"
+        #log "HEADERS = #{headers.inspect}"
 
         response = case method
           when :get
@@ -272,9 +241,9 @@ module Quickbooks
       end
 
       def check_response(response)
-        # puts "RESPONSE CODE = #{response.code}"
-        # puts "RESPONSE BODY = #{response.body}"
-        parse_xml(response.body)
+        # log "RESPONSE CODE = #{response.code}"
+        # log "RESPONSE BODY = #{response.plain_body}"
+        parse_xml(response.plain_body)
         status = response.code.to_i
         case status
         when 200
@@ -291,7 +260,7 @@ module Quickbooks
         when 400, 500
           parse_and_raise_exception
         else
-          raise "HTTP Error Code: #{status}, Msg: #{response.body}"
+          raise "HTTP Error Code: #{status}, Msg: #{response.plain_body}"
         end
       end
 

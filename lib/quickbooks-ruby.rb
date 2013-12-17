@@ -9,6 +9,7 @@ require 'forwardable'
 require 'oauth'
 require 'quickbooks/util/logging'
 require 'quickbooks/util/class_util'
+require 'quickbooks/util/http_encoding_helper'
 
 #== Models
 require 'quickbooks/model/base_model'
