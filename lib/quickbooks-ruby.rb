@@ -37,6 +37,7 @@ require 'quickbooks/model/ship_method_ref'
 require 'quickbooks/model/payment_method_ref'
 require 'quickbooks/model/sales_receipt'
 require 'quickbooks/model/payment_method'
+require 'quickbooks/model/credit_memo'
 
 #== Services
 require 'quickbooks/service/base_service'
@@ -47,6 +48,7 @@ require 'quickbooks/service/item'
 require 'quickbooks/service/sales_receipt'
 require 'quickbooks/service/account'
 require 'quickbooks/service/payment_method'
+require 'quickbooks/service/credit_memo'
 
 unless Quickbooks::Util::ClassUtil.defined?("InvalidModelException")
   class InvalidModelException < StandardError; end

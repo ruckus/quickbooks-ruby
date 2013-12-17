@@ -1,0 +1,55 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-12-17T11:58:17.268-08:00">
+  <CreditMemo domain="QBO" sparse="false">
+    <Id>52</Id>
+    <SyncToken>0</SyncToken>
+    <MetaData>
+      <CreateTime>2013-12-17T11:54:50-08:00</CreateTime>
+      <LastUpdatedTime>2013-12-17T11:54:50-08:00</LastUpdatedTime>
+    </MetaData>
+    <DocNumber>R3454653464</DocNumber>
+    <TxnDate>2013-12-17</TxnDate>
+    <CurrencyRef name="Brazilian Real">BRL</CurrencyRef>
+    <Line>
+      <Id>1</Id>
+      <LineNum>1</LineNum>
+      <Description>Games</Description>
+      <Amount>10.00</Amount>
+      <DetailType>SalesItemLineDetail</DetailType>
+      <SalesItemLineDetail>
+        <ItemRef name="Sales">1</ItemRef>
+        <UnitPrice>10</UnitPrice>
+        <Qty>1</Qty>
+      </SalesItemLineDetail>
+    </Line>
+    <Line>
+      <Amount>10.00</Amount>
+      <DetailType>SubTotalLineDetail</DetailType>
+      <SubTotalLineDetail />
+    </Line>
+    <CustomerRef name="Vanessa Feitosa">2</CustomerRef>
+    <BillAddr>
+      <Id>2</Id>
+      <Line1>Rua Jorn Helder Feitosa</Line1>
+      <City>Bethesda</City>
+      <Country>US</Country>
+      <PostalCode>22000</PostalCode>
+      <Lat>INVALID</Lat>
+      <Long>INVALID</Long>
+    </BillAddr>
+    <ShipAddr>
+      <Id>3</Id>
+      <Line1>Rua Jorn Helder Feitosa</Line1>
+      <City>Bethesda</City>
+      <Country>US</Country>
+      <PostalCode>22000</PostalCode>
+      <Lat>INVALID</Lat>
+      <Long>INVALID</Long>
+    </ShipAddr>
+    <GlobalTaxCalculation>NotApplicable</GlobalTaxCalculation>
+    <TotalAmt>10.00</TotalAmt>
+    <PrintStatus>NeedToPrint</PrintStatus>
+    <EmailStatus>NotSet</EmailStatus>
+    <Balance>10.00</Balance>
+    <RemainingCredit>10.00</RemainingCredit>
+  </CreditMemo>
+</IntuitResponse>
