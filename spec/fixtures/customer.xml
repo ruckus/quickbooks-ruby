@@ -5,7 +5,7 @@
     <CreateTime>2013-11-15T11:50:19-08:00</CreateTime>
     <LastUpdatedTime>2013-11-15T11:50:19-08:00</LastUpdatedTime>
   </MetaData>
-  <GivenName>John</GivenName>
+  <GivenName>David</GivenName>
   <FamilyName>Doe</FamilyName>
   <FullyQualifiedName>Thrifty Meats</FullyQualifiedName>
   <CompanyName>Thrifty Meats</CompanyName>
@@ -16,7 +16,7 @@
     <FreeFormNumber>(415) 555-1212</FreeFormNumber>
   </PrimaryPhone>
   <PrimaryEmailAddr>
-    <Address>info@thriftymeats.com</Address>
+    <Address>david@gmail.com</Address>
   </PrimaryEmailAddr>
   <Taxable>false</Taxable>
   <BillAddr>

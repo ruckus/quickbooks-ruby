@@ -1,5 +1,5 @@
 module Quickbooks
-  module Model
+  module Service
     class Payment < BaseService
       include ServiceCrud
       
