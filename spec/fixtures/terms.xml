@@ -1,0 +1,14 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-11-15T15:25:09.985-08:00">
+	<QueryResponse startPosition="0" maxResults="1" totalCount="1">
+		<Term domain="QBO" sparse="false">
+			<Id>1</Id>
+			<SyncToken>0</SyncToken>
+			<MetaData>
+				<CreateTime>2013-11-15T15:22:43-08:00</CreateTime>
+				<LastUpdatedTime>2013-11-15T15:22:43-08:00</LastUpdatedTime>
+			</MetaData>
+                        <Name>Net30</Name>
+			<CustomerRef name="Sunset Bakery">2</CustomerRef>
+		</Term>
+	</QueryResponse>
+</IntuitResponse>

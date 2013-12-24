@@ -1,0 +1,12 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-11-16T10:26:42.762-08:00">
+  <Term domain="QBO" sparse="false">
+  	<Id>1</Id>
+  	<SyncToken>2</SyncToken>
+  	<MetaData>
+  		<CreateTime>2013-11-15T15:22:43-08:00</CreateTime>
+  		<LastUpdatedTime>2013-11-15T15:22:43-08:00</LastUpdatedTime>
+  	</MetaData>
+        <Name>Net30</Name>
+  	<CustomerRef name="Sunset Bakery">2</CustomerRef>
+  </Term>
+</IntuitResponse>
