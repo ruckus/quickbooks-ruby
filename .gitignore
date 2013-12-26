@@ -3,3 +3,6 @@ coverage/
 quickbooks-ruby-*.gem
 
 Gemfile.lock
+
+.ruby-version
+.ruby-gemset
