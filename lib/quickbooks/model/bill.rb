@@ -11,7 +11,7 @@ module Quickbooks
       xml_accessor :doc_number, :from => 'DocNumber'
       xml_accessor :txn_date, :from => 'TxnDate', :as => Date
 
-      xml_accessor :line_items, :from => 'Line', :as => [Model::Line]
+      xml_accessor :line_items, :from => 'Line', :as => [Model::BillLineItem]
 
       xml_accessor :private_note, :from => 'PrivateNote'
 
