@@ -15,9 +15,9 @@ module Quickbooks
 
       xml_accessor :private_note, :from => 'PrivateNote'
 
-      xml_accessor :vendor_ref, :from => 'VendorRef'
-      xml_accessor :payer_ref, :from => 'PayerRef'
-      xml_accessor :sales_term_ref, :from => 'SalesTermRef'
+      xml_accessor :vendor_ref, :from => 'VendorRef', :as => Model::BaseReference
+      xml_accessor :payer_ref, :from => 'PayerRef', :as => Model::BaseReference
+      xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => Model::BaseReference
 
       xml_accessor :due_date, :from => 'DueDate', :as => Date
       xml_accessor :remit_to_address, :from => 'RemitToAddr', :as => Model::PhysicalAddress
