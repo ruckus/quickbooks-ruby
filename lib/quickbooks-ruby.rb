@@ -60,6 +60,7 @@ require 'quickbooks/service/account'
 require 'quickbooks/service/payment_method'
 require 'quickbooks/service/credit_memo'
 require 'quickbooks/service/bill'
+require 'quickbooks/service/bill_payment'
 
 unless Quickbooks::Util::ClassUtil.defined?("InvalidModelException")
   class InvalidModelException < StandardError; end
