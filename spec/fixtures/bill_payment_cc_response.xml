@@ -1,0 +1,23 @@
+<BillPayment domain="QBO" sparse="false">
+  <Id>812</Id>
+  <SyncToken>0</SyncToken>
+  <MetaData>
+    <CreateTime>2013-10-18T10:19:48-07:00</CreateTime>
+    <LastUpdatedTime>2013-10-18T10:19:48-07:00</LastUpdatedTime>
+  </MetaData>
+  <TxnDate>2013-10-18</TxnDate>
+  <PrivateNote>5-487-00</PrivateNote>
+  <Line>
+    <Amount>336.00</Amount>
+    <LinkedTxn>
+      <TxnId>134</TxnId>
+      <TxnType>Bill</TxnType>
+    </LinkedTxn>
+  </Line>
+  <VendorRef name="Nolan Hardware and Supplies">38</VendorRef>
+  <PayType>CreditCard</PayType>
+  <CreditCardPayment>
+    <CCAccountRef name="CreditCard">135</CCAccountRef>
+  </CreditCardPayment>
+  <TotalAmt>336.00</TotalAmt>
+</BillPayment>
