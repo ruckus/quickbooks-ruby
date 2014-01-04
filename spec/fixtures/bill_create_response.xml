@@ -1,0 +1,36 @@
+<Bill domain="QBO" sparse="false">
+    <Id>814</Id>
+    <SyncToken>0</SyncToken>
+    <MetaData>
+        <CreateTime>2013-07-19T08:42:46-07:00</CreateTime>
+        <LastUpdatedTime>2013-07-19T08:42:46-07:00</LastUpdatedTime>
+    </MetaData>
+    <DocNumber>17</DocNumber>
+    <TxnDate>2017-12-16</TxnDate>
+    <Line>
+        <Id>1</Id>
+        <Amount>700.00</Amount>
+        <DetailType>AccountBasedExpenseLineDetail</DetailType>
+        <AccountBasedExpenseLineDetail>
+            <ClassRef name="Overhead">100000000000128320</ClassRef>
+            <AccountRef name="Bank Loan">42</AccountRef>
+            <BillableStatus>NotBillable</BillableStatus>
+            <TaxCodeRef>NON</TaxCodeRef>
+        </AccountBasedExpenseLineDetail>
+    </Line>
+    <Line>
+        <Id>2</Id>
+        <Amount>55.12</Amount>
+        <DetailType>AccountBasedExpenseLineDetail</DetailType>
+        <AccountBasedExpenseLineDetail>
+            <ClassRef name="Overhead">100000000000128320</ClassRef>
+            <AccountRef name="Interest Expense">77</AccountRef>
+            <BillableStatus>NotBillable</BillableStatus>
+            <TaxCodeRef>NON</TaxCodeRef>
+        </AccountBasedExpenseLineDetail>
+    </Line>
+    <VendorRef name="Great Statewide Bank">4</VendorRef>
+    <APAccountRef name="Accounts Payable">38</APAccountRef>
+    <TotalAmt>755.12</TotalAmt>
+    <DueDate>2018-12-26</DueDate>
+</Bill>
