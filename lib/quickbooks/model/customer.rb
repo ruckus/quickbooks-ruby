@@ -17,7 +17,7 @@ module Quickbooks
       xml_name XML_NODE
       xml_accessor :id, :from => 'Id', :as => Integer
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
-      xml_accessor :meta_data, :from => 'MetaData', :as => Quickbooks::Model::MetaData
+      xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :title, :from => 'Title'
       xml_accessor :given_name, :from => 'GivenName'
       xml_accessor :middle_name, :from => 'MiddleName'
@@ -26,20 +26,20 @@ module Quickbooks
       xml_accessor :display_name, :from => 'DisplayName'
       xml_accessor :print_on_check_name, :from => 'PrintOnCheckName'
       xml_accessor :active, :from => 'Active'
-      xml_accessor :primary_phone, :from => 'PrimaryPhone', :as => Quickbooks::Model::TelephoneNumber
-      xml_accessor :alternate_phone, :from => 'AlternatePhone', :as => Quickbooks::Model::TelephoneNumber
-      xml_accessor :mobile_phone, :from => 'Mobile', :as => Quickbooks::Model::TelephoneNumber
-      xml_accessor :fax_phone, :from => 'Fax', :as => Quickbooks::Model::TelephoneNumber
-      xml_accessor :primary_email_address, :from => 'PrimaryEmailAddr', :as => Quickbooks::Model::EmailAddress
-      xml_accessor :web_site, :from => 'WebAddr', :as => Quickbooks::Model::WebSiteAddress
-      xml_accessor :billing_address, :from => 'BillAddr', :as => Quickbooks::Model::PhysicalAddress
-      xml_accessor :shipping_address, :from => 'ShipAddr', :as => Quickbooks::Model::PhysicalAddress
+      xml_accessor :primary_phone, :from => 'PrimaryPhone', :as => TelephoneNumber
+      xml_accessor :alternate_phone, :from => 'AlternatePhone', :as => TelephoneNumber
+      xml_accessor :mobile_phone, :from => 'Mobile', :as => TelephoneNumber
+      xml_accessor :fax_phone, :from => 'Fax', :as => TelephoneNumber
+      xml_accessor :primary_email_address, :from => 'PrimaryEmailAddr', :as => EmailAddress
+      xml_accessor :web_site, :from => 'WebAddr', :as => WebSiteAddress
+      xml_accessor :billing_address, :from => 'BillAddr', :as => PhysicalAddress
+      xml_accessor :shipping_address, :from => 'ShipAddr', :as => PhysicalAddress
       xml_accessor :job, :from => 'Job'
       xml_accessor :bill_with_parent, :from => 'BillWithParent'
-      xml_accessor :parent_ref, :from => 'ParentRef', :as => Integer
+      xml_accessor :parent_ref, :from => 'ParentRef', :as => BaseReference
       xml_accessor :level, :from => 'Level'
-      xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => Integer
-      xml_accessor :payment_method_ref, :from => 'PaymentMethodRef'
+      xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => BaseReference
+      xml_accessor :payment_method_ref, :from => 'PaymentMethodRef', :as => BaseReference
       xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :open_balance_date, :from => 'OpenBalanceDate', :as => Date
       xml_accessor :balance_with_jobs, :from => 'BalanceWithJobs', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
@@ -50,8 +50,11 @@ module Quickbooks
       xml_accessor :taxable, :from => 'Taxable'
       xml_accessor :notes, :from => 'Notes'
 
+      #== Validations
       validate :names_cannot_contain_invalid_characters
       validate :email_address_is_valid
+
+      reference_setters :parent_ref, :sales_term_ref, :payment_method_ref
 
       def active?
         active.to_s == 'true'
@@ -82,7 +85,7 @@ module Quickbooks
       end
 
       def email_address=(email_address)
-        self.primary_email_address = Quickbooks::Model::EmailAddress.new(email_address)
+        self.primary_email_address = EmailAddress.new(email_address)
       end
 
       def email_address

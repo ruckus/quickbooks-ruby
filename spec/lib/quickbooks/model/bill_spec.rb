@@ -12,7 +12,7 @@ describe "Quickbooks::Model::Bill" do
     bill.vendor_ref.name.should == "Great Statewide Bank"
 
     bill.line_items.size.should == 2
-    
+
     line_item1 = bill.line_items[0]
     line_item1.id.should == 1
     line_item1.amount.should == 700.0
@@ -22,7 +22,7 @@ describe "Quickbooks::Model::Bill" do
     line_item1.account_based_expense_line_detail.billable_status.should == "NotBillable"
     line_item1.account_based_expense_line_detail.class_ref.value.should == "100000000000128320"
     line_item1.account_based_expense_line_detail.class_ref.name.should == "Overhead"
-    line_item1.account_based_expense_line_detail.tax_code_ref.should == "NON"
+    line_item1.account_based_expense_line_detail.tax_code_ref.to_s.should == "NON"
 
     line_item2 = bill.line_items[1]
     line_item2.id.should == 2
@@ -33,7 +33,7 @@ describe "Quickbooks::Model::Bill" do
     line_item2.account_based_expense_line_detail.billable_status.should == "NotBillable"
     line_item2.account_based_expense_line_detail.class_ref.value.should == "100000000000128320"
     line_item2.account_based_expense_line_detail.class_ref.name.should == "Overhead"
-    line_item2.account_based_expense_line_detail.tax_code_ref.should == "NON"
+    line_item2.account_based_expense_line_detail.tax_code_ref.to_s.should == "NON"
   end
 
 end

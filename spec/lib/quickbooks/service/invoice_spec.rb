@@ -84,8 +84,8 @@ describe "Quickbooks::Service::Invoice" do
     line_item.sales_item! do |detail|
       detail.unit_price = 50
       detail.quantity = 1
-      detail.item_ref = 1
-      detail.tax_code_ref = 'NON'
+      detail.item_id = 1
+      detail.tax_code_id = 'NON'
     end
 
     invoice.line_items << line_item
@@ -107,8 +107,8 @@ describe "Quickbooks::Service::Invoice" do
     line_item.sales_item! do |detail|
       detail.unit_price = 50
       detail.quantity = 1
-      detail.item_ref = 1
-      detail.tax_code_ref = 'NON'
+      detail.item_id = 1
+      detail.tax_code_id = 'NON'
     end
 
     invoice.line_items << line_item

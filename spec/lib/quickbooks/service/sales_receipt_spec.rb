@@ -8,7 +8,7 @@ module Quickbooks
         line.amount = 10
         line.description = "Games"
         line.sales_item! do |sales_item|
-          sales_item.item_ref = 1
+          sales_item.item_id = 1
           sales_item.unit_price = 10
           sales_item.quantity = 1
         end
@@ -46,8 +46,8 @@ module Quickbooks
         stub_request(:post, subject.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
 
         receipt = model.new
-        receipt.customer_ref = 2
-        receipt.ship_method_ref = "Ship Method"
+        receipt.customer_id = 2
+        receipt.ship_method_id = "Ship Method"
         receipt.placed_on = Time.now
         receipt.line_items = [line]
 

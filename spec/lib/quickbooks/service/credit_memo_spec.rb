@@ -8,7 +8,7 @@ module Quickbooks
         line.amount = 10
         line.description = "Games"
         line.sales_item! do |sales_item|
-          sales_item.item_ref = 1
+          sales_item.item_id = 1
           sales_item.unit_price = 10
           sales_item.quantity = 1
         end
@@ -28,8 +28,8 @@ module Quickbooks
 
         credit_memo = model.new
         credit_memo.doc_number = "R3454653464"
-        credit_memo.customer_ref = 2
-        credit_memo.payment_method_ref = 1
+        credit_memo.customer_id = 2
+        credit_memo.payment_method_id = 1
         credit_memo.placed_on = Time.now
         credit_memo.line_items = [line]
 

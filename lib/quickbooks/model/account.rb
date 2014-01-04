@@ -17,13 +17,13 @@ module Quickbooks
 
       xml_accessor :id, :from => 'Id', :as => Integer
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
-      xml_accessor :meta_data, :from => 'MetaData', :as => Quickbooks::Model::MetaData
+      xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :has_attachment, :from => 'HasAttachment'
       xml_accessor :name, :from => 'Name'
       xml_accessor :description, :from => 'Description'
 
       xml_accessor :sub_account, :from => 'SubAccount'
-      xml_accessor :parent_ref, :from => 'ParentRef', :as => Integer
+      xml_accessor :parent_ref, :from => 'ParentRef', :as => BaseReference
 
       xml_accessor :active, :from => 'Active'
 
@@ -36,16 +36,16 @@ module Quickbooks
 
       xml_accessor :opening_balance, :from => 'OpeningBalance', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :opening_balance_date, :from => 'OpeningBalanceDate', :as => DateTime
-
-      xml_accessor :currency_ref, :from => 'CurrencyRef'
+      xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
       xml_accessor :tax_account, :from => 'TaxAccount'
-      xml_accessor :tax_code_ref, :from => 'TaxCodeRef'
+      xml_accessor :tax_code_ref, :from => 'TaxCodeRef', :as => BaseReference
 
+      reference_setters :parent_ref, :currency_ref, :tax_code_ref
+
+      #== Validations
       validates_inclusion_of :classification, :in => ACCOUNT_CLASSIFICATION
-
       validates_length_of :name, :minimum => 1, :maximum => 100
       validates_length_of :description, :minimum => 1, :maximum => 100
-
       validate :name_cannot_contain_invalid_characters
 
       def name_cannot_contain_invalid_characters

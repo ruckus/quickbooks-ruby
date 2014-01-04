@@ -23,6 +23,6 @@ describe Quickbooks::Service::Account do
     account.name.should == "Sales of Product Income"
     account.classification.should == Quickbooks::Model::Account::REVENUE
     account.tax_account?.should == false
-    account.currency_ref.should == 'USD'
+    account.currency_ref.to_s.should == 'USD'
   end
 end

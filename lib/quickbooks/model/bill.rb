@@ -11,28 +11,26 @@ module Quickbooks
       xml_accessor :doc_number, :from => 'DocNumber'
       xml_accessor :txn_date, :from => 'TxnDate', :as => Date
 
-      xml_accessor :line_items, :from => 'Line', :as => [Model::BillLineItem]
+      xml_accessor :line_items, :from => 'Line', :as => [BillLineItem]
 
       xml_accessor :private_note, :from => 'PrivateNote'
 
-      xml_accessor :vendor_ref, :from => 'VendorRef', :as => Model::BaseReference
-      xml_accessor :payer_ref, :from => 'PayerRef', :as => Model::BaseReference
-      xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => Model::BaseReference
+      xml_accessor :vendor_ref, :from => 'VendorRef', :as => BaseReference
+      xml_accessor :payer_ref, :from => 'PayerRef', :as => BaseReference
+      xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => BaseReference
 
       xml_accessor :due_date, :from => 'DueDate', :as => Date
-      xml_accessor :remit_to_address, :from => 'RemitToAddr', :as => Model::PhysicalAddress
-      xml_accessor :ship_address, :from => 'ShipAddr', :as => Model::PhysicalAddress
+      xml_accessor :remit_to_address, :from => 'RemitToAddr', :as => PhysicalAddress
+      xml_accessor :ship_address, :from => 'ShipAddr', :as => PhysicalAddress
 
       # readonly
-      xml_accessor :bill_email, :from => 'BillEmail', :as => Model::EmailAddress
-      xml_accessor :reply_email, :from => 'ReplyEmail', :as => Model::EmailAddress
+      xml_accessor :bill_email, :from => 'BillEmail', :as => EmailAddress
+      xml_accessor :reply_email, :from => 'ReplyEmail', :as => EmailAddress
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
 
       validates_length_of :line_items, :minimum => 1
 
-      # def email=(email)
-      #   self.bill_email = Model::EmailAddress.new(email)
-      # end
+      reference_setters :vendor_ref, :payer_ref, :sales_term_ref
     end
   end
 end

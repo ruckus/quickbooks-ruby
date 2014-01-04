@@ -12,7 +12,7 @@ module Quickbooks
       xml_accessor :amount, :from => 'Amount', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :detail_type, :from => 'DetailType'
 
-      xml_accessor :linked_transactions, :from => 'LinkedTxn', :as => [Quickbooks::Model::LinkedTransaction]
+      xml_accessor :linked_transactions, :from => 'LinkedTxn', :as => [LinkedTransaction]
 
       #== Various detail types
 

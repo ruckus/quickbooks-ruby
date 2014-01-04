@@ -11,22 +11,24 @@ module Quickbooks
       xml_accessor :doc_number, :from => 'DocNumber'
       xml_accessor :txn_date, :from => 'TxnDate', :as => Date
 
-      xml_accessor :line_items, :from => 'Line', :as => [Model::BillPaymentLineItem]
+      xml_accessor :line_items, :from => 'Line', :as => [BillPaymentLineItem]
 
       xml_accessor :private_note, :from => 'PrivateNote'
 
-      xml_accessor :vendor_ref, :from => 'VendorRef', :as => Model::BaseReference
+      xml_accessor :vendor_ref, :from => 'VendorRef', :as => BaseReference
       xml_accessor :pay_type, :from => 'PayType'
 
-      ## Required if PayType is Check. 
-      xml_accessor :check_payment, :from => 'CheckPayment', :as => Model::BillPaymentCheck
+      ## Required if PayType is Check.
+      xml_accessor :check_payment, :from => 'CheckPayment', :as => BillPaymentCheck
       ## Required if PayType is CreditCard.
-      xml_accessor :credit_card_payment, :from => 'CreditCardPayment', :as => Model::BillPaymentCreditCard
+      xml_accessor :credit_card_payment, :from => 'CreditCardPayment', :as => BillPaymentCreditCard
 
       # readonly
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
 
       validates_length_of :line_items, :minimum => 1
+
+      reference_setters :vendor_ref
     end
   end
 end

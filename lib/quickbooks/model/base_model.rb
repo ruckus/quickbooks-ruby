@@ -35,6 +35,27 @@ module Quickbooks
           self::REST_RESOURCE
         end
 
+        # Automatically generate an ID setter.
+        # Example:
+        #   reference_setters :discount_ref
+        # Would generate a method like:
+        # def discount_id=(id)
+        #    self.discount_ref = BaseReference.new(id)
+        # end
+        def reference_setters(*args)
+          args.each do |attribute|
+            method_name = "#{attribute.to_s.gsub('_ref', '_id')}=".to_sym
+            unless instance_methods(false).include?(method_name)
+              method_definition = <<-METH
+              def #{method_name}(id)
+                self.#{attribute} = BaseReference.new(id)
+              end
+              METH
+              class_eval(method_definition)
+            end
+          end
+        end
+
       end
     end
   end

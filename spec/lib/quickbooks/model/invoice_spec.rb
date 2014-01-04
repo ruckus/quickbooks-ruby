@@ -21,10 +21,10 @@ describe "Quickbooks::Model::Invoice" do
     line_item1.amount.should == 198.99
     line_item1.sales_item?.should == true
     line_item1.sales_line_item_detail.should_not be_nil
-    line_item1.sales_line_item_detail.item_ref.should == 1
+    line_item1.sales_line_item_detail.item_ref.to_i.should == 1
     line_item1.sales_line_item_detail.unit_price.should == 198.99
     line_item1.sales_line_item_detail.quantity.should == 1
-    line_item1.sales_line_item_detail.tax_code_ref.should == 'NON'
+    line_item1.sales_line_item_detail.tax_code_ref.to_s.should == 'NON'
 
     line_item2 = invoice.line_items[1]
     line_item2.sub_total_item?.should == true
@@ -54,7 +54,7 @@ describe "Quickbooks::Model::Invoice" do
     shipping_address.lat.should == "33.739466"
     shipping_address.lon.should == "-118.0395574"
 
-    invoice.sales_term_ref.should == 2
+    invoice.sales_term_ref.to_i.should == 2
     invoice.due_date.to_date.should == Date.civil(2013, 11, 30)
     invoice.total_amount.should == 50.00
     invoice.apply_tax_after_discount?.should == false

@@ -17,37 +17,40 @@ module Quickbooks
 
       xml_accessor :id, :from => 'Id', :as => Integer
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
-      xml_accessor :meta_data, :from => 'MetaData', :as => Quickbooks::Model::MetaData
-      xml_accessor :custom_fields, :from => 'CustomField', :as => [Quickbooks::Model::CustomField]
+      xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
+      xml_accessor :custom_fields, :from => 'CustomField', :as => [CustomField]
       xml_accessor :doc_number, :from => 'DocNumber'
       xml_accessor :txn_date, :from => 'TxnDate', :as => Date
       xml_accessor :private_note, :from => 'PrivateNote'
-      xml_accessor :linked_transactions, :from => 'LinkedTxn', :as => [Quickbooks::Model::LinkedTransaction]
-      xml_accessor :line_items, :from => 'Line', :as => [Quickbooks::Model::InvoiceLineItem]
+      xml_accessor :linked_transactions, :from => 'LinkedTxn', :as => [LinkedTransaction]
+      xml_accessor :line_items, :from => 'Line', :as => [InvoiceLineItem]
       xml_accessor :txn_tax_detail, :from => 'TxnTaxDetail'
-      xml_accessor :customer_ref, :from => 'CustomerRef', :as => Quickbooks::Model::CustomerRef
+      xml_accessor :customer_ref, :from => 'CustomerRef', :as => BaseReference
       xml_accessor :customer_memo, :from => 'CustomerMemo'
-      xml_accessor :billing_address, :from => 'BillAddr', :as => Quickbooks::Model::PhysicalAddress
-      xml_accessor :shipping_address, :from => 'ShipAddr', :as => Quickbooks::Model::PhysicalAddress
-      xml_accessor :class_ref, :from => 'ClassRef'
-      xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => Integer
+      xml_accessor :billing_address, :from => 'BillAddr', :as => PhysicalAddress
+      xml_accessor :shipping_address, :from => 'ShipAddr', :as => PhysicalAddress
+      xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
+      xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => BaseReference
       xml_accessor :due_date, :from => 'DueDate', :as => Date
-      xml_accessor :ship_method_ref, :from => 'ShipMethodRef'
+      xml_accessor :ship_method_ref, :from => 'ShipMethodRef', :as => BaseReference
       xml_accessor :ship_date, :from => 'ShipDate', :as => Date
       xml_accessor :tracking_num, :from => 'TrackingNum'
-      xml_accessor :ar_account_ref, :from => 'ARAccountRef', :as => Integer
+      xml_accessor :ar_account_ref, :from => 'ARAccountRef', :as => BaseReference
       xml_accessor :total_amount, :from => 'TotalAmt', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :apply_tax_after_discount, :from => 'ApplyTaxAfterDiscount'
       xml_accessor :print_status, :from => 'PrintStatus'
       xml_accessor :email_status, :from => 'EmailStatus'
       xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :deposit, :from => 'Deposit', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
-      xml_accessor :department_ref, :from => 'DepartmentRef'
+      xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
       xml_accessor :allow_ipn_payment, :from => 'AllowIPNPayment'
-      xml_accessor :bill_email, :from => 'BillEmail', :as => Quickbooks::Model::EmailAddress
+      xml_accessor :bill_email, :from => 'BillEmail', :as => EmailAddress
       xml_accessor :allow_online_payment, :from => 'AllowOnlinePayment'
       xml_accessor :allow_online_credit_card_payment, :from => 'AllowOnlineCreditCardPayment'
       xml_accessor :allow_online_ach_payment, :from => 'AllowOnlineACHPayment'
+
+      reference_setters :customer_ref, :class_ref, :sales_term_ref, :ship_method_ref
+      reference_setters :ar_account_ref, :department_ref
 
       #== Validations
       validates_length_of :line_items, :minimum => 1
@@ -68,7 +71,7 @@ module Quickbooks
       end
 
       def billing_email_address=(email_address_string)
-        self.bill_email = Quickbooks::Model::EmailAddress.new(email_address_string)
+        self.bill_email = EmailAddress.new(email_address_string)
       end
 
       def wants_billing_email_sent!
@@ -97,10 +100,6 @@ module Quickbooks
 
       def allow_online_ach_payment?
         allow_online_ach_payment.to_s == 'true'
-      end
-
-      def customer_id=(customer_id)
-        self.customer_ref = Quickbooks::Model::CustomerRef.new(customer_id)
       end
 
       private

@@ -1,8 +1,10 @@
 module Quickbooks
   module Model
     class BillPaymentCreditCard < BaseModel
-      xml_accessor :cc_account_ref, :from => 'CCAccountRef', :as => Model::BaseReference
-      xml_accessor :cc_detail, :from => 'CCDetail', :as => Model::CreditCardPayment
+      xml_accessor :cc_account_ref, :from => 'CCAccountRef', :as => BaseReference
+      xml_accessor :cc_detail, :from => 'CCDetail', :as => CreditCardPayment
+
+      reference_setters :cc_account_ref
     end
   end
 end

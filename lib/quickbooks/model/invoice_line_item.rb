@@ -14,9 +14,9 @@ module Quickbooks
       xml_accessor :detail_type, :from => 'DetailType'
 
       #== Various detail types
-      xml_accessor :sales_line_item_detail, :from => 'SalesItemLineDetail', :as => Quickbooks::Model::SalesItemLineDetail
-      xml_accessor :sub_total_line_detail, :from => 'SubTotalLineDetail', :as => Quickbooks::Model::SubTotalLineDetail
-      xml_accessor :payment_line_detail, :from => 'PaymentLineDetail', :as => Quickbooks::Model::PaymentLineDetail
+      xml_accessor :sales_line_item_detail, :from => 'SalesItemLineDetail', :as => SalesItemLineDetail
+      xml_accessor :sub_total_line_detail, :from => 'SubTotalLineDetail', :as => SubTotalLineDetail
+      xml_accessor :payment_line_detail, :from => 'PaymentLineDetail', :as => PaymentLineDetail
 
       def sales_item?
         detail_type.to_s == SALES_LINE_ITEM_DETAIL
@@ -28,14 +28,14 @@ module Quickbooks
 
       def sales_item!
         self.detail_type = SALES_LINE_ITEM_DETAIL
-        self.sales_line_item_detail = Quickbooks::Model::SalesItemLineDetail.new
+        self.sales_line_item_detail = SalesItemLineDetail.new
 
         yield self.sales_line_item_detail if block_given?
       end
 
       def payment_item!
         self.detail_type = PAYMENT_LINE_DETAIL
-        self.payment_line_detail = Quickbooks::Model::PaymentLineDetail.new
+        self.payment_line_detail = PaymentLineDetail.new
 
         yield self.payment_line_detail if block_given?
       end

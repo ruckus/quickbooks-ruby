@@ -19,31 +19,38 @@ module Quickbooks
       xml_name 'Item'
       xml_accessor :id, :from => 'Id', :as => Integer
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
-      xml_accessor :meta_data, :from => 'MetaData', :as => Quickbooks::Model::MetaData
-      xml_accessor :attachable_ref, :from => 'AttachableRef', :as => Integer
+      xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :name, :from => 'Name'
       xml_accessor :description, :from => 'Description'
       xml_accessor :active, :from => 'Active'
-      xml_accessor :parent_ref, :from => 'ParentRef', :as => Integer
       xml_accessor :sub_item, :from => 'SubItem'
+      xml_accessor :parent_ref, :from => 'ParentRef', :as => Integer
+      xml_accessor :level, :from => 'Level', :as => Integer
+
+      # read-only
+      xml_accessor :fully_qualified_name, :from => 'FullyQualifiedName'
+
+      xml_accessor :taxable, :from => 'Taxable'
+      xml_accessor :sales_tax_included, :from => 'SalesTaxIncluded'
       xml_accessor :unit_price, :from => 'UnitPrice', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :rate_percent, :from => 'RatePercent', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :type, :from => 'Type'
-      xml_accessor :taxable, :from => 'Taxable'
-      xml_accessor :asset_account_ref, :from => 'AssetAccountRef', :as => Integer
-      xml_accessor :income_account_ref, :from => 'IncomeAccountRef', :as => Integer
+      xml_accessor :income_account_ref, :from => 'IncomeAccountRef', :as => BaseReference
       xml_accessor :purchase_desc, :from => 'PurchaseDesc'
-      xml_accessor :purchase_cost, :from => 'PurchaseCost', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
-      xml_accessor :expense_account_ref, :from => 'ExpenseAccountRef', :as => Integer
-      xml_accessor :quantity_on_hand, :from => 'QtyOnHand', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
-      xml_accessor :sales_tax_code_ref, :from => 'SalesTaxCodeRef', :as => Integer
-      xml_accessor :purchase_tax_code_ref, :from => 'PurchaseTaxCodeRef', :as => Integer
-      xml_accessor :track_quantity_on_hand, :from => 'TrackQtyOnHand'
-      xml_accessor :asset_account, :from => 'AssetAccount', :as => Integer
-      xml_accessor :level, :from => 'Level', :as => Integer
-      xml_accessor :sales_tax_included, :from => 'SalesTaxIncluded'
       xml_accessor :purchase_tax_included, :from => 'PurchaseTaxIncluded'
+      xml_accessor :purchase_cost, :from => 'PurchaseCost', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
+      xml_accessor :expense_account_ref, :from => 'ExpenseAccountRef', :as => BaseReference
+      xml_accessor :asset_account_ref, :from => 'AssetAccountRef', :as => BaseReference
+      xml_accessor :track_quantity_on_hand, :from => 'TrackQtyOnHand'
+      xml_accessor :quantity_on_hand, :from => 'QtyOnHand', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
+      xml_accessor :sales_tax_code_ref, :from => 'SalesTaxCodeRef', :as => BaseReference
+      xml_accessor :purchase_tax_code_ref, :from => 'PurchaseTaxCodeRef', :as => BaseReference
+      xml_accessor :inv_start_date, :from => 'InvStartDate', :as => Date
 
+      reference_setters :parent_ref, :income_account_ref, :expense_account_ref
+      reference_setters :asset_account_ref, :sales_tax_code_ref, :purchase_tax_code_ref
+
+      #== Validations
       validates_length_of :name, :minimum => 1
       validates_inclusion_of :type, :in => ITEM_TYPES
 

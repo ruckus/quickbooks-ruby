@@ -12,7 +12,7 @@ describe "Quickbooks::Model::Item" do
     item.taxable?.should == false
     item.unit_price.should == 50
     item.type.should == 'Service'
-    item.income_account_ref.should == 1
+    item.income_account_ref.to_i.should == 1
     item.purchase_cost.should == 0
     item.track_quantity_on_hand?.should == false
   end
