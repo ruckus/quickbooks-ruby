@@ -186,7 +186,7 @@ line_item.description = "Plush Baby Doll"
 line_item.sales_item! do |detail|
   detail.unit_price = 50
   detail.quantity = 1
-  detail.item_ref = 500 # Item ID here
+  detail.item_id = 500 # Item ID here
 end
 
 invoice.line_items << line_item
