@@ -10,6 +10,7 @@ require 'oauth'
 require 'quickbooks/util/logging'
 require 'quickbooks/util/class_util'
 require 'quickbooks/util/http_encoding_helper'
+require 'quickbooks/util/name_entity'
 
 #== Models
 require 'quickbooks/model/base_model'
@@ -26,8 +27,8 @@ require 'quickbooks/model/item'
 require 'quickbooks/model/account'
 require 'quickbooks/model/check_payment'
 require 'quickbooks/model/credit_card_payment'
-
 require 'quickbooks/model/telephone_number'
+require 'quickbooks/model/other_contact_info'
 require 'quickbooks/model/email_address'
 require 'quickbooks/model/web_site_address'
 require 'quickbooks/model/physical_address'
@@ -44,6 +45,7 @@ require 'quickbooks/model/bill_payment_line_item'
 require 'quickbooks/model/bill_payment_check'
 require 'quickbooks/model/bill_payment_credit_card'
 require 'quickbooks/model/bill_payment'
+require 'quickbooks/model/vendor'
 
 #== Services
 require 'quickbooks/service/base_service'
@@ -57,6 +59,7 @@ require 'quickbooks/service/payment_method'
 require 'quickbooks/service/credit_memo'
 require 'quickbooks/service/bill'
 require 'quickbooks/service/bill_payment'
+require 'quickbooks/service/vendor'
 
 unless Quickbooks::Util::ClassUtil.defined?("InvalidModelException")
   class InvalidModelException < StandardError; end
