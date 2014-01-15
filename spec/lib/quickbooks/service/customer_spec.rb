@@ -33,6 +33,7 @@ describe "Quickbooks::Service::Customer" do
     end.should raise_error(InvalidModelException)
 
     customer.valid?.should == false
+    customer.valid_for_create?.should == false
     customer.errors.keys.include?(:display_name).should == true
   end
 
@@ -65,6 +66,7 @@ describe "Quickbooks::Service::Customer" do
     billing_address.country = "USA"
     customer.billing_address = billing_address
 
+    customer.valid_for_create?.should == true
     created_customer = @service.create(customer)
     created_customer.id.should == 1
   end
@@ -79,6 +81,7 @@ describe "Quickbooks::Service::Customer" do
     xml = fixture("fetch_customer_by_id.xml")
     stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
 
+    customer.valid_for_update?.should == true
     update_response = @service.update(customer, :sparse => true)
     update_response.display_name.should == 'Thrifty Meats'
   end
@@ -93,6 +96,7 @@ describe "Quickbooks::Service::Customer" do
     xml = fixture("deleted_customer.xml")
     stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
 
+    customer.valid_for_deletion?.should == true
     response = @service.delete(customer)
     response.fully_qualified_name.should == 'Thrifty Meats (deleted)'
     response.active?.should == false
