@@ -1,0 +1,27 @@
+module Quickbooks
+  module Model
+    class CompanyInfo < BaseModel
+      XML_COLLECTION_NODE = "CompanyInfo"
+      XML_NODE = "CompanyInfo"
+      REST_RESOURCE = 'companyinfo'
+
+      xml_name XML_NODE
+      xml_accessor :id, :from => 'Id', :as => Integer
+      xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
+      xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
+      xml_accessor :company_name, :from => 'CompanyName'
+      xml_accessor :legal_name, :from => 'LegalName'
+      xml_accessor :company_address, :from => 'CompanyAddr', :as => PhysicalAddress
+      xml_accessor :customer_communication_address, :from => 'CustomerCommunicationAddr', :as => PhysicalAddress
+      xml_accessor :legal_address, :from => 'LegalAddr', :as => PhysicalAddress
+      xml_accessor :primary_phone, :from => 'PrimaryPhone', :as => TelephoneNumber
+      xml_accessor :company_start_date, :from => 'CompanyStartDate', :as => DateTime
+      xml_accessor :employer_id, :from => 'EmployerId'
+      xml_accessor :fiscal_year_start_month, :from => 'FiscalYearStartMonth'
+      xml_accessor :country, :from => 'Country'
+      xml_accessor :email, :from => 'Email', :as => EmailAddress
+      xml_accessor :web_site, :from => 'WebAddr', :as => WebSiteAddress
+      xml_accessor :supported_languages, :from => 'SupportedLanguages'
+    end
+  end
+end
