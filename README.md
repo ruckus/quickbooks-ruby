@@ -225,7 +225,7 @@ Attachable        | no     | no     | no   | no     | no
 Bill              | no    | no    | no  | no    | no
 Bill Payment      | no    | no    | no  | no    | no
 Class             | no    | no    | no  | no    | no
-Company Info      | no     | no     | yes   | no     | yes          |
+Company Info      | n/a     | n/a     | yes   | n/a     | yes          |
 Credit Memo | yes     | yes     | yes   | no     | no          |
 Customer          | yes    | yes    | yes  | yes    | yes         |
 Department          | no    | no    | no  | no    | no         |
