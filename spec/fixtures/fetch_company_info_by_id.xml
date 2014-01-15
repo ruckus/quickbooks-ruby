@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-07-11T08:29:51.987-07:00">
+  <CompanyInfo domain="QBO" sparse="false">
+    <Id>1</Id>
+    <SyncToken>2</SyncToken>
+    <MetaData>
+      <CreateTime>2013-04-20T10:32:18-07:00</CreateTime>
+      <LastUpdatedTime>2013-07-11T07:52:39-07:00</LastUpdatedTime>
+    </MetaData>
+    <CompanyName>Acme Corp.</CompanyName>
+    <LegalName>Acme Corp.</LegalName>
+    <CompanyAddr>
+      <Id>1</Id>
+      <Line1>2500 Garcia Ave</Line1>
+      <City>Mountain View</City>
+      <CountrySubDivisionCode>CA</CountrySubDivisionCode>
+      <PostalCode>94043</PostalCode>
+      <Lat>37.428314</Lat>
+      <Long>-122.0961024</Long>
+    </CompanyAddr>
+    <CustomerCommunicationAddr>
+      <Id>1</Id>
+      <Line1>2500 Garcia Ave</Line1>
+      <City>Mountain View</City>
+      <CountrySubDivisionCode>CA</CountrySubDivisionCode>
+      <PostalCode>94043</PostalCode>
+      <Lat>37.428314</Lat>
+      <Long>-122.0961024</Long>
+    </CustomerCommunicationAddr>
+    <LegalAddr>
+      <Id>1</Id>
+      <Line1>2500 Garcia Ave</Line1>
+      <City>Mountain View</City>
+      <CountrySubDivisionCode>CA</CountrySubDivisionCode>
+      <PostalCode>94043</PostalCode>
+      <Lat>37.428314</Lat>
+      <Long>-122.0961024</Long>
+    </LegalAddr>
+    <PrimaryPhone>
+      <FreeFormNumber>(650)944-4444</FreeFormNumber>
+    </PrimaryPhone>
+    <CompanyStartDate>2013-04-20</CompanyStartDate>
+    <Country>US</Country>
+    <Email>
+      <Address>acme@enterprise.com</Address>
+    </Email>
+    <WebAddr/>
+    <SupportedLanguages>en</SupportedLanguages>
+    <NameValue>
+      <Name>NeoEnabled</Name>
+      <Value>false</Value>
+    </NameValue>
+  </CompanyInfo>
+</IntuitResponse>
