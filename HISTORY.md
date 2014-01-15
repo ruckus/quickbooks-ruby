@@ -1,3 +1,7 @@
+## 0.0.4 (2014-01-15)
+
+* Added CompanyInfo model/service - thank you [Sean Xie](https://github.com/seanxiesx)
+
 ## 0.0.3 (2014-01-04)
 
 * All reference types, e.g. Account#parent_ref are implemented via a first-class `BaseReference` instance.
