@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-12-10T12:38:26.908-08:00">
   <QueryResponse startPosition="1" maxResults="5">
     <SalesReceipt domain="QBO" sparse="false">
@@ -9,6 +10,7 @@
       </MetaData>
       <DocNumber>1002</DocNumber>
       <TxnDate>2013-12-10</TxnDate>
+      <PrivateNote>private</PrivateNote>
       <CurrencyRef name="Brazilian Real">BRL</CurrencyRef>
       <Line>
         <Id>1</Id>
@@ -24,9 +26,10 @@
       <Line>
         <Amount>10.00</Amount>
         <DetailType>SubTotalLineDetail</DetailType>
-        <SubTotalLineDetail />
+        <SubTotalLineDetail/>
       </Line>
       <CustomerRef name="Luis Braga">1</CustomerRef>
+      <CustomerMemo>memo!</CustomerMemo>
       <GlobalTaxCalculation>NotApplicable</GlobalTaxCalculation>
       <TotalAmt>10.00</TotalAmt>
       <PrintStatus>NotSet</PrintStatus>
@@ -59,7 +62,7 @@
       <Line>
         <Amount>10.00</Amount>
         <DetailType>SubTotalLineDetail</DetailType>
-        <SubTotalLineDetail />
+        <SubTotalLineDetail/>
       </Line>
       <CustomerRef name="Vanessa Feitosa">2</CustomerRef>
       <BillAddr>

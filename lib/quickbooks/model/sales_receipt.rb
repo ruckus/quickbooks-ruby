@@ -28,6 +28,9 @@ module Quickbooks
 
       xml_accessor :deposit_to_account_ref, :from => 'DepositToAccountRef', :as => BaseReference
 
+      xml_accessor :customer_memo, :from => 'CustomerMemo'
+      xml_accessor :private_note, :from => 'PrivateNote'
+
       # readonly
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
 
