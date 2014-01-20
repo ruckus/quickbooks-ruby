@@ -1,0 +1,34 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-04-23T08:55:52.958-07:00">
+<Employee domain="QBO" sparse="false">
+    <Id>2</Id>
+    <SyncToken>0</SyncToken>
+    <MetaData>
+        <CreateTime>2013-10-11T08:28:30-07:00</CreateTime>
+        <LastUpdatedTime>2013-10-11T08:28:30-07:00</LastUpdatedTime>
+    </MetaData>
+    <Organization>false</Organization>
+    <GivenName>Lindy</GivenName>
+    <FamilyName>Miller</FamilyName>
+    <DisplayName>Lindy Miller</DisplayName>
+    <PrintOnCheckName>Lindy Miller</PrintOnCheckName>
+    <Active>true</Active>
+    <PrimaryPhone>
+        <FreeFormNumber>525-7892</FreeFormNumber>
+    </PrimaryPhone>
+    <PrimaryEmailAddr>
+      <Address>lindy.employee@intuit.com</Address>
+    </PrimaryEmailAddr>
+    <SSN>XXX-XX-XXXX</SSN>
+    <PrimaryAddr>
+        <Id>50</Id>
+        <Line1>99 N. Elm Street</Line1>
+        <City>Middlesburg</City>
+        <CountrySubDivisionCode>VA</CountrySubDivisionCode>
+        <PostalCode>93242</PostalCode>
+    </PrimaryAddr>
+    <BillableTime>true</BillableTime>
+    <BillRate>215.00</BillRate>
+    <BirthDate>1991-03-28</BirthDate>
+    <Gender>female</Gender>
+    <HiredDate>2013-09-01</HiredDate>
+</Employee>

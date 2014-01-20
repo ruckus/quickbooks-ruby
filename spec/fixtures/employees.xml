@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-11-25T09:40:05.297-08:00">
+    <Employee domain="QBO" sparse="false">
+        <Id>114</Id>
+        <SyncToken>0</SyncToken>
+        <MetaData>
+            <CreateTime>2013-11-25T09:40:05-08:00</CreateTime>
+            <LastUpdatedTime>2013-11-25T09:40:05-08:00</LastUpdatedTime>
+        </MetaData>
+        <GivenName>John</GivenName>
+        <FamilyName>Miller</FamilyName>
+        <DisplayName>John Miller</DisplayName>
+        <PrintOnCheckName>John Miller</PrintOnCheckName>
+        <Active>true</Active>
+        <PrimaryPhone>
+            <FreeFormNumber>234-525-1234</FreeFormNumber>
+        </PrimaryPhone>
+        <SSN>XXX-XX-XXXX</SSN>
+        <PrimaryAddr>
+            <Id>357</Id>
+            <Line1>45 N. Elm Street</Line1>
+            <City>Middlefield</City>
+            <CountrySubDivisionCode>CA</CountrySubDivisionCode>
+            <PostalCode>93242</PostalCode>
+            <Lat>37.4601027</Lat>
+            <Long>-122.1523605</Long>
+        </PrimaryAddr>
+        <BillableTime>true</BillableTime>
+        <BillRate>50</BillRate>
+        <HiredDate>2013-11-01</HiredDate>
+    </Employee>
+    <Employee domain="QBO" sparse="false">
+        <Id>115</Id>
+        <SyncToken>0</SyncToken>
+        <MetaData>
+            <CreateTime>2013-11-25T09:40:05-08:00</CreateTime>
+            <LastUpdatedTime>2013-11-25T09:40:05-08:00</LastUpdatedTime>
+        </MetaData>
+        <GivenName>Horace</GivenName>
+        <FamilyName>Miller</FamilyName>
+        <DisplayName>Horace Miller</DisplayName>
+        <PrintOnCheckName>Horace Miller</PrintOnCheckName>
+        <Active>true</Active>
+        <PrimaryPhone>
+            <FreeFormNumber>234-525-5678</FreeFormNumber>
+        </PrimaryPhone>
+        <SSN>XXX-XX-XXXX</SSN>
+        <PrimaryAddr>
+            <Id>357</Id>
+            <Line1>45 N. Elm Street</Line1>
+            <City>Middlefield</City>
+            <CountrySubDivisionCode>CA</CountrySubDivisionCode>
+            <PostalCode>93242</PostalCode>
+            <Lat>37.4601027</Lat>
+            <Long>-122.1523605</Long>
+        </PrimaryAddr>
+        <BillableTime>true</BillableTime>
+        <BillRate>50</BillRate>
+        <HiredDate>2013-11-01</HiredDate>
+    </Employee>
+</IntuitResponse>

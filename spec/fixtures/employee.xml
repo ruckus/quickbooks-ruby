@@ -1,0 +1,33 @@
+<Employee domain="QBO" sparse="false">
+    <Id>48</Id>
+    <SyncToken>0</SyncToken>
+    <MetaData>
+        <CreateTime>2013-10-11T08:28:30-07:00</CreateTime>
+        <LastUpdatedTime>2013-10-11T08:28:30-07:00</LastUpdatedTime>
+    </MetaData>
+    <Organization>false</Organization>
+    <GivenName>Jenny</GivenName>
+    <FamilyName>Miller</FamilyName>
+    <DisplayName>Jenny Miller</DisplayName>
+    <PrintOnCheckName>Jenny Miller</PrintOnCheckName>
+    <Active>true</Active>
+    <PrimaryPhone>
+        <FreeFormNumber>525-7891</FreeFormNumber>
+    </PrimaryPhone>
+    <PrimaryEmailAddr>
+      <Address>jenny.employee@intuit.com</Address>
+    </PrimaryEmailAddr>
+    <SSN>XXX-XX-XXXX</SSN>
+    <PrimaryAddr>
+        <Id>50</Id>
+        <Line1>45 N. Elm Street</Line1>
+        <City>Middlefield</City>
+        <CountrySubDivisionCode>CA</CountrySubDivisionCode>
+        <PostalCode>93242</PostalCode>
+    </PrimaryAddr>
+    <BillableTime>true</BillableTime>
+    <BillRate>115.00</BillRate>
+    <BirthDate>1995-06-01</BirthDate>
+    <Gender>female</Gender>
+    <HiredDate>2013-11-01</HiredDate>
+</Employee>
