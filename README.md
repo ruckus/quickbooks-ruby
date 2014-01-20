@@ -229,7 +229,7 @@ Company Info      | n/a     | n/a     | yes   | n/a     | yes          |
 Credit Memo | yes     | yes     | yes   | no     | no          |
 Customer          | yes    | yes    | yes  | yes    | yes         |
 Department          | no    | no    | no  | no    | no         |
-Employee          | no    | no    | no  | no    | no         |
+Employee          | yes    | yes    | yes  | yes    | yes         |
 Entitlements          | no    | no    | no  | no    | no         |
 Estimate          | no    | no    | no  | no    | no         |
 Invoice           | yes    | yes    | yes  | yes    | yes         |
