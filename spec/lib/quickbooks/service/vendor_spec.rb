@@ -60,19 +60,6 @@ describe "Quickbooks::Service::Vendor" do
     created_vendor.id.should == 1129
   end
 
-  it "can sparse update a customer" do
-    model = Quickbooks::Model::Vendor
-    customer = Quickbooks::Model::Vendor.new
-    customer.display_name = 'John Vendor-UudRGTA2p7'
-    customer.sync_token = 2
-    customer.id = 1
-    xml = fixture("fetch_vendor_by_id.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
-    customer.valid_for_update?.should == true
-    update_response = @service.update(customer, :sparse => false)
-    update_response.display_name.should == customer.display_name
-  end
-
   it "cannot sparse update a vendor" do
     model = Quickbooks::Model::Vendor
     vendor = Quickbooks::Model::Vendor.new
