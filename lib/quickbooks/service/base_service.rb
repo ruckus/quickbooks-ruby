@@ -91,12 +91,7 @@ module Quickbooks
         page = options.fetch(:page, 1)
         per_page = options.fetch(:per_page, 20)
 
-        if page == 1
-          start_position = 1
-        else
-          start_position = (page * per_page) + 1 # page=2, per_page=10 then we want to start at 11
-        end
-
+        start_position = ((page - 1) * per_page) + 1 # page=2, per_page=10 then we want to start at 11
         max_results = per_page
         response = do_http_get(url_for_query(query, start_position, max_results))
 
