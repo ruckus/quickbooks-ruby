@@ -97,7 +97,7 @@ module Quickbooks
           start_position = (page * per_page) + 1 # page=2, per_page=10 then we want to start at 11
         end
 
-        max_results = (page * per_page)
+        max_results = per_page
         response = do_http_get(url_for_query(query, start_position, max_results))
 
         parse_collection(response, model)
