@@ -45,7 +45,6 @@ module Quickbooks
       #== Validations
       validates_inclusion_of :classification, :in => ACCOUNT_CLASSIFICATION
       validates_length_of :name, :minimum => 1, :maximum => 100
-      validates_length_of :description, :minimum => 1, :maximum => 100
       validate :name_cannot_contain_invalid_characters
 
       def name_cannot_contain_invalid_characters
