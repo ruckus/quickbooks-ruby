@@ -1,3 +1,10 @@
+## 0.0.5 (2014-01-24)
+
+* Fixed pagination bugs raised by @dlains - thank you.
+* `Account.description` is not a required field
+* Added `Employee` & `Vendor` Entity support via PR #23 & #21, thank you @minimul
+* Updates to `CustomerMemo` and `PrivateNote` in `SalesReceipt`, via PR #22, thank you @seanxiesx
+
 ## 0.0.4 (2014-01-15)
 
 * Added CompanyInfo model/service - thank you [Sean Xie](https://github.com/seanxiesx)
