@@ -134,7 +134,6 @@ module Quickbooks
             end
             collection.entries = results
           rescue => ex
-            log("Error parsing XML: #{ex.message}")
             raise IntuitRequestException.new("Error parsing XML: #{ex.message}")
           end
           collection
@@ -224,7 +223,7 @@ module Quickbooks
           when :post
             @oauth.post(url, body, headers)
           else
-            raise "Dont know how to perform that HTTP operation"
+            raise "Do not know how to perform that HTTP operation"
           end
         check_response(response)
       end
