@@ -134,7 +134,6 @@ module Quickbooks
             end
             collection.entries = results
           rescue => ex
-            #log("Error parsing XML: #{ex.message}")
             raise IntuitRequestException.new("Error parsing XML: #{ex.message}")
           end
           collection
@@ -212,10 +211,11 @@ module Quickbooks
           headers['Accept-Encoding'] = HTTP_ACCEPT_ENCODING
         end
 
-        #log "METHOD = #{method}"
-        #log "RESOURCE = #{url}"
-        #log "BODY(#{body.class}) = #{body == nil ? "<NIL>" : body.inspect}"
-        #log "HEADERS = #{headers.inspect}"
+        log "------ New Request ------"
+        log "METHOD = #{method}"
+        log "RESOURCE = #{url}"
+        log "BODY(#{body.class}) = #{body == nil ? "<NIL>" : body.inspect}"
+        log "HEADERS = #{headers.inspect}"
 
         response = case method
           when :get
@@ -223,7 +223,7 @@ module Quickbooks
           when :post
             @oauth.post(url, body, headers)
           else
-            raise "Dont know how to perform that HTTP operation"
+            raise "Do not know how to perform that HTTP operation"
           end
         check_response(response)
       end
@@ -237,6 +237,8 @@ module Quickbooks
       end
 
       def check_response(response)
+        log "RESPONSE CODE = #{response.code}"
+        log "RESPONSE BODY = #{response.plain_body}"
         parse_xml(response.plain_body)
         status = response.code.to_i
         case status
