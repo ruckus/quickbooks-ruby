@@ -30,7 +30,7 @@ describe "Quickbooks::Service::Customer" do
     customer.display_name = 'Tractor:Trailer'
     lambda do
       @service.create(customer)
-    end.should raise_error(InvalidModelException)
+    end.should raise_error(Quickbooks::InvalidModelException)
 
     customer.valid?.should == false
     customer.valid_for_create?.should == false
@@ -42,7 +42,7 @@ describe "Quickbooks::Service::Customer" do
     customer.email_address = "foobar.com"
     lambda do
       @service.create(customer)
-    end.should raise_error(InvalidModelException)
+    end.should raise_error(Quickbooks::InvalidModelException)
 
     customer.valid?.should == false
     customer.errors.keys.include?(:primary_email_address).should == true

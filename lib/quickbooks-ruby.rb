@@ -1,14 +1,13 @@
 require 'roxml'
 require 'logger'
 require 'nokogiri'
-require 'logger'
 require 'active_model'
 require 'cgi'
+require 'uri'
 require 'date'
 require 'forwardable'
 require 'oauth'
 require 'quickbooks/util/logging'
-require 'quickbooks/util/class_util'
 require 'quickbooks/util/http_encoding_helper'
 require 'quickbooks/util/name_entity'
 
@@ -65,10 +64,6 @@ require 'quickbooks/service/bill_payment'
 require 'quickbooks/service/vendor'
 require 'quickbooks/service/employee'
 
-unless Quickbooks::Util::ClassUtil.defined?("InvalidModelException")
-  class InvalidModelException < StandardError; end
-end
-
 module Quickbooks
   @@logger = nil
 
@@ -96,6 +91,19 @@ module Quickbooks
       end
     end
   end # << self
+
+  class InvalidModelException < StandardError; end
+
+  class AuthorizationFailure < StandardError; end
+
+  class IntuitRequestException < StandardError
+    attr_accessor :message, :code, :detail, :type
+    def initialize(msg)
+      self.message = msg
+      super(msg)
+    end
+  end
+
 
   class Collection
     attr_accessor :entries

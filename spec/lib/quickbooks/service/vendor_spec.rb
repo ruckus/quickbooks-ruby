@@ -28,7 +28,7 @@ describe "Quickbooks::Service::Vendor" do
     vendor.display_name = 'Tractor:Trailer' # invalid because the name contains a colon
     vendor.valid?.should == false
     vendor.valid_for_create?.should == false
-    expect{ @service.create(vendor) }.to raise_error(InvalidModelException, /cannot contain a colon/)
+    expect{ @service.create(vendor) }.to raise_error(Quickbooks::InvalidModelException, /cannot contain a colon/)
     vendor.errors.keys.include?(:display_name).should == true
   end
 
@@ -37,7 +37,7 @@ describe "Quickbooks::Service::Vendor" do
     vendor.email_address = "foobar.com"
     vendor.valid_for_create?.should == false
     vendor.valid?.should == false
-    expect{ @service.create(vendor) }.to raise_error(InvalidModelException, /Email address must contain/)
+    expect{ @service.create(vendor) }.to raise_error(Quickbooks::InvalidModelException, /Email address must contain/)
     vendor.errors.keys.include?(:primary_email_address).should == true
   end
 
@@ -68,7 +68,7 @@ describe "Quickbooks::Service::Vendor" do
     vendor.id = 1
     xml = fixture("fetch_vendor_by_id.xml")
     vendor.valid_for_update?.should == true
-    expect{ @service.update(vendor, :sparse => true) }.to raise_error(InvalidModelException, /Vendor sparse update is not supported/)
+    expect{ @service.update(vendor, :sparse => true) }.to raise_error(Quickbooks::InvalidModelException, /Vendor sparse update is not supported/)
   end
 
   it "can delete a vendor" do

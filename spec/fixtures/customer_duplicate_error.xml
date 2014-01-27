@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2014-01-26T09:19:21.801-08:00">
+  <Fault type="ValidationFault">
+    <Error code="6240" element="">
+      <Message>Duplicate Name Exists Error</Message>
+      <Detail>The name supplied already exists. : Another $$customer$$ is already using this name. Please use a different name.</Detail>
+    </Error>
+  </Fault>
+</IntuitResponse>

@@ -1,21 +1,3 @@
-#require 'rexml/document'
-require 'uri'
-require 'cgi'
-
-unless Quickbooks::Util::ClassUtil.defined?("InvalidModelException")
-  class IntuitRequestException < StandardError
-    attr_accessor :message, :code, :detail, :type
-    def initialize(msg)
-      self.message = msg
-      super(msg)
-    end
-  end
-end
-
-unless Quickbooks::Util::ClassUtil.defined?("InvalidModelException")
-  class AuthorizationFailure < StandardError; end
-end
-
 module Quickbooks
   module Service
     class BaseService
@@ -135,7 +117,7 @@ module Quickbooks
             collection.entries = results
           rescue => ex
             #log("Error parsing XML: #{ex.message}")
-            raise IntuitRequestException.new("Error parsing XML: #{ex.message}")
+            raise Quickbooks::IntuitRequestException.new("Error parsing XML: #{ex.message}")
           end
           collection
         else
@@ -181,9 +163,9 @@ module Quickbooks
           when 200
             result = Quickbooks::Model::RestResponse.from_xml(response.plain_body)
           when 401
-            raise IntuitRequestException.new("Authorization failure: token timed out?")
+            raise Quickbooks::IntuitRequestException.new("Authorization failure: token timed out?")
           when 404
-            raise IntuitRequestException.new("Resource Not Found: Check URL and try again")
+            raise Quickbooks::IntuitRequestException.new("Resource Not Found: Check URL and try again")
           end
         end
         result
@@ -250,7 +232,7 @@ module Quickbooks
         when 302
           raise "Unhandled HTTP Redirect"
         when 401
-          raise AuthorizationFailure
+          raise Quickbooks::AuthorizationFailure
         when 400, 500
           parse_and_raise_exception
         else
@@ -260,7 +242,7 @@ module Quickbooks
 
       def parse_and_raise_exception
         err = parse_intuit_error
-        ex = IntuitRequestException.new("#{err[:message]}:\n\t#{err[:detail]}")
+        ex = Quickbooks::IntuitRequestException.new("#{err[:message]}:\n\t#{err[:detail]}")
         ex.code = err[:code]
         ex.detail = err[:detail]
         ex.type = err[:type]
