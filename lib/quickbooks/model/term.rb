@@ -1,9 +1,9 @@
 module Quickbooks
   module Model
     class Term < BaseModel
-      XML_COLLECTION_NODE = "Payment"
-      XML_NODE = "Payment"
-      REST_RESOURCE = 'payment'
+      XML_COLLECTION_NODE = "Term"
+      XML_NODE = "Term"
+      REST_RESOURCE = 'term'
 
       xml_accessor :id, :from => 'Id', :as => Integer
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer

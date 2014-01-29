@@ -1,7 +1,6 @@
 describe "Quickbooks::Service::Payment" do
   before(:all) { construct_service :payment }
 
-  # do we need this?
   it "can query for payments" do
     xml = fixture("payments.xml")
     model = Quickbooks::Model::Payment
@@ -38,7 +37,7 @@ describe "Quickbooks::Service::Payment" do
   it "can sparse update a payment" do
     model = Quickbooks::Model::Payment
     payment = Quickbooks::Model::Payment.new
-    payment.total = 20.0 
+    payment.total = 20.0
     payment.sync_token = 0
     payment.id = 8748
 
