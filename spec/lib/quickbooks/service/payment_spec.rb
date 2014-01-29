@@ -36,35 +36,28 @@ describe "Quickbooks::Service::Payment" do
   end
 
   it "can sparse update a payment" do
-    pending
     model = Quickbooks::Model::Payment
     payment = Quickbooks::Model::Payment.new
-    payment.display_name = "Thrifty Meats"
-    payment.sync_token = 2
-    payment.id = 1
+    payment.total = 20.0 
+    payment.sync_token = 0
+    payment.id = 8748
 
     xml = fixture("fetch_payment_by_id.xml")
     stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
 
-    payment.valid_for_update?.should == true
     update_response = @service.update(payment, :sparse => true)
-    update_response.display_name.should == 'Thrifty Meats'
+    update_response.total = 40.0
   end
 
   it "can delete a payment" do
-    pending
     model = Quickbooks::Model::Payment
     payment = Quickbooks::Model::Payment.new
-    payment.display_name = "Thrifty Meats"
-    payment.sync_token = 2
-    payment.id = 1
+    payment.id = 8748
 
-    xml = fixture("deleted_payment.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+    xml = fixture("payment_delete_success_response.xml")
+    stub_request(:post, "#{@service.url_for_resource(model::REST_RESOURCE)}?operation=delete", ["200", "OK"], xml)
 
-    payment.valid_for_deletion?.should == true
     response = @service.delete(payment)
-    response.fully_qualified_name.should == 'Thrifty Meats (deleted)'
-    response.active?.should == false
+    response.should == true
   end
 end
