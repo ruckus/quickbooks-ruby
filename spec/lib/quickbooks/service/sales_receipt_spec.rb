@@ -35,7 +35,7 @@ module Quickbooks
 
         expect {
           subject.create(receipt)
-        }.to raise_error(InvalidModelException)
+        }.to raise_error(Quickbooks::InvalidModelException)
 
         expect(receipt.errors.messages).to have_key(:line_items)
       end

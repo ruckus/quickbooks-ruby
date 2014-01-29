@@ -28,7 +28,7 @@ describe "Quickbooks::Service::Invoice" do
 
     lambda do
       @service.create(invoice)
-    end.should raise_error(InvalidModelException)
+    end.should raise_error(Quickbooks::InvalidModelException)
 
     invoice.valid?.should == false
     invoice.errors.keys.include?(:line_items).should == true
@@ -40,7 +40,7 @@ describe "Quickbooks::Service::Invoice" do
 
     lambda do
       @service.create(invoice)
-    end.should raise_error(InvalidModelException)
+    end.should raise_error(Quickbooks::InvalidModelException)
 
     invoice.valid?.should == false
     invoice.errors.keys.include?(:line_items).should_not == true
@@ -51,7 +51,7 @@ describe "Quickbooks::Service::Invoice" do
 
     lambda do
       @service.create(invoice)
-    end.should raise_error(InvalidModelException)
+    end.should raise_error(Quickbooks::InvalidModelException)
 
     invoice.valid?.should == false
     invoice.errors.keys.include?(:customer_ref).should == true
@@ -63,7 +63,7 @@ describe "Quickbooks::Service::Invoice" do
 
     lambda do
       @service.create(invoice)
-    end.should raise_error(InvalidModelException)
+    end.should raise_error(Quickbooks::InvalidModelException)
 
     invoice.valid?.should == false
     invoice.errors.keys.include?(:customer_ref).should_not == true

@@ -28,4 +28,11 @@ describe Quickbooks::Service::BaseService do
     end
 
   end
+
+  it "Correctly handled an IntuitRequestException" do
+    construct_service :base_service
+    xml = fixture("customer_duplicate_error.xml")
+    response = Struct.new(:plain_body, :code).new(xml, 400)
+    expect{ @service.send(:check_response, response) }.to raise_error(Quickbooks::IntuitRequestException, /is already using this name/)
+  end
 end

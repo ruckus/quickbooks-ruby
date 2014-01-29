@@ -29,7 +29,7 @@ describe "Quickbooks::Service::Item" do
     # invalid because the name contains a colon
     lambda do
       @service.create(item)
-    end.should raise_error(InvalidModelException)
+    end.should raise_error(Quickbooks::InvalidModelException)
 
     item.valid?.should == false
     item.errors.keys.include?(:name).should == true

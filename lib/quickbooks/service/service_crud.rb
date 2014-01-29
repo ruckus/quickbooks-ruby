@@ -12,7 +12,7 @@ module Quickbooks
       end
 
       def create(entity, options = {})
-        raise InvalidModelException.new(entity.errors.full_messages.join(',')) unless entity.valid?
+        raise Quickbooks::InvalidModelException.new(entity.errors.full_messages.join(',')) unless entity.valid?
         xml = entity.to_xml_ns(options)
         response = do_http_post(url_for_resource(model.resource_for_singular), valid_xml_document(xml))
         if response.code.to_i == 200
@@ -40,7 +40,7 @@ module Quickbooks
 
       def update(entity, options = {})
         unless entity.valid?
-          raise InvalidModelException.new(entity.errors.full_messages.join(','))
+          raise Quickbooks::InvalidModelException.new(entity.errors.full_messages.join(','))
         end
 
         xml = entity.to_xml_ns(options)

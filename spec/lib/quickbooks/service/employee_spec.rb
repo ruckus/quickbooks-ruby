@@ -28,7 +28,7 @@ describe "Quickbooks::Service::Employee" do
     employee.display_name = 'Tractor:Trailer' # invalid because the name contains a colon
     employee.valid?.should == false
     employee.valid_for_create?.should == false
-    expect{ @service.create(employee) }.to raise_error(InvalidModelException, /cannot contain a colon/)
+    expect{ @service.create(employee) }.to raise_error(Quickbooks::InvalidModelException, /cannot contain a colon/)
     employee.errors.keys.include?(:display_name).should == true
   end
 
@@ -37,7 +37,7 @@ describe "Quickbooks::Service::Employee" do
     employee.email_address = "foobar.com"
     employee.valid_for_create?.should == false
     employee.valid?.should == false
-    expect{ @service.create(employee) }.to raise_error(InvalidModelException, /Email address must contain/)
+    expect{ @service.create(employee) }.to raise_error(Quickbooks::InvalidModelException, /Email address must contain/)
     employee.errors.keys.include?(:primary_email_address).should == true
   end
 
@@ -67,7 +67,7 @@ describe "Quickbooks::Service::Employee" do
     employee.id = 1
     xml = fixture("fetch_employee_by_id.xml")
     employee.valid_for_update?.should == true
-    expect{ @service.update(employee, :sparse => true) }.to raise_error(InvalidModelException, /Employee sparse update is not supported/)
+    expect{ @service.update(employee, :sparse => true) }.to raise_error(Quickbooks::InvalidModelException, /Employee sparse update is not supported/)
   end
 
   it "can delete a employee" do
