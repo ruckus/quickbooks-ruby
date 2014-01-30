@@ -20,6 +20,10 @@ describe "Quickbooks::Model::Purchase" do
     line1.id.should == 1
     line1.amount.should == 10.0
     line1.description.should == "this is line 1"
+    line1.account_based_expense_line_detail.account_ref.value.should == "60"
+    line1.account_based_expense_line_detail.account_ref.name.should == "Advertising"
+    line1.account_based_expense_line_detail.billable_status.should == "NotBillable"
+    line1.account_based_expense_line_detail.tax_code_ref.value.should == "3"
 
     line2 = purchase.line_items[1]
     line2.detail_type.should == "ItemBasedExpenseLineDetail"
@@ -31,6 +35,8 @@ describe "Quickbooks::Model::Purchase" do
     line2.item_based_expense_line_detail.billable_status.should == "NotBillable"
     line2.item_based_expense_line_detail.item_ref.value.should == "3"
     line2.item_based_expense_line_detail.item_ref.name.should == "Test Purchase Item"
+    line2.account_based_expense_line_detail.account_ref.value.should == "62"
+    line2.account_based_expense_line_detail.account_ref.name.should == "Test Purchase Expense Account"
   end
 
   it "parse from XML (check)" do
@@ -64,6 +70,10 @@ describe "Quickbooks::Model::Purchase" do
     line1.id.should == 1
     line1.amount.should == 10.0
     line1.description.should == "this is line 1"
+    line1.account_based_expense_line_detail.account_ref.value.should == "60"
+    line1.account_based_expense_line_detail.account_ref.name.should == "Advertising"
+    line1.account_based_expense_line_detail.billable_status.should == "NotBillable"
+    line1.account_based_expense_line_detail.tax_code_ref.value.should == "3"
 
     line2 = purchase.line_items[1]
     line2.detail_type.should == "ItemBasedExpenseLineDetail"
@@ -75,6 +85,8 @@ describe "Quickbooks::Model::Purchase" do
     line2.item_based_expense_line_detail.billable_status.should == "NotBillable"
     line2.item_based_expense_line_detail.item_ref.value.should == "3"
     line2.item_based_expense_line_detail.item_ref.name.should == "Test Purchase Item"
+    line2.account_based_expense_line_detail.account_ref.value.should == "62"
+    line2.account_based_expense_line_detail.account_ref.name.should == "Test Purchase Expense Account"
   end
 
   it "parse from XML (credit_card)" do
@@ -97,5 +109,9 @@ describe "Quickbooks::Model::Purchase" do
     line1.id.should == 1
     line1.amount.should == 0
     line1.description.should == "this is description only."
+    line1.account_based_expense_line_detail.account_ref.value.should == "60"
+    line1.account_based_expense_line_detail.account_ref.name.should == "Advertising"
+    line1.account_based_expense_line_detail.billable_status.should == "NotBillable"
+    line1.account_based_expense_line_detail.tax_code_ref.value.should == "NON"
   end
 end
