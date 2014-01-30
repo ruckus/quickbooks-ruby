@@ -6,6 +6,10 @@ module Quickbooks
 
       xml_convention :camelcase
 
+      def initialize(attributes={})
+        attributes.each {|key, value| public_send("#{key}=", value) }
+      end
+
       # ROXML doesnt insert the namespaces into generated XML so we need to do it ourselves
       # insert the static namespaces in the first opening tag that matches the +model_name+
       def to_xml_inject_ns(model_name, options = {})

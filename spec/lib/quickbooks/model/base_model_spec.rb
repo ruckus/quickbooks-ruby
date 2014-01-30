@@ -17,6 +17,12 @@ describe "Quickbooks::Model::BaseModel" do
 <Foo><baz>quux</baz><bar><foo>42</foo></bar></Foo>
   XML
 
+  describe ".new" do
+    it "allows attributes to be passed in" do
+      Quickbooks::Model::FooModel.new(:baz => "value").baz.should eq("value")
+    end
+  end
+
   describe ".attribute_names" do
     it "returns the list of attribute names" do
       Quickbooks::Model::FooModel.attribute_names.should eq(%w{baz bar})
