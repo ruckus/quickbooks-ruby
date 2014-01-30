@@ -1,5 +1,7 @@
 # Quickbooks-Ruby
 
+[![Build Status](https://travis-ci.org/ruckus/quickbooks-ruby.png?branch=master)](https://travis-ci.org/ruckus/quickbooks-ruby)
+
 Integration with Quickbooks Online via the Intuit Data Services v3 REST API.
 
 **NOTE**: If you are looking for the v2 API then you need to use my other library - Quickeebooks:
