@@ -236,7 +236,7 @@ Invoice           | yes    | yes    | yes  | yes    | yes         |
 Item              | yes    | yes    | yes  | yes    | yes         |
 Journal Entry     | no    | no    | no  | no    | no         |
 Job               | no    | no    | no  | no    | no         |
-Payment           | no    | no    | no  | no    | no         |
+Payment           | yes    | yes    | yes  | yes    | yes         |
 PaymentMethod     | yes    | yes    | yes  | yes    | yes         |
 Preferences           | no    | no    | no  | no    | no         |
 Purchase           | no    | no    | no  | no    | no         |
@@ -247,7 +247,7 @@ Sales Tax         | no     | no     | no   | no     | no          |
 Sales Term        | no    | no    | no  | no    | no         |
 Tax Code     | no    | no    | no  | no    | no         |
 Tax Rate     | no    | no    | no  | no    | no         |
-Term     | no    | no    | no  | no    | no         |
+Term     | yes    | yes    | yes  | yes    | yes         |
 Time Activity     | no    | no    | no  | no    | no         |
 Tracking Class    | no    | no    | no  | no    | no         |
 Vendor            | no    | no    | no  | no    | no         |
