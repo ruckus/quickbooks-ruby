@@ -21,4 +21,18 @@ describe "Quickbooks::Model::Payment" do
     payment.currency_ref.should be_nil
     payment.exchange_rate.should be_nil
   end
+
+  it "should require customer_ref for create / update" do
+    invoice = Quickbooks::Model::Payment.new
+    invoice.should_not be_valid
+    invoice.errors.keys.include?(:customer_ref).should be_true
+  end
+
+  it "is valid with customer_ref" do
+    invoice = Quickbooks::Model::Payment.new
+    invoice.customer_id = 2
+
+    invoice.should be_valid
+  end
+
 end

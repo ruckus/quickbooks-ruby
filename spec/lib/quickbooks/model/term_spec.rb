@@ -20,6 +20,17 @@ describe "Quickbooks::Model::Term" do
     term.discount_day_of_month.should eq(3)
   end
 
+  it "is invalid without a name" do
+    term = Quickbooks::Model::Term.new
+    term.should_not be_valid
+  end
+
+  it "is valid with a name" do
+    term = Quickbooks::Model::Term.new
+    term.name = "Cool Term, Yo"
+    term.should be_valid
+  end
+
   describe "#active?" do
     it "returns true when active == 'true'" do
       term = Quickbooks::Model::Term.new

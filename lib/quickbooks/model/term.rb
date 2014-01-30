@@ -18,6 +18,8 @@ module Quickbooks
       xml_accessor :due_next_month_days, :from => 'DueNextMonthDays', :as => Integer
       xml_accessor :discount_day_of_month, :from => 'DiscountDayOfMonth', :as => Integer
 
+      validates_presence_of :name
+
       def active?
         active == "true"
       end

@@ -26,6 +26,16 @@ module Quickbooks
 
       reference_setters :customer_ref
       reference_setters :payment_method_ref
+
+      validate :existence_of_customer_ref
+
+      private
+
+      def existence_of_customer_ref
+        if customer_ref.nil? || (customer_ref && customer_ref.value == 0)
+          errors.add(:customer_ref, "CustomerRef is required and must be a non-zero value.")
+        end
+      end
     end
   end
 end
