@@ -3,7 +3,6 @@ module Quickbooks
     class BaseModel
       include ActiveModel::Validations
       include ROXML
-      include Enumerable
 
       xml_convention :camelcase
 
