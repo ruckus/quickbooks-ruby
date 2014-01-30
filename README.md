@@ -226,8 +226,8 @@ Entity            | Create | Update | Query | Delete | Fetch by ID | Other
 ---               | ---    | ---    | ---  | ---    | ---         | ---
 Account           | yes    | yes    | yes  | yes    | yes
 Attachable        | no     | no     | no   | no     | no
-Bill              | no    | no    | no  | no    | no
-Bill Payment      | no    | no    | no  | no    | no
+Bill              | yes    | yes    | yes  | yes    | yes
+Bill Payment      | yes    | yes    | yes  | yes    | yes
 Class             | no    | no    | no  | no    | no
 Company Info      | n/a     | n/a     | yes   | n/a     | yes          |
 Credit Memo | yes     | yes     | yes   | no     | no          |
