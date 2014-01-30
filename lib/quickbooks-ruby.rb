@@ -37,6 +37,7 @@ require 'quickbooks/model/invoice'
 require 'quickbooks/model/company_info'
 require 'quickbooks/model/customer'
 require 'quickbooks/model/sales_receipt'
+require 'quickbooks/model/payment'
 require 'quickbooks/model/payment_method'
 require 'quickbooks/model/credit_memo'
 require 'quickbooks/model/bill_line_item'
@@ -47,6 +48,7 @@ require 'quickbooks/model/bill_payment_credit_card'
 require 'quickbooks/model/bill_payment'
 require 'quickbooks/model/vendor'
 require 'quickbooks/model/employee'
+require 'quickbooks/model/term'
 
 #== Services
 require 'quickbooks/service/base_service'
@@ -63,6 +65,8 @@ require 'quickbooks/service/bill'
 require 'quickbooks/service/bill_payment'
 require 'quickbooks/service/vendor'
 require 'quickbooks/service/employee'
+require 'quickbooks/service/payment'
+require 'quickbooks/service/term'
 
 module Quickbooks
   @@logger = nil

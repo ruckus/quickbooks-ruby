@@ -1,0 +1,17 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-07-11T17:49:44.248-07:00">
+   <Term domain="QBO" sparse="false">
+      <Id>11</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+         <CreateTime>2013-07-11T17:46:39-07:00</CreateTime>
+         <LastUpdatedTime>2013-07-11T17:46:39-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>TermForV3Testing-1373590184130</Name>
+      <Active>true</Active>
+      <Type>DATE_DRIVEN</Type>
+      <DiscountPercent>4.0000000</DiscountPercent>
+      <DayOfMonthDue>1</DayOfMonthDue>
+      <DueNextMonthDays>2</DueNextMonthDays>
+      <DiscountDayOfMonth>3</DiscountDayOfMonth>
+   </Term>
+</IntuitResponse>

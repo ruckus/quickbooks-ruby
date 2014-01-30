@@ -3,7 +3,12 @@ module Quickbooks
     class BaseModel
       include ActiveModel::Validations
       include ROXML
+
       xml_convention :camelcase
+
+      def initialize(attributes={})
+        attributes.each {|key, value| public_send("#{key}=", value) }
+      end
 
       # ROXML doesnt insert the namespaces into generated XML so we need to do it ourselves
       # insert the static namespaces in the first opening tag that matches the +model_name+
@@ -24,7 +29,22 @@ module Quickbooks
         to_xml_inject_ns(self.class::XML_NODE, options)
       end
 
+      delegate :[], :fetch, :to => :attributes
+
+      def attributes
+        attributes = self.class.attribute_names.map do |name|
+          value = public_send(name)
+          value = value.attributes if value.respond_to?(:attributes)
+          [name, value]
+        end
+
+        HashWithIndifferentAccess[attributes]
+      end
+
       class << self
+        def attribute_names
+          roxml_attrs.map(&:accessor)
+        end
 
         # These can be over-ridden in each model object as needed
         def resource_for_collection
