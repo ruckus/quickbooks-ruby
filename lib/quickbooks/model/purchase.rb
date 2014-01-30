@@ -27,7 +27,7 @@ module Quickbooks
     
       xml_accessor :line_items, :from => 'Line', :as => [PurchaseLineItem]
       xml_accessor :account_ref, :from => 'AccountRef', :as => BaseReference
-      #xml_accessor :txn_tax_detail, :from => 'TxnTaxDetail'
+      xml_accessor :txn_tax_detail, :from => 'TxnTaxDetail', :as => TransactionTaxDetail
 
       xml_accessor :payment_type, :from => 'PaymentType'
       xml_accessor :entity_ref, :from => 'EntityRef', :as => BaseReference

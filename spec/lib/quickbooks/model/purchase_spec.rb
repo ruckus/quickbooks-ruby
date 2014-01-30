@@ -37,6 +37,32 @@ describe "Quickbooks::Model::Purchase" do
     line2.item_based_expense_line_detail.item_ref.name.should == "Test Purchase Item"
     line2.account_based_expense_line_detail.account_ref.value.should == "62"
     line2.account_based_expense_line_detail.account_ref.name.should == "Test Purchase Expense Account"
+
+    purchase.txn_tax_detail.lines.size.should == 3
+
+    tax_line1 = purchase.txn_tax_detail.lines[0]
+    tax_line1.detail_type.should == "TaxLineDetail"
+    tax_line1.amount.should == 2.0
+    tax_line1.tax_line_detail.tax_rate_ref.value.should == "4"
+    tax_line1.tax_line_detail.percent_based.should == "true"
+    tax_line1.tax_line_detail.tax_percent.should == 20
+    tax_line1.tax_line_detail.net_amount_taxable.should == 10.0
+
+    tax_line2 = purchase.txn_tax_detail.lines[1]
+    tax_line2.detail_type.should == "TaxLineDetail"
+    tax_line2.amount.should == -2.0
+    tax_line2.tax_line_detail.tax_rate_ref.value.should == "3"
+    tax_line2.tax_line_detail.percent_based.should == "true"
+    tax_line2.tax_line_detail.tax_percent.should == -20
+    tax_line2.tax_line_detail.net_amount_taxable.should == 10.0
+
+    tax_line3 = purchase.txn_tax_detail.lines[2]
+    tax_line3.detail_type.should == "TaxLineDetail"
+    tax_line3.amount.should == 0.05
+    tax_line3.tax_line_detail.tax_rate_ref.value.should == "8"
+    tax_line3.tax_line_detail.percent_based.should == "true"
+    tax_line3.tax_line_detail.tax_percent.should == 5
+    tax_line3.tax_line_detail.net_amount_taxable.should == 1.0
   end
 
   it "parse from XML (check)" do
@@ -87,6 +113,32 @@ describe "Quickbooks::Model::Purchase" do
     line2.item_based_expense_line_detail.item_ref.name.should == "Test Purchase Item"
     line2.account_based_expense_line_detail.account_ref.value.should == "62"
     line2.account_based_expense_line_detail.account_ref.name.should == "Test Purchase Expense Account"
+
+    purchase.txn_tax_detail.lines.size.should == 3
+
+    tax_line1 = purchase.txn_tax_detail.lines[0]
+    tax_line1.detail_type.should == "TaxLineDetail"
+    tax_line1.amount.should == 2.0
+    tax_line1.tax_line_detail.tax_rate_ref.value.should == "4"
+    tax_line1.tax_line_detail.percent_based.should == "true"
+    tax_line1.tax_line_detail.tax_percent.should == 20
+    tax_line1.tax_line_detail.net_amount_taxable.should == 10.0
+
+    tax_line2 = purchase.txn_tax_detail.lines[1]
+    tax_line2.detail_type.should == "TaxLineDetail"
+    tax_line2.amount.should == -2.0
+    tax_line2.tax_line_detail.tax_rate_ref.value.should == "3"
+    tax_line2.tax_line_detail.percent_based.should == "true"
+    tax_line2.tax_line_detail.tax_percent.should == -20
+    tax_line2.tax_line_detail.net_amount_taxable.should == 10.0
+
+    tax_line3 = purchase.txn_tax_detail.lines[2]
+    tax_line3.detail_type.should == "TaxLineDetail"
+    tax_line3.amount.should == 0.05
+    tax_line3.tax_line_detail.tax_rate_ref.value.should == "8"
+    tax_line3.tax_line_detail.percent_based.should == "true"
+    tax_line3.tax_line_detail.tax_percent.should == 5
+    tax_line3.tax_line_detail.net_amount_taxable.should == 1.0
   end
 
   it "parse from XML (credit_card)" do
