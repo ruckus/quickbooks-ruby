@@ -243,7 +243,7 @@ Job               | no    | no    | no  | no    | no         |
 Payment           | yes    | yes    | yes  | yes    | yes         |
 PaymentMethod     | yes    | yes    | yes  | yes    | yes         |
 Preferences           | no    | no    | no  | no    | no         |
-Purchase           | no    | no    | no  | no    | no         |
+Purchase           | yes    | yes    | yes  | yes    | yes         |
 PurchaseOrder           | no    | no    | no  | no    | no         |
 Sales Receipt     | yes    | yes    | yes  | yes    | yes         |
 Sales Rep         | no     | no     | no   | no     | no          |
