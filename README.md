@@ -12,7 +12,9 @@ This library communicates with the Quickbooks Data Services `v3` API, documented
 
 ## Requirements
 
-This is being developed on Ruby REE, 1.9.2 & 1.9.3. Other versions/VMs are untested but stable Rubies should work in theory.
+This has been tested on 1.9.3, 2.0.0, and 2.1.0.
+
+Ruby 1.8.7 and 1.9.2 are not supported.
 
 ## Dependencies
 
