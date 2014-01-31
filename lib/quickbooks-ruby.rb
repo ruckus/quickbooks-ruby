@@ -57,6 +57,7 @@ require 'quickbooks/model/tax_line'
 require 'quickbooks/model/transaction_tax_detail'
 require 'quickbooks/model/purchase_line_item'
 require 'quickbooks/model/purchase'
+require 'quickbooks/model/purchase_order'
 
 #== Services
 require 'quickbooks/service/base_service'
@@ -76,6 +77,7 @@ require 'quickbooks/service/employee'
 require 'quickbooks/service/payment'
 require 'quickbooks/service/term'
 require 'quickbooks/service/purchase'
+require 'quickbooks/service/purchase_order'
 
 module Quickbooks
   @@logger = nil

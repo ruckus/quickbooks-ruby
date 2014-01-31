@@ -1,0 +1,49 @@
+<PurchaseOrder domain="QBO" sparse="false">
+    <Id>813</Id>
+    <SyncToken>0</SyncToken>
+    <MetaData>
+        <CreateTime>2013-07-19T07:57:19-07:00</CreateTime>
+        <LastUpdatedTime>2013-07-19T07:57:19-07:00</LastUpdatedTime>
+    </MetaData>
+    <DocNumber>1002</DocNumber>
+    <TxnDate>2013-07-19</TxnDate>
+    <Line>
+        <Id>1</Id>
+        <Description>hose</Description>
+        <Amount>72.00</Amount>
+        <DetailType>ItemBasedExpenseLineDetail</DetailType>
+        <ItemBasedExpenseLineDetail>
+            <ItemRef name="Irrigation Hose">31</ItemRef>
+            <ClassRef name="Landscaping">100000000000128319</ClassRef>
+            <UnitPrice>72</UnitPrice>
+            <Qty>1</Qty>
+            <TaxCodeRef>NON</TaxCodeRef>
+            <CustomerRef name="Adam's Candy Shop">110</CustomerRef>
+            <BillableStatus>NotBillable</BillableStatus>
+        </ItemBasedExpenseLineDetail>
+        <AccountBasedExpenseLineDetail>
+            <AccountRef name="Inventory Asset-1">139</AccountRef>
+        </AccountBasedExpenseLineDetail>
+    </Line>
+    <VendorRef name="Brown Equipment Rental">24</VendorRef>
+    <APAccountRef name="Accounts Payable">38</APAccountRef>
+    <TotalAmt>72.00</TotalAmt>
+    <VendorAddr>
+        <Id>339</Id>
+        <Line1>Sylvester Brown</Line1>
+        <Line2>33 Old Bayshore Rd</Line2>
+        <Line3>Bayshore, CA  94326</Line3>
+        <Lat>INVALID</Lat>
+        <Long>INVALID</Long>
+    </VendorAddr>
+    <ShipAddr>
+        <Id>340</Id>
+        <Line1>Larry's Landscaping &amp; Garden Supply</Line1>
+        <Line2>1045 Main Street</Line2>
+        <Line3>Bayshore, CA 94326</Line3>
+        <Line4>(415)  555-4567</Line4>
+        <Lat>INVALID</Lat>
+        <Long>INVALID</Long>
+    </ShipAddr>
+    <POStatus>Open</POStatus>
+</PurchaseOrder>
