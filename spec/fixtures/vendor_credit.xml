@@ -1,0 +1,23 @@
+<VendorCredit domain="QBO" sparse="false">
+    <Id>11</Id>
+    <SyncToken>0</SyncToken>
+    <MetaData>
+        <CreateTime>2013-10-10T11:16:32-07:00</CreateTime>
+        <LastUpdatedTime>2013-10-10T11:16:32-07:00</LastUpdatedTime>
+    </MetaData>
+    <TxnDate>2013-09-20</TxnDate>
+    <Line>
+        <Id>1</Id>
+        <Amount>90.00</Amount>
+        <DetailType>AccountBasedExpenseLineDetail</DetailType>
+        <AccountBasedExpenseLineDetail>
+            <CustomerRef name="Cust1">2</CustomerRef>
+            <AccountRef name="Bank Charges">8</AccountRef>
+            <BillableStatus>Billable</BillableStatus>
+            <TaxCodeRef>TAX</TaxCodeRef>
+        </AccountBasedExpenseLineDetail>
+    </Line>
+    <VendorRef name="myVendor">5</VendorRef>
+    <APAccountRef name="Accounts Payable (A/P)">38</APAccountRef>
+    <TotalAmt>90.00</TotalAmt>
+</VendorCredit>
