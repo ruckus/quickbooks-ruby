@@ -235,7 +235,7 @@ Customer          | yes    | yes    | yes  | yes    | yes         |
 Department          | no    | no    | no  | no    | no         |
 Employee          | yes    | yes    | yes  | yes    | yes         |
 Entitlements          | no    | no    | no  | no    | no         |
-Estimate          | no    | no    | no  | no    | no         |
+Estimate           | yes    | yes    | yes  | yes    | yes         |
 Invoice           | yes    | yes    | yes  | yes    | yes         |
 Item              | yes    | yes    | yes  | yes    | yes         |
 Journal Entry     | no    | no    | no  | no    | no         |
