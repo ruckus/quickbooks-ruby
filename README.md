@@ -255,7 +255,7 @@ Term     | yes    | yes    | yes  | yes    | yes         |
 Time Activity     | no    | no    | no  | no    | no         |
 Tracking Class    | no    | no    | no  | no    | no         |
 Vendor            | no    | no    | no  | no    | no         |
-VendorCredit            | no    | no    | no  | no    | no         |
+Vendor Credit     | yes    | yes    | yes  | yes    | yes         |
 
 
 ## TODO
