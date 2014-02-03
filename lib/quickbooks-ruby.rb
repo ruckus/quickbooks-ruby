@@ -48,6 +48,7 @@ require 'quickbooks/model/bill_payment_credit_card'
 require 'quickbooks/model/bill_payment'
 require 'quickbooks/model/vendor'
 require 'quickbooks/model/employee'
+require 'quickbooks/model/batch_request'
 
 #== Services
 require 'quickbooks/service/base_service'
