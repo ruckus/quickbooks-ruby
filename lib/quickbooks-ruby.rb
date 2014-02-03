@@ -48,7 +48,9 @@ require 'quickbooks/model/bill_payment_credit_card'
 require 'quickbooks/model/bill_payment'
 require 'quickbooks/model/vendor'
 require 'quickbooks/model/employee'
+require 'quickbooks/model/fault'
 require 'quickbooks/model/batch_request'
+require 'quickbooks/model/batch_response'
 
 #== Services
 require 'quickbooks/service/base_service'
@@ -65,6 +67,7 @@ require 'quickbooks/service/bill'
 require 'quickbooks/service/bill_payment'
 require 'quickbooks/service/vendor'
 require 'quickbooks/service/employee'
+require 'quickbooks/service/batch'
 
 unless Quickbooks::Util::ClassUtil.defined?("InvalidModelException")
   class InvalidModelException < StandardError; end
