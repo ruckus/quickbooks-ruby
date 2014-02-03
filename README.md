@@ -239,7 +239,6 @@ Estimate           | yes    | yes    | yes  | yes    | yes         |
 Invoice           | yes    | yes    | yes  | yes    | yes         |
 Item              | yes    | yes    | yes  | yes    | yes         |
 Journal Entry     | no    | no    | no  | no    | no         |
-Job               | no    | no    | no  | no    | no         |
 Payment           | yes    | yes    | yes  | yes    | yes         |
 PaymentMethod     | yes    | yes    | yes  | yes    | yes         |
 Preferences           | no    | no    | no  | no    | no         |
