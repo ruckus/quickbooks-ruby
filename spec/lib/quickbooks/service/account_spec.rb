@@ -24,5 +24,7 @@ describe Quickbooks::Service::Account do
     account.classification.should == Quickbooks::Model::Account::REVENUE
     account.tax_account?.should == false
     account.currency_ref.to_s.should == 'USD'
+    account.current_balance.should == 0
+    account.current_balance_with_sub_accounts.should == 0
   end
 end
