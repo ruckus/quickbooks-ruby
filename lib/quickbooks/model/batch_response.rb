@@ -13,5 +13,5 @@ class Quickbooks::Model::BatchResponse < Quickbooks::Model::BaseModel
   end
 
   xml_name  "IntuitResponse"
-  xml_accessor :item_responses, :from => :BatchItemResponse, as: [Quickbooks::Model::BatchResponse::BatchItemResponse]
+  xml_accessor :response_items, :from => :BatchItemResponse, as: [Quickbooks::Model::BatchResponse::BatchItemResponse]
 end
