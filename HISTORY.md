@@ -1,3 +1,12 @@
+## 0.0.6 (2014-02-04)
+
+* Upgraded nokogiri dependency to '~> 1.6', '>= 1.6.1'
+* Added Account#{current_balance, current_balance_with_sub_accounts} properties - thanks to @diego-link-eggy
+* Added support for Estimate, VendorCredit, PurchaseOrder, Bill, BillPayment entities - thanks to @sequielo
+* Added support for Tax Lines in Purchases - thanks to @sequielo
+* Added support for Term and Payment entities - thanks to @harvesthq
+* Fixed issues with exception handling - thanks to @minimul
+
 ## 0.0.5 (2014-01-24)
 
 * Fixed pagination bugs raised by @dlains - thank you.
