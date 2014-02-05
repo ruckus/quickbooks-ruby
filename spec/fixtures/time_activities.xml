@@ -1,0 +1,42 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2014-02-18T06:29:19.831-08:00">
+  <QueryResponse startPosition="1" maxResults="10">
+    <TimeActivity domain="QBO" sparse="false">
+      <Id>1255</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2014-02-05T07:17:08-08:00</CreateTime>
+        <LastUpdatedTime>2014-02-05T07:17:08-08:00</LastUpdatedTime>
+      </MetaData>
+      <TxnDate>2014-02-05</TxnDate>
+      <NameOf>Employee</NameOf>
+      <EmployeeRef name="John Smith">66</EmployeeRef>
+      <CustomerRef name="Test Customer">123</CustomerRef>
+      <ItemRef name="General Consulting">49</ItemRef>
+      <BillableStatus>Billable</BillableStatus>
+      <Taxable>false</Taxable>
+      <HourlyRate>115</HourlyRate>
+      <Hours>1</Hours>
+      <Minutes>0</Minutes>
+      <Description>Description 1</Description>
+    </TimeActivity>
+    <TimeActivity domain="QBO" sparse="false">
+      <Id>1256</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2014-02-05T07:17:08-08:00</CreateTime>
+        <LastUpdatedTime>2014-02-05T07:17:08-08:00</LastUpdatedTime>
+      </MetaData>
+      <TxnDate>2014-02-05</TxnDate>
+      <NameOf>Employee</NameOf>
+      <EmployeeRef name="Jane Smith">67</EmployeeRef>
+      <CustomerRef name="Test Customer">123</CustomerRef>
+      <ItemRef name="General Consulting">49</ItemRef>
+      <BillableStatus>Billable</BillableStatus>
+      <Taxable>false</Taxable>
+      <HourlyRate>225</HourlyRate>
+      <Hours>2</Hours>
+      <Minutes>30</Minutes>
+      <Description>Description 2</Description>
+    </TimeActivity>
+  </QueryResponse>
+</IntuitResponse>
