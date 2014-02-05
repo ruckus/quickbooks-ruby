@@ -72,7 +72,7 @@ Your Controller action (the `grantUrl` above) should look like this:
   end
 ```
 
-Where `quickbooks_oauth_callback_url` is the absolute URL of your application that Intuit should send the user when authentication succeeeds. That action should look like:
+Where `quickbooks_oauth_callback_url` is the absolute URL of your application that Intuit should send the user when authentication succeeds. That action should look like:
 
 ```ruby
 def oauth_callback
@@ -80,10 +80,10 @@ def oauth_callback
 	token = at.token
 	secret = at.secret
 	realm_id = params['realmId']
-	# store the token, secret & RealmID somewhere for this user, you will need all 3 to work with Quickeebooks
+	# store the token, secret & RealmID somewhere for this user, you will need all 3 to work with Quickbooks-Ruby
 end
 ```
-:star: Also, check out regular Quickeebooks contributor, <a href="https://github.com/minimul" target="_blank">minimul</a>'s, article [Get started integrating Rails 4 and QuickBooks Online with the Quickeebooks Gem](http://minimul.com/get-started-integrating-rails-4-and-quickbooks-online-with-the-quickeebooks-gem-part-1.html) for a step-by-step guide.
+:star: Also, check out regular Quickbooks-Ruby contributor, <a href="https://github.com/minimul" target="_blank">minimul</a>'s, article [Integrating Rails and QuickBooks Online via the version 3 API](http://minimul.com/integrating-rails-and-quickbooks-online-via-the-version-3-api-part-1.html) for a step-by-step guide along with screencasts.
 
 ## Creating an OAuth Access Token
 
@@ -217,6 +217,11 @@ service.delete(customer)
 ## Logging
 
 ```ruby
+Quickbooks.log = true
+```
+By default, logging is directed at STDOUT, but another target may be defined, e.g. in Rails
+```ruby
+Quickbooks.logger = Rails.logger
 Quickbooks.log = true
 ```
 
