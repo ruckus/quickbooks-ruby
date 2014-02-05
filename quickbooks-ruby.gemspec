@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'oauth'
   gem.add_dependency 'roxml'
-  gem.add_dependency 'nokogiri', '~> 1.6', '>= 1.6.1'
+  gem.add_dependency 'nokogiri' # leave in promiscuous mode so as to not conflict with quickeebooks gem
   gem.add_dependency 'activemodel'
 
   gem.add_development_dependency 'rake'
