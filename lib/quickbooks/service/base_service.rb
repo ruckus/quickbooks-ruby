@@ -2,6 +2,7 @@ module Quickbooks
   module Service
     class BaseService
       include Quickbooks::Util::Logging
+      include ServiceCrud
 
       attr_accessor :company_id
       attr_accessor :oauth

@@ -1,7 +1,6 @@
 module Quickbooks
   module Service
     class Account < BaseService
-      include ServiceCrud
 
       def delete(account)
         account.active = false

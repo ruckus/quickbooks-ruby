@@ -62,8 +62,8 @@ require 'quickbooks/model/vendor_credit'
 require 'quickbooks/model/estimate'
 
 #== Services
-require 'quickbooks/service/base_service'
 require 'quickbooks/service/service_crud'
+require 'quickbooks/service/base_service'
 require 'quickbooks/service/company_info'
 require 'quickbooks/service/customer'
 require 'quickbooks/service/invoice'

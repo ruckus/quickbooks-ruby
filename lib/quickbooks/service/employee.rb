@@ -1,7 +1,6 @@
 module Quickbooks
   module Service
     class Employee < BaseService
-      include ServiceCrud
 
       # override update as sparse is not supported
       def update(entity, options = {})

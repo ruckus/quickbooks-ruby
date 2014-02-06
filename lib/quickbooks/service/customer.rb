@@ -1,7 +1,6 @@
 module Quickbooks
   module Service
     class Customer < BaseService
-      include ServiceCrud
 
       def delete(customer)
         customer.active = false

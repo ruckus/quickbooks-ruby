@@ -1,7 +1,6 @@
 module Quickbooks
   module Service
     class PurchaseOrder < BaseService
-      include ServiceCrud
 
       def default_model_query
         "SELECT * FROM PurchaseOrder"

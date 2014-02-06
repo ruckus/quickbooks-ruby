@@ -1,7 +1,6 @@
 module Quickbooks
   module Service
     class Item < BaseService
-      include ServiceCrud
 
       def delete(item)
         item.active = false
