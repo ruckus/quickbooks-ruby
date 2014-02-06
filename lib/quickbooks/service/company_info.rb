@@ -1,7 +1,6 @@
 module Quickbooks
   module Service
     class CompanyInfo < BaseService
-      include ServiceCrud
 
       private
 

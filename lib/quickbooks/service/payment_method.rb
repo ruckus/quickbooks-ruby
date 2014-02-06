@@ -1,7 +1,6 @@
 module Quickbooks
   module Service
     class PaymentMethod < BaseService
-      include ServiceCrud
 
       def default_model_query
         "SELECT * FROM PaymentMethod"

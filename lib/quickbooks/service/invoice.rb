@@ -1,7 +1,6 @@
 module Quickbooks
   module Service
     class Invoice < BaseService
-      include ServiceCrud
 
       def delete(invoice, options = {})
         delete_by_query_string(invoice)

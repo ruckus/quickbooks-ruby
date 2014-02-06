@@ -1,7 +1,6 @@
 module Quickbooks
   module Service
     class Estimate < BaseService
-      include ServiceCrud
 
       def delete(estimate, options = {})
         delete_by_query_string(estimate)
