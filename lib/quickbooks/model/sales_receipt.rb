@@ -19,7 +19,7 @@ module Quickbooks
 
       xml_accessor :po_number, :from => 'PONumber'
 
-      xml_accessor :ship_method_ref, :from => 'ShipMethodRef', :as => BaseReference
+      xml_accessor :ship_method_ref, :from => 'ShipMethodRef'
       xml_accessor :ship_date, :from => 'ShipDate', :as => Time
       xml_accessor :tracking_num, :from => 'TrackingNum'
 
@@ -34,7 +34,7 @@ module Quickbooks
       # readonly
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
 
-      reference_setters :customer_ref, :ship_method_ref, :payment_method_ref, :deposit_to_account_ref
+      reference_setters :customer_ref, :payment_method_ref, :deposit_to_account_ref
 
       validates_length_of :line_items, :minimum => 1
 
