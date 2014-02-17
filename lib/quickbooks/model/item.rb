@@ -33,7 +33,7 @@ module Quickbooks
       xml_accessor :taxable, :from => 'Taxable'
       xml_accessor :sales_tax_included, :from => 'SalesTaxIncluded'
       xml_accessor :unit_price, :from => 'UnitPrice', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
-      xml_accessor :rate_percent, :from => 'RatePercent', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
+      xml_accessor :rate_percent, :from => 'RatePercent', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :type, :from => 'Type'
       xml_accessor :income_account_ref, :from => 'IncomeAccountRef', :as => BaseReference
       xml_accessor :purchase_desc, :from => 'PurchaseDesc'
