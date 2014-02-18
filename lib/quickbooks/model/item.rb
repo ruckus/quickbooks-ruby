@@ -32,17 +32,17 @@ module Quickbooks
 
       xml_accessor :taxable, :from => 'Taxable'
       xml_accessor :sales_tax_included, :from => 'SalesTaxIncluded'
-      xml_accessor :unit_price, :from => 'UnitPrice', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
+      xml_accessor :unit_price, :from => 'UnitPrice', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :rate_percent, :from => 'RatePercent', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :type, :from => 'Type'
       xml_accessor :income_account_ref, :from => 'IncomeAccountRef', :as => BaseReference
       xml_accessor :purchase_desc, :from => 'PurchaseDesc'
       xml_accessor :purchase_tax_included, :from => 'PurchaseTaxIncluded'
-      xml_accessor :purchase_cost, :from => 'PurchaseCost', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
+      xml_accessor :purchase_cost, :from => 'PurchaseCost', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :expense_account_ref, :from => 'ExpenseAccountRef', :as => BaseReference
       xml_accessor :asset_account_ref, :from => 'AssetAccountRef', :as => BaseReference
       xml_accessor :track_quantity_on_hand, :from => 'TrackQtyOnHand'
-      xml_accessor :quantity_on_hand, :from => 'QtyOnHand', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
+      xml_accessor :quantity_on_hand, :from => 'QtyOnHand', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :sales_tax_code_ref, :from => 'SalesTaxCodeRef', :as => BaseReference
       xml_accessor :purchase_tax_code_ref, :from => 'PurchaseTaxCodeRef', :as => BaseReference
       xml_accessor :inv_start_date, :from => 'InvStartDate', :as => Date
