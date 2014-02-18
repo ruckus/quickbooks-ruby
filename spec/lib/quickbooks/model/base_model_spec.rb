@@ -9,6 +9,7 @@ describe "Quickbooks::Model::BaseModel" do
       XML_NODE = "Foo"
       xml_accessor :baz, :from => "baz"
       xml_accessor :bar, :from => "bar", :as => BarModel
+      xml_accessor :amount, :from => "amount", :as => BigDecimal, :to_xml => to_xml_big_decimal
     end
   end
 
@@ -25,8 +26,19 @@ describe "Quickbooks::Model::BaseModel" do
 
   describe ".attribute_names" do
     it "returns the list of attribute names" do
-      Quickbooks::Model::FooModel.attribute_names.should eq(%w{baz bar})
+      Quickbooks::Model::FooModel.attribute_names.should eq(%w{baz bar amount})
       Quickbooks::Model::BarModel.attribute_names.should eq(%w{foo})
+    end
+  end
+
+  describe ".to_xml_big_decimal" do
+    it "only sets value when present" do
+      foo = Quickbooks::Model::FooModel.new
+      foo.to_xml
+      expect(foo.to_xml.elements.map(&:name)).not_to include("amount")
+
+      foo.amount = 3
+      expect(foo.to_xml.elements.map(&:name)).to include("amount")
     end
   end
 
@@ -36,7 +48,7 @@ describe "Quickbooks::Model::BaseModel" do
     end
 
     it "returns a hash even for nested objects" do
-      foo_model.attributes.should eq("baz" => "quux", "bar" => {"foo" => 42})
+      foo_model.attributes.should eq("baz" => "quux", "bar" => {"foo" => 42}, "amount" => nil)
     end
   end
 

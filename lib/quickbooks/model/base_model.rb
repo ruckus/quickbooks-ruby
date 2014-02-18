@@ -42,6 +42,10 @@ module Quickbooks
       end
 
       class << self
+        def to_xml_big_decimal
+          Proc.new { |val| val.to_f unless val.nil? }
+        end
+
         def attribute_names
           roxml_attrs.map(&:accessor)
         end

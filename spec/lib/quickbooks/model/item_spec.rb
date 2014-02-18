@@ -28,6 +28,16 @@ describe "Quickbooks::Model::Item" do
     item.errors.keys.include?(:name).should_not == true
   end
 
+  it "doesn't set rate_percent unless user explicitly does it" do
+    item = Quickbooks::Model::Item.new
+    item.name = "Name name name!"
+    item.unit_price = 22
+    expect(item.to_xml.elements.map(&:name)).not_to include("RatePercent")
+
+    item.rate_percent = 5
+    expect(item.to_xml.elements.map(&:name)).to include("RatePercent")
+  end
+
   it "type must be known" do
     item = Quickbooks::Model::Item.new
 
@@ -41,5 +51,4 @@ describe "Quickbooks::Model::Item" do
     item.valid?
     item.errors.keys.include?(:type).should_not == true
   end
-
 end
