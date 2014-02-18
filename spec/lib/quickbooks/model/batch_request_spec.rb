@@ -22,4 +22,18 @@ describe Quickbooks::Model::BatchRequest do
 
     Hash.from_xml(req.to_xml.to_s).should == Hash.from_xml(ex_req.to_xml.to_s)
   end
+
+  it "should add item" do
+    req = Quickbooks::Model::BatchRequest.new
+    item1 = Quickbooks::Model::Item.new
+    item1.name = "Some"
+    req.add("1", item1, 'create')
+
+    ex_req = Nokogiri::XML("<IntuitBatchRequest/>").children.first
+    bir1 = Nokogiri::XML("<BatchItemRequest bId=\"1\" operation=\"create\">").children.first
+    bir1.add_child(item1.to_xml)
+    ex_req.add_child(bir1)
+
+    Hash.from_xml(req.to_xml.to_s).should == Hash.from_xml(ex_req.to_xml.to_s)
+  end
 end

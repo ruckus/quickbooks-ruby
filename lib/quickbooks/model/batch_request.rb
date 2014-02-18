@@ -7,6 +7,7 @@ class Quickbooks::Model::BatchRequest < Quickbooks::Model::BaseModel
     xml_accessor :operation, :from => "@operation"
     xml_accessor :bId, :from => "@bId"
     xml_accessor :customer, from: "Customer", :as => Quickbooks::Model::Customer
+    xml_accessor :item, from: "Item", :as => Quickbooks::Model::Item
   end
 
   XML_COLLECTION_NODE = "IntuitBatchRequest"

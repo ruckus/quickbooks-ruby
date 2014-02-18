@@ -24,4 +24,11 @@
       <PrintOnCheckName>Mark Basler </PrintOnCheckName>
     </Customer>
   </BatchItemResponse>
+  <BatchItemResponse bId="3d">
+    <Item>
+      <Id>19891</Id>
+      <Name>false</Name>
+      <UnitPrice>12.23</UnitPrice>
+    </Item>
+  </BatchItemResponse>
 </IntuitResponse>

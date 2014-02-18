@@ -5,6 +5,7 @@ class Quickbooks::Model::BatchResponse < Quickbooks::Model::BaseModel
 
     xml_accessor :bId, :from => "@bId"
     xml_accessor :customer, :from => 'Customer', :as => Quickbooks::Model::Customer
+    xml_accessor :item, :from => 'Item', :as => Quickbooks::Model::Item
     xml_accessor :fault, :from => 'Fault', :as => Quickbooks::Model::Fault
 
     def fault?
