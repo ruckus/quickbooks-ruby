@@ -27,6 +27,29 @@
 		<DetailType>SubTotalLineDetail</DetailType>
 		<SubTotalLineDetail />
 	</Line>
+	<TxnTaxDetail>
+			<TotalTax>2.85</TotalTax>
+			<TaxLine>
+					<Amount>0</Amount>
+					<DetailType>TaxLineDetail</DetailType>
+					<TaxLineDetail>
+							<TaxRateRef>4</TaxRateRef>
+							<PercentBased>true</PercentBased>
+							<TaxPercent>0</TaxPercent>
+							<NetAmountTaxable>4.00</NetAmountTaxable>
+					</TaxLineDetail>
+			</TaxLine>
+			<TaxLine>
+					<Amount>2.85</Amount>
+					<DetailType>TaxLineDetail</DetailType>
+					<TaxLineDetail>
+							<TaxRateRef>20</TaxRateRef>
+							<PercentBased>true</PercentBased>
+							<TaxPercent>10</TaxPercent>
+							<NetAmountTaxable>28.50</NetAmountTaxable>
+					</TaxLineDetail>
+			</TaxLine>
+	</TxnTaxDetail>
 	<CustomerRef name="Sunset Bakery">2</CustomerRef>
 	<CustomerMemo>Message to Customer</CustomerMemo>
 	<BillAddr>

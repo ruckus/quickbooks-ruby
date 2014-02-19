@@ -54,6 +54,24 @@ describe "Quickbooks::Model::Invoice" do
     shipping_address.lat.should == "33.739466"
     shipping_address.lon.should == "-118.0395574"
 
+    tax_detail = invoice.txn_tax_detail
+    tax_detail.total_tax.should eq(2.85)
+    first_tax_line, second_tax_line = tax_detail.lines
+
+    first_tax_line.amount.should eq(0)
+    first_tax_line.detail_type.should eq("TaxLineDetail")
+    first_tax_line.tax_line_detail.tax_rate_ref.value.should eq("4")
+    first_tax_line.tax_line_detail.percent_based.should eq("true")
+    first_tax_line.tax_line_detail.tax_percent.should eq(0.0)
+    first_tax_line.tax_line_detail.net_amount_taxable.should eq(4.0)
+
+    second_tax_line.amount.should eq(2.85)
+    second_tax_line.detail_type.should eq("TaxLineDetail")
+    second_tax_line.tax_line_detail.tax_rate_ref.value.should eq("20")
+    second_tax_line.tax_line_detail.percent_based.should eq("true")
+    second_tax_line.tax_line_detail.tax_percent.should eq(10.0)
+    second_tax_line.tax_line_detail.net_amount_taxable.should eq(28.5)
+
     invoice.sales_term_ref.to_i.should == 2
     invoice.due_date.to_date.should == Date.civil(2013, 11, 30)
     invoice.total_amount.should == 50.00

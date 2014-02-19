@@ -24,7 +24,7 @@ module Quickbooks
       xml_accessor :private_note, :from => 'PrivateNote'
       xml_accessor :linked_transactions, :from => 'LinkedTxn', :as => [LinkedTransaction]
       xml_accessor :line_items, :from => 'Line', :as => [InvoiceLineItem]
-      xml_accessor :txn_tax_detail, :from => 'TxnTaxDetail'
+      xml_accessor :txn_tax_detail, :from => 'TxnTaxDetail', :as => TransactionTaxDetail
       xml_accessor :customer_ref, :from => 'CustomerRef', :as => BaseReference
       xml_accessor :customer_memo, :from => 'CustomerMemo'
       xml_accessor :billing_address, :from => 'BillAddr', :as => PhysicalAddress
