@@ -1,5 +1,3 @@
-require "quickbooks/model/tax_line_detail"
-
 module Quickbooks
   module Model
     class TaxLine < BaseModel

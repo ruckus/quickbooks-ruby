@@ -5,8 +5,6 @@
 # * If ShipAddr, BillAddr, or both are not provided, the appropriate customer address from Customer is used to fill those values.
 # * DocNumber, if supplied, must be unique.
 
-require "quickbooks/model/transaction_tax_detail"
-
 module Quickbooks
   module Model
     class Invoice < BaseModel
