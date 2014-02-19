@@ -256,9 +256,9 @@ Sales Term        | no    | no    | no  | no    | no         |
 Tax Code     | no    | no    | no  | no    | no         |
 Tax Rate     | no    | no    | no  | no    | no         |
 Term     | yes    | yes    | yes  | yes    | yes         |
-Time Activity     | no    | no    | no  | no    | no         |
+Time Activity     | yes    | yes    | yes  | yes    | yes         |
 Tracking Class    | no    | no    | no  | no    | no         |
-Vendor            | no    | no    | no  | no    | no         |
+Vendor            | yes    | yes    | yes  | yes    | yes         |
 Vendor Credit     | yes    | yes    | yes  | yes    | yes         |
 
 
