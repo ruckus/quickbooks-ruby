@@ -25,7 +25,7 @@ module Quickbooks
       xml_accessor :company_name, :from => 'CompanyName'
       xml_accessor :display_name, :from => 'DisplayName'
       xml_accessor :print_on_check_name, :from => 'PrintOnCheckName'
-      xml_accessor :active, :from => 'Active'
+      xml_accessor :active?, :from => 'Active'
       xml_accessor :primary_phone, :from => 'PrimaryPhone', :as => TelephoneNumber
       xml_accessor :alternate_phone, :from => 'AlternatePhone', :as => TelephoneNumber
       xml_accessor :mobile_phone, :from => 'Mobile', :as => TelephoneNumber

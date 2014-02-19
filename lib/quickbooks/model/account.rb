@@ -18,14 +18,14 @@ module Quickbooks
       xml_accessor :id, :from => 'Id', :as => Integer
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
-      xml_accessor :has_attachment, :from => 'HasAttachment'
+      xml_accessor :has_attachment?, :from => 'HasAttachment'
       xml_accessor :name, :from => 'Name'
       xml_accessor :description, :from => 'Description'
 
-      xml_accessor :sub_account, :from => 'SubAccount'
+      xml_accessor :sub_account?, :from => 'SubAccount'
       xml_accessor :parent_ref, :from => 'ParentRef', :as => BaseReference
 
-      xml_accessor :active, :from => 'Active'
+      xml_accessor :active?, :from => 'Active'
 
       xml_accessor :classification, :from => 'Classification'
       xml_accessor :account_type, :from => 'AccountType'
@@ -39,7 +39,7 @@ module Quickbooks
       xml_accessor :opening_balance, :from => 'OpeningBalance', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :opening_balance_date, :from => 'OpeningBalanceDate', :as => DateTime
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
-      xml_accessor :tax_account, :from => 'TaxAccount'
+      xml_accessor :tax_account?, :from => 'TaxAccount'
       xml_accessor :tax_code_ref, :from => 'TaxCodeRef', :as => BaseReference
 
       reference_setters :parent_ref, :currency_ref, :tax_code_ref
@@ -72,21 +72,6 @@ module Quickbooks
         id.to_i > 0 && !sync_token.to_s.empty? && sync_token.to_i >= 0
       end
 
-      def has_attachment?
-        has_attachment.to_s == 'true'
-      end
-
-      def sub_account?
-        sub_account.to_s == 'true'
-      end
-
-      def active?
-        active.to_s == 'true'
-      end
-
-      def tax_account?
-        tax_account.to_s == 'true'
-      end
     end
   end
 end

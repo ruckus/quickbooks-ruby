@@ -37,17 +37,17 @@ module Quickbooks
       xml_accessor :tracking_num, :from => 'TrackingNum'
       xml_accessor :ar_account_ref, :from => 'ARAccountRef', :as => BaseReference
       xml_accessor :total_amount, :from => 'TotalAmt', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
-      xml_accessor :apply_tax_after_discount, :from => 'ApplyTaxAfterDiscount'
+      xml_accessor :apply_tax_after_discount?, :from => 'ApplyTaxAfterDiscount'
       xml_accessor :print_status, :from => 'PrintStatus'
       xml_accessor :email_status, :from => 'EmailStatus'
       xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :deposit, :from => 'Deposit', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
-      xml_accessor :allow_ipn_payment, :from => 'AllowIPNPayment'
+      xml_accessor :allow_ipn_payment?, :from => 'AllowIPNPayment'
       xml_accessor :bill_email, :from => 'BillEmail', :as => EmailAddress
-      xml_accessor :allow_online_payment, :from => 'AllowOnlinePayment'
-      xml_accessor :allow_online_credit_card_payment, :from => 'AllowOnlineCreditCardPayment'
-      xml_accessor :allow_online_ach_payment, :from => 'AllowOnlineACHPayment'
+      xml_accessor :allow_online_payment?, :from => 'AllowOnlinePayment'
+      xml_accessor :allow_online_credit_card_payment?, :from => 'AllowOnlineCreditCardPayment'
+      xml_accessor :allow_online_ach_payment?, :from => 'AllowOnlineACHPayment'
 
       reference_setters :customer_ref, :class_ref, :sales_term_ref, :ship_method_ref
       reference_setters :ar_account_ref, :department_ref
@@ -80,26 +80,6 @@ module Quickbooks
 
       def email_status_for_delivery?
         email_status == EMAIL_STATUS_NEED_TO_SEND
-      end
-
-      def apply_tax_after_discount?
-        apply_tax_after_discount.to_s == 'true'
-      end
-
-      def allow_ipn_payment?
-        allow_ipn_payment.to_s == 'true'
-      end
-
-      def allow_online_payment?
-        allow_online_payment.to_s == 'true'
-      end
-
-      def allow_online_credit_card_payment?
-        allow_online_credit_card_payment.to_s == 'true'
-      end
-
-      def allow_online_ach_payment?
-        allow_online_ach_payment.to_s == 'true'
       end
 
       private
