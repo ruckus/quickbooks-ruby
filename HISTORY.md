@@ -1,3 +1,7 @@
+## 0.0.7 (2014-02-20)
+
+* Implemented `AccessToken` service with `renew` and `disconnect` methods for OAuth token management.
+
 ## 0.0.6 (2014-02-04)
 
 * Upgraded nokogiri dependency to '~> 1.6', '>= 1.6.1'
