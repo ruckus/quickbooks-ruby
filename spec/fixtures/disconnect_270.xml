@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<PlatformResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://platform.intuit.com/api/v1">
+  <ErrorMessage>OAuth Token rejected</ErrorMessage>
+  <ErrorCode>270</ErrorCode>
+  <ServerTime>2011-11-24T17:45:27.11097Z</ServerTime>
+</PlatformResponse>

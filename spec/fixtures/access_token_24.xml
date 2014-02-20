@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<ReconnectResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://platform.intuit.com/api/v1">
+  <ErrorMessage>Invalid App Token</ErrorMessage>
+  <ErrorCode>24</ErrorCode>
+  <ServerTime>2012-01-04T19:21:21.0782072Z</ServerTime>
+</ReconnectResponse>
