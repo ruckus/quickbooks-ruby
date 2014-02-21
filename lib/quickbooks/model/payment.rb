@@ -11,7 +11,7 @@ module Quickbooks
       xml_accessor :txn_date, :from => 'TxnDate', :as => Date
       xml_accessor :private_note, :from => 'PrivateNote'
       xml_accessor :txn_status, :from => 'TxnStatus'
-      xml_accessor :line, :from => 'Line', :as => Line
+      xml_accessor :line_items, :from => 'Line', :as => [Line]
       xml_accessor :customer_ref, :from => 'CustomerRef', :as => BaseReference
       xml_accessor :ar_account_ref, :from => 'ARAccountRef', :as => BaseReference
       xml_accessor :deposit_to_account_ref, :from => 'DepositToAccountRef', :as => BaseReference
