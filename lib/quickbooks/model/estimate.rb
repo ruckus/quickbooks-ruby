@@ -52,7 +52,7 @@ module Quickbooks
       validates_length_of :line_items, :minimum => 1
       validate :existence_of_customer_ref
 
-      def initialize
+      def initialize(*args)
         ensure_line_items_initialization
         super
       end
