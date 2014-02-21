@@ -1,3 +1,7 @@
+## 0.0.8 (2014-02-21)
+
+* Fixed bug where I had the wrong REST URL for Purchase Order.
+
 ## 0.0.7 (2014-02-20)
 
 * Implemented `AccessToken` service with `renew` and `disconnect` methods for OAuth token management.
