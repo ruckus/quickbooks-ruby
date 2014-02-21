@@ -3,7 +3,7 @@ module Quickbooks
     class BillPayment < BaseModel
       XML_COLLECTION_NODE = "BillPayment"
       XML_NODE = "BillPayment"
-      REST_RESOURCE = 'bill_payment'
+      REST_RESOURCE = 'billpayment'
 
       xml_accessor :id, :from => 'Id', :as => Integer
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
