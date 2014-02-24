@@ -238,6 +238,8 @@ module Quickbooks
           raise Quickbooks::AuthorizationFailure
         when 400, 500
           parse_and_raise_exception
+        when 503
+          raise Quickbooks::ServiceUnavailable
         else
           raise "HTTP Error Code: #{status}, Msg: #{response.plain_body}"
         end
