@@ -16,6 +16,12 @@ module Quickbooks
       xml_accessor :sales_item_line_detail, :from => 'SalesItemLineDetail', :as => SalesItemLineDetail
       xml_accessor :sub_total_line_detail, :from => 'SubTotalLineDetail', :as => SubTotalLineDetail
       xml_accessor :payment_line_detail, :from => 'PaymentLineDetail', :as => PaymentLineDetail
+      xml_accessor :linked_transaction, :from => 'LinkedTxn', :as => LinkedTransaction
+
+      def invoice_id=(invoice_id)
+        self.linked_transaction = LinkedTransaction.new(txn_id: invoice_id,
+                                                        txn_type: "Invoice")
+      end
 
       def sales_item!
         self.detail_type = SALES_LINE_ITEM_DETAIL
