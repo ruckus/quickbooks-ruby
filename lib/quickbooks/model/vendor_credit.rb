@@ -7,7 +7,7 @@ module Quickbooks
     class VendorCredit < BaseModel
 
       #== Constants
-      REST_RESOURCE = 'vendor_credit'
+      REST_RESOURCE = 'vendorcredit'
       XML_COLLECTION_NODE = "VendorCredit"
       XML_NODE = "VendorCredit"
 
@@ -17,7 +17,7 @@ module Quickbooks
       xml_accessor :doc_number, :from => 'DocNumber'
       xml_accessor :txn_date, :from => 'TxnDate', :as => Date
       xml_accessor :private_note, :from => 'PrivateNote'
-    
+
       xml_accessor :line_items, :from => 'Line', :as => [PurchaseLineItem]
       xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
       xml_accessor :ap_account_ref, :from => 'APAccountRef', :as => BaseReference

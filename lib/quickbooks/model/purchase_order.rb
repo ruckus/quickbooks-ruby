@@ -3,7 +3,7 @@ module Quickbooks
     class PurchaseOrder < BaseModel
 
       #== Constants
-      REST_RESOURCE = 'purchase_order'
+      REST_RESOURCE = 'purchaseorder'
       XML_COLLECTION_NODE = "PurchaseOrder"
       XML_NODE = "PurchaseOrder"
 
@@ -14,10 +14,10 @@ module Quickbooks
       xml_accessor :txn_date, :from => 'TxnDate', :as => Date
       xml_accessor :custom_fields, :from => 'CustomField', :as => [CustomField]
       xml_accessor :private_note, :from => 'PrivateNote'
-    
+
       xml_accessor :linked_transactions, :from => 'LinkedTxn', :as => [LinkedTransaction]
       xml_accessor :line_items, :from => 'Line', :as => [PurchaseLineItem]
-      
+
       xml_accessor :attachable_ref, :from => 'AttachableRef', :as => BaseReference
       xml_accessor :vendor_ref, :from => 'VendorRef', :as => BaseReference
       xml_accessor :ap_account_ref, :from => 'APAccountRef', :as => BaseReference

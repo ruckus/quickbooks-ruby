@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<PlatformResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://platform.intuit.com/api/v1">
+  <ErrorCode>0</ErrorCode>
+  <ServerTime>2011-11-23T17:15:27.21097Z</ServerTime>
+</PlatformResponse>

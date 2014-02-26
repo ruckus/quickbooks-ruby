@@ -1,7 +1,7 @@
 module Quickbooks
   module Model
     class PaymentMethod < BaseModel
-      REST_RESOURCE = 'payment_method'
+      REST_RESOURCE = 'paymentmethod'
       XML_COLLECTION_NODE = "PaymentMethod"
       XML_NODE = "PaymentMethod"
 
