@@ -1,0 +1,220 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-04-23T09:10:12.547-07:00">
+  <QueryResponse startPosition="1" maxResults="11" totalCount="11">
+    <TaxCode>
+      <Id>TAX</Id>
+      <MetaData>
+        <CreateTime>2012-05-10T00:15:18-07:00</CreateTime>
+        <LastUpdatedTime>2012-05-10T00:15:18-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>TAX</Name>
+      <Description>TAX</Description>
+      <Taxable>true</Taxable>
+      <TaxGroup>false</TaxGroup>
+    </TaxCode>
+    <TaxCode>
+      <Id>NON</Id>
+      <MetaData>
+        <CreateTime>2012-05-10T00:15:18-07:00</CreateTime>
+        <LastUpdatedTime>2012-05-10T00:15:18-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>NON</Name>
+      <Description>NON</Description>
+      <Taxable>false</Taxable>
+      <TaxGroup>false</TaxGroup>
+    </TaxCode>
+    <TaxCode>
+      <Id>CustomSalesTax</Id>
+      <MetaData>
+        <CreateTime>2012-05-10T00:15:18-07:00</CreateTime>
+        <LastUpdatedTime>2012-05-10T00:15:18-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>CustomSalesTax</Name>
+      <Description>CustomSalesTax</Description>
+      <Taxable>true</Taxable>
+      <TaxGroup>true</TaxGroup>
+    </TaxCode>
+    <TaxCode domain="QBO" sparse="false">
+      <Id>7</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-03-18T22:08:42-07:00</CreateTime>
+        <LastUpdatedTime>2013-03-18T22:08:42-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Alameda County Tax</Name>
+      <Description>Alameda County Tax</Description>
+      <Active>true</Active>
+      <Taxable>true</Taxable>
+      <TaxGroup>true</TaxGroup>
+      <SalesTaxRateList>
+        <TaxRateDetail>
+          <TaxRateRef name="Newark City">16</TaxRateRef>
+          <TaxTypeApplicable>TaxOnAmount</TaxTypeApplicable>
+          <TaxOrder>0</TaxOrder>
+        </TaxRateDetail>
+        <TaxRateDetail>
+          <TaxRateRef name="Fremont City">7</TaxRateRef>
+          <TaxTypeApplicable>TaxOnAmount</TaxTypeApplicable>
+          <TaxOrder>0</TaxOrder>
+        </TaxRateDetail>
+      </SalesTaxRateList>
+      <PurchaseTaxRateList/>
+    </TaxCode>
+    <TaxCode domain="QBO" sparse="false">
+      <Id>9</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-03-18T22:10:40-07:00</CreateTime>
+        <LastUpdatedTime>2013-03-18T22:10:40-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Atherton</Name>
+      <Description>Atherton</Description>
+      <Active>true</Active>
+      <Taxable>true</Taxable>
+      <TaxGroup>true</TaxGroup>
+      <SalesTaxRateList>
+        <TaxRateDetail>
+          <TaxRateRef name="Atherton">18</TaxRateRef>
+          <TaxTypeApplicable>TaxOnAmount</TaxTypeApplicable>
+          <TaxOrder>0</TaxOrder>
+        </TaxRateDetail>
+      </SalesTaxRateList>
+      <PurchaseTaxRateList/>
+    </TaxCode>
+    <TaxCode domain="QBO" sparse="false">
+      <Id>5</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-03-18T22:06:43-07:00</CreateTime>
+        <LastUpdatedTime>2013-03-18T22:06:43-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>County services</Name>
+      <Description>County services</Description>
+      <Active>true</Active>
+      <Taxable>true</Taxable>
+      <TaxGroup>true</TaxGroup>
+      <SalesTaxRateList>
+        <TaxRateDetail>
+          <TaxRateRef name="Palo Alto City Services">15</TaxRateRef>
+          <TaxTypeApplicable>TaxOnAmount</TaxTypeApplicable>
+          <TaxOrder>0</TaxOrder>
+        </TaxRateDetail>
+        <TaxRateDetail>
+          <TaxRateRef name="Mountain View">1</TaxRateRef>
+          <TaxTypeApplicable>TaxOnAmount</TaxTypeApplicable>
+          <TaxOrder>0</TaxOrder>
+        </TaxRateDetail>
+        <TaxRateDetail>
+          <TaxRateRef name="Redwood City Services">10</TaxRateRef>
+          <TaxTypeApplicable>TaxOnAmount</TaxTypeApplicable>
+          <TaxOrder>0</TaxOrder>
+        </TaxRateDetail>
+      </SalesTaxRateList>
+      <PurchaseTaxRateList/>
+    </TaxCode>
+    <TaxCode domain="QBO" sparse="false">
+      <Id>4</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-03-18T22:03:20-07:00</CreateTime>
+        <LastUpdatedTime>2013-03-18T22:03:20-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Fremont City</Name>
+      <Description>Fremont City</Description>
+      <Active>true</Active>
+      <Taxable>true</Taxable>
+      <TaxGroup>true</TaxGroup>
+      <SalesTaxRateList>
+        <TaxRateDetail>
+          <TaxRateRef name="Fremont City">7</TaxRateRef>
+          <TaxTypeApplicable>TaxOnAmount</TaxTypeApplicable>
+          <TaxOrder>0</TaxOrder>
+        </TaxRateDetail>
+      </SalesTaxRateList>
+      <PurchaseTaxRateList/>
+    </TaxCode>
+    <TaxCode domain="QBO" sparse="false">
+      <Id>8</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-03-18T22:09:36-07:00</CreateTime>
+        <LastUpdatedTime>2013-03-18T22:09:36-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Menlo Park</Name>
+      <Description>Menlo Park</Description>
+      <Active>true</Active>
+      <Taxable>true</Taxable>
+      <TaxGroup>true</TaxGroup>
+      <SalesTaxRateList>
+        <TaxRateDetail>
+          <TaxRateRef name="Menlo Park">17</TaxRateRef>
+          <TaxTypeApplicable>TaxOnAmount</TaxTypeApplicable>
+          <TaxOrder>0</TaxOrder>
+        </TaxRateDetail>
+      </SalesTaxRateList>
+      <PurchaseTaxRateList/>
+    </TaxCode>
+    <TaxCode domain="QBO" sparse="false">
+      <Id>2</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-03-15T17:05:13-07:00</CreateTime>
+        <LastUpdatedTime>2013-03-15T17:05:13-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Mountain View</Name>
+      <Description>Mountain View</Description>
+      <Active>true</Active>
+      <Taxable>true</Taxable>
+      <TaxGroup>true</TaxGroup>
+      <SalesTaxRateList>
+        <TaxRateDetail>
+          <TaxRateRef name="Mountain View">1</TaxRateRef>
+          <TaxTypeApplicable>TaxOnAmount</TaxTypeApplicable>
+          <TaxOrder>0</TaxOrder>
+        </TaxRateDetail>
+      </SalesTaxRateList>
+      <PurchaseTaxRateList/>
+    </TaxCode>
+    <TaxCode domain="QBO" sparse="false">
+      <Id>6</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-03-18T22:07:47-07:00</CreateTime>
+        <LastUpdatedTime>2013-03-18T22:07:47-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Newark City</Name>
+      <Description>Newark City</Description>
+      <Active>true</Active>
+      <Taxable>true</Taxable>
+      <TaxGroup>true</TaxGroup>
+      <SalesTaxRateList>
+        <TaxRateDetail>
+          <TaxRateRef name="Newark City">16</TaxRateRef>
+          <TaxTypeApplicable>TaxOnAmount</TaxTypeApplicable>
+          <TaxOrder>0</TaxOrder>
+        </TaxRateDetail>
+      </SalesTaxRateList>
+      <PurchaseTaxRateList/>
+    </TaxCode>
+    <TaxCode domain="QBO" sparse="false">
+      <Id>3</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2013-03-18T22:01:56-07:00</CreateTime>
+        <LastUpdatedTime>2013-03-18T22:01:56-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>San Jose City Services</Name>
+      <Description>San Jose City Services</Description>
+      <Active>true</Active>
+      <Taxable>true</Taxable>
+      <TaxGroup>true</TaxGroup>
+      <SalesTaxRateList>
+        <TaxRateDetail>
+          <TaxRateRef name="San Jose City Services">4</TaxRateRef>
+          <TaxTypeApplicable>TaxOnAmount</TaxTypeApplicable>
+          <TaxOrder>0</TaxOrder>
+        </TaxRateDetail>
+      </SalesTaxRateList>
+      <PurchaseTaxRateList/>
+    </TaxCode>
+  </QueryResponse>
+</IntuitResponse>
