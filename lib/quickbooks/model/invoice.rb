@@ -57,7 +57,7 @@ module Quickbooks
       validate :existence_of_customer_ref
       validate :required_bill_email_if_email_delivery
 
-      def initialize
+      def initialize(*args)
         ensure_line_items_initialization
         super
       end

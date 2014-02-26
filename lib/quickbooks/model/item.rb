@@ -54,7 +54,7 @@ module Quickbooks
       validates_length_of :name, :minimum => 1
       validates_inclusion_of :type, :in => ITEM_TYPES
 
-      def initialize
+      def initialize(*args)
         self.type = INVENTORY_TYPE
         super
       end
