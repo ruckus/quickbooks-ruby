@@ -228,43 +228,43 @@ Quickbooks.log = true
 ## Entities Implemented
 
 Entity            | Create | Update | Query | Delete | Fetch by ID | Other
----               | ---    | ---    | ---  | ---    | ---         | ---
-Account           | yes    | yes    | yes  | yes    | yes
-Attachable        | no     | no     | no   | no     | no
-Bill              | yes    | yes    | yes  | yes    | yes
-Bill Payment      | yes    | yes    | yes  | yes    | yes
-Class             | no    | no    | no  | no    | no
-Company Info      | n/a     | n/a     | yes   | n/a     | yes          |
-Credit Memo | yes     | yes     | yes   | no     | no          |
-Customer          | yes    | yes    | yes  | yes    | yes         |
-Department          | no    | no    | no  | no    | no         |
-Employee          | yes    | yes    | yes  | yes    | yes         |
-Entitlements          | no    | no    | no  | no    | no         |
-Estimate           | yes    | yes    | yes  | yes    | yes         |
-Invoice           | yes    | yes    | yes  | yes    | yes         |
-Item              | yes    | yes    | yes  | yes    | yes         |
-Journal Entry     | no    | no    | no  | no    | no         |
-Payment           | yes    | yes    | yes  | yes    | yes         |
-PaymentMethod     | yes    | yes    | yes  | yes    | yes         |
-Preferences           | no    | no    | no  | no    | no         |
-Purchase           | yes    | yes    | yes  | yes    | yes         |
-Purchase Order      | yes    | yes    | yes  | yes    | yes         |
-Sales Receipt     | yes    | yes    | yes  | yes    | yes         |
-Sales Rep         | no     | no     | no   | no     | no          |
-Sales Tax         | no     | no     | no   | no     | no          |
-Sales Term        | no    | no    | no  | no    | no         |
-Tax Code     | no    | no    | no  | no    | no         |
-Tax Rate     | no    | no    | no  | no    | no         |
-Term     | yes    | yes    | yes  | yes    | yes         |
-Time Activity     | yes    | yes    | yes  | yes    | yes         |
-Tracking Class    | no    | no    | no  | no    | no         |
-Vendor            | yes    | yes    | yes  | yes    | yes         |
-Vendor Credit     | yes    | yes    | yes  | yes    | yes         |
+---               | ---    | ---    | ---   | ---    | ---         | ---
+Account           | yes    | yes    | yes   | yes    | yes         |
+Attachable        | no     | no     | no    | no     | no          |
+Bill              | yes    | yes    | yes   | yes    | yes         |
+Bill Payment      | yes    | yes    | yes   | yes    | yes         |
+Class             | no     | no     | no    | no     | no          |
+Company Info      | n/a    | n/a    | yes   | n/a    | yes         |
+Credit Memo       | yes    | yes    | yes   | no     | no          |
+Customer          | yes    | yes    | yes   | yes    | yes         |
+Department        | no     | no     | no    | no     | no          |
+Employee          | yes    | yes    | yes   | yes    | yes         |
+Entitlements      | no     | no     | no    | no     | no          |
+Estimate          | yes    | yes    | yes   | yes    | yes         |
+Invoice           | yes    | yes    | yes   | yes    | yes         |
+Item              | yes    | yes    | yes   | yes    | yes         |
+Journal Entry     | no     | no     | no    | no     | no          |
+Payment           | yes    | yes    | yes   | yes    | yes         |
+PaymentMethod     | yes    | yes    | yes   | yes    | yes         |
+Preferences       | no     | no     | no    | no     | no          |
+Purchase          | yes    | yes    | yes   | yes    | yes         |
+Purchase Order    | yes    | yes    | yes   | yes    | yes         |
+Sales Receipt     | yes    | yes    | yes   | yes    | yes         |
+Sales Rep         | no     | no     | no    | no     | no          |
+Sales Tax         | no     | no     | no    | no     | no          |
+Sales Term        | no     | no     | no    | no     | no          |
+Tax Code          | no     | no     | yes   | no     | no          |
+Tax Rate          | no     | no     | yes   | no     | no          |
+Term              | yes    | yes    | yes   | yes    | yes         |
+Time Activity     | yes    | yes    | yes   | yes    | yes         |
+Tracking Class    | no     | no     | no    | no     | no          |
+Vendor            | yes    | yes    | yes   | yes    | yes         |
+Vendor Credit     | yes    | yes    | yes   | yes    | yes         |
 
 
 ## TODO
 
-* Implement other Line Item types, e.g. `DiscountLineDetail`, `DescriptionLineDetail` for Invoices
+* Implement other Line Item types, e.g. `DescriptionLineDetail` for Invoices
 
 ## Author
 
