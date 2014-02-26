@@ -62,6 +62,10 @@ require 'quickbooks/model/purchase_order'
 require 'quickbooks/model/vendor_credit'
 require 'quickbooks/model/estimate'
 require 'quickbooks/model/invoice'
+require 'quickbooks/model/tax_rate'
+require 'quickbooks/model/tax_rate_detail'
+require 'quickbooks/model/sales_tax_rate_list'
+require 'quickbooks/model/tax_code'
 
 #== Services
 require 'quickbooks/service/service_crud'
@@ -86,6 +90,8 @@ require 'quickbooks/service/purchase'
 require 'quickbooks/service/purchase_order'
 require 'quickbooks/service/vendor_credit'
 require 'quickbooks/service/estimate'
+require 'quickbooks/service/tax_rate'
+require 'quickbooks/service/tax_code'
 
 module Quickbooks
   @@logger = nil

@@ -1,0 +1,21 @@
+<TaxCode domain="QBO" sparse="false">
+  <Id>2</Id>
+  <SyncToken>0</SyncToken>
+  <MetaData>
+    <CreateTime>2014-02-19T12:08:08-08:00</CreateTime>
+    <LastUpdatedTime>2014-02-19T12:08:08-08:00</LastUpdatedTime>
+  </MetaData>
+  <Name>Stupid tax</Name>
+  <Description>Stupid tax</Description>
+  <Active>true</Active>
+  <Taxable>true</Taxable>
+  <TaxGroup>true</TaxGroup>
+  <SalesTaxRateList>
+    <TaxRateDetail>
+      <TaxRateRef name="Stupid tax">1</TaxRateRef>
+      <TaxTypeApplicable>TaxOnAmount</TaxTypeApplicable>
+      <TaxOrder>0</TaxOrder>
+    </TaxRateDetail>
+  </SalesTaxRateList>
+  <PurchaseTaxRateList/>
+</TaxCode>
