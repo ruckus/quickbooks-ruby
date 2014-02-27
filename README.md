@@ -12,6 +12,23 @@ This library communicates with the Quickbooks Data Services `v3` API, documented
 
 [Data Services v3](https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services)
 
+## Changes in 0.1.x from 0.0.x
+
+`0.1.0` introduced a backwards-incompatible change in how boolean attributes are handled. As of `0.1.0` any boolean like:
+
+`xml_accessor :active?, :from => 'Active'`
+
+will be accessible via `active?`. Thereby eliminating custom code like:
+
+```ruby
+def active?
+  active.to_s == 'true'
+end
+```
+
+Now a call to `active?` that is not set will return `nil`. Otherwise it return `true` / `false`.
+Moreover, there is no longer a getter method e.g. `active` (without the trailing `?`).
+
 ## Requirements
 
 This has been tested on 1.9.3, 2.0.0, and 2.1.0.
