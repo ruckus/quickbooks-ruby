@@ -77,7 +77,7 @@ describe "Quickbooks::Service::Item" do
     stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
 
     response = @service.delete(item)
-    response.active?.should == false
+    response.active?.should be_nil
   end
 
 end

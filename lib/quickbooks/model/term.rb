@@ -9,7 +9,7 @@ module Quickbooks
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :name, :from => 'Name'
-      xml_accessor :active, :from => 'Active'
+      xml_accessor :active?, :from => 'Active'
       xml_accessor :type, :from => 'Type'
       xml_accessor :discount_percent, :from => 'DiscountPercent', :as => BigDecimal
       xml_accessor :due_days, :from => 'DueDays', :as => Integer
@@ -20,9 +20,6 @@ module Quickbooks
 
       validates_presence_of :name
 
-      def active?
-        active == "true"
-      end
     end
   end
 end

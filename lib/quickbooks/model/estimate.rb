@@ -38,7 +38,7 @@ module Quickbooks
       xml_accessor :ship_method_ref, :from => 'ShipMethodRef', :as => BaseReference
       xml_accessor :ship_date, :from => 'ShipDate', :as => Date
      
-      xml_accessor :apply_tax_after_discount, :from => 'ApplyTaxAfterDiscount'
+      xml_accessor :apply_tax_after_discount?, :from => 'ApplyTaxAfterDiscount'
       xml_accessor :print_status, :from => 'PrintStatus'
       xml_accessor :email_status, :from => 'EmailStatus'
       xml_accessor :bill_email, :from => 'BillEmail', :as => EmailAddress
@@ -55,10 +55,6 @@ module Quickbooks
       def initialize(*args)
         ensure_line_items_initialization
         super
-      end
-
-      def apply_tax_after_discount?
-        apply_tax_after_discount.to_s == 'true'
       end
 
       private

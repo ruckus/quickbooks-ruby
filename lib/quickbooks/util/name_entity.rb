@@ -29,9 +29,6 @@ module NameEntity
   end
 
   module PermitAlterations
-    def active?
-      active.to_s == 'true'
-    end
 
     def valid_for_update?
       if sync_token.nil?
