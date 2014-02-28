@@ -184,7 +184,7 @@ If you don't have the complete object on hand and only want to change a couple o
 
 ```ruby
 # update a Customer's name when we only know their ID
-customer = Quickbooks::Customer::Model.new
+customer = Quickbooks::Model::Customer.new
 customer.id = 99
 customer.company_name = "New Company Name"
 service.update(customer, :sparse => true)
@@ -230,6 +230,17 @@ Use `Service#delete` which returns a boolean on whether the delete operation suc
 service.delete(customer)
 => returns boolean
 ```
+
+## Email Addresses
+Email attributes are not just strings, they are top-level objects, e.g. `EmailAddress` on a `Customer` for instance.
+
+A `Customer` has a setter method to make assigning an email address easier.
+
+```ruby
+customer = Quickbooks::Model::Customer.new
+customer.email_address = "foo@example.com"
+```
+
 
 ## Logging
 
