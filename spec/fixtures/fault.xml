@@ -1,0 +1,8 @@
+<Fault type="ValidationFault">
+  <Error code="101">
+    <Message>Length of the field exceeds 21 chars</Message>
+  </Error>
+  <Error code="201">
+    <Message>ZipCode should be a number with at least 5 digits</Message>
+  </Error>
+</Fault>

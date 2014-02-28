@@ -29,7 +29,6 @@ module Quickbooks
 
       # read-only
       xml_accessor :fully_qualified_name, :from => 'FullyQualifiedName'
-
       xml_accessor :taxable?, :from => 'Taxable'
       xml_accessor :sales_tax_included?, :from => 'SalesTaxIncluded'
       xml_accessor :unit_price, :from => 'UnitPrice', :as => BigDecimal, :to_xml => to_xml_big_decimal

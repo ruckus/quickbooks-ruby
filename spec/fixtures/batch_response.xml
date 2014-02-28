@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2014-02-03T03:48:58.191-08:00">
+  <BatchItemResponse bId="1a">
+    <Fault type="ValidationFault">
+      <Error code="101">
+        <Message>Length of the field exceeds 21 chars </Message>
+      </Error>
+      <Error code="201">
+        <Message>ZipCode should be a number with at least 5 digits</Message>
+      </Error>
+    </Fault>
+  </BatchItemResponse>
+  <BatchItemResponse bId="2b">
+    <Customer>
+      <Id>19891</Id>
+      <Organization>false</Organization>
+      <Title>Mr</Title>
+      <GivenName>Mark</GivenName>
+      <MiddleName>Arch </MiddleName>
+      <FamilyName>Basler </FamilyName>
+      <Suffix>Jr</Suffix>
+      <FullName>Mr Mark Arch Basler Jr </FullName>
+      <DisplayName>Mark Basler</DisplayName>
+      <PrintOnCheckName>Mark Basler </PrintOnCheckName>
+    </Customer>
+  </BatchItemResponse>
+  <BatchItemResponse bId="3c">
+    <Item>
+      <Id>19891</Id>
+      <Name>false</Name>
+      <UnitPrice>12.23</UnitPrice>
+    </Item>
+  </BatchItemResponse>
+  <BatchItemResponse bId="4d">
+    <Account>
+      <Id>19891</Id>
+    </Account>
+  </BatchItemResponse>
+  <BatchItemResponse bId="5e">
+    <Invoice>
+      <Id>19891</Id>
+    </Invoice>
+  </BatchItemResponse>
+  <BatchItemResponse bId="6f">
+    <SalesReceipt>
+      <Id>19891</Id>
+    </SalesReceipt>
+  </BatchItemResponse>
+</IntuitResponse>
