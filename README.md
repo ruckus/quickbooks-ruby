@@ -241,6 +241,35 @@ customer = Quickbooks::Model::Customer.new
 customer.email_address = "foo@example.com"
 ```
 
+## Batch Operations
+
+You can batch operations such creating an Invoice, updating a Customer, etc. The maximum batch size is 25 objects.
+
+How to use:
+
+```ruby
+batch_req = Quickbooks::Model::BatchRequest.new
+
+customer = Quickbooks::Model::Customer.new
+# build the customer as needed
+...
+
+item = Quickbooks::Model::Item.new
+# build the item as needed
+...
+
+batch_req.add("bId1", customer, "create")
+batch_req.add("bId2", item, "create")
+
+# Add more items to create/update as needed, up to 25
+
+batch_service = Quickbooks::Service::Batch.new
+batch_response = batch_service.make_request(batch_req)
+batch_response.response_items.each do |res|
+  puts res.bId
+  puts res.fault? ? "error" : "success"
+end
+```
 
 ## Logging
 
