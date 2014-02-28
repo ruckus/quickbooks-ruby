@@ -6,6 +6,7 @@ module Quickbooks
       xml_accessor :total_tax, :from => 'TotalTax', :as => BigDecimal, :to_xml => :to_f.to_proc
       xml_accessor :lines, :from => 'TaxLine', :as => [TaxLine]
 
+      reference_setters :txn_tax_code_ref
     end
   end
 end
