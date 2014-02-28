@@ -10,7 +10,7 @@
       </Error>
     </Fault>
   </BatchItemResponse>
-  <BatchItemResponse bId="2c">
+  <BatchItemResponse bId="2b">
     <Customer>
       <Id>19891</Id>
       <Organization>false</Organization>
@@ -24,11 +24,26 @@
       <PrintOnCheckName>Mark Basler </PrintOnCheckName>
     </Customer>
   </BatchItemResponse>
-  <BatchItemResponse bId="3d">
+  <BatchItemResponse bId="3c">
     <Item>
       <Id>19891</Id>
       <Name>false</Name>
       <UnitPrice>12.23</UnitPrice>
     </Item>
+  </BatchItemResponse>
+  <BatchItemResponse bId="4d">
+    <Account>
+      <Id>19891</Id>
+    </Account>
+  </BatchItemResponse>
+  <BatchItemResponse bId="5e">
+    <Invoice>
+      <Id>19891</Id>
+    </Invoice>
+  </BatchItemResponse>
+  <BatchItemResponse bId="6f">
+    <SalesReceipt>
+      <Id>19891</Id>
+    </SalesReceipt>
   </BatchItemResponse>
 </IntuitResponse>

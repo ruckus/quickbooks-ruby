@@ -36,4 +36,32 @@ describe Quickbooks::Model::BatchRequest do
 
     Hash.from_xml(req.to_xml.to_s).should == Hash.from_xml(ex_req.to_xml.to_s)
   end
+
+  it "should add account" do
+    req = Quickbooks::Model::BatchRequest.new
+    account = Quickbooks::Model::Account.new
+    req.add("1", account, 'create')
+    req.request_items.first.account.class.should == Quickbooks::Model::Account
+  end
+
+  it "should add invoice" do
+    req = Quickbooks::Model::BatchRequest.new
+    invoice = Quickbooks::Model::Invoice.new
+    req.add("1", invoice, 'create')
+    req.request_items.first.invoice.class.should == Quickbooks::Model::Invoice
+  end
+
+  it "should add bill" do
+    req = Quickbooks::Model::BatchRequest.new
+    bill = Quickbooks::Model::Bill.new
+    req.add("1", bill, 'create')
+    req.request_items.first.bill.class.should == Quickbooks::Model::Bill
+  end
+
+  it "should add sales_receipt" do
+    req = Quickbooks::Model::BatchRequest.new
+    sales_receipt = Quickbooks::Model::SalesReceipt.new
+    req.add("1", sales_receipt, 'create')
+    req.request_items.first.sales_receipt.class.should == Quickbooks::Model::SalesReceipt
+  end
 end
