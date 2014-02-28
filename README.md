@@ -271,6 +271,9 @@ batch_response.response_items.each do |res|
 end
 ```
 
+For complete details on Batch Operations see:
+https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services/020_key_concepts/00700_batch_operation
+
 ## Logging
 
 ```ruby
