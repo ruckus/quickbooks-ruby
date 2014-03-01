@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.author   = "Cody Caughlan"
   gem.email    = "toolbag@gmail.com"
   gem.homepage = "http://github.com/ruckus/quickbooks-ruby"
-  gem.summary  = "REST API to Quickbooks Online via Intuit Data Services v3"
+  gem.summary  = "REST API to Quickbooks Online"
   gem.license  = 'MIT'
-  gem.description = gem.summary
+  gem.description = "QBO V3 REST API to Quickbooks Online"
 
   gem.files = Dir['lib/**/*']
 
