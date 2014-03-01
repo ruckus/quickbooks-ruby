@@ -1,3 +1,14 @@
+## 0.1.1 (2014-03-01)
+
+* Batch Operations added - thank you @siliconsenthil
+
+## 0.1.0 (2014-02-27)
+
+* Refactored Boolean support - methods are now `foo?`. This was a backwards-incompatible change, thus
+necessitating the version bump to 0.1.x.
+
+* Tax entities added - thank you @harvesthq
+
 ## 0.0.8 (2014-02-21)
 
 * Fixed bug where I had the wrong REST URL for Purchase Order.
