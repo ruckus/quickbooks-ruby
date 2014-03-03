@@ -50,7 +50,7 @@ module Quickbooks
       xml_accessor :allow_online_ach_payment?, :from => 'AllowOnlineACHPayment'
 
       reference_setters :customer_ref, :class_ref, :sales_term_ref, :ship_method_ref
-      reference_setters :ar_account_ref, :department_ref
+      reference_setters :ar_account_ref, :department_ref, :ar_account_ref
 
       #== Validations
       validates_length_of :line_items, :minimum => 1
