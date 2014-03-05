@@ -10,6 +10,7 @@ require 'oauth'
 require 'quickbooks/util/logging'
 require 'quickbooks/util/http_encoding_helper'
 require 'quickbooks/util/name_entity'
+require 'quickbooks/util/query_builder'
 
 #== Models
 require 'quickbooks/model/base_model'

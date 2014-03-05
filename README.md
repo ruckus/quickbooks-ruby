@@ -274,6 +274,19 @@ end
 For complete details on Batch Operations see:
 https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services/020_key_concepts/00700_batch_operation
 
+## Query Building / Filtering
+Intuit requires that complex queries be escaped in a certain way. To make it easier to build queries that will be accepted I have provided a *basic* Query builder.
+
+```ruby
+util = Quickbooks::Util::QueryBuilder.new
+
+# the method signature is: clause(field, operator, value)
+clause1 = util.clause("DisplayName", "LIKE", "%O'Halloran")
+clause2 = util.clause("CompanyName", "=", "Smith")
+
+service.query("SELECT * FROM Customer WHERE #{clause1} OR #{clause2}")
+```
+
 ## Logging
 
 ```ruby
