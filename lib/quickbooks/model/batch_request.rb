@@ -6,7 +6,7 @@ class Quickbooks::Model::BatchRequest < Quickbooks::Model::BaseModel
 
     xml_accessor :operation, :from => "@operation"
     xml_accessor :bId, :from => "@bId"
-    [:Item, :Account, :Invoice, :Customer, :Bill, :SalesReceipt].each do |model|
+    [:Item, :Account, :Invoice, :Customer, :Bill, :SalesReceipt, :CreditMemo].each do |model|
       xml_accessor model.to_s.underscore, from: model.to_s, as: "Quickbooks::Model::#{model.to_s}".constantize
     end
   end
