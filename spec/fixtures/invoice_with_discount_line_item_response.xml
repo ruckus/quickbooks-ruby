@@ -1,0 +1,71 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2014-03-13T09:52:49.960-07:00">
+	<Invoice domain="QBO" sparse="false">
+		<Id>4</Id>
+		<SyncToken>0</SyncToken>
+		<MetaData>
+			<CreateTime>2014-03-13T09:52:50-07:00</CreateTime>
+			<LastUpdatedTime>2014-03-13T09:52:50-07:00</LastUpdatedTime>
+		</MetaData>
+		<DocNumber>1001</DocNumber>
+		<TxnDate>2014-03-12</TxnDate>
+		<Line>
+			<Id>1</Id>
+			<LineNum>1</LineNum>
+			<Description>Plush Baby Doll</Description>
+			<Amount>50.00</Amount>
+			<DetailType>SalesItemLineDetail</DetailType>
+			<SalesItemLineDetail>
+				<ItemRef name="Stuffed Bear">2</ItemRef>
+				<UnitPrice>50</UnitPrice>
+				<Qty>1</Qty>
+				<TaxCodeRef>NON</TaxCodeRef>
+			</SalesItemLineDetail>
+		</Line>
+		<Line>
+			<Amount>50.00</Amount>
+			<DetailType>SubTotalLineDetail</DetailType>
+			<SubTotalLineDetail />
+		</Line>
+		<Line>
+			<Amount>5.00</Amount>
+			<DetailType>DiscountLineDetail</DetailType>
+			<DiscountLineDetail>
+				<PercentBased>true</PercentBased>
+				<DiscountPercent>10</DiscountPercent>
+				<DiscountAccountRef name="Discounts given">54</DiscountAccountRef>
+			</DiscountLineDetail>
+		</Line>
+		<CustomerRef name="Acme Enterprises">3</CustomerRef>
+		<BillAddr>
+			<Id>4</Id>
+			<Line1>100 Global Domination Ave</Line1>
+			<City>Washington DC</City>
+			<Country>USA</Country>
+			<CountrySubDivisionCode>CA</CountrySubDivisionCode>
+			<PostalCode>95060</PostalCode>
+			<Lat>37.0105307</Lat>
+			<Long>-122.1178261</Long>
+		</BillAddr>
+		<ShipAddr>
+			<Id>4</Id>
+			<Line1>100 Global Domination Ave</Line1>
+			<City>Washington DC</City>
+			<Country>USA</Country>
+			<CountrySubDivisionCode>CA</CountrySubDivisionCode>
+			<PostalCode>95060</PostalCode>
+			<Lat>37.0105307</Lat>
+			<Long>-122.1178261</Long>
+		</ShipAddr>
+		<DueDate>2014-04-11</DueDate>
+		<TotalAmt>45.00</TotalAmt>
+		<ApplyTaxAfterDiscount>false</ApplyTaxAfterDiscount>
+		<PrintStatus>NeedToPrint</PrintStatus>
+		<EmailStatus>NotSet</EmailStatus>
+		<Balance>45.00</Balance>
+		<Deposit>0</Deposit>
+		<AllowIPNPayment>false</AllowIPNPayment>
+		<AllowOnlinePayment>false</AllowOnlinePayment>
+		<AllowOnlineCreditCardPayment>false</AllowOnlineCreditCardPayment>
+		<AllowOnlineACHPayment>false</AllowOnlineACHPayment>
+	</Invoice>
+</IntuitResponse>

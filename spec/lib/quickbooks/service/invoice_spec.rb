@@ -134,4 +134,38 @@ describe "Quickbooks::Service::Invoice" do
     response.should == true
   end
 
+  it "can generate an invoice with a discount line item" do
+    model = Quickbooks::Model::Invoice
+    invoice = Quickbooks::Model::Invoice.new
+
+    xml = fixture("invoice_with_discount_line_item_response.xml")
+    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
+
+    invoice.customer_id = 3
+    invoice.txn_date = Date.civil(2014, 3, 12)
+    invoice.doc_number = "1001"
+    sales_line_item = Quickbooks::Model::InvoiceLineItem.new
+    sales_line_item.amount = 50
+    sales_line_item.description = "Plush Baby Doll"
+    sales_line_item.sales_item! do |detail|
+      detail.unit_price = 50
+      detail.quantity = 1
+      detail.item_id = 2 # Item ID here
+    end
+
+    discount_line_item = Quickbooks::Model::InvoiceLineItem.new
+    discount_line_item.amount = 5
+    discount_line_item.discount_item! do |detail|
+      detail.discount_percent = 10
+      detail.percent_based = true
+      detail.discount_account_id = 54
+    end
+
+    invoice.line_items << sales_line_item
+    invoice.line_items << discount_line_item
+
+    created_invoice = @service.create(invoice)
+    created_invoice.id.should == 4
+  end
+
 end
