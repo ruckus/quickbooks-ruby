@@ -5,9 +5,16 @@ class Quickbooks::Model::BatchResponse < Quickbooks::Model::BaseModel
 
     xml_accessor :bId, :from => "@bId"
     xml_accessor :fault, :from => 'Fault', :as => Quickbooks::Model::Fault
-    [:Item, :Account, :Invoice, :Customer, :Bill, :SalesReceipt].each do |model|
-      xml_accessor model.to_s.underscore, from: model.to_s, as: "Quickbooks::Model::#{model.to_s}".constantize
-    end
+
+    # Supported Entities
+    xml_accessor :item, from: "Item", as: Quickbooks::Model::Item
+    xml_accessor :account, from: "Account", as: Quickbooks::Model::Account
+    xml_accessor :invoice, from: "Invoice", as: Quickbooks::Model::Invoice
+    xml_accessor :customer, from: "Customer", as: Quickbooks::Model::Customer
+    xml_accessor :bill, from: "Bill", as: Quickbooks::Model::Bill
+    xml_accessor :sales_receipt, from: "SalesReceipt", as: Quickbooks::Model::SalesReceipt
+    xml_accessor :bill_payment, from: "BillPayment", as: Quickbooks::Model::BillPayment
+    xml_accessor :purchase, from: "Purchase", as: Quickbooks::Model::Purchase
 
     def fault?
       fault
