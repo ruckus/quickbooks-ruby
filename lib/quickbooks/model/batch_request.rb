@@ -16,6 +16,7 @@ class Quickbooks::Model::BatchRequest < Quickbooks::Model::BaseModel
     xml_accessor :sales_receipt, from: "SalesReceipt", as: Quickbooks::Model::SalesReceipt
     xml_accessor :bill_payment, from: "BillPayment", as: Quickbooks::Model::BillPayment
     xml_accessor :purchase, from: "Purchase", as: Quickbooks::Model::Purchase
+    xml_accessor :credit_memo, from: "CreditMemo", as: Quickbooks::Model::CreditMemo
   end
 
   XML_COLLECTION_NODE = "IntuitBatchRequest"
