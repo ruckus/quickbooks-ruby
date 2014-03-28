@@ -10,22 +10,11 @@ module Quickbooks
       xml_accessor :meta_data, :from => "MetaData", :as => MetaData
       xml_accessor :name, :from => "Name"
       xml_accessor :description, :from => "Description"
-      xml_accessor :active, :from => "Active"
-      xml_accessor :taxable, :from => "Taxable"
-      xml_accessor :tax_group, :from => "TaxGroup"
+      xml_accessor :active?, :from => "Active"
+      xml_accessor :taxable?, :from => "Taxable"
+      xml_accessor :tax_group?, :from => "TaxGroup"
       xml_accessor :sales_tax_rate_list, :from => "SalesTaxRateList", :as => SalesTaxRateList
 
-      def active?
-        active == "true"
-      end
-
-      def taxable?
-        taxable == "true"
-      end
-
-      def tax_group?
-        tax_group == "true"
-      end
     end
   end
 end
