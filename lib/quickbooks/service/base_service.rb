@@ -194,11 +194,12 @@ module Quickbooks
           headers['Accept-Encoding'] = HTTP_ACCEPT_ENCODING
         end
 
-        log "------ New Request ------"
+        log "------ QUICKBOOKS-RUBY REQUEST ------"
         log "METHOD = #{method}"
         log "RESOURCE = #{url}"
-        log "BODY(#{body.class}) = #{body == nil ? "<NIL>" : body.inspect}"
-        log "HEADERS = #{headers.inspect}"
+        log "REQUEST BODY:"
+        log(log_xml(body))
+        log "REQUEST HEADERS = #{headers.inspect}"
 
         response = case method
           when :get
@@ -220,8 +221,10 @@ module Quickbooks
       end
 
       def check_response(response)
+        log "------ QUICKBOOKS-RUBY RESPONSE ------"
         log "RESPONSE CODE = #{response.code}"
-        log "RESPONSE BODY = #{response.plain_body}"
+        log "RESPONSE BODY:"
+        log(log_xml(response.plain_body))
         parse_xml(response.plain_body)
         status = response.code.to_i
         case status
