@@ -112,11 +112,16 @@ module Quickbooks
     end
 
     # set logging on or off
-    attr_writer :log
+    attr_writer :log, :log_xml_pretty_print
 
     # Returns whether to log. Defaults to 'false'.
     def log?
       @log ||= false
+    end
+
+    # pretty printing the xml in the logs is "on" by default
+    def log_xml_pretty_print?
+      defined?(@log_xml_pretty_print) ? @log_xml_pretty_print : true
     end
 
     def log(msg)

@@ -9,6 +9,7 @@ describe Quickbooks::Service::BaseService do
     end
 
     context 'logging' do
+      let(:assortment) { [nil, 1, Object.new, [], {foo: 'bar'}] }
       before do
         construct_service :vendor
         stub_request(:get, @service.url_for_query, ["200", "OK"], fixture("vendors.xml"))
@@ -21,9 +22,36 @@ describe Quickbooks::Service::BaseService do
 
       it "should log if Quickbooks.log = true" do
         Quickbooks.log = true
+        obj = double('obj', :to_xml => '<test/>')
+        Nokogiri::XML::Document.any_instance.stub(:to_xml) { |arg| obj.to_xml }
+        obj.should_receive(:to_xml).once # will only called once on a get request, twice on a post
         Quickbooks.logger.should_receive(:info).at_least(1)
         @service.query
         Quickbooks.log = false
+      end
+
+      it "should log if Quickbooks.log = true but not prettyprint the xml" do
+        Quickbooks.log = true
+        Quickbooks.log_xml_pretty_print = false
+        Nokogiri::XML::Document.any_instance.should_not_receive(:to_xml)
+        Quickbooks.logger.should_receive(:info).at_least(1)
+        @service.query
+        Quickbooks.log = false
+        Quickbooks.log_xml_pretty_print = true
+      end
+
+      it "log_xml should handle a non-xml string" do
+        assortment.each do |e|
+          expect{ Quickbooks::Service::BaseService.new.log_xml(e) }.to_not raise_error
+        end
+      end
+
+      it "log_xml should handle a non-xml string with pretty printing turned off" do
+        Quickbooks.log_xml_pretty_print = false
+        assortment.each do |e|
+          expect{ Quickbooks::Service::BaseService.new.log_xml(e) }.to_not raise_error
+        end
+        Quickbooks.log_xml_pretty_print = true
       end
     end
 

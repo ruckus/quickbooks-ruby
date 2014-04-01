@@ -296,6 +296,7 @@ By default, logging is directed at STDOUT, but another target may be defined, e.
 ```ruby
 Quickbooks.logger = Rails.logger
 Quickbooks.log = true
+Quickbooks.log_xml_pretty_print = false
 ```
 
 ## Entities Implemented
@@ -348,7 +349,7 @@ Cody Caughlan
 your name please email me or submit a Pull Request.
 
 * Bruno Buccolo
-* Christian
+* Christian Pelczarski
 * Eggy
 * Evan Walsh
 * Exe Curia
