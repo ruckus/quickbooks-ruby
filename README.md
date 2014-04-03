@@ -296,6 +296,7 @@ By default, logging is directed at STDOUT, but another target may be defined, e.
 ```ruby
 Quickbooks.logger = Rails.logger
 Quickbooks.log = true
+# Pretty-printing logged xml is true by default
 Quickbooks.log_xml_pretty_print = false
 ```
 
