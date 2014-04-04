@@ -21,6 +21,7 @@ module Quickbooks
       xml_accessor :custom_fields, :from => 'CustomField', :as => [CustomField]
       xml_accessor :doc_number, :from => 'DocNumber'
       xml_accessor :txn_date, :from => 'TxnDate', :as => Date
+      xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
       xml_accessor :private_note, :from => 'PrivateNote'
       xml_accessor :linked_transactions, :from => 'LinkedTxn', :as => [LinkedTransaction]
       xml_accessor :line_items, :from => 'Line', :as => [InvoiceLineItem]
@@ -50,7 +51,7 @@ module Quickbooks
       xml_accessor :allow_online_ach_payment?, :from => 'AllowOnlineACHPayment'
 
       reference_setters :customer_ref, :class_ref, :sales_term_ref, :ship_method_ref
-      reference_setters :ar_account_ref, :department_ref, :ar_account_ref
+      reference_setters :ar_account_ref, :department_ref, :ar_account_ref, :currency_ref
 
       #== Validations
       validates_length_of :line_items, :minimum => 1
