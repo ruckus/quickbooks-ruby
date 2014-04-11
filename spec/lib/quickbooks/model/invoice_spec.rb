@@ -13,6 +13,8 @@ describe "Quickbooks::Model::Invoice" do
     invoice.private_note.should == "Statement Memo"
     invoice.line_items.should_not be_nil
     invoice.line_items.length.should == 2
+    invoice.currency_ref.to_s.should == 'USD'
+    invoice.currency_ref.name.should == 'United States Dollar'
 
     line_item1 = invoice.line_items[0]
     line_item1.id.should == 1
@@ -130,5 +132,12 @@ describe "Quickbooks::Model::Invoice" do
     node = xml.xpath("//Invoice/Line/Amount")[0]
     node.should_not be_nil
     node.content.should == "198.99"
+  end
+
+  it "can set the currency" do
+    invoice = Quickbooks::Model::Invoice.new
+    invoice.currency_id = 'CAD'
+    invoice.currency_ref.name = 'Canadian Dollar'
+    invoice.to_xml.to_s.should match /CurrencyRef name.+?Canadian Dollar.+?>CAD/
   end
 end
