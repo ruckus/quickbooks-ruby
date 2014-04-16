@@ -20,6 +20,7 @@ module Quickbooks
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :custom_fields, :from => 'CustomField', :as => [CustomField]
       xml_accessor :doc_number, :from => 'DocNumber'
+      xml_accessor :auto_doc_number, :from => 'AutoDocNumber' # See auto_doc_number! method below for usage
       xml_accessor :txn_date, :from => 'TxnDate', :as => Date
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
       xml_accessor :private_note, :from => 'PrivateNote'
@@ -57,6 +58,7 @@ module Quickbooks
       validates_length_of :line_items, :minimum => 1
       validate :existence_of_customer_ref
       validate :required_bill_email_if_email_delivery
+      validate :document_numbering
 
       def initialize(*args)
         ensure_line_items_initialization
@@ -75,6 +77,13 @@ module Quickbooks
         self.bill_email = EmailAddress.new(email_address_string)
       end
 
+      # Convenience method for proper AutoDocNumber tag
+      # construction, which should be blank if auto
+      # document numbering is desired.
+      def auto_doc_number!
+        self.auto_doc_number = ''
+      end
+
       def wants_billing_email_sent!
         self.email_status = EMAIL_STATUS_NEED_TO_SEND
       end
@@ -84,6 +93,12 @@ module Quickbooks
       end
 
       private
+
+      def document_numbering
+        if !auto_doc_number.nil? && !doc_number.nil?
+          errors.add(:doc_number, "DocumentNumber should not be specified if AutoDocNumber is.")
+        end
+      end
 
       def existence_of_customer_ref
         if customer_ref.nil? || (customer_ref && customer_ref.value == 0)

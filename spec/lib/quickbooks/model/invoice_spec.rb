@@ -120,6 +120,31 @@ describe "Quickbooks::Model::Invoice" do
     invoice.errors.keys.include?(:bill_email).should == false
   end
 
+  describe "#auto_doc_number" do
+
+    it "turned on should set the AutoDocNumber tag" do
+      invoice = Quickbooks::Model::Invoice.new
+      invoice.auto_doc_number!
+      invoice.to_xml.to_s.should =~ /AutoDocNumber/
+    end
+
+    it "turned on then doc_number should not be specified" do
+      invoice = Quickbooks::Model::Invoice.new
+      invoice.doc_number = 'AUTO'
+      invoice.auto_doc_number!
+      invoice.valid?
+      invoice.valid?.should == false
+      invoice.errors.keys.include?(:doc_number).should be_true
+    end
+
+    it "turned off then doc_number can be specified" do
+      invoice = Quickbooks::Model::Invoice.new
+      invoice.doc_number = 'AUTO'
+      invoice.valid?
+      invoice.errors.keys.include?(:doc_number).should be_false
+    end
+  end
+
   it "can properly convert to/from BigDecimal" do
     input_xml = fixture("invoice.xml")
     invoice = Quickbooks::Model::Invoice.from_xml(input_xml)
