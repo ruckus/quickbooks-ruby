@@ -139,7 +139,7 @@ module Quickbooks
   class ServiceUnavailable < StandardError; end
 
   class IntuitRequestException < StandardError
-    attr_accessor :message, :code, :detail, :type
+    attr_accessor :message, :code, :detail, :type, :request_xml
     def initialize(msg)
       self.message = msg
       super(msg)
