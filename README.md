@@ -312,7 +312,7 @@ Class             | no     | no     | no    | no     | no          |
 Company Info      | n/a    | n/a    | yes   | n/a    | yes         |
 Credit Memo       | yes    | yes    | yes   | no     | no          |
 Customer          | yes    | yes    | yes   | yes    | yes         |
-Department        | no     | no     | no    | no     | no          |
+Department        | yes    | yes    | yes   | yes    | yes         |
 Employee          | yes    | yes    | yes   | yes    | yes         |
 Entitlements      | no     | no     | no    | no     | no          |
 Estimate          | yes    | yes    | yes   | yes    | yes         |
