@@ -308,7 +308,7 @@ Account           | yes    | yes    | yes   | yes    | yes         |
 Attachable        | no     | no     | no    | no     | no          |
 Bill              | yes    | yes    | yes   | yes    | yes         |
 Bill Payment      | yes    | yes    | yes   | yes    | yes         |
-Class             | no     | no     | no    | no     | no          |
+Class             | yes    | yes    | yes   | yes    | yes         |
 Company Info      | n/a    | n/a    | yes   | n/a    | yes         |
 Credit Memo       | yes    | yes    | yes   | no     | no          |
 Customer          | yes    | yes    | yes   | yes    | yes         |

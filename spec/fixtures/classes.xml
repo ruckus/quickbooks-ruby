@@ -1,0 +1,53 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2014-04-18T12:04:53.709-07:00">
+  <QueryResponse startPosition="1" maxResults="4" totalCount="4">
+    <Class domain="QBO" sparse="false">
+      <Id>1</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2014-04-16T05:40:25-07:00</CreateTime>
+        <LastUpdatedTime>2014-04-16T05:40:25-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Design</Name>
+      <SubClass>false</SubClass>
+      <FullyQualifiedName>Design</FullyQualifiedName>
+      <Active>true</Active>
+    </Class>
+    <Class domain="QBO" sparse="false">
+      <Id>2</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2014-04-16T05:40:47-07:00</CreateTime>
+        <LastUpdatedTime>2014-04-16T05:40:47-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Development</Name>
+      <SubClass>false</SubClass>
+      <FullyQualifiedName>Development</FullyQualifiedName>
+      <Active>true</Active>
+    </Class>
+    <Class domain="QBO" sparse="false">
+      <Id>3</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2014-04-16T05:40:34-07:00</CreateTime>
+        <LastUpdatedTime>2014-04-16T05:40:34-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Product</Name>
+      <SubClass>false</SubClass>
+      <FullyQualifiedName>Product</FullyQualifiedName>
+      <Active>true</Active>
+    </Class>
+    <Class domain="QBO" sparse="false">
+      <Id>4</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2014-04-16T05:40:50-07:00</CreateTime>
+        <LastUpdatedTime>2014-04-16T05:40:50-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>QA</Name>
+      <SubClass>true</SubClass>
+      <ParentRef>3</ParentRef>
+      <FullyQualifiedName>QA</FullyQualifiedName>
+      <Active>true</Active>
+    </Class>
+  </QueryResponse>
+</IntuitResponse>

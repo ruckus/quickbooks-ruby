@@ -1,0 +1,12 @@
+<Class domain="QBO" sparse="false">
+  <Id>1</Id>
+  <SyncToken>1</SyncToken>
+  <MetaData>
+    <CreateTime>2014-04-16T05:40:25-07:00</CreateTime>
+    <LastUpdatedTime>2014-04-16T05:40:25-07:00</LastUpdatedTime>
+  </MetaData>
+  <Name>Design</Name>
+  <SubClass>false</SubClass>
+  <FullyQualifiedName>Design</FullyQualifiedName>
+  <Active>true</Active>
+</Class>
