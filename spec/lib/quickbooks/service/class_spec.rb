@@ -17,7 +17,7 @@ describe "Quickbooks::Service::Class" do
     class3.name.should == 'Product'
     class4 = classes.entries[3]
     class4.name.should == 'QA'
-    class4.sub_class.should == true
+    class4.sub_class?.should == true
     class4.parent_ref.to_i.should == 3
   end
 
