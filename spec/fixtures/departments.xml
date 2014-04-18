@@ -10,7 +10,7 @@
             <Name>Sales Department</Name>
             <SubDepartment>false</SubDepartment>
             <FullyQualifiedName>Sales Department</FullyQualifiedName>
-            <Active>false</Active>
+            <Active>true</Active>
         </Department>
         <Department domain="QBO" sparse="false">
             <Id>2</Id>
@@ -22,7 +22,20 @@
             <Name>Support Department</Name>
             <SubDepartment>false</SubDepartment>
             <FullyQualifiedName>Support Department</FullyQualifiedName>
-            <Active>false</Active>
+            <Active>true</Active>
+        </Department>
+        <Department domain="QBO" sparse="false">
+            <Id>3</Id>
+            <SyncToken>3</SyncToken>
+            <MetaData>
+                <CreateTime>2013-08-13T11:52:48-07:00</CreateTime>
+                <LastUpdatedTime>2013-08-13T11:58:58-07:00</LastUpdatedTime>
+            </MetaData>
+            <Name>QA Department</Name>
+            <SubDepartment>true</SubDepartment>
+            <ParentRef>2</ParentRef>
+            <FullyQualifiedName>Support Department:QA Department</FullyQualifiedName>
+            <Active>true</Active>
         </Department>
     </QueryResponse>
 </IntuitResponse>

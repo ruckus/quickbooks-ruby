@@ -8,11 +8,14 @@ describe "Quickbooks::Service::Department" do
     model = Quickbooks::Model::Department
     stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
     departments = @service.query
-    departments.entries.count.should == 2
-    department1 = departments.entries.first
+    departments.entries.count.should == 3
+    department1 = departments.entries[0]
     department1.name.should == 'Sales Department'
-    department2 = departments.entries.last
+    department2 = departments.entries[1]
     department2.name.should == 'Support Department'
+    department3 = departments.entries[2]
+    department3.name.should == 'QA Department'
+    department3.parent_ref.to_i.should == 2
   end
 
   it "can fetch a department by ID" do
