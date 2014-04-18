@@ -4,6 +4,8 @@ module Quickbooks
       XML_COLLECTION_NODE = "Department"
       XML_NODE = "Department"
       REST_RESOURCE = 'Department'
+      include NameEntity::Quality
+      include NameEntity::PermitAlterations
 
       xml_name XML_NODE
       xml_accessor :id, :from => 'Id', :as => Integer
@@ -16,6 +18,10 @@ module Quickbooks
       xml_accessor :active?, :from => 'Active'
 
       reference_setters :parent_ref
+
+      #== Validations
+      validate :names_cannot_contain_invalid_characters
+
     end
   end
 end

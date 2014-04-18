@@ -30,6 +30,7 @@ describe "Quickbooks::Service::Department" do
     department = Quickbooks::Model::Department.new
     department.name = 'Marketing Department'
     department.sub_department = false
+    department.valid_for_create?.should == true
     created_department = @service.create(department)
     created_department.id.should == 2
   end
@@ -41,6 +42,7 @@ describe "Quickbooks::Service::Department" do
     department.sync_token = 2
     department.id = 1
     xml = fixture("fetch_department_by_id.xml")
+    department.valid_for_update?.should == true
     expect{ @service.update(department, :sparse => true) }.to raise_error(Quickbooks::InvalidModelException, /Department sparse update is not supported/)
   end
 
@@ -52,6 +54,7 @@ describe "Quickbooks::Service::Department" do
     department.id = 2
     xml = fixture("deleted_department.xml")
     stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+    department.valid_for_deletion?.should == true
     response = @service.delete(department)
     response.name.should == "#{department.name} (Deleted)"
     response.active?.should == false
