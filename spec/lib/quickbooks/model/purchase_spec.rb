@@ -44,7 +44,7 @@ describe "Quickbooks::Model::Purchase" do
     tax_line1.detail_type.should == "TaxLineDetail"
     tax_line1.amount.should == 2.0
     tax_line1.tax_line_detail.tax_rate_ref.value.should == "4"
-    tax_line1.tax_line_detail.percent_based.should == "true"
+    tax_line1.tax_line_detail.percent_based?.should be_true
     tax_line1.tax_line_detail.tax_percent.should == 20
     tax_line1.tax_line_detail.net_amount_taxable.should == 10.0
 
@@ -52,7 +52,7 @@ describe "Quickbooks::Model::Purchase" do
     tax_line2.detail_type.should == "TaxLineDetail"
     tax_line2.amount.should == -2.0
     tax_line2.tax_line_detail.tax_rate_ref.value.should == "3"
-    tax_line2.tax_line_detail.percent_based.should == "true"
+    tax_line2.tax_line_detail.percent_based?.should be_true
     tax_line2.tax_line_detail.tax_percent.should == -20
     tax_line2.tax_line_detail.net_amount_taxable.should == 10.0
 
@@ -60,7 +60,7 @@ describe "Quickbooks::Model::Purchase" do
     tax_line3.detail_type.should == "TaxLineDetail"
     tax_line3.amount.should == 0.05
     tax_line3.tax_line_detail.tax_rate_ref.value.should == "8"
-    tax_line3.tax_line_detail.percent_based.should == "true"
+    tax_line3.tax_line_detail.percent_based?.should be_true
     tax_line3.tax_line_detail.tax_percent.should == 5
     tax_line3.tax_line_detail.net_amount_taxable.should == 1.0
   end
@@ -120,7 +120,7 @@ describe "Quickbooks::Model::Purchase" do
     tax_line1.detail_type.should == "TaxLineDetail"
     tax_line1.amount.should == 2.0
     tax_line1.tax_line_detail.tax_rate_ref.value.should == "4"
-    tax_line1.tax_line_detail.percent_based.should == "true"
+    tax_line1.tax_line_detail.percent_based?.should be_true
     tax_line1.tax_line_detail.tax_percent.should == 20
     tax_line1.tax_line_detail.net_amount_taxable.should == 10.0
 
@@ -128,7 +128,7 @@ describe "Quickbooks::Model::Purchase" do
     tax_line2.detail_type.should == "TaxLineDetail"
     tax_line2.amount.should == -2.0
     tax_line2.tax_line_detail.tax_rate_ref.value.should == "3"
-    tax_line2.tax_line_detail.percent_based.should == "true"
+    tax_line2.tax_line_detail.percent_based?.should be_true
     tax_line2.tax_line_detail.tax_percent.should == -20
     tax_line2.tax_line_detail.net_amount_taxable.should == 10.0
 
@@ -136,7 +136,7 @@ describe "Quickbooks::Model::Purchase" do
     tax_line3.detail_type.should == "TaxLineDetail"
     tax_line3.amount.should == 0.05
     tax_line3.tax_line_detail.tax_rate_ref.value.should == "8"
-    tax_line3.tax_line_detail.percent_based.should == "true"
+    tax_line3.tax_line_detail.percent_based?.should be_true
     tax_line3.tax_line_detail.tax_percent.should == 5
     tax_line3.tax_line_detail.net_amount_taxable.should == 1.0
   end
