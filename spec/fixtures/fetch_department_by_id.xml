@@ -1,0 +1,14 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-08-13T11:54:13.371-07:00">
+    <Department domain="QBO" sparse="false">
+        <Id>2</Id>
+        <SyncToken>0</SyncToken>
+        <MetaData>
+            <CreateTime>2013-08-13T11:52:48-07:00</CreateTime>
+            <LastUpdatedTime>2013-08-13T11:52:48-07:00</LastUpdatedTime>
+        </MetaData>
+        <Name>Marketing Department</Name>
+        <SubDepartment>false</SubDepartment>
+        <FullyQualifiedName>Marketing Department</FullyQualifiedName>
+        <Active>true</Active>
+    </Department>
+</IntuitResponse>

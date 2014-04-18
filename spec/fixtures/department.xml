@@ -1,0 +1,12 @@
+<Department domain="QBO" sparse="false">
+    <Id>1</Id>
+    <SyncToken>0</SyncToken>
+    <MetaData>
+        <CreateTime>2013-08-13T11:49:31-07:00</CreateTime>
+        <LastUpdatedTime>2013-08-13T11:49:31-07:00</LastUpdatedTime>
+    </MetaData>
+    <Name>Sales Department</Name>
+    <SubDepartment>false</SubDepartment>
+    <FullyQualifiedName>Sales Department</FullyQualifiedName>
+    <Active>true</Active>
+</Department>

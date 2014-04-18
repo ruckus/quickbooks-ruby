@@ -1,0 +1,41 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-08-13T12:03:21.548-07:00">
+    <QueryResponse startPosition="1" maxResults="2">
+        <Department domain="QBO" sparse="false">
+            <Id>1</Id>
+            <SyncToken>0</SyncToken>
+            <MetaData>
+                <CreateTime>2013-08-13T11:49:31-07:00</CreateTime>
+                <LastUpdatedTime>2013-08-13T11:49:31-07:00</LastUpdatedTime>
+            </MetaData>
+            <Name>Sales Department</Name>
+            <SubDepartment>false</SubDepartment>
+            <FullyQualifiedName>Sales Department</FullyQualifiedName>
+            <Active>true</Active>
+        </Department>
+        <Department domain="QBO" sparse="false">
+            <Id>2</Id>
+            <SyncToken>2</SyncToken>
+            <MetaData>
+                <CreateTime>2013-08-13T11:52:48-07:00</CreateTime>
+                <LastUpdatedTime>2013-08-13T11:58:58-07:00</LastUpdatedTime>
+            </MetaData>
+            <Name>Support Department</Name>
+            <SubDepartment>false</SubDepartment>
+            <FullyQualifiedName>Support Department</FullyQualifiedName>
+            <Active>true</Active>
+        </Department>
+        <Department domain="QBO" sparse="false">
+            <Id>3</Id>
+            <SyncToken>3</SyncToken>
+            <MetaData>
+                <CreateTime>2013-08-13T11:52:48-07:00</CreateTime>
+                <LastUpdatedTime>2013-08-13T11:58:58-07:00</LastUpdatedTime>
+            </MetaData>
+            <Name>QA Department</Name>
+            <SubDepartment>true</SubDepartment>
+            <ParentRef>2</ParentRef>
+            <FullyQualifiedName>Support Department:QA Department</FullyQualifiedName>
+            <Active>true</Active>
+        </Department>
+    </QueryResponse>
+</IntuitResponse>
