@@ -63,14 +63,14 @@ describe "Quickbooks::Model::Invoice" do
     first_tax_line.amount.should eq(0)
     first_tax_line.detail_type.should eq("TaxLineDetail")
     first_tax_line.tax_line_detail.tax_rate_ref.value.should eq("4")
-    first_tax_line.tax_line_detail.percent_based.should eq("true")
+    first_tax_line.tax_line_detail.percent_based?.should be_true
     first_tax_line.tax_line_detail.tax_percent.should eq(0.0)
     first_tax_line.tax_line_detail.net_amount_taxable.should eq(4.0)
 
     second_tax_line.amount.should eq(2.85)
     second_tax_line.detail_type.should eq("TaxLineDetail")
     second_tax_line.tax_line_detail.tax_rate_ref.value.should eq("20")
-    second_tax_line.tax_line_detail.percent_based.should eq("true")
+    second_tax_line.tax_line_detail.percent_based?.should be_true 
     second_tax_line.tax_line_detail.tax_percent.should eq(10.0)
     second_tax_line.tax_line_detail.net_amount_taxable.should eq(28.5)
 
