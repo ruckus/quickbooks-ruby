@@ -15,8 +15,9 @@ module Quickbooks
       HTTP_ACCEPT = 'application/xml'
       HTTP_ACCEPT_ENCODING = 'gzip, deflate'
 
-      def initialize()
+      def initialize(attributes = {})
         @base_uri = 'https://qb.sbfinance.intuit.com/v3/company'
+        attributes.each {|key, value| public_send("#{key}=", value) }
       end
 
       def access_token=(token)

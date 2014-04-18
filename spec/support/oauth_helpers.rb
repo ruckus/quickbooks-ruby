@@ -17,6 +17,10 @@ module OauthHelpers
     @service.access_token = construct_oauth
     @service.company_id = "9991111222"
   end
+
+  def construct_compact_service(model)
+    @service = "Quickbooks::Service::#{model.to_s.camelcase}".constantize.new(access_token: construct_oauth, company_id:"9991111222")    
+  end
 end
 
 RSpec.configure do |config|
