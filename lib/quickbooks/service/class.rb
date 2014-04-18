@@ -7,9 +7,9 @@ module Quickbooks
         super(entity, options)
       end
 
-      def delete(c)
-        c.active = false
-        update(c, :sparse => false)
+      def delete(classs)
+        classs.active = false
+        update(classs, :sparse => false)
       end
 
       private
