@@ -238,7 +238,7 @@ module Quickbooks
           end
         when 302
           raise "Unhandled HTTP Redirect"
-        when 401
+        when 401, 403
           raise Quickbooks::AuthorizationFailure
         when 400, 500
           parse_and_raise_exception(options)
