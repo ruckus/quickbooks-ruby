@@ -22,6 +22,10 @@ module Quickbooks
       #== Validations
       validate :names_cannot_contain_invalid_characters
 
+      def sub_department?
+        sub_department.to_s == 'true'
+      end
+
     end
   end
 end
