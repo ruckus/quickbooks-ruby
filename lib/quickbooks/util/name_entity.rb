@@ -10,7 +10,8 @@ module NameEntity
     end
 
     def names_cannot_contain_invalid_characters
-      [:display_name, :given_name, :middle_name, :family_name, :print_on_check_name].each do |property|
+      [:name, :display_name, :given_name, :middle_name, :family_name, :print_on_check_name].each do |property|
+        next unless respond_to? property
         value = send(property).to_s
         if value.index(':')
           errors.add(property, ":#{property} cannot contain a colon (:).")
