@@ -10,6 +10,18 @@ describe Quickbooks::Service::BaseService do
     end
   end
 
+  describe 'constructor' do
+    before do
+      construct_compact_service :base_service
+    end
+
+    it "correctly initializes with an access_token and realm" do
+      @service.company_id.should == "9991111222"
+      puts
+      @service.oauth.is_a?(OAuth::AccessToken).should == true
+    end
+  end
+
   describe 'check_response' do
     before do
       construct_service :base_service
