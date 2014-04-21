@@ -41,6 +41,10 @@ module Quickbooks
         HashWithIndifferentAccess[attributes]
       end
 
+      def ensure_line_items_initialization
+        self.line_items ||= []
+      end
+
       class << self
         def to_xml_big_decimal
           Proc.new { |val| val.to_f unless val.nil? }
