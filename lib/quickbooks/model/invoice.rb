@@ -106,9 +106,6 @@ module Quickbooks
         end
       end
 
-      def ensure_line_items_initialization
-        self.line_items ||= []
-      end
     end
   end
 end

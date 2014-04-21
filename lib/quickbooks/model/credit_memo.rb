@@ -9,7 +9,9 @@ module Quickbooks
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :doc_number, :from => 'DocNumber'
-      xml_accessor :placed_on, :from => 'TxnDate', :as => Time
+      #xml_accessor :txn_date, :from => 'TxnDate', :as => Date
+      # TODO: Next major version 'placed_on' should be replaced by 'txn_date'
+      xml_accessor :placed_on, :from => 'TxnDate', :as => Date
 
       xml_accessor :line_items, :from => 'Line', :as => [Line]
 
@@ -29,6 +31,11 @@ module Quickbooks
       validates_length_of :line_items, :minimum => 1
 
       reference_setters :customer_ref, :sales_term_ref, :deposit_to_account_ref, :payment_method_ref
+
+      def initialize(*args)
+        ensure_line_items_initialization
+        super
+      end
 
       def email=(email)
         self.bill_email = EmailAddress.new(email)
