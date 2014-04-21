@@ -284,7 +284,7 @@ util = Quickbooks::Util::QueryBuilder.new
 clause1 = util.clause("DisplayName", "LIKE", "%O'Halloran")
 clause2 = util.clause("CompanyName", "=", "Smith")
 
-service.query("SELECT * FROM Customer WHERE #{clause1} OR #{clause2}")
+service.query("SELECT * FROM Customer WHERE #{clause1} AND #{clause2}")
 ```
 
 ## Logging
