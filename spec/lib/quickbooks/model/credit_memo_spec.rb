@@ -13,7 +13,7 @@ describe "Quickbooks::Model::CreditMemo" do
     credit_memo = Quickbooks::Model::CreditMemo.new
     current = Time.now
     credit_memo.placed_on = current
-    credit_memo.to_xml.to_s.should =~ /TxnDate.*#{current}/
+    credit_memo.to_xml.to_s.should =~ /TxnDate.*#{current.to_s[0..-6]}/ # shave off utc offset as Travis doesn't like
   end
 
 end
