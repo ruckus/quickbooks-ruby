@@ -3,7 +3,7 @@ module Quickbooks
     class Class < BaseModel
       XML_COLLECTION_NODE = "Class"
       XML_NODE = "Class"
-      REST_RESOURCE = 'Class'
+      REST_RESOURCE = 'class'
       include NameEntity::Quality
       include NameEntity::PermitAlterations
 

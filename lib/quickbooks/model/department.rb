@@ -3,7 +3,7 @@ module Quickbooks
     class Department < BaseModel
       XML_COLLECTION_NODE = "Department"
       XML_NODE = "Department"
-      REST_RESOURCE = 'Department'
+      REST_RESOURCE = 'department'
       include NameEntity::Quality
       include NameEntity::PermitAlterations
 
