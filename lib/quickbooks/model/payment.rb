@@ -19,10 +19,10 @@ module Quickbooks
       xml_accessor :payment_ref_number, :from => 'PaymentRefNum'
       xml_accessor :credit_card_payment, :from => 'CreditCardPayment', :as => CreditCardPayment
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal, :to_xml => :to_f.to_proc
-      xml_accessor :unapplied_amount, :from => 'UnappliedAmt', :as => BigDecimal, :to_xml => :to_f.to_proc
+      xml_accessor :unapplied_amount, :from => 'UnappliedAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :process_payment, :from => 'ProcessPayment'
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
-      xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => :to_f.to_proc
+      xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
 
       reference_setters :customer_ref, :ar_account_ref
       reference_setters :payment_method_ref, :deposit_to_account_ref, :currency_ref
