@@ -21,6 +21,7 @@ module Quickbooks
           nil
         end
       end
+      alias :update :create
 
       def delete(entity)
         raise "Not implemented for this Entity"
@@ -37,21 +38,6 @@ module Quickbooks
           false
         end
       end
-
-      def update(entity, options = {})
-        unless entity.valid?
-          raise Quickbooks::InvalidModelException.new(entity.errors.full_messages.join(','))
-        end
-
-        xml = entity.to_xml_ns(options)
-        response = do_http_post(url_for_resource(model.resource_for_singular), valid_xml_document(xml))
-        if response.code.to_i == 200
-          model.from_xml(parse_singular_entity_response(model, response.plain_body))
-        else
-          nil
-        end
-      end
-
     end
   end
 end
