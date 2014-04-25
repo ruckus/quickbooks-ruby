@@ -23,7 +23,6 @@ module Quickbooks
       ## Required if PayType is CreditCard.
       xml_accessor :credit_card_payment, :from => 'CreditCardPayment', :as => BillPaymentCreditCard
 
-      # readonly
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
 
       validates_length_of :line_items, :minimum => 1
