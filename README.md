@@ -337,6 +337,10 @@ Vendor            | yes    | yes    | yes   | yes    | yes         |
 Vendor Credit     | yes    | yes    | yes   | yes    | yes         |
 
 
+## Related GEMS
+
+[`quickbooks-ruby-base`](https://github.com/minimul/quickbooks-ruby-base): Complements quickbooks-ruby by providing a [base class](http://minimul.com/improve-your-quickbooks-ruby-integration-experience-with-the-quickbooks-ruby-base-gem.html) to handle routine tasks like creating a model, service, and displaying information.
+
 ## TODO
 
 * Implement other Line Item types, e.g. `DescriptionLineDetail` for Invoices
