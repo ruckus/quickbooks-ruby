@@ -10,6 +10,7 @@ module Quickbooks
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :doc_number, :from => 'DocNumber'
       xml_accessor :txn_date, :from => 'TxnDate', :as => Date
+      xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
 
       xml_accessor :line_items, :from => 'Line', :as => [BillLineItem]
 
@@ -30,7 +31,7 @@ module Quickbooks
 
       validates_length_of :line_items, :minimum => 1
 
-      reference_setters :vendor_ref, :payer_ref, :sales_term_ref
+      reference_setters :department_ref, :vendor_ref, :payer_ref, :sales_term_ref
     end
   end
 end
