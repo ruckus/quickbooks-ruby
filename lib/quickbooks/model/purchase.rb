@@ -24,7 +24,7 @@ module Quickbooks
       xml_accessor :doc_number, :from => 'DocNumber'
       xml_accessor :txn_date, :from => 'TxnDate', :as => Date
       xml_accessor :private_note, :from => 'PrivateNote'
-    
+
       xml_accessor :line_items, :from => 'Line', :as => [PurchaseLineItem]
       xml_accessor :account_ref, :from => 'AccountRef', :as => BaseReference
       xml_accessor :txn_tax_detail, :from => 'TxnTaxDetail', :as => TransactionTaxDetail
@@ -32,7 +32,7 @@ module Quickbooks
       xml_accessor :payment_type, :from => 'PaymentType'
       xml_accessor :entity_ref, :from => 'EntityRef', :as => BaseReference
       xml_accessor :remit_to_address, :from => 'RemitToAddr', :as => PhysicalAddress
-      xml_accessor :total_amount, :from => 'TotalAmt', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
+      xml_accessor :total_amount, :from => 'TotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :print_status, :from => 'PrintStatus'
       xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
 

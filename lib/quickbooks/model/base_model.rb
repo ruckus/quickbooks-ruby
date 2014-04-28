@@ -47,7 +47,7 @@ module Quickbooks
 
       class << self
         def to_xml_big_decimal
-          Proc.new { |val| val.to_f unless val.nil? }
+          Proc.new { |val| val.nil? ? nil : val.to_f }
         end
 
         def attribute_names

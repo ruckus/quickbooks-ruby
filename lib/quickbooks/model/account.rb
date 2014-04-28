@@ -34,9 +34,9 @@ module Quickbooks
       xml_accessor :acct_num, :from => 'AcctNum'
       xml_accessor :bank_num, :from => 'BankNum'
 
-      xml_accessor :current_balance, :from => 'CurrentBalance', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
-      xml_accessor :current_balance_with_sub_accounts, :from => 'CurrentBalanceWithSubAccounts', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
-      xml_accessor :opening_balance, :from => 'OpeningBalance', :as => BigDecimal, :to_xml => Proc.new { |val| val.nil? ? nil : val.to_f }
+      xml_accessor :current_balance, :from => 'CurrentBalance', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :current_balance_with_sub_accounts, :from => 'CurrentBalanceWithSubAccounts', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :opening_balance, :from => 'OpeningBalance', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :opening_balance_date, :from => 'OpeningBalanceDate', :as => DateTime
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
       xml_accessor :tax_account?, :from => 'TaxAccount'

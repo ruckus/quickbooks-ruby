@@ -8,7 +8,7 @@ module Quickbooks
       xml_accessor :id, :from => 'Id', :as => Integer
       xml_accessor :name, :from => 'Name'
       xml_accessor :active?, :from => 'Active'
-      xml_accessor :amount, :from => 'Amount', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
+      xml_accessor :amount, :from => 'Amount', :as => BigDecimal, :to_xml => to_xml_big_decimal
     end
   end
 end
