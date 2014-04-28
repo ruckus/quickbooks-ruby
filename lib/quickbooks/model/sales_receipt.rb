@@ -38,6 +38,11 @@ module Quickbooks
 
       validates_length_of :line_items, :minimum => 1
 
+      def initialize(*args)
+        ensure_line_items_initialization
+        super
+      end
+
       def email=(email)
         self.bill_email = EmailAddress.new(email)
       end
