@@ -6,6 +6,8 @@ module Quickbooks
         delete_by_query_string(bill)
       end
 
+      private
+      
       def model
         Quickbooks::Model::Bill
       end

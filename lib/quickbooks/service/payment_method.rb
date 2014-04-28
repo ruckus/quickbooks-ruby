@@ -6,6 +6,8 @@ module Quickbooks
         self.query(search_name_query(name)).entries.first
       end
 
+      private
+
       def model
         Quickbooks::Model::PaymentMethod
       end
