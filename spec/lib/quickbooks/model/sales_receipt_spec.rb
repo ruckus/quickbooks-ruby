@@ -39,4 +39,10 @@ describe "Quickbooks::Model::SalesReceipt" do
 
     sales_receipt.total.should == 10.00
   end
+
+  it "should initialize line items as empty array" do
+     sales_receipt = Quickbooks::Model::SalesReceipt.new
+     sales_receipt.line_items.should_not be_nil
+     sales_receipt.line_items.length.should == 0
+  end
 end
