@@ -7,11 +7,7 @@ module Quickbooks
       end
 
       private
-
-      def default_model_query
-        "SELECT * FROM INVOICE"
-      end
-
+      
       def model
         Quickbooks::Model::Invoice
       end

@@ -14,10 +14,6 @@ module Quickbooks
 
       private
 
-      def default_model_query
-        "SELECT * FROM Class"
-      end
-
       def model
         Quickbooks::Model::Class
       end

@@ -8,10 +8,6 @@ module Quickbooks
 
       private
 
-      def default_model_query
-        "SELECT * FROM Payment"
-      end
-
       def model
         Quickbooks::Model::Payment
       end

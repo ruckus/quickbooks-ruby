@@ -2,9 +2,7 @@ module Quickbooks
   module Service
     class SalesReceipt < BaseService
 
-      def default_model_query
-        "SELECT * FROM SALESRECEIPT"
-      end
+      private
 
       def model
         Quickbooks::Model::SalesReceipt

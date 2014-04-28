@@ -4,10 +4,6 @@ module Quickbooks
 
       private
 
-      def default_model_query
-        "SELECT * FROM TaxCode"
-      end
-
       def model
         Quickbooks::Model::TaxCode
       end
