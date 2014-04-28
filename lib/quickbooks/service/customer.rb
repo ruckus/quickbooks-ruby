@@ -9,10 +9,6 @@ module Quickbooks
 
       private
 
-      def default_model_query
-        "SELECT * FROM CUSTOMER"
-      end
-
       def model
         Quickbooks::Model::Customer
       end

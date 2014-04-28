@@ -15,10 +15,6 @@ module Quickbooks
 
       private
 
-      def default_model_query
-        "SELECT * FROM EMPLOYEE"
-      end
-
       def model
         Quickbooks::Model::Employee
       end

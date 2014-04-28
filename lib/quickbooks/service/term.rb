@@ -9,10 +9,6 @@ module Quickbooks
 
       private
 
-      def default_model_query
-        "SELECT * FROM Term"
-      end
-
       def model
         Quickbooks::Model::Term
       end

@@ -8,10 +8,6 @@ module Quickbooks
 
       private
 
-      def default_model_query
-        "SELECT * FROM Estimate"
-      end
-
       def model
         Quickbooks::Model::Estimate
       end
