@@ -15,6 +15,7 @@ require 'quickbooks/util/query_builder'
 #== Models
 require 'quickbooks/model/base_model'
 require 'quickbooks/model/base_reference'
+require 'quickbooks/model/document_numbering'
 require 'quickbooks/model/access_token_response'
 require 'quickbooks/model/meta_data'
 require 'quickbooks/model/class'
