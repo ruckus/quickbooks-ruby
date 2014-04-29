@@ -27,6 +27,22 @@ module NameEntity
         end
       end
     end
+
+    def posting_type_is_valid
+      if posting_type
+        unless %w(Debit Credit).include?(posting_type)
+          errors.add(:posting_type, "Posting Type myst be either 'Debit' or 'Credit'")
+        end
+      end
+    end
+
+    def billable_status_is_valid
+      if billable_status
+        unless %w(Billable NotBillable HasBeenBilled).include?(billable_status)
+          errors.add(:posting_type, "Posting Type myst be either 'Debit' or 'Credit'")
+        end
+      end
+    end
   end
 
   module PermitAlterations
