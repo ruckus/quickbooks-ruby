@@ -110,6 +110,46 @@ Once you have your users OAuth Token & Secret you can initialize your `OAuth Con
 access_token = OAuth::AccessToken.new($qb_oauth_consumer, access_token, access_secret)
 ```
 
+## Persisting the Credentials
+
+Most likely you will want to persist the OAuth access credentials so you don't have to connect to QBO
+each and every time.
+
+QBO allows the access credentials to live for 6 months, and after 5 months they can be renewed. You will
+get an error if you try and renew prior to 5 months. Thus, you will need to keep track of the dates and
+manage the renewal process yourself.
+
+An example database table would have fields likes:
+
+
+```sql
+access_token varchar(255),
+access_secret varchar(255)
+company_id varchar(255),
+token_expires_at datetime # Set to 6.months.from_now upon insertion
+reconnect_token_at # datetime Set to 5.months.from_now upon insertion
+```
+
+Then you will want to have a scheduled task / cron which runs nightly and runs thru your tokens and checks for records where `reconnect_token_at >= now()` and it then performs the following logic:
+
+```ruby
+expiring_tokens.each do |record|
+  access_token = OAuth::AccessToken.new($qb_oauth_consumer, record.access_token, record.access_secret)
+  service = Quickbooks::Service::AccessToken.new
+  service.access_token = access_token
+  service.company_id = record.company_id
+  result = service.renew
+
+  # result is an AccessTokenResponse, which has fields +token+ and +secret+
+  # update your local record with these new params
+  record.access_token = result.token
+  record.access_secret = result.secret
+  record.token_expires_at = 6.months.from_now.utc
+  record.reconnect_token_at = 5.months.from_now.utc
+  record.save!
+end
+```
+
 ## Getting Started - Retrieving a list of Customers
 
 The general approach is you first instantiate a `Service` object based on the entity you would like to retrieve. Lets retrieve a list of Customers:
