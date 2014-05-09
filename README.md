@@ -222,6 +222,37 @@ puts created_invoice.id
 
 **Notes**: `line_item.amount` must equal the `unit_price * quantity` in the sales detail packet - otherwise Intuit will raise an exception.
 
+## Generating a SalesReceipt
+
+```ruby
+#Invoices, SalesReceipts etc can also be defined in a single command
+salesreceipt = Quickbooks::Model::SalesReceipt.new({
+  customer_id: 99, 
+  placed_on: Date.civil(2013, 11, 20), 
+  payment_ref_number: "111", #optional payment reference number/string - e.g. stripe token
+  deposit_to_account_id: 222, #The ID of the Account entity you want the SalesReciept to be deposited to
+  payment_method_id: 333 #The ID of the PaymentMethod entity you want to be used for this transaction
+}) 
+salesreceipt.auto_doc_number! #allows Intuit to auto-generate the transaction number
+
+line_item = Quickbooks::Model::Line.new
+line_item.amount = 50
+line_item.description = "Plush Baby Doll"
+line_item.sales_item! do |detail|
+  detail.unit_price = 50
+  detail.quantity = 1
+  detail.item_id = 500 # Item (Product/Service) ID here
+end
+
+salesreceipt.line_items << line_item
+
+service = Quickbooks::Service::SalesReceipt.new({access_token: access_token, company_id: "123" })
+created_receipt = service.create(salesreceipt)
+```
+
+**Notes**: In order to auto-generate transaction numbers using `salesreceipt.auto_doc_number!`, the 'Custom Transaction Numbers' setting under Company Settings>Sales Form Entry must be **unchecked** within the Quickbooks account you are posting to.
+
+
 ## Deleting an Object
 
 Use `Service#delete` which returns a boolean on whether the delete operation succeeded or not.
