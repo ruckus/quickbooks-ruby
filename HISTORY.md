@@ -1,3 +1,8 @@
+## 0.1.3 (2014-05-13)
+
+* Add AutoDocNumber support to SalesReceipt
+* Ensure line items initialization when creating new SalesReceipt
+
 ## 0.1.2 (2014-03-26)
 
 * Minor code cleanup
