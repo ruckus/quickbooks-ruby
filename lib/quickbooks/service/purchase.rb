@@ -2,9 +2,7 @@ module Quickbooks
   module Service
     class Purchase < BaseService
 
-      def default_model_query
-        "SELECT * FROM Purchase"
-      end
+      private
 
       def model
         Quickbooks::Model::Purchase

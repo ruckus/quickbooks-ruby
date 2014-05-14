@@ -1,3 +1,10 @@
+## 0.1.2 (2014-03-26)
+
+* Minor code cleanup
+* Added more entities to BatchRequest/BatchResponse
+* Implemented DiscountLineDetail for Invoices
+* Ability to set DiscountLineDetail.discount_percent=nil to NOT include it in the XML
+
 ## 0.1.1 (2014-03-01)
 
 * Batch Operations added - thank you @siliconsenthil

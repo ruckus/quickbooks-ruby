@@ -15,10 +15,6 @@ module Quickbooks
 
       private
 
-      def default_model_query
-        "SELECT * FROM VENDOR"
-      end
-
       def model
         Quickbooks::Model::Vendor
       end
