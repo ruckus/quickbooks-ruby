@@ -389,7 +389,7 @@ Entitlements      | no     | no     | no    | no     | no          |
 Estimate          | yes    | yes    | yes   | yes    | yes         |
 Invoice           | yes    | yes    | yes   | yes    | yes         |
 Item              | yes    | yes    | yes   | yes    | yes         |
-Journal Entry     | no     | no     | no    | no     | no          |
+Journal Entry     | yes    | yes    | yes   | yes    | yes         |
 Payment           | yes    | yes    | yes   | yes    | yes         |
 PaymentMethod     | yes    | yes    | yes   | yes    | yes         |
 Preferences       | no     | no     | no    | no     | no          |
