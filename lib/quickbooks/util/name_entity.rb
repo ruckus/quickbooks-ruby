@@ -31,7 +31,7 @@ module NameEntity
     def posting_type_is_valid
       if posting_type
         unless %w(Debit Credit).include?(posting_type)
-          errors.add(:posting_type, "Posting Type myst be either 'Debit' or 'Credit'")
+          errors.add(:posting_type, "Posting Type must be either 'Debit' or 'Credit'")
         end
       end
     end
@@ -39,8 +39,24 @@ module NameEntity
     def billable_status_is_valid
       if billable_status
         unless %w(Billable NotBillable HasBeenBilled).include?(billable_status)
-          errors.add(:posting_type, "Posting Type myst be either 'Debit' or 'Credit'")
+          errors.add(:posting_type, "Posting Type must be either 'Debit' or 'Credit'")
         end
+      end
+    end
+
+    def entity_type_is_valid
+      if entity_type
+        unless %w(Customer Vendor).include?(entity_type)
+          errors.add(:entity_type, "Entity Type must be either 'Customer' or 'Vendor'")
+        end
+      end
+    end
+
+    def journal_line_entry_tax
+      if tax_code_ref
+        # tax_applicable_on must be set
+        errors.add(:tax_applicable_on, "TaxApplicableOn must be set when TaxCodeRef is set") if tax_applicable_on.nil?
+        errors.add(:tax_amount, "TaxAmount must be set when TaxCodeRef is set") if tax_amount.nil?
       end
     end
   end
