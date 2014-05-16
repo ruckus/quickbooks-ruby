@@ -392,7 +392,7 @@ Item              | yes    | yes    | yes   | yes    | yes         |
 Journal Entry     | no     | no     | no    | no     | no          |
 Payment           | yes    | yes    | yes   | yes    | yes         |
 PaymentMethod     | yes    | yes    | yes   | yes    | yes         |
-Preferences       | no     | no     | no    | no     | no          |
+Preferences       | n/a    | no     | yes   | n/a    | yes         |
 Purchase          | yes    | yes    | yes   | yes    | yes         |
 Purchase Order    | yes    | yes    | yes   | yes    | yes         |
 Sales Receipt     | yes    | yes    | yes   | yes    | yes         |
