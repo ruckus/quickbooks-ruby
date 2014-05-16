@@ -74,6 +74,7 @@ require 'quickbooks/model/tax_code'
 require 'quickbooks/model/fault'
 require 'quickbooks/model/batch_request'
 require 'quickbooks/model/batch_response'
+require 'quickbooks/model/preferences'
 
 #== Services
 require 'quickbooks/service/service_crud'
@@ -103,6 +104,7 @@ require 'quickbooks/service/estimate'
 require 'quickbooks/service/tax_rate'
 require 'quickbooks/service/tax_code'
 require 'quickbooks/service/batch'
+require 'quickbooks/service/preferences'
 
 module Quickbooks
   @@logger = nil
