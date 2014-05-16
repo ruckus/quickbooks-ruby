@@ -1,0 +1,131 @@
+<Preferences domain="QBO" sparse="false">
+  <Id>1</Id>
+  <SyncToken>0</SyncToken>
+  <MetaData>
+    <CreateTime>2014-04-22T01:31:59-07:00</CreateTime>
+    <LastUpdatedTime>2014-05-01T17:44:56-07:00</LastUpdatedTime>
+  </MetaData>
+  <AccountingInfoPrefs>
+    <CustomerTerminology>Customers</CustomerTerminology>
+  </AccountingInfoPrefs>
+  <ProductAndServicesPrefs>
+    <ForSales>true</ForSales>
+    <ForPurchase>false</ForPurchase>
+    <QuantityWithPriceAndRate>true</QuantityWithPriceAndRate>
+    <QuantityOnHand>false</QuantityOnHand>
+  </ProductAndServicesPrefs>
+  <SalesFormsPrefs>
+    <CustomField xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="BooleanTypeCustomFieldDefinition">
+      <CustomField>
+        <Name>SalesFormsPrefs.UseSalesCustom3</Name>
+        <Type>BooleanType</Type>
+        <BooleanValue>false</BooleanValue>
+      </CustomField>
+      <CustomField>
+        <Name>SalesFormsPrefs.UseSalesCustom2</Name>
+        <Type>BooleanType</Type>
+        <BooleanValue>false</BooleanValue>
+      </CustomField>
+      <CustomField>
+        <Name>SalesFormsPrefs.UseSalesCustom1</Name>
+        <Type>BooleanType</Type>
+        <BooleanValue>false</BooleanValue>
+      </CustomField>
+    </CustomField>
+    <CustomTxnNumbers>false</CustomTxnNumbers>
+    <AllowDeposit>false</AllowDeposit>
+    <AllowDiscount>false</AllowDiscount>
+    <AllowEstimates>true</AllowEstimates>
+    <ETransactionEnabledStatus>Enabled</ETransactionEnabledStatus>
+    <ETransactionAttachPDF>false</ETransactionAttachPDF>
+    <ETransactionPaymentEnabled>false</ETransactionPaymentEnabled>
+    <IPNSupportEnabled>false</IPNSupportEnabled>
+    <AllowServiceDate>false</AllowServiceDate>
+    <AllowShipping>false</AllowShipping>
+    <DefaultTerms>3</DefaultTerms>
+  </SalesFormsPrefs>
+  <EmailMessagesPrefs>
+    <InvoiceMessage>
+      <Subject>Invoice from Demo Company</Subject>
+      <Message>Here's your invoice! We appreciate your prompt payment.
+
+Thanks for your business!
+Demo Company</Message>
+    </InvoiceMessage>
+    <EstimateMessage>
+      <Subject>Estimate from Demo Company</Subject>
+      <Message>Please review the estimate below.  Feel free to contact us if you have any questions.
+We look forward to working with you.
+
+Thanks for your business!
+Demo Company</Message>
+    </EstimateMessage>
+    <SalesReceiptMessage>
+      <Subject>Sales Receipt from Demo Company</Subject>
+      <Message>Your sales receipt is attached.
+Thank you for your business - we appreciate it very much.
+
+Thanks for your business!
+Demo Company</Message>
+    </SalesReceiptMessage>
+    <StatementMessage>
+      <Subject>Statement from Demo Company</Subject>
+      <Message>Your statement is attached.  Please remit payment at your earliest convenience.
+Thank you for your business - we appreciate it very much.
+
+Thanks for your business!
+Demo Company</Message>
+    </StatementMessage>
+  </EmailMessagesPrefs>
+  <VendorAndPurchasesPrefs>
+    <TrackingByCustomer>false</TrackingByCustomer>
+    <BillableExpenseTracking>false</BillableExpenseTracking>
+    <POCustomField xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="BooleanTypeCustomFieldDefinition">
+      <CustomField>
+        <Name>PurchasePrefs.UsePurchaseCustom3</Name>
+        <Type>BooleanType</Type>
+        <BooleanValue>false</BooleanValue>
+      </CustomField>
+      <CustomField>
+        <Name>PurchasePrefs.UsePurchaseCustom2</Name>
+        <Type>BooleanType</Type>
+        <BooleanValue>false</BooleanValue>
+      </CustomField>
+      <CustomField>
+        <Name>PurchasePrefs.UsePurchaseCustom1</Name>
+        <Type>BooleanType</Type>
+        <BooleanValue>false</BooleanValue>
+      </CustomField>
+    </POCustomField>
+  </VendorAndPurchasesPrefs>
+  <TimeTrackingPrefs>
+    <UseServices>false</UseServices>
+    <BillCustomers>true</BillCustomers>
+    <ShowBillRateToAll>false</ShowBillRateToAll>
+    <MarkTimeEntriesBillable>true</MarkTimeEntriesBillable>
+  </TimeTrackingPrefs>
+  <TaxPrefs>
+    <UsingSalesTax>false</UsingSalesTax>
+  </TaxPrefs>
+  <CurrencyPrefs>
+    <MultiCurrencyEnabled>false</MultiCurrencyEnabled>
+    <HomeCurrency>USD</HomeCurrency>
+  </CurrencyPrefs>
+  <ReportPrefs>
+    <ReportBasis>Accrual</ReportBasis>
+    <CalcAgingReportFromTxnDate>false</CalcAgingReportFromTxnDate>
+  </ReportPrefs>
+  <OtherPrefs>
+    <NameValue>
+      <Name>SalesFormsPrefs.DefaultCustomerMessage</Name>
+    </NameValue>
+    <NameValue>
+      <Name>SalesFormsPrefs.DefaultItem</Name>
+      <Value>1</Value>
+    </NameValue>
+    <NameValue>
+      <Name>SFCEnabled</Name>
+      <Value>true</Value>
+    </NameValue>
+  </OtherPrefs>
+</Preferences>
