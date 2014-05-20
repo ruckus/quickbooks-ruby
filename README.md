@@ -267,12 +267,12 @@ puts created_invoice.id
 ```ruby
 #Invoices, SalesReceipts etc can also be defined in a single command
 salesreceipt = Quickbooks::Model::SalesReceipt.new({
-  customer_id: 99, 
-  placed_on: Date.civil(2013, 11, 20), 
+  customer_id: 99,
+  placed_on: Date.civil(2013, 11, 20),
   payment_ref_number: "111", #optional payment reference number/string - e.g. stripe token
   deposit_to_account_id: 222, #The ID of the Account entity you want the SalesReciept to be deposited to
   payment_method_id: 333 #The ID of the PaymentMethod entity you want to be used for this transaction
-}) 
+})
 salesreceipt.auto_doc_number! #allows Intuit to auto-generate the transaction number
 
 line_item = Quickbooks::Model::Line.new
@@ -381,7 +381,7 @@ Bill              | yes    | yes    | yes   | yes    | yes         |
 Bill Payment      | yes    | yes    | yes   | yes    | yes         |
 Class             | yes    | yes    | yes   | yes    | yes         |
 Company Info      | n/a    | n/a    | yes   | n/a    | yes         |
-Credit Memo       | yes    | yes    | yes   | no     | no          |
+Credit Memo       | yes    | yes    | yes   | yes    | no          |
 Customer          | yes    | yes    | yes   | yes    | yes         |
 Department        | yes    | yes    | yes   | yes    | yes         |
 Employee          | yes    | yes    | yes   | yes    | yes         |
