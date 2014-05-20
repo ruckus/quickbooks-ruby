@@ -12,6 +12,7 @@ module Quickbooks
       #xml_accessor :txn_date, :from => 'TxnDate', :as => Date
       # TODO: Next major version 'placed_on' should be replaced by 'txn_date'
       xml_accessor :placed_on, :from => 'TxnDate', :as => Date
+      xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
 
       xml_accessor :line_items, :from => 'Line', :as => [Line]
 
@@ -30,7 +31,7 @@ module Quickbooks
 
       validates_length_of :line_items, :minimum => 1
 
-      reference_setters :customer_ref, :sales_term_ref, :deposit_to_account_ref, :payment_method_ref
+      reference_setters :department_ref, :customer_ref, :sales_term_ref, :deposit_to_account_ref, :payment_method_ref
 
       def initialize(*args)
         ensure_line_items_initialization
