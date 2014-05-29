@@ -127,7 +127,7 @@ access_token varchar(255),
 access_secret varchar(255)
 company_id varchar(255),
 token_expires_at datetime # Set to 6.months.from_now upon insertion
-reconnect_token_at # datetime Set to 5.months.from_now upon insertion
+reconnect_token_at datetime # Set to 5.months.from_now upon insertion
 ```
 
 Then you will want to have a scheduled task / cron which runs nightly and runs thru your tokens and checks for records where `reconnect_token_at >= now()` and it then performs the following logic:
