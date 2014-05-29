@@ -32,7 +32,7 @@ module Quickbooks
       include DocumentNumbering
       reference_setters :customer_ref, :payment_method_ref, :deposit_to_account_ref
 
-      validates_length_of :line_items, :minimum => 1
+      validate :line_item_size
       validate :document_numbering
 
       def initialize(*args)

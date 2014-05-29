@@ -29,7 +29,7 @@ module Quickbooks
       xml_accessor :reply_email, :from => 'ReplyEmail', :as => EmailAddress
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
 
-      validates_length_of :line_items, :minimum => 1
+      validate :line_item_size
 
       reference_setters :department_ref, :vendor_ref, :payer_ref, :sales_term_ref
     end

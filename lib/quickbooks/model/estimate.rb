@@ -49,7 +49,7 @@ module Quickbooks
       reference_setters :department_ref, :customer_ref, :class_ref, :sales_term_ref, :ship_method_ref
 
       #== Validations
-      validates_length_of :line_items, :minimum => 1
+      validate :line_item_size
       validate :existence_of_customer_ref
 
       def initialize(*args)

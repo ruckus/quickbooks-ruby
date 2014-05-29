@@ -9,6 +9,12 @@ describe "Quickbooks::Model::CreditMemo" do
     credit_memo.errors.keys.include?(:line_items).should == true
   end
 
+  it "should not be valid if empty line item" do
+    credit_memo = Quickbooks::Model::CreditMemo.new
+    credit_memo.valid?
+    expect(credit_memo.errors[:line_items].first).to match /At least 1 line item is required/
+  end
+
   it "should set the transaction date" do
     credit_memo = Quickbooks::Model::CreditMemo.new
     current = Time.now

@@ -28,7 +28,7 @@ describe "Quickbooks::Service::Invoice" do
 
     lambda do
       @service.create(invoice)
-    end.should raise_error(Quickbooks::InvalidModelException)
+    end.should raise_error(Quickbooks::InvalidModelException, /At least 1 line item is required/)
 
     invoice.valid?.should == false
     invoice.errors.keys.include?(:line_items).should == true
