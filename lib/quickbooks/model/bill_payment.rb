@@ -25,7 +25,7 @@ module Quickbooks
 
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
 
-      validates_length_of :line_items, :minimum => 1
+      validate :line_item_size
 
       reference_setters :vendor_ref
     end

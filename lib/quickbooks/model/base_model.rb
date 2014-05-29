@@ -2,6 +2,7 @@ module Quickbooks
   module Model
     class BaseModel
       include ActiveModel::Validations
+      include Validator
       include ROXML
 
       xml_convention :camelcase

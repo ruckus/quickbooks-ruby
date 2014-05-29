@@ -56,7 +56,7 @@ module Quickbooks
       reference_setters :ar_account_ref, :department_ref, :ar_account_ref, :currency_ref
 
       #== Validations
-      validates_length_of :line_items, :minimum => 1
+      validate :line_item_size
       validate :existence_of_customer_ref
       validate :required_bill_email_if_email_delivery
       validate :document_numbering
