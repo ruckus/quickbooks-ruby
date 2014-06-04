@@ -50,13 +50,14 @@ module Quickbooks
       xml_accessor :suffix, :from => 'Suffix'
       xml_accessor :fully_qualified_name, :from => 'FullyQualifiedName'
       xml_accessor :taxable, :from => 'Taxable'
+      xml_accessor :default_tax_code_ref, :from => 'DefaultTaxCodeRef', :as => BaseReference
       xml_accessor :notes, :from => 'Notes'
 
       #== Validations
       validate :names_cannot_contain_invalid_characters
       validate :email_address_is_valid
 
-      reference_setters :parent_ref, :sales_term_ref, :payment_method_ref
+      reference_setters :parent_ref, :sales_term_ref, :payment_method_ref, :default_tax_code_ref
 
       def job?
         job.to_s == 'true'
