@@ -15,6 +15,7 @@ describe "Quickbooks::Model::Customer" do
     customer.primary_email_address.should_not be_nil
     customer.primary_email_address.address.should == "info@thriftymeats.com"
     customer.taxable?.should == false
+    customer.default_tax_code_ref.to_s.should == 'NON'
 
     customer.billing_address.should_not be_nil
     customer.billing_address.id.should == 2

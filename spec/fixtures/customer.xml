@@ -19,6 +19,7 @@
     <Address>info@thriftymeats.com</Address>
   </PrimaryEmailAddr>
   <Taxable>false</Taxable>
+  <DefaultTaxCodeRef>NON</DefaultTaxCodeRef>
   <BillAddr>
     <Id>2</Id>
     <Line1>123 Swift St.</Line1>
