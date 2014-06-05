@@ -45,4 +45,5 @@
   <Balance>0</Balance>
   <BalanceWithJobs>0</BalanceWithJobs>
   <PreferredDeliveryMethod>Email</PreferredDeliveryMethod>
+  <CurrencyRef name="British Pound Sterling">GBP</CurrencyRef>
 </Customer>

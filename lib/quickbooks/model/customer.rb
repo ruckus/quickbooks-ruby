@@ -52,6 +52,7 @@ module Quickbooks
       xml_accessor :taxable, :from => 'Taxable'
       xml_accessor :default_tax_code_ref, :from => 'DefaultTaxCodeRef', :as => BaseReference
       xml_accessor :notes, :from => 'Notes'
+      xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
 
       #== Validations
       validate :names_cannot_contain_invalid_characters
