@@ -100,6 +100,16 @@ def oauth_callback
 	# store the token, secret & RealmID somewhere for this user, you will need all 3 to work with Quickbooks-Ruby
 end
 ```
+**NOTE**: If you are using Rails 4.1, you will need to wrap the token in Marshal.load and Marshal.dump:
+
+```ruby
+session[:qb_request_token] = Marshal.dump(token)
+```
+
+```ruby
+Marshal.load(session[:qb_request_token]).get_access_token(:oauth_verifier => params[:oauth_verifier])
+```
+
 :star: Also, check out regular Quickbooks-Ruby contributor, <a href="https://github.com/minimul" target="_blank">minimul</a>'s, article [Integrating Rails and QuickBooks Online via the version 3 API](http://minimul.com/integrating-rails-and-quickbooks-online-via-the-version-3-api-part-1.html) for a step-by-step guide along with screencasts.
 
 ## Creating an OAuth Access Token
