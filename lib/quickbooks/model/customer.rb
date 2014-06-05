@@ -58,7 +58,7 @@ module Quickbooks
       validate :names_cannot_contain_invalid_characters
       validate :email_address_is_valid
 
-      reference_setters :parent_ref, :sales_term_ref, :payment_method_ref, :default_tax_code_ref
+      reference_setters :parent_ref, :sales_term_ref, :payment_method_ref, :default_tax_code_ref, :currency_ref
 
       def job?
         job.to_s == 'true'
