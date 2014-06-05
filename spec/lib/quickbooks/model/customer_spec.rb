@@ -40,6 +40,9 @@ describe "Quickbooks::Model::Customer" do
     customer.balance.should == 0
     customer.balance_with_jobs.should == 0
     customer.preferred_delivery_method.should == "Email"
+
+    customer.currency_ref.name.should == "British Pound Sterling"
+    customer.currency_ref.value.should == "GBP"
   end
 
   it "can assign an email address" do
