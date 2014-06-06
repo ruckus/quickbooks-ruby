@@ -46,6 +46,12 @@ module Quickbooks
         self.line_items ||= []
       end
 
+      def inspect
+        # it would be nice if we could inspect all the children,
+        # but it's likely to blow the stack in some cases
+        "#<#{self.class} " + 
+        "#{attributes.map{|k,v| "#{k}: #{v.nil? ? 'nil' : v.to_s }"}.join ", "}>"
+      end
       class << self
         def to_xml_big_decimal
           Proc.new { |val| val.nil? ? nil : val.to_f }
@@ -85,6 +91,15 @@ module Quickbooks
           end
         end
 
+        def inspect
+          "#{super}(#{attrs_with_types.join " "})"
+        end
+        def attrs_with_types
+          roxml_attrs.map do |attr|
+            "#{attr.accessor}:" +
+              "#{attr.class.block_shorthands.invert[attr.blocks.last]}:#{attr.sought_type}"
+          end
+        end
       end
     end
   end
