@@ -63,4 +63,37 @@ describe "Quickbooks::Model::BaseModel" do
       bar_model.fetch(:foo).should eq(42)
     end
   end
+
+
+  describe ".inspect" do
+    it "should include the class name" do
+       Quickbooks::Model::FooModel.inspect.should match /\AQuickbooks::Model::FooModel/
+    end
+    it "should include the attribute keys" do
+      Quickbooks::Model::FooModel.inspect.should match /baz/
+    end
+    it "should include the attribute types" do
+      Quickbooks::Model::FooModel.inspect.should match /amount:BigDecimal/
+    end
+    it "should include the association type" do
+      Quickbooks::Model::FooModel.inspect.should match /bar:.+:Quickbooks::Model::BarModel/
+    end
+  end
+
+  describe "#inspect" do
+    it "should include the class name" do
+      foo_model.inspect.should match /\A#<Quickbooks::Model::FooModel.*>/
+    end
+    it "should include the attribute keys" do
+      foo_model.inspect.should match /baz/
+    end
+    it "should have nil values on init" do
+      Quickbooks::Model::FooModel.new.inspect.should match /baz: nil/
+    end
+    it "should show values if they are there" do
+      puts foo_model.inspect
+      foo_model.inspect.should match /baz: quux/
+    end
+  end
+
 end
