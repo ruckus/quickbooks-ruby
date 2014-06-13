@@ -170,6 +170,8 @@ service = Quickbooks::Service::Customer.new
 service.company_id = "123" # also known as RealmID
 service.access_token = access_token # the OAuth Access Token you have from above
 
+# Equivalent to Quickbooks::Service::Customer.new(:company_id => "123", :access_token => access_token)
+
 customers = service.query() # Called without args you get the first page of results
 
 # yields
