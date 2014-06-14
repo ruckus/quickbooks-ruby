@@ -5,7 +5,8 @@ describe Quickbooks::Service::BaseService do
       subject.realm_id = 1234
       query = "SELECT * FROM Customer where Name = 'John'"
 
-      correct_url = "https://qb.sbfinance.intuit.com/v3/company/1234/query?query=SELECT+*+FROM+Customer+where+Name+%3D+%27John%27"
+      domain = Quickbooks::Service::BaseService::BASE_DOMAIN
+      correct_url = "https://#{domain}/v3/company/1234/query?query=SELECT+*+FROM+Customer+where+Name+%3D+%27John%27"
       subject.url_for_query(query).should include(correct_url)
     end
   end

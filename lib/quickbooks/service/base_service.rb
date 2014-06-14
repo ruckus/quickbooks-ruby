@@ -14,9 +14,10 @@ module Quickbooks
       HTTP_CONTENT_TYPE = 'application/xml'
       HTTP_ACCEPT = 'application/xml'
       HTTP_ACCEPT_ENCODING = 'gzip, deflate'
+      BASE_DOMAIN = 'quickbooks.api.intuit.com'
 
       def initialize(attributes = {})
-        @base_uri = 'https://qb.sbfinance.intuit.com/v3/company'
+        @base_uri = "https://#{BASE_DOMAIN}/v3/company"
         attributes.each {|key, value| public_send("#{key}=", value) }
       end
 
