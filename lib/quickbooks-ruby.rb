@@ -7,6 +7,7 @@ require 'uri'
 require 'date'
 require 'forwardable'
 require 'oauth'
+require 'quickbooks/util/collection'
 require 'quickbooks/util/logging'
 require 'quickbooks/util/http_encoding_helper'
 require 'quickbooks/util/name_entity'
@@ -156,17 +157,6 @@ module Quickbooks
       self.message = msg
       super(msg)
     end
-  end
-
-
-  class Collection
-    attr_accessor :entries
-
-    # Legacy Attributes (v2)
-    attr_accessor :count, :current_page
-
-    # v3 Attributes
-    attr_accessor :start_position, :max_results, :total_count
   end
 
 end
