@@ -91,7 +91,6 @@ describe "Quickbooks::Model::BaseModel" do
       Quickbooks::Model::FooModel.new.inspect.should match /baz: nil/
     end
     it "should show values if they are there" do
-      puts foo_model.inspect
       foo_model.inspect.should match /baz: quux/
     end
   end
