@@ -150,6 +150,7 @@ module Quickbooks
   class AuthorizationFailure < StandardError; end
 
   class ServiceUnavailable < StandardError; end
+  class MissingRealmError < StandardError; end
 
   class IntuitRequestException < StandardError
     attr_accessor :message, :code, :detail, :type, :request_xml

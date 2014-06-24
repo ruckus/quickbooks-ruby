@@ -9,6 +9,9 @@ describe Quickbooks::Service::BaseService do
       correct_url = "https://#{domain}/v3/company/1234/query?query=SELECT+*+FROM+Customer+where+Name+%3D+%27John%27"
       subject.url_for_query(query).should include(correct_url)
     end
+    it "raises an error if there is not realm id" do
+      expect{subject.url_for_query("")}.to raise_error(Quickbooks::MissingRealmError)
+    end
   end
 
   describe 'constructor' do

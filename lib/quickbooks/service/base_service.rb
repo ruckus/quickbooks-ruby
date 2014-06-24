@@ -39,6 +39,7 @@ module Quickbooks
       end
 
       def url_for_base
+        raise MissingRealmError unless @company_id
         "#{@base_uri}/#{@company_id}"
       end
 
