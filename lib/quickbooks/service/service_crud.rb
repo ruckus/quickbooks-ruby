@@ -24,7 +24,7 @@ module Quickbooks
       alias :update :create
 
       def delete(entity)
-        raise "Not implemented for this Entity"
+        raise NotImplementedError
       end
 
       def delete_by_query_string(entity, options = {})
