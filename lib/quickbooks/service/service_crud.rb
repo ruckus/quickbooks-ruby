@@ -6,6 +6,16 @@ module Quickbooks
         fetch_collection(object_query, model, options)
       end
 
+      def query_in_batches(object_query=nil, options={})
+        page = 0
+        per_page = options.delete(:per_page) || 1_000
+        begin
+          page += 1
+          results = query(object_query, page: page, per_page: per_page)
+          yield results if results.count > 0
+        end until results.count < per_page
+      end
+
       def fetch_by_id(id, options = {})
         url = "#{url_for_resource(model.resource_for_singular)}/#{id}"
         fetch_object(model, url, options)
