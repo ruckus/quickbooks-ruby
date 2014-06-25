@@ -205,7 +205,7 @@ customers.query(query, :page => 2, :per_page => 25)
 ```
 ### Querying in Batches
 
-Often one needs to retrieve multiple records of an Entity type
+Often one needs to retrieve multiple pages of records of an Entity type
 and loop over them all. Fortunately there is the `query_in_batches` collection method:
 
 ```ruby
@@ -217,9 +217,12 @@ Customer.query_in_batches(query, per_page: 1000) do |batch|
 end
 ```
 
-The first argument to `query_in_batches` is the `query` - which
-can be `nil` to retrieve the default items in that collection.
-If you're are running a custom Query then pass it in place.
+The first argument to `query_in_batches` is the `query` (which
+can be `nil` to retrieve the default items in that collection).
+If you're are running a custom Query then pass it instead.
+
+The second argument is the options, which are optional.
+By default, the options are `per_page: 1000`.
 
 
 ## Retrieving a single object
