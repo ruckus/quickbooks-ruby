@@ -203,6 +203,24 @@ customers.query(nil, :page => 2, :per_page => 25)
 query = "Select Id, GivenName From Customer Where Metadata.LastUpdatedTime>'2013-03-13T14:50:22-08:00' Order By Metadata.LastUpdatedTime"
 customers.query(query, :page => 2, :per_page => 25)
 ```
+### Querying in Batches
+
+Often one needs to retrieve multiple records of an Entity type
+and loop over them all. Fortunately there is the `query_in_batches` collection method:
+
+```ruby
+query = nil
+Customer.query_in_batches(query, per_page: 1000) do |batch|
+  batch.each do |customer|
+    # ...
+  end
+end
+```
+
+The first argument to `query_in_batches` is the `query` - which
+can be `nil` to retrieve the default items in that collection.
+If you're are running a custom Query then pass it in place.
+
 
 ## Retrieving a single object
 
