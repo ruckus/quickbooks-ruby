@@ -2,8 +2,12 @@ module Quickbooks
   module Service
     class PurchaseOrder < BaseService
 
-      private
-      
+      def delete(purchase_order, options = {})
+        delete_by_query_string(purchase_order)
+      end
+
+    private
+
       def model
         Quickbooks::Model::PurchaseOrder
       end
