@@ -12,7 +12,7 @@ module Quickbooks
       xml_accessor :txn_date, :from => 'TxnDate', :as => Date
       xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :private_note, :from => 'PrivateNote'
-      xml_accessor :line_items, :from => 'Line', :as => [JournalEntryLineDetail]
+      xml_accessor :line_items, :from => 'Line', :as => [Line]
       xml_accessor :txn_tax_detail, :from => 'TxnTaxDetail', :as => TransactionTaxDetail
 
       # Readonly
