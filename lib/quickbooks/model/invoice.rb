@@ -8,7 +8,7 @@
 module Quickbooks
   module Model
     class Invoice < BaseModel
-
+      include DocumentNumbering
       #== Constants
       REST_RESOURCE = 'invoice'
       XML_COLLECTION_NODE = "Invoice"
@@ -51,7 +51,6 @@ module Quickbooks
       xml_accessor :allow_online_credit_card_payment?, :from => 'AllowOnlineCreditCardPayment'
       xml_accessor :allow_online_ach_payment?, :from => 'AllowOnlineACHPayment'
 
-      include DocumentNumbering
       reference_setters :customer_ref, :class_ref, :sales_term_ref, :ship_method_ref
       reference_setters :ar_account_ref, :department_ref, :ar_account_ref, :currency_ref
 

@@ -1,6 +1,7 @@
 module Quickbooks
   module Model
     class SalesReceipt < BaseModel
+      include DocumentNumbering
       XML_COLLECTION_NODE = "SalesReceipt"
       XML_NODE = "SalesReceipt"
       REST_RESOURCE = 'salesreceipt'
@@ -29,7 +30,6 @@ module Quickbooks
       # readonly
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
 
-      include DocumentNumbering
       reference_setters :customer_ref, :payment_method_ref, :deposit_to_account_ref
 
       validate :line_item_size

@@ -1,6 +1,7 @@
 module Quickbooks
   module Model
     class CreditMemo < BaseModel
+      include DocumentNumbering
       XML_COLLECTION_NODE = "CreditMemo"
       XML_NODE = "CreditMemo"
       REST_RESOURCE = 'creditmemo'
@@ -29,7 +30,6 @@ module Quickbooks
 
       # readonly
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
-      include DocumentNumbering
 
       validate :line_item_size
       validate :document_numbering
