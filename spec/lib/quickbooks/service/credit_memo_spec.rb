@@ -26,6 +26,7 @@ module Quickbooks
         model = Quickbooks::Model::CreditMemo
         stub_request(:get, "#{subject.url_for_resource(model::REST_RESOURCE)}/52", ["200", "OK"], xml)
         credit_memo = subject.fetch_by_id(52)
+        credit_memo.id.should == 52
         credit_memo.doc_number.should == "R3454653464"
       end
 
