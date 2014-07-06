@@ -13,6 +13,7 @@ module Quickbooks
 
       #== Various detail types
       xml_accessor :account_based_expense_line_detail, :from => 'AccountBasedExpenseLineDetail', :as => AccountBasedExpenseLineDetail
+      xml_accessor :item_based_expense_line_detail, :from => 'ItemBasedExpenseLineDetail', :as => ItemBasedExpenseLineDetail
 
       def account_based_expense_item?
         detail_type.to_s == ACCOUNT_BASED_EXPENSE_LINE_DETAIL
