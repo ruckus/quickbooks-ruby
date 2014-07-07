@@ -1,0 +1,23 @@
+<Bill xmlns="http://schema.intuit.com/finance/v3" >
+    <DocNumber>17</DocNumber>
+    <TxnDate>2017-12-16</TxnDate>
+    <Line>
+        <Id>1</Id>
+        <Amount>700.00</Amount>
+        <DetailType>ItemBasedExpenseLineDetail</DetailType>
+        <ItemBasedExpenseLineDetail>
+            <ItemRef name="Item">1001</ItemRef>
+            <ClassRef name="Overhead">100000000000128320</ClassRef>
+            <UnitPrice>9.79</UnitPrice>
+            <TaxCodeRef>NON</TaxCodeRef>
+            <MarkupInfo>
+              <PercentBased>true</PercentBased>
+              <Value>10</Value>
+            </MarkupInfo>
+        </ItemBasedExpenseLineDetail>
+    </Line>
+    <VendorRef name="Great Statewide Bank">4</VendorRef>
+    <APAccountRef name="Accounts Payable">38</APAccountRef>
+    <TotalAmt>755.12</TotalAmt>
+    <DueDate>2018-12-26</DueDate>
+</Bill>
