@@ -22,4 +22,8 @@ describe "Quickbooks::Model::CreditMemo" do
     credit_memo.to_xml.to_s.should =~ /TxnDate.*#{current.to_s[0..-6]}/ # shave off utc offset as Travis doesn't like
   end
 
+  describe "#auto_doc_number" do
+    it_should_behave_like "a model that has auto_doc_number support", 'CreditMemo'
+  end
+
 end

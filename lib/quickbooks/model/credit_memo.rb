@@ -1,6 +1,7 @@
 module Quickbooks
   module Model
     class CreditMemo < BaseModel
+      include DocumentNumbering
       XML_COLLECTION_NODE = "CreditMemo"
       XML_NODE = "CreditMemo"
       REST_RESOURCE = 'creditmemo'
@@ -8,6 +9,7 @@ module Quickbooks
       xml_accessor :id, :from => 'Id', :as => Integer
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
+      xml_accessor :auto_doc_number, :from => 'AutoDocNumber' # See auto_doc_number! method below for usage
       xml_accessor :doc_number, :from => 'DocNumber'
       #xml_accessor :txn_date, :from => 'TxnDate', :as => Date
       # TODO: Next major version 'placed_on' should be replaced by 'txn_date'
@@ -30,6 +32,7 @@ module Quickbooks
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
 
       validate :line_item_size
+      validate :document_numbering
 
       reference_setters :department_ref, :customer_ref, :sales_term_ref, :deposit_to_account_ref, :payment_method_ref
 
