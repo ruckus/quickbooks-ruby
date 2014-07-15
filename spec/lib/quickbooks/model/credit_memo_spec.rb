@@ -26,4 +26,12 @@ describe "Quickbooks::Model::CreditMemo" do
     it_should_behave_like "a model that has auto_doc_number support", 'CreditMemo'
   end
 
+  it "should set the transaction tax reference" do
+    credit_memo = Quickbooks::Model::CreditMemo.new
+    tax_detail = Quickbooks::Model::TransactionTaxDetail.new
+    tax_detail.txn_tax_code_id = 5
+    credit_memo.txn_tax_detail = tax_detail
+    credit_memo.to_xml.to_s.should =~ /TxnTaxCodeRef\>5\</
+  end
+
 end
