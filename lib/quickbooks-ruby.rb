@@ -81,6 +81,7 @@ require 'quickbooks/model/fault'
 require 'quickbooks/model/batch_request'
 require 'quickbooks/model/batch_response'
 require 'quickbooks/model/preferences'
+require 'quickbooks/model/refund_receipt'
 
 #== Services
 require 'quickbooks/service/service_crud'
@@ -112,6 +113,7 @@ require 'quickbooks/service/tax_rate'
 require 'quickbooks/service/tax_code'
 require 'quickbooks/service/batch'
 require 'quickbooks/service/preferences'
+require 'quickbooks/service/refund_receipt'
 
 module Quickbooks
   @@logger = nil
