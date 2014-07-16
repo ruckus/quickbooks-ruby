@@ -428,6 +428,7 @@ PaymentMethod     | yes    | yes    | yes   | yes    | yes         |
 Preferences       | n/a    | no     | yes   | n/a    | yes         |
 Purchase          | yes    | yes    | yes   | yes    | yes         |
 Purchase Order    | yes    | yes    | yes   | yes    | yes         |
+Refund Receipt    | yes    | yes    | yes   | yes    | yes         |
 Sales Receipt     | yes    | yes    | yes   | yes    | yes         |
 Sales Rep         | no     | no     | no    | no     | no          |
 Sales Tax         | no     | no     | no    | no     | no          |
