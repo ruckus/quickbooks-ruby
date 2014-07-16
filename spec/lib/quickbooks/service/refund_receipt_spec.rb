@@ -47,7 +47,7 @@ module Quickbooks
 
         receipt = model.new
         receipt.customer_id = 2
-        receipt.deposit_to_account_ref = "Refunds Given"
+        receipt.deposit_to_account_id = 2
         receipt.placed_on = Time.now
         receipt.line_items = [line]
 
