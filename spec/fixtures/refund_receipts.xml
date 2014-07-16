@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2014-04-25T09:21:51.943-07:00">
+  <QueryResponse startPosition="1" maxResults="1" totalCount="1">
+    <RefundReceipt domain="QBO" sparse="false">
+      <Id>927</Id>
+      <SyncToken>3</SyncToken>
+      <MetaData>
+        <CreateTime>2014-04-24T15:15:42-07:00</CreateTime>
+        <LastUpdatedTime>2014-04-25T09:20:06-07:00</LastUpdatedTime>
+      </MetaData>
+      <CustomField>
+        <Name>P.O. Number</Name>
+        <Type>StringType</Type>
+        <StringValue>123443</StringValue>
+      </CustomField>
+      <CustomField>
+        <Name>Sales Rep</Name>
+        <Type>StringType</Type>
+        <StringValue>2435245</StringValue>
+      </CustomField>
+      <DocNumber>10030</DocNumber>
+      <TxnDate>2014-04-22</TxnDate>
+      <DepartmentRef name="Garden Services">1</DepartmentRef>
+      <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+      <PrivateNote>This is a revised memo to demonstrate Full update.</PrivateNote>
+      <Line>
+        <Id>1</Id>
+        <LineNum>1</LineNum>
+        <Description>Deck Lumber</Description>
+        <Amount>345.00</Amount>
+        <DetailType>SalesItemLineDetail</DetailType>
+        <SalesItemLineDetail>
+          <ItemRef name="Deck Lumber">34</ItemRef>
+          <UnitPrice>23</UnitPrice>
+          <Qty>15</Qty>
+          <TaxCodeRef>TAX</TaxCodeRef>
+          <ServiceDate>2014-04-24</ServiceDate>
+        </SalesItemLineDetail>
+      </Line>
+      <Line>
+        <Amount>345.00</Amount>
+        <DetailType>SubTotalLineDetail</DetailType>
+        <SubTotalLineDetail/>
+      </Line>
+      <Line>
+        <Amount>34.50</Amount>
+        <DetailType>DiscountLineDetail</DetailType>
+        <DiscountLineDetail>
+          <PercentBased>true</PercentBased>
+          <DiscountPercent>10</DiscountPercent>
+          <DiscountAccountRef name="Discounts given">151</DiscountAccountRef>
+        </DiscountLineDetail>
+      </Line>
+      <Line>
+        <Amount>5.00</Amount>
+        <DetailType>SalesItemLineDetail</DetailType>
+        <SalesItemLineDetail>
+          <ItemRef>SHIPPING_ITEM_ID</ItemRef>
+        </SalesItemLineDetail>
+      </Line>
+      <TxnTaxDetail>
+        <TxnTaxCodeRef>2</TxnTaxCodeRef>
+        <TotalTax>22.43</TotalTax>
+        <TaxLine>
+          <Amount>22.43</Amount>
+          <DetailType>TaxLineDetail</DetailType>
+          <TaxLineDetail>
+            <TaxRateRef>1</TaxRateRef>
+            <PercentBased>true</PercentBased>
+            <TaxPercent>6.5</TaxPercent>
+            <NetAmountTaxable>345.00</NetAmountTaxable>
+          </TaxLineDetail>
+        </TaxLine>
+      </TxnTaxDetail>
+      <CustomerRef name="Adam's Candy Shop">64</CustomerRef>
+      <CustomerMemo>Customer sales form message defined in Preferences.</CustomerMemo>
+      <BillAddr>
+        <Id>413</Id>
+        <Line1>Mr. Adam Bradley</Line1>
+        <Line2>Adam's Candy Shop</Line2>
+        <Line3>1528 Kitty Bang Bang St.</Line3>
+        <Line4>Fudge, CA 94555</Line4>
+        <Lat>37.5677679</Lat>
+        <Long>-122.0522177</Long>
+      </BillAddr>
+      <ClassRef name="Landscaping">100000000000368490</ClassRef>
+      <TotalAmt>337.93</TotalAmt>
+      <ApplyTaxAfterDiscount>false</ApplyTaxAfterDiscount>
+      <PrintStatus>NeedToPrint</PrintStatus>
+      <BillEmail>
+        <Address>adam@gmail.com</Address>
+      </BillEmail>
+      <Balance>0</Balance>
+      <PaymentMethodRef name="Check">9</PaymentMethodRef>
+      <PaymentRefNum>To Print</PaymentRefNum>
+      <DepositToAccountRef name="Checking">40</DepositToAccountRef>
+    </RefundReceipt>
+  </QueryResponse>
+</IntuitResponse>
