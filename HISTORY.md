@@ -1,3 +1,14 @@
+## 0.1.4 (2014-07-16)
+
+* RefundReceipt support - thank you @n8armstrong
+* Transaction level tax support for CreditMemos - thank you @minimul
+* Broke out auto document numbering into a module - thank you @minimul
+* Interface for query-in-batches - thank you @barelyknown
+* PurchaseOrder deletion - thank you @barelyknown
+* Enumerable-ize the Collection - thank you @mgates
+* JournalEntry implementation - thank you @markrickert
+
+
 ## 0.1.3 (2014-05-13)
 
 * Add AutoDocNumber support to SalesReceipt
