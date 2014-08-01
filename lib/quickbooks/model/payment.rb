@@ -29,6 +29,11 @@ module Quickbooks
 
       validate :existence_of_customer_ref
 
+      def initialize(*args)
+        ensure_line_items_initialization
+        super
+      end
+
       private
 
       def existence_of_customer_ref
