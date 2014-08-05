@@ -21,18 +21,46 @@ module Quickbooks
       xml_accessor :payment_line_detail, :from => 'PaymentLineDetail', :as => PaymentLineDetail
       xml_accessor :discount_line_detail, :from => 'DiscountLineDetail', :as => DiscountOverride
       xml_accessor :journal_entry_line_detail, :from => 'JournalEntryLineDetail', :as => JournalEntryLineDetail
-      xml_accessor :linked_transaction, :from => 'LinkedTxn', :as => LinkedTransaction
 
-      def invoice_id=(invoice_id)
-        self.linked_transaction = LinkedTransaction.new(txn_id: invoice_id,
-                                                        txn_type: "Invoice")
+      def initialize(*args)
+        super
+        self.linked_transactions ||= []
       end
+
+      def invoice_id=(id)
+        update_linked_transactions([id], 'Invoice')
+      end
+      alias_method :invoice_ids=, :invoice_id=
+
+      def credit_memo_id=(id)
+        update_linked_transactions([id], 'CreditMemo')
+      end
+      alias_method :credit_memo_ids=, :credit_memo_id=
 
       def sales_item!
         self.detail_type = SALES_LINE_ITEM_DETAIL
         self.sales_item_line_detail = SalesItemLineDetail.new
 
         yield self.sales_item_line_detail if block_given?
+      end
+
+
+      private
+
+      def update_linked_transactions(txn_ids, txn_type)
+        remove_linked_transactions(txn_type)
+        txn_ids.flatten.compact.each do |id|
+          add_linked_transaction(id, txn_type)
+        end
+      end
+
+      def remove_linked_transactions(txn_type)
+        self.linked_transactions.delete_if { |lt| lt.txn_type == txn_type }
+      end
+
+      def add_linked_transaction(txn_id, txn_type)
+        self.linked_transactions << LinkedTransaction.new(txn_id: txn_id,
+                                                          txn_type: txn_type)
       end
     end
   end
