@@ -10,8 +10,15 @@ module Quickbooks
       end
 
       def clause(field, operator, value)
-        # escape single quotes with an escaped backslash
-        value = value.gsub("'", "\\\\'")
+        value = case value
+                when DateTime, Time
+                  value.iso8601
+                when Date
+                  value.strftime('%Y-%m-%d')
+                else
+                  # escape single quotes with an escaped backslash
+                  value = value.gsub("'", "\\\\'")
+                end
 
         "#{field} #{operator} #{VALUE_QUOTE}#{value}#{VALUE_QUOTE}"
       end
