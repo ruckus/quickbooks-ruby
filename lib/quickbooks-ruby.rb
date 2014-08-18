@@ -7,6 +7,7 @@ require 'uri'
 require 'date'
 require 'forwardable'
 require 'oauth'
+require 'net/http/post/multipart'
 require 'quickbooks/util/collection'
 require 'quickbooks/util/logging'
 require 'quickbooks/util/http_encoding_helper'
@@ -114,6 +115,8 @@ require 'quickbooks/service/tax_code'
 require 'quickbooks/service/batch'
 require 'quickbooks/service/preferences'
 require 'quickbooks/service/refund_receipt'
+require 'quickbooks/service/upload'
+require 'quickbooks/util/multipart'
 
 module Quickbooks
   @@logger = nil

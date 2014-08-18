@@ -187,6 +187,18 @@ module Quickbooks
         do_http(:get, url, {}, headers)
       end
 
+      def do_http_file_upload(uploadIO, url, metadata = nil)
+        headers = {
+          'Content-Type' => 'multipart/form-data'
+        }
+        body = {}
+        body[:file_content_0] = uploadIO
+        if metadata
+          body[:file_metadata_0] = metadata
+        end
+        do_http(:upload, url, body, headers)
+      end
+
       def do_http(method, url, body, headers) # throws IntuitRequestException
         if @oauth.nil?
           raise "OAuth client has not been initialized. Initialize with setter access_token="
@@ -213,6 +225,8 @@ module Quickbooks
             @oauth.get(url, headers)
           when :post
             @oauth.post(url, body, headers)
+          when :upload
+            @oauth.post_with_multipart(url, body, headers)
           else
             raise "Do not know how to perform that HTTP operation"
           end
