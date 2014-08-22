@@ -10,6 +10,7 @@
   <EmployeeRef name="John Smith">66</EmployeeRef>
   <CustomerRef name="Test Customer">123</CustomerRef>
   <ItemRef name="General Consulting">49</ItemRef>
+  <ClassRef name="Training">100100000000000321233</ClassRef>
   <BillableStatus>Billable</BillableStatus>
   <Taxable>false</Taxable>
   <HourlyRate>115</HourlyRate>
