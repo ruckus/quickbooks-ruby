@@ -187,15 +187,13 @@ module Quickbooks
         do_http(:get, url, {}, headers)
       end
 
-      def do_http_file_upload(uploadIO, url, metadata = nil)
+      def do_http_file_upload(uploadIOs, url, metadata = {})
         headers = {
           'Content-Type' => 'multipart/form-data'
         }
-        body = {}
-        body[:file_content_0] = uploadIO
-        if metadata
-          body[:file_metadata_0] = metadata
-        end
+        file_contents = Hash[uploadIOs.map.with_index { |v, i| ["file_content_#{i}".to_sym, v] }]
+        file_metadatas = Hash[metadata.map.with_index { |v, i| ["file_metadata_#{i}".to_sym, v] }]
+        body = file_contents.merge(file_metadatas)
         do_http(:upload, url, body, headers)
       end
 
