@@ -18,4 +18,11 @@ describe Quickbooks::Util::QueryBuilder do
     generated = subject.clause("DueDate", ">", date)
     expected.should == generated
   end
+
+  it "parses an IN query with an array of values" do
+    values = [10, 20, "something", "40", "it's a quote!"]
+    expected = "DocNumber IN ('10', '20', 'something', '40', 'it\\'s a quote!')"
+    generated = subject.clause("DocNumber", "IN", values)
+    expected.should == generated
+  end
 end
