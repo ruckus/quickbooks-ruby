@@ -20,6 +20,7 @@ module Quickbooks
       xml_accessor :vendor_ref, :from => 'VendorRef', :as => BaseReference
       xml_accessor :customer_ref, :from => 'CustomerRef', :as => BaseReference
       xml_accessor :item_ref, :from => 'ItemRef', :as => BaseReference
+      xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
 
       xml_accessor :billable_status, :from => 'BillableStatus'
       xml_accessor :taxable, :from => 'Taxable'

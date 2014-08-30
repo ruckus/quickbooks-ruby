@@ -12,6 +12,8 @@ describe "Quickbooks::Model::TimeActivity" do
     time_activity.customer_ref.name.should == "Test Customer"
     time_activity.item_ref.value.should == "49"
     time_activity.item_ref.name.should == "General Consulting"
+    time_activity.class_ref.value.should == "100100000000000321233"
+    time_activity.class_ref.name.should == "Training"
     time_activity.billable_status.should == "Billable"
     time_activity.taxable.should == "false"
     time_activity.hourly_rate.should == "115"
