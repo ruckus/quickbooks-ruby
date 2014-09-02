@@ -64,4 +64,11 @@ describe Quickbooks::Model::BatchRequest do
     req.add("1", sales_receipt, 'create')
     req.request_items.first.sales_receipt.class.should == Quickbooks::Model::SalesReceipt
   end
+
+  it "should add payment" do
+    req = Quickbooks::Model::BatchRequest.new
+    payment = Quickbooks::Model::Payment.new
+    req.add("1", payment, 'create')
+    req.request_items.first.payment.class.should == Quickbooks::Model::Payment
+  end
 end

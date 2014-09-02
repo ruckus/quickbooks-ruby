@@ -46,4 +46,9 @@
       <Id>19891</Id>
     </SalesReceipt>
   </BatchItemResponse>
+  <BatchItemResponse bId="7g">
+    <Payment>
+      <Id>19891</Id>
+    </Payment>
+  </BatchItemResponse>
 </IntuitResponse>
