@@ -4,7 +4,7 @@ describe Quickbooks::Model::BatchResponse do
   it "parse from XML" do
     xml = fixture("batch_response.xml")
     batch_response = Quickbooks::Model::BatchResponse.from_xml(xml)
-    batch_response.response_items.size.should == 6
+    batch_response.response_items.size.should == 7
 
     item_res1 = batch_response.response_items.first
     item_res1.bId.should == "1a"
@@ -31,5 +31,8 @@ describe Quickbooks::Model::BatchResponse do
 
     item_res6 = batch_response.response_items[5]
     item_res6.sales_receipt.should_not be_nil
+
+    item_res7 = batch_response.response_items[6]
+    item_res7.payment.should_not be_nil
   end
 end

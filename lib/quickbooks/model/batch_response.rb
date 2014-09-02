@@ -16,6 +16,7 @@ class Quickbooks::Model::BatchResponse < Quickbooks::Model::BaseModel
     xml_accessor :bill_payment, from: "BillPayment", as: Quickbooks::Model::BillPayment
     xml_accessor :purchase, from: "Purchase", as: Quickbooks::Model::Purchase
     xml_accessor :credit_memo, from: "CreditMemo", as: Quickbooks::Model::CreditMemo
+    xml_accessor :payment, from: "Payment", as: Quickbooks::Model::Payment
 
     def fault?
       fault
