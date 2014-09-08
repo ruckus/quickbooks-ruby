@@ -1,3 +1,17 @@
+## 0.1.5 (2014-09-08)
+
+* Merge pull request #162 from arthurchui/credit-memo-txn-date - thank you! Addresses the renaming of PlacedOn to TxnDate in CreditMemo
+* Merge pull request #159 from minimul/je-spec - thank you! A more complete JournalEntry spec with proper setting of the line node
+* Merge pull request #157 from michaelcheung/master - thank you! Add Payment entity to batch request and response
+* Merge pull request #158 from minimul/tax-applicable-on
+* Merge pull request #153 from jabr/add-class-to-time-activity - thank you! Add class ref to time activity model
+* Merge pull request #156 from walter4dev/patch-1 - thank you! Update estimate.rb
+* Merge pull request #155 from markrickert/query-in  - thank you! Better handling of IN queries in the query builder.
+* Merge pull request #150 from arthurchui/master - thank you! QueryBuilder supports DateTime, Time and Date value
+* Merge pull request #149 from arthurchui/master - thank you! Support to set invoice_id and credit_memo_id
+* Merge pull request #148 from arthurchui/topic-147 - Fixed #147: initialized Payment#line_items as an empty array. Thank you!
+* Merge pull request #145 from nickgervasi/master - thank you! EmployeeNumber can be a string
+
 ## 0.1.4 (2014-07-16)
 
 * RefundReceipt support - thank you @n8armstrong
