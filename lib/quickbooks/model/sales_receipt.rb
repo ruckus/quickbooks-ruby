@@ -11,7 +11,7 @@ module Quickbooks
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :auto_doc_number, :from => 'AutoDocNumber' # See auto_doc_number! method below for usage
       xml_accessor :doc_number, :from => 'DocNumber'
-      xml_accessor :placed_on, :from => 'TxnDate', :as => Time
+      xml_accessor :txn_date, :from => 'TxnDate', :as => Time
       xml_accessor :line_items, :from => 'Line', :as => [Line]
       xml_accessor :customer_ref, :from => 'CustomerRef', :as => BaseReference
       xml_accessor :bill_email, :from => 'BillEmail', :as => EmailAddress
@@ -29,6 +29,9 @@ module Quickbooks
 
       # readonly
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
+
+      # backward-compatible alias
+      alias_attribute :placed_on, :txn_date
 
       reference_setters :customer_ref, :payment_method_ref, :deposit_to_account_ref
 

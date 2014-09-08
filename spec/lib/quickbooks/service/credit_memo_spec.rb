@@ -39,7 +39,7 @@ module Quickbooks
         credit_memo.doc_number = "R3454653464"
         credit_memo.customer_id = 2
         credit_memo.payment_method_id = 1
-        credit_memo.placed_on = Time.now
+        credit_memo.txn_date = Time.now
         credit_memo.line_items = [line]
 
         credit_memo = subject.create(credit_memo)

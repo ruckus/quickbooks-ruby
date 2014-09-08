@@ -301,7 +301,7 @@ puts created_invoice.id
 #Invoices, SalesReceipts etc can also be defined in a single command
 salesreceipt = Quickbooks::Model::SalesReceipt.new({
   customer_id: 99,
-  placed_on: Date.civil(2013, 11, 20),
+  txn_date: Date.civil(2013, 11, 20),
   payment_ref_number: "111", #optional payment reference number/string - e.g. stripe token
   deposit_to_account_id: 222, #The ID of the Account entity you want the SalesReciept to be deposited to
   payment_method_id: 333 #The ID of the PaymentMethod entity you want to be used for this transaction

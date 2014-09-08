@@ -48,7 +48,7 @@ module Quickbooks
         receipt = model.new
         receipt.customer_id = 2
         receipt.deposit_to_account_id = 2
-        receipt.placed_on = Time.now
+        receipt.txn_date = Time.now
         receipt.line_items = [line]
 
         receipt = subject.create(receipt)

@@ -10,7 +10,7 @@ describe "Quickbooks::Model::SalesReceipt" do
     sales_receipt.meta_data.last_updated_time.should == DateTime.parse("2013-12-10T05:35:42-08:00")
 
     sales_receipt.doc_number.should == "1002"
-    sales_receipt.placed_on.should == Time.parse("2013-12-10")
+    sales_receipt.txn_date.should == Time.parse("2013-12-10")
 
     sales_receipt.line_items.first.should_not be_nil
     sales_receipt.line_items.first.id.should == 1
