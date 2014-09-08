@@ -11,9 +11,7 @@ module Quickbooks
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :auto_doc_number, :from => 'AutoDocNumber' # See auto_doc_number! method below for usage
       xml_accessor :doc_number, :from => 'DocNumber'
-      #xml_accessor :txn_date, :from => 'TxnDate', :as => Date
-      # TODO: Next major version 'placed_on' should be replaced by 'txn_date'
-      xml_accessor :placed_on, :from => 'TxnDate', :as => Date
+      xml_accessor :txn_date, :from => 'TxnDate', :as => Date
       xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
 
       xml_accessor :line_items, :from => 'Line', :as => [Line]
@@ -30,6 +28,9 @@ module Quickbooks
 
       # readonly
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
+
+      # backward-compatible alias
+      alias_attribute :placed_on, :txn_date
 
       validate :line_item_size
       validate :document_numbering
