@@ -2,11 +2,13 @@
 <IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2014-02-03T03:48:58.191-08:00">
   <BatchItemResponse bId="1a">
     <Fault type="ValidationFault">
-      <Error code="101">
-        <Message>Length of the field exceeds 21 chars </Message>
+      <Error code="2050" element="firstname">
+        <Message>Length exceeds limit</Message>
+        <Detail>Length of the field exceeds 21 chars</Detail>
       </Error>
-      <Error code="201">
-        <Message>ZipCode should be a number with at least 5 digits</Message>
+      <Error code="2080" element="postalcode">
+        <Message>Illegal number format</Message>
+        <Detail>ZipCode should be a number with at least 5 digits</Detail>
       </Error>
     </Fault>
   </BatchItemResponse>
