@@ -4,6 +4,7 @@ module Quickbooks
       xml_convention :camelcase
       xml_accessor :name, :from => '@name' # Attribute with name 'name'
       xml_accessor :value, :from => :content
+      xml_accessor :type, :from => '@type' # Attribute with name 'type'
 
       def initialize(value = nil)
         self.value = value

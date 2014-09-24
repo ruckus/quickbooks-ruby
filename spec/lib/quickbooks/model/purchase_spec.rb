@@ -77,6 +77,7 @@ describe "Quickbooks::Model::Purchase" do
     purchase.account_ref.name.should == "Test Purchase Bank Account"
     purchase.entity_ref.value.should == "1"
     purchase.entity_ref.name.should == "Mr V3 Service Customer Jr2"
+    purchase.entity_ref.type.should == "Customer"
 
     purchase.remit_to_address.id.should == 2
     purchase.remit_to_address.line1.should == "Google"
