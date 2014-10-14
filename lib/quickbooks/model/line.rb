@@ -23,8 +23,8 @@ module Quickbooks
       xml_accessor :journal_entry_line_detail, :from => 'JournalEntryLineDetail', :as => JournalEntryLineDetail
 
       def initialize(*args)
-        super
         self.linked_transactions ||= []
+        super
       end
 
       def invoice_id=(id)
