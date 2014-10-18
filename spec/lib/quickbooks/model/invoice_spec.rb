@@ -15,6 +15,7 @@ describe "Quickbooks::Model::Invoice" do
     invoice.line_items.length.should == 2
     invoice.currency_ref.to_s.should == 'USD'
     invoice.currency_ref.name.should == 'United States Dollar'
+    invoice.exchange_rate.should == 1.5
 
     line_item1 = invoice.line_items[0]
     line_item1.id.should == 1
@@ -77,6 +78,7 @@ describe "Quickbooks::Model::Invoice" do
     invoice.sales_term_ref.to_i.should == 2
     invoice.due_date.to_date.should == Date.civil(2013, 11, 30)
     invoice.total_amount.should == 50.00
+    invoice.home_total_amount.should == 75.00
     invoice.apply_tax_after_discount?.should == false
     invoice.print_status.should == 'NotSet'
     invoice.email_status.should == 'NotSet'
