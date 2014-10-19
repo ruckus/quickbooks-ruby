@@ -455,22 +455,7 @@ Vendor Credit     | yes    | yes    | yes   | yes    | yes         |
 Cody Caughlan
 
 ## Contributors
-`quickbooks-ruby` has been a community effort and I am thankful for all the amazing contributors. If I have missed
-your name please email me or submit a Pull Request.
-
-* Bruno Buccolo
-* Christian Pelczarski
-* Eggy
-* Evan Walsh
-* Exe Curia
-* Jason Dew
-* jleo3
-* Joe Wright
-* Josh Wilson
-* Pavel Pachkovskij
-* Sean Xie
-* Steven Chau
-* Washington Luiz
+`quickbooks-ruby` has been a community effort and I am extremely thankful for all the [amazing contributors](https://github.com/ruckus/quickbooks-ruby/network/members).
 
 ## License
 
