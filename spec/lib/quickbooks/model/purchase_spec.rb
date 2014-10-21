@@ -167,4 +167,13 @@ describe "Quickbooks::Model::Purchase" do
     line1.account_based_expense_line_detail.billable_status.should == "NotBillable"
     line1.account_based_expense_line_detail.tax_code_ref.value.should == "NON"
   end
+
+  describe "#global_tax_calculation" do
+    subject { Quickbooks::Model::Purchase.new }
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxIncluded"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxExcluded"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "NotApplicable"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", ""
+    it_should_behave_like "a model with an invalid GlobalTaxCalculation"
+  end
 end

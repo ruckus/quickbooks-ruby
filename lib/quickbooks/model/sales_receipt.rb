@@ -2,6 +2,8 @@ module Quickbooks
   module Model
     class SalesReceipt < BaseModel
       include DocumentNumbering
+      include GlobalTaxCalculation
+
       XML_COLLECTION_NODE = "SalesReceipt"
       XML_NODE = "SalesReceipt"
       REST_RESOURCE = 'salesreceipt'

@@ -2,6 +2,8 @@ module Quickbooks
   module Model
     class CreditMemo < BaseModel
       include DocumentNumbering
+      include GlobalTaxCalculation
+
       XML_COLLECTION_NODE = "CreditMemo"
       XML_NODE = "CreditMemo"
       REST_RESOURCE = 'creditmemo'

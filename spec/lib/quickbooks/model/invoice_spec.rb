@@ -149,27 +149,11 @@ describe "Quickbooks::Model::Invoice" do
 
   describe "#global_tax_calculation" do
     subject { Quickbooks::Model::Invoice.new }
-
-    shared_examples_for "an invoice with a valid GlobalTaxCalculation" do |value|
-      before { subject.global_tax_calculation = value }
-      it "does not include an error for global_tax_calculation" do
-        subject.valid?
-        subject.errors.keys.include?(:global_tax_calculation).should be_false
-      end
-    end
-
-    it_should_behave_like "an invoice with a valid GlobalTaxCalculation", "TaxIncluded"
-    it_should_behave_like "an invoice with a valid GlobalTaxCalculation", "TaxExcluded"
-    it_should_behave_like "an invoice with a valid GlobalTaxCalculation", "NotApplicable"
-    it_should_behave_like "an invoice with a valid GlobalTaxCalculation", ""
-
-    context "when global_tax_calcuation is not in Quickbooks::Model::Invoice::GLOBAL_TAX_CALCULATION" do
-      before { subject.global_tax_calculation = "Invalid" }
-      it "includes an error for global_tax_calculation" do
-        subject.valid?.should be_false
-        subject.errors.keys.include?(:global_tax_calculation).should be_true
-      end
-    end
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxIncluded"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxExcluded"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "NotApplicable"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", ""
+    it_should_behave_like "a model with an invalid GlobalTaxCalculation"
   end
 
 end

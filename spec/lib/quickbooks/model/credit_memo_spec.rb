@@ -34,4 +34,13 @@ describe "Quickbooks::Model::CreditMemo" do
     credit_memo.to_xml.to_s.should =~ /TxnTaxCodeRef\>5\</
   end
 
+  describe "#global_tax_calculation" do
+    subject { Quickbooks::Model::CreditMemo.new }
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxIncluded"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxExcluded"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "NotApplicable"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", ""
+    it_should_behave_like "a model with an invalid GlobalTaxCalculation"
+  end
+
 end

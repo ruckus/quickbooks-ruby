@@ -9,13 +9,13 @@ module Quickbooks
   module Model
     class Invoice < BaseModel
       include DocumentNumbering
+      include GlobalTaxCalculation
+
       #== Constants
       REST_RESOURCE = 'invoice'
       XML_COLLECTION_NODE = "Invoice"
       XML_NODE = "Invoice"
       EMAIL_STATUS_NEED_TO_SEND = 'NeedToSend'
-
-      GLOBAL_TAX_CALCULATION = ["TaxIncluded", "TaxExcluded", "NotApplicable"]
 
       xml_accessor :id, :from => 'Id', :as => Integer
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
@@ -54,7 +54,6 @@ module Quickbooks
       xml_accessor :allow_online_payment?, :from => 'AllowOnlinePayment'
       xml_accessor :allow_online_credit_card_payment?, :from => 'AllowOnlineCreditCardPayment'
       xml_accessor :allow_online_ach_payment?, :from => 'AllowOnlineACHPayment'
-      xml_accessor :global_tax_calculation, :from => 'GlobalTaxCalculation'
 
       reference_setters :customer_ref, :class_ref, :sales_term_ref, :ship_method_ref
       reference_setters :ar_account_ref, :department_ref, :ar_account_ref, :currency_ref
@@ -64,7 +63,6 @@ module Quickbooks
       validate :existence_of_customer_ref
       validate :required_bill_email_if_email_delivery
       validate :document_numbering
-      validates_inclusion_of :global_tax_calculation, :in => GLOBAL_TAX_CALCULATION, allow_blank: true
 
       def initialize(*args)
         ensure_line_items_initialization

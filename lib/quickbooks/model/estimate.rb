@@ -8,6 +8,7 @@
 module Quickbooks
   module Model
     class Estimate < BaseModel
+      include GlobalTaxCalculation
 
       #== Constants
       REST_RESOURCE = 'estimate'
