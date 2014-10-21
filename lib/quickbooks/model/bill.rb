@@ -1,6 +1,8 @@
 module Quickbooks
   module Model
     class Bill < BaseModel
+      include GlobalTaxCalculation
+
       XML_COLLECTION_NODE = "Bill"
       XML_NODE = "Bill"
       REST_RESOURCE = 'bill'

@@ -1,6 +1,7 @@
 module Quickbooks
   module Model
     class PurchaseOrder < BaseModel
+      include GlobalTaxCalculation
 
       #== Constants
       REST_RESOURCE = 'purchaseorder'

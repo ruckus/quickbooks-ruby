@@ -1,6 +1,8 @@
 module Quickbooks
   module Model
     class RefundReceipt < BaseModel
+      include GlobalTaxCalculation
+
       XML_COLLECTION_NODE = "RefundReceipt"
       XML_NODE = "RefundReceipt"
       REST_RESOURCE = 'refundreceipt'

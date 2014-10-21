@@ -131,4 +131,13 @@ describe "Quickbooks::Model::RefundReceipt" do
       refund_receipt.errors.keys.include?(:doc_number).should be_false
     end
   end
+
+  describe "#global_tax_calculation" do
+    subject { Quickbooks::Model::RefundReceipt.new }
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxIncluded"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxExcluded"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "NotApplicable"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", ""
+    it_should_behave_like "a model with an invalid GlobalTaxCalculation"
+  end
 end
