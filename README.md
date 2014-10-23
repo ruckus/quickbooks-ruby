@@ -44,6 +44,17 @@ Gems:
 * `nokogiri` : XML parsing
 * `active_model` : For validations
 
+## Sandbox Mode
+An API app provides two sets of OAuth key for production and development. Since October 22, 2014, only [Sandbox Companies](https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services)
+are allowed to connected to the QBO via the development key. The end-point for sandbox mode is https://sandbox-quickbooks.api.intuit.com.
+
+By default, the gem runs in production mode. If you prefer to develop / test the integration with the development key,
+you need to config the gem to run in sandbox mode:
+
+```ruby
+Quickbooks.sandbox_mode = true
+```
+
 ## Getting Started & Initiating Authentication Flow with Intuit
 
 What follows is an example using Rails but the principles can be adapted to any other framework / pure Ruby.
