@@ -1,3 +1,11 @@
+## 0.1.6 (2014-10-23)
+
+* Merge pull request #174 from arthurchui/sandbox-mode - allows for the specification of an alternate endpoints for Development / Production.
+* Merge pull request #173 from michaelcheung/global_tax_calculation. Add global_tax_calculation to all transaction entities that use it.
+* Merge pull request #169 from muhammad-abubakar/master. handle nil class error for linked_transaction in line.rb
+* Merge pull request #167 from verifyvalid/master. added type to BaseReference
+* Merge pull request #163 from arthurchui/fault-detail. Added Fault#detail
+
 ## 0.1.5 (2014-09-08)
 
 * Merge pull request #162 from arthurchui/credit-memo-txn-date - thank you! Addresses the renaming of PlacedOn to TxnDate in CreditMemo
