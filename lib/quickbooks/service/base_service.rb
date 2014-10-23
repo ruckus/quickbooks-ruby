@@ -15,9 +15,11 @@ module Quickbooks
       HTTP_ACCEPT = 'application/xml'
       HTTP_ACCEPT_ENCODING = 'gzip, deflate'
       BASE_DOMAIN = 'quickbooks.api.intuit.com'
+      SANDBOX_DOMAIN = 'sandbox-quickbooks.api.intuit.com'
 
       def initialize(attributes = {})
-        @base_uri = "https://#{BASE_DOMAIN}/v3/company"
+        domain = Quickbooks.sandbox_mode ? SANDBOX_DOMAIN : BASE_DOMAIN
+        @base_uri = "https://#{domain}/v3/company"
         attributes.each {|key, value| public_send("#{key}=", value) }
       end
 

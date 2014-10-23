@@ -1,14 +1,29 @@
 describe Quickbooks::Service::BaseService do
 
   describe "#url_for_query" do
-    it "correctly encodes the query" do
-      subject.realm_id = 1234
-      query = "SELECT * FROM Customer where Name = 'John'"
+    shared_examples "encoding the query correctly" do |domain|
+      let(:correct_url) { "https://#{domain}/v3/company/1234/query?query=SELECT+*+FROM+Customer+where+Name+%3D+%27John%27" }
 
-      domain = Quickbooks::Service::BaseService::BASE_DOMAIN
-      correct_url = "https://#{domain}/v3/company/1234/query?query=SELECT+*+FROM+Customer+where+Name+%3D+%27John%27"
-      subject.url_for_query(query).should include(correct_url)
+      it "correctly encodes the query" do
+        subject.realm_id = 1234
+        query = "SELECT * FROM Customer where Name = 'John'"
+        subject.url_for_query(query).should include(correct_url)
+      end
     end
+
+    context "with the production API" do
+      it_behaves_like "encoding the query correctly", Quickbooks::Service::BaseService::BASE_DOMAIN
+    end
+
+    context "with the sandbox API" do
+      around do |example|
+        Quickbooks.sandbox_mode = true
+        example.run
+        Quickbooks.sandbox_mode = false
+      end
+      it_behaves_like "encoding the query correctly", Quickbooks::Service::BaseService::SANDBOX_DOMAIN
+    end
+
     it "raises an error if there is not realm id" do
       expect{subject.url_for_query("")}.to raise_error(Quickbooks::MissingRealmError)
     end
@@ -21,7 +36,6 @@ describe Quickbooks::Service::BaseService do
 
     it "correctly initializes with an access_token and realm" do
       @service.company_id.should == "9991111222"
-      puts
       @service.oauth.is_a?(OAuth::AccessToken).should == true
     end
   end
