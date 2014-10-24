@@ -61,6 +61,16 @@ describe Quickbooks::Service::BaseService do
         ex.request_xml.should == xml2
       end
     end
+
+    it "should raise ServiceUnavailable on HTTP 503 and 504" do
+      xml = fixture('generic_error.xml')
+
+      response = Struct.new(:code, :plain_body).new(503, xml)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ServiceUnavailable)
+
+      response = Struct.new(:code, :plain_body).new(504, xml)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ServiceUnavailable)
+    end
   end
 
   it "Correctly handled an IntuitRequestException" do
