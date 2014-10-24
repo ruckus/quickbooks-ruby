@@ -269,6 +269,8 @@ module Quickbooks
 
       def response_is_error?
         @last_response_xml.xpath("//xmlns:IntuitResponse/xmlns:Fault")[0] != nil
+      rescue Nokogiri::XML::XPath::SyntaxError => exception
+        true
       end
 
       def parse_intuit_error
@@ -287,6 +289,10 @@ module Quickbooks
             error[:detail] = error_element.xpath("//xmlns:Detail").text
           end
         end
+
+        error
+      rescue Nokogiri::XML::XPath::SyntaxError => exception
+        error[:detail] = @last_response_xml.to_s
 
         error
       end
