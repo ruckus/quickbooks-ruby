@@ -250,7 +250,7 @@ module Quickbooks
           raise Quickbooks::AuthorizationFailure
         when 400, 500
           parse_and_raise_exception(options)
-        when 503
+        when 503, 504
           raise Quickbooks::ServiceUnavailable
         else
           raise "HTTP Error Code: #{status}, Msg: #{response.plain_body}"
@@ -269,6 +269,8 @@ module Quickbooks
 
       def response_is_error?
         @last_response_xml.xpath("//xmlns:IntuitResponse/xmlns:Fault")[0] != nil
+      rescue Nokogiri::XML::XPath::SyntaxError => exception
+        true
       end
 
       def parse_intuit_error
@@ -287,6 +289,10 @@ module Quickbooks
             error[:detail] = error_element.xpath("//xmlns:Detail").text
           end
         end
+
+        error
+      rescue Nokogiri::XML::XPath::SyntaxError => exception
+        error[:detail] = @last_response_xml.to_s
 
         error
       end

@@ -61,6 +61,38 @@ describe Quickbooks::Service::BaseService do
         ex.request_xml.should == xml2
       end
     end
+
+    it "should raise ServiceUnavailable on HTTP 503 and 504" do
+      xml = fixture('generic_error.xml')
+
+      response = Struct.new(:code, :plain_body).new(503, xml)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ServiceUnavailable)
+
+      response = Struct.new(:code, :plain_body).new(504, xml)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ServiceUnavailable)
+    end
+
+    it "handles error XML with a missing namespace" do
+      xml = <<-XML
+<?xml version=\"1.0\"?>
+<IntuitResponse time="2013-11-15T13:16:49.528-08:00">
+  <Fault type="SystemFault">
+    <Error code="10000">
+      <Message>An application error has occurred while processing your request</Message>
+      <Detail>System Failure Error: Could not find resource for relative : some more info here</Detail>
+    </Error>
+  </Fault>
+</IntuitResponse>
+      XML
+      response = Struct.new(:code, :plain_body).new(200, xml)
+
+      begin
+        @service.send :check_response, response
+        fail "Exception expected"
+      rescue Quickbooks::IntuitRequestException => exception
+        expect(exception.detail).to eq(xml)
+      end
+    end
   end
 
   it "Correctly handled an IntuitRequestException" do
