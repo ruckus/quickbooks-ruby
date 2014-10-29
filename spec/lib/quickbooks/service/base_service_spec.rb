@@ -62,6 +62,20 @@ describe Quickbooks::Service::BaseService do
       end
     end
 
+    it "should raise AuthorizationFailure on HTTP 401" do
+      xml = fixture('generic_error.xml')
+
+      response = Struct.new(:code, :plain_body).new(401, xml)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::AuthorizationFailure)
+    end
+
+    it "should raise Forbidden on HTTP 403" do
+      xml = fixture('generic_error.xml')
+
+      response = Struct.new(:code, :plain_body).new(403, xml)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::Forbidden)
+    end
+
     it "should raise ServiceUnavailable on HTTP 503 and 504" do
       xml = fixture('generic_error.xml')
 
