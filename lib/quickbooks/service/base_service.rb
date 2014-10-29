@@ -68,7 +68,7 @@ module Quickbooks
 
       # A single object response is the same as a collection response except
       # it just has a single main element
-      def fetch_object(model, url, params = {}, options = {})
+      def fetch_object(model, url, params = {})
         raise ArgumentError, "missing model to instantiate" if model.nil?
         response = do_http_get(url, params)
         collection = parse_collection(response, model)
@@ -186,6 +186,7 @@ module Quickbooks
       end
 
       def do_http_get(url, params = {}, headers = {}) # throws IntuitRequestException
+        url = add_query_string_to_url(url, params)
         do_http(:get, url, {}, headers)
       end
 
