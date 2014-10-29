@@ -1,3 +1,9 @@
+## 0.1.7 (2014-10-29)
+
+* Merge pull request #180 from arthurchui/error-401-403 - Added Quickbooks::Forbidden for HTTP 403
+
+* Merge pull request #181 from benzittlau/master - Connect the params argument from fetch_by_id to do_http_get
+
 ## 0.1.6 (2014-10-23)
 
 * Merge pull request #174 from arthurchui/sandbox-mode - allows for the specification of an alternate endpoints for Development / Production.
