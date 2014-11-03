@@ -41,8 +41,8 @@ module Quickbooks
       xml_accessor :ship_date, :from => 'ShipDate', :as => Date
       xml_accessor :tracking_num, :from => 'TrackingNum'
       xml_accessor :ar_account_ref, :from => 'ARAccountRef', :as => BaseReference
-      xml_accessor :total_amount, :from => 'TotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
-      xml_accessor :home_total_amount, :from => 'HomeTotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :home_total, :from => 'HomeTotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :apply_tax_after_discount?, :from => 'ApplyTaxAfterDiscount'
       xml_accessor :print_status, :from => 'PrintStatus'
       xml_accessor :email_status, :from => 'EmailStatus'
@@ -57,6 +57,12 @@ module Quickbooks
 
       reference_setters :customer_ref, :class_ref, :sales_term_ref, :ship_method_ref
       reference_setters :ar_account_ref, :department_ref, :ar_account_ref, :currency_ref
+
+      #== This adds aliases for backwards compatability to old attributes names
+      alias_method :total_amount, :total
+      alias_method :total_amount=, :total=
+      alias_method :home_total_amount, :home_total
+      alias_method :home_total_amount=, :home_total=
 
       #== Validations
       validate :line_item_size
