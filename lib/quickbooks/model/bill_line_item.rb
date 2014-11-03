@@ -24,6 +24,19 @@ module Quickbooks
         detail_type.to_s == ITEM_BASED_EXPENSE_LINE_DETAIL
       end
 
+      def account_based_expense_item!
+        self.detail_type = ACCOUNT_BASED_EXPENSE_LINE_DETAIL
+        self.account_based_expense_line_detail = AccountBasedExpenseLineDetail.new
+
+        yield self.account_based_expense_line_detail if block_given?
+      end
+
+      def item_based_expense_item!
+        self.detail_type = ITEM_BASED_EXPENSE_LINE_DETAIL
+        self.item_based_expense_line_detail = ItemBasedExpenseLineDetail.new
+
+        yield self.item_based_expense_line_detail if block_given?
+      end
     end
   end
 end
