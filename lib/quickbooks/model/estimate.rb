@@ -35,7 +35,7 @@ module Quickbooks
       xml_accessor :shipping_address, :from => 'ShipAddr', :as => PhysicalAddress
       xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
       xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => BaseReference
-      xml_accessor :total_amount, :from => 'TotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :ship_method_ref, :from => 'ShipMethodRef', :as => BaseReference
       xml_accessor :ship_date, :from => 'ShipDate', :as => Date
 
@@ -48,6 +48,10 @@ module Quickbooks
       xml_accessor :accepted_date, :from => 'AcceptedDate', :as => Date
 
       reference_setters :department_ref, :customer_ref, :class_ref, :sales_term_ref, :ship_method_ref
+
+      #== This adds aliases for backwards compatability to old attributes names
+      alias_method :total_amount, :total
+      alias_method :total_amount=, :total=
 
       #== Validations
       validate :line_item_size

@@ -33,11 +33,15 @@ module Quickbooks
       xml_accessor :payment_type, :from => 'PaymentType'
       xml_accessor :entity_ref, :from => 'EntityRef', :as => BaseReference
       xml_accessor :remit_to_address, :from => 'RemitToAddr', :as => PhysicalAddress
-      xml_accessor :total_amount, :from => 'TotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :print_status, :from => 'PrintStatus'
       xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
 
       reference_setters :account_ref, :entity_ref, :department_ref
+
+      #== This adds aliases for backwards compatability to old attributes names
+      alias_method :total_amount, :total
+      alias_method :total_amount=, :total=
 
     end
   end

@@ -23,9 +23,13 @@ module Quickbooks
       xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
       xml_accessor :ap_account_ref, :from => 'APAccountRef', :as => BaseReference
       xml_accessor :vendor_ref, :from => 'VendorRef', :as => BaseReference
-      xml_accessor :total_amount, :from => 'TotalAmt', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
+      xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
 
       reference_setters :department_ref, :ap_account_ref, :vendor_ref
+
+      #== This adds aliases for backwards compatability to old attributes names
+      alias_method :total_amount, :total
+      alias_method :total_amount=, :total=
 
     end
   end

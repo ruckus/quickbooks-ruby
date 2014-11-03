@@ -25,7 +25,7 @@ module Quickbooks
       xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
       xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => BaseReference
 
-      xml_accessor :total_amount, :from => 'TotalAmt', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
+      xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :due_date, :from => 'DueDate', :as => Date
       xml_accessor :vendor_address, :from => 'VendorAddr', :as => PhysicalAddress
       xml_accessor :ship_address, :from => 'ShipAddr', :as => PhysicalAddress
@@ -34,6 +34,10 @@ module Quickbooks
       xml_accessor :txn_tax_detail, :from => 'TxnTaxDetail', :as => TransactionTaxDetail
 
       reference_setters :attachable_ref, :vendor_ref, :ap_account_ref, :class_ref, :sales_term_ref, :ship_method_ref
+
+      #== This adds aliases for backwards compatability to old attributes names
+      alias_method :total_amount, :total
+      alias_method :total_amount=, :total=
 
     end
   end

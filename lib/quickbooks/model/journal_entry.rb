@@ -17,8 +17,12 @@ module Quickbooks
 
       # Readonly
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
-      xml_accessor :total_amount, :from => 'TotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :home_total, :from => 'HomeTotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
+
+      #== This adds aliases for backwards compatability to old attributes names
+      alias_method :total_amount, :total
+      alias_method :total_amount=, :total=
 
       xml_accessor :adjustment?, :from => 'Adjustment'
 
