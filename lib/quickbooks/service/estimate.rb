@@ -2,7 +2,7 @@ module Quickbooks
   module Service
     class Estimate < BaseService
 
-      def delete(estimate, options = {})
+      def delete(estimate)
         delete_by_query_string(estimate)
       end
 

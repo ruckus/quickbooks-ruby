@@ -2,7 +2,7 @@ module Quickbooks
   module Service
     class CreditMemo < BaseService
 
-      def delete(credit_memo, options = {})
+      def delete(credit_memo)
         delete_by_query_string(credit_memo)
       end
 

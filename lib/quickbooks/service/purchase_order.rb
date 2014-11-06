@@ -2,7 +2,7 @@ module Quickbooks
   module Service
     class PurchaseOrder < BaseService
 
-      def delete(purchase_order, options = {})
+      def delete(purchase_order)
         delete_by_query_string(purchase_order)
       end
 
