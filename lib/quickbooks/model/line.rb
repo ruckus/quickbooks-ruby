@@ -2,7 +2,7 @@ module Quickbooks
   module Model
     class Line < BaseModel
       #== Constants
-      SALES_LINE_ITEM_DETAIL = 'SalesItemLineDetail'
+      SALES_ITEM_LINE_DETAIL = 'SalesItemLineDetail'
       SUB_TOTAL_LINE_DETAIL = 'SubTotalLineDetail'
       PAYMENT_LINE_DETAIL = 'PaymentLineDetail'
       DISCOUNT_LINE_DETAIL = 'DiscountLineDetail'
@@ -38,12 +38,39 @@ module Quickbooks
       alias_method :credit_memo_ids=, :credit_memo_id=
 
       def sales_item!
-        self.detail_type = SALES_LINE_ITEM_DETAIL
+        self.detail_type = SALES_ITEM_LINE_DETAIL
         self.sales_item_line_detail = SalesItemLineDetail.new
 
         yield self.sales_item_line_detail if block_given?
       end
 
+      def sub_total!
+        self.detail_type = SUB_TOTAL_LINE_DETAIL
+        self.sub_total_line_detail = SubTotalLineDetail.new
+
+        yield self.sub_total_line_detail if block_given?
+      end
+
+      def payment!
+        self.detail_type = PAYMENT_LINE_DETAIL
+        self.payment_line_detail = PaymentLineDetail.new
+
+        yield self.payment_line_detail if block_given?
+      end
+
+      def discount!
+        self.detail_type = DISCOUNT_LINE_DETAIL
+        self.discount_line_detail = DiscountLineDetail.new
+
+        yield self.discount_line_detail if block_given?
+      end
+
+      def journal_entry!
+        self.detail_type = JOURNAL_ENTRY_LINE_DETAIL
+        self.journal_entry_line_detail = JournalEntryLineDetail.new
+
+        yield self.journal_entry_line_detail if block_given?
+      end
 
       private
 
