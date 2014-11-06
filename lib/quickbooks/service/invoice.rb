@@ -2,7 +2,7 @@ module Quickbooks
   module Service
     class Invoice < BaseService
 
-      def delete(invoice, options = {})
+      def delete(invoice)
         delete_by_query_string(invoice)
       end
 
