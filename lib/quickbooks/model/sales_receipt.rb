@@ -30,7 +30,6 @@ module Quickbooks
       xml_accessor :customer_memo, :from => 'CustomerMemo'
       xml_accessor :private_note, :from => 'PrivateNote'
       xml_accessor :txn_tax_detail, :from => 'TxnTaxDetail', :as => TransactionTaxDetail
-      xml_accessor :txn_date, :from => 'TxnDate', :as => Date
       xml_accessor :custom_fields, :from => 'CustomField', :as => [CustomField]
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
       xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
