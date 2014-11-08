@@ -16,6 +16,7 @@ module Quickbooks
       xml_accessor :txn_date, :from => 'TxnDate', :as => Time
       xml_accessor :line_items, :from => 'Line', :as => [Line]
       xml_accessor :customer_ref, :from => 'CustomerRef', :as => BaseReference
+      xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
       xml_accessor :bill_email, :from => 'BillEmail', :as => EmailAddress
       xml_accessor :bill_address, :from => 'BillAddr', :as => PhysicalAddress
       xml_accessor :ship_address, :from => 'ShipAddr', :as => PhysicalAddress
@@ -28,9 +29,18 @@ module Quickbooks
       xml_accessor :deposit_to_account_ref, :from => 'DepositToAccountRef', :as => BaseReference
       xml_accessor :customer_memo, :from => 'CustomerMemo'
       xml_accessor :private_note, :from => 'PrivateNote'
+      xml_accessor :txn_tax_detail, :from => 'TxnTaxDetail', :as => TransactionTaxDetail
+      xml_accessor :txn_date, :from => 'TxnDate', :as => Date
+      xml_accessor :custom_fields, :from => 'CustomField', :as => [CustomField]
+      xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
+      xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
+      xml_accessor :apply_tax_after_discount?, :from => 'ApplyTaxAfterDiscount'
+      xml_accessor :print_status, :from => 'PrintStatus'
+      xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => to_xml_big_decimal
 
       # readonly
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
+      xml_accessor :home_total, :from => 'HomeTotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
 
       # backward-compatible alias
       alias_attribute :placed_on, :txn_date
