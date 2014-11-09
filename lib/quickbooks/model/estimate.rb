@@ -39,6 +39,11 @@ module Quickbooks
       xml_accessor :ship_method_ref, :from => 'ShipMethodRef', :as => BaseReference
       xml_accessor :ship_date, :from => 'ShipDate', :as => Date
 
+      xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
+      xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :due_date, :from => 'DueDate', :as => Date
+      xml_accessor :deposit_to_account_ref, :from => 'DepositToAccountRef', :as => BaseReference
+
       xml_accessor :apply_tax_after_discount?, :from => 'ApplyTaxAfterDiscount'
       xml_accessor :print_status, :from => 'PrintStatus'
       xml_accessor :email_status, :from => 'EmailStatus'
@@ -47,7 +52,7 @@ module Quickbooks
       xml_accessor :accepted_by, :from => 'AcceptedBy'
       xml_accessor :accepted_date, :from => 'AcceptedDate', :as => Date
 
-      reference_setters :department_ref, :customer_ref, :class_ref, :sales_term_ref, :ship_method_ref
+      reference_setters
 
       #== This adds aliases for backwards compatability to old attributes names
       alias_method :total_amount, :total

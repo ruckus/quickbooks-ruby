@@ -4,7 +4,7 @@ module Quickbooks
       xml_accessor :cc_account_ref, :from => 'CCAccountRef', :as => BaseReference
       xml_accessor :cc_detail, :from => 'CCDetail', :as => CreditCardPayment
 
-      reference_setters :cc_account_ref
+      reference_setters
     end
   end
 end

@@ -36,6 +36,9 @@ module Quickbooks
       xml_accessor :print_status, :from => 'PrintStatus'
       xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => to_xml_big_decimal
 
+      xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :linked_transactions, :from => 'LinkedTxn', :as => [LinkedTransaction]
+
       # readonly
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
       xml_accessor :home_total, :from => 'HomeTotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
@@ -44,7 +47,7 @@ module Quickbooks
       alias_attribute :placed_on, :txn_date
 
       include DocumentNumbering
-      reference_setters :customer_ref, :payment_method_ref, :deposit_to_account_ref, :department_ref, :currency_ref, :class_ref
+      reference_setters
 
       validate :line_item_size
       validate :document_numbering

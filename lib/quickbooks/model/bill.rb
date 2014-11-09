@@ -21,19 +21,24 @@ module Quickbooks
       xml_accessor :vendor_ref, :from => 'VendorRef', :as => BaseReference
       xml_accessor :payer_ref, :from => 'PayerRef', :as => BaseReference
       xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => BaseReference
+      xml_accessor :attachable_ref, :from => 'AttachableRef', :as => BaseReference
+      xml_accessor :ap_account_ref, :from => 'APAccountRef', :as => BaseReference
 
       xml_accessor :due_date, :from => 'DueDate', :as => Date
       xml_accessor :remit_to_address, :from => 'RemitToAddr', :as => PhysicalAddress
       xml_accessor :ship_address, :from => 'ShipAddr', :as => PhysicalAddress
+      xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => to_xml_big_decimal
 
       # readonly
       xml_accessor :bill_email, :from => 'BillEmail', :as => EmailAddress
       xml_accessor :reply_email, :from => 'ReplyEmail', :as => EmailAddress
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
+      xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
 
       validate :line_item_size
 
-      reference_setters :department_ref, :vendor_ref, :payer_ref, :sales_term_ref
+      reference_setters :department_ref, :vendor_ref, :payer_ref, :sales_term_ref, :currency_ref, :attachable_ref, :ap_account_ref
     end
   end
 end

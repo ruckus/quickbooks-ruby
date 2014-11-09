@@ -16,7 +16,12 @@ module Quickbooks
       xml_accessor :private_note, :from => 'PrivateNote'
 
       xml_accessor :vendor_ref, :from => 'VendorRef', :as => BaseReference
+      xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
+      xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
+      xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :ap_account_ref, :from => 'APAccountRef', :as => BaseReference
       xml_accessor :pay_type, :from => 'PayType'
+      xml_accessor :process_bill_payment?, :from => 'ProcessBillPayment'
 
       ## Required if PayType is Check.
       xml_accessor :check_payment, :from => 'CheckPayment', :as => BillPaymentCheck
@@ -27,7 +32,7 @@ module Quickbooks
 
       validate :line_item_size
 
-      reference_setters :vendor_ref
+      reference_setters
     end
   end
 end

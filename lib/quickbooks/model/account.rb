@@ -21,6 +21,7 @@ module Quickbooks
       xml_accessor :has_attachment?, :from => 'HasAttachment'
       xml_accessor :name, :from => 'Name'
       xml_accessor :description, :from => 'Description'
+      xml_accessor :fully_qualified_name, :from => 'FullyQualifiedName' # ReadOnly
 
       xml_accessor :sub_account?, :from => 'SubAccount'
       xml_accessor :parent_ref, :from => 'ParentRef', :as => BaseReference

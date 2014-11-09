@@ -24,15 +24,25 @@ module Quickbooks
 
       xml_accessor :billable_status, :from => 'BillableStatus'
       xml_accessor :taxable, :from => 'Taxable'
-      xml_accessor :hours, :from => 'Hours', :as => Integer
       xml_accessor :hourly_rate, :from => 'HourlyRate'
       xml_accessor :minutes, :from => 'Minutes', :as => Integer
+      xml_accessor :hours, :from => 'Hours', :as => Integer
+      xml_accessor :break_minutes, :from => 'BreakMinutes', :as => Integer
+      xml_accessor :break_hours, :from => 'BreakHours', :as => Integer
       xml_accessor :description, :from => 'Description'
+
+      xml_accessor :attachable_ref, :from => 'AttachableRef', :as => BaseReference
+      xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
+      xml_accessor :start_time, :from => 'StartTime', :as => DateTime
+      xml_accessor :end_time, :from => 'EndTime', :as => DateTime
+      xml_accessor :time_zone, :from => 'TimeZone'
 
       #== Validations
       validates_inclusion_of :name_of, :in => NAMEOF_OPTIONS
       validates_presence_of :employee_ref, :if => Proc.new { |ta| ta.name_of == "Employee" }
       validates_presence_of :vendor_ref, :if => Proc.new { |ta| ta.name_of == "Vendor" }
+
+      reference_setters
 
       def valid_for_update?
         if sync_token.nil?

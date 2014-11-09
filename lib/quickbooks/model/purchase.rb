@@ -37,7 +37,12 @@ module Quickbooks
       xml_accessor :print_status, :from => 'PrintStatus'
       xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
 
-      reference_setters :account_ref, :entity_ref, :department_ref
+      xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
+      xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :linked_transactions, :from => 'LinkedTxn', :as => [LinkedTransaction]
+      xml_accessor :credit?, :from => 'Credit'
+
+      reference_setters
 
       #== This adds aliases for backwards compatability to old attributes names
       alias_method :total_amount, :total

@@ -33,7 +33,11 @@ module Quickbooks
       xml_accessor :po_status, :from => 'POStatus'
       xml_accessor :txn_tax_detail, :from => 'TxnTaxDetail', :as => TransactionTaxDetail
 
-      reference_setters :attachable_ref, :vendor_ref, :ap_account_ref, :class_ref, :sales_term_ref, :ship_method_ref
+      xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
+      xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :tax_code_ref, :from => 'TaxCodeRef', :as => BaseReference
+
+      reference_setters
 
       #== This adds aliases for backwards compatability to old attributes names
       alias_method :total_amount, :total
