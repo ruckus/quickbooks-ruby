@@ -13,6 +13,7 @@ module Quickbooks
 
       xml_accessor :id, :from => 'Id', :as => Integer
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
+      xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :name, :from => 'Name'
       xml_accessor :type, :from => 'Type'
       xml_accessor :active?, :from => 'Active'

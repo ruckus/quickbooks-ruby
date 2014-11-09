@@ -17,8 +17,11 @@ module Quickbooks
       xml_accessor :day_of_month_due, :from => 'DayOfMonthDue', :as => Integer
       xml_accessor :due_next_month_days, :from => 'DueNextMonthDays', :as => Integer
       xml_accessor :discount_day_of_month, :from => 'DiscountDayOfMonth', :as => Integer
+      xml_accessor :attachable_ref, :from => 'AttachableRef', :as => BaseReference
 
       validates_presence_of :name
+
+      reference_setters :attachable_ref
 
     end
   end

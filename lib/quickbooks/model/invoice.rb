@@ -54,9 +54,9 @@ module Quickbooks
       xml_accessor :allow_online_payment?, :from => 'AllowOnlinePayment'
       xml_accessor :allow_online_credit_card_payment?, :from => 'AllowOnlineCreditCardPayment'
       xml_accessor :allow_online_ach_payment?, :from => 'AllowOnlineACHPayment'
+      xml_accessor :deposit_to_account_ref, :from => 'DepositToAccountRef', :as => BaseReference
 
-      reference_setters :customer_ref, :class_ref, :sales_term_ref, :ship_method_ref
-      reference_setters :ar_account_ref, :department_ref, :ar_account_ref, :currency_ref
+      reference_setters
 
       #== This adds aliases for backwards compatability to old attributes names
       alias_method :total_amount, :total

@@ -19,6 +19,7 @@ module Quickbooks
       xml_accessor :line_items, :from => 'Line', :as => [Line]
       xml_accessor :txn_tax_detail, :from => 'TxnTaxDetail', :as => TransactionTaxDetail
       xml_accessor :private_note, :from => 'PrivateNote'
+      xml_accessor :custom_fields, :from => 'CustomField', :as => [CustomField]
 
       xml_accessor :customer_ref, :from => 'CustomerRef', :as => BaseReference
       xml_accessor :customer_memo, :from => 'CustomerMemo'
@@ -27,6 +28,16 @@ module Quickbooks
       xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => BaseReference
       xml_accessor :deposit_to_account_ref, :from => 'DepositToAccountRef', :as => BaseReference
       xml_accessor :payment_method_ref, :from => 'PaymentMethodRef', :as => BaseReference
+      xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
+      xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :shipping_address, :from => 'ShipAddr', :as => PhysicalAddress
+      xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
+      xml_accessor :home_total, :from => 'HomeTotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :apply_tax_after_discount?, :from => 'ApplyTaxAfterDiscount'
+      xml_accessor :print_status, :from => 'PrintStatus'
+      xml_accessor :email_status, :from => 'EmailStatus'
+      xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :remaining_credit, :from => 'RemainingCredit', :as => BigDecimal, :to_xml => to_xml_big_decimal
 
       # readonly
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
@@ -37,7 +48,7 @@ module Quickbooks
       validate :line_item_size
       validate :document_numbering
 
-      reference_setters :department_ref, :customer_ref, :sales_term_ref, :deposit_to_account_ref, :payment_method_ref
+      reference_setters
 
       def initialize(*args)
         ensure_line_items_initialization
