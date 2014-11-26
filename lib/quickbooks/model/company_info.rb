@@ -22,6 +22,47 @@ module Quickbooks
       xml_accessor :email, :from => 'Email', :as => EmailAddress
       xml_accessor :web_site, :from => 'WebAddr', :as => WebSiteAddress
       xml_accessor :supported_languages, :from => 'SupportedLanguages'
+      xml_accessor :name_values, :from => 'NameValue', :as => [NameValue]
+
+      def find_name_value(name)
+        name_values.select { |nv| nv.name == name }.first.value
+      end
+
+      def find_boolean_name_value(name)
+        find_name_value(name) == "true"
+      end
+
+      def industry_type
+        find_name_value("IndustryType")
+      end
+
+      def industry_code
+        find_name_value("IndustryCode")
+      end
+
+      def company_type
+        find_name_value("CompanyType")
+      end
+
+      def subscription_status
+        find_name_value("SubscriptionStatus")
+      end
+
+      def offering_sku
+        find_name_value("OfferingSku")
+      end
+
+      def neo_enabled
+        find_boolean_name_value("NeoEnabled")
+      end
+
+      def payroll_feature
+        find_boolean_name_value("PayrollFeature")
+      end
+
+      def accountant_feature
+        find_boolean_name_value("AccountantFeature")
+      end
     end
   end
 end

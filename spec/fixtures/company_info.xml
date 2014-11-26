@@ -54,4 +54,32 @@
     <Name>NeoEnabled</Name>
     <Value>false</Value>
   </NameValue>
+  <NameValue>
+    <Name>IndustryType</Name>
+    <Value>Restaurant, Caterer, or Bar</Value>
+  </NameValue>
+  <NameValue>
+    <Name>CompanyType</Name>
+    <Value>SCorporation</Value>
+  </NameValue>
+  <NameValue>
+    <Name>IndustryCode</Name>
+    <Value>722</Value>
+  </NameValue>
+  <NameValue>
+    <Name>SubscriptionStatus</Name>
+    <Value>TRIAL</Value>
+  </NameValue>
+  <NameValue>
+    <Name>OfferingSku</Name>
+    <Value>QuickBooks Online Essentials</Value>
+  </NameValue>
+  <NameValue>
+    <Name>PayrollFeature</Name>
+    <Value>false</Value>
+  </NameValue>
+  <NameValue>
+    <Name>AccountantFeature</Name>
+    <Value>false</Value>
+  </NameValue>
 </CompanyInfo>

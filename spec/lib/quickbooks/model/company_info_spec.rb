@@ -55,5 +55,16 @@ describe "Quickbooks::Model::CompanyInfo" do
     company_info.web_site.uri.should == "http://www.acmeenterprise.com"
 
     company_info.supported_languages.should == "en"
+
+    company_info.name_values.count.should == 8
+
+    company_info.industry_type.should == "Restaurant, Caterer, or Bar"
+    company_info.industry_code.should == "722"
+    company_info.company_type.should == "SCorporation"
+    company_info.subscription_status.should == "TRIAL"
+    company_info.offering_sku.should == "QuickBooks Online Essentials"
+    company_info.neo_enabled.should be_false
+    company_info.payroll_feature.should be_false
+    company_info.accountant_feature.should be_false
   end
 end
