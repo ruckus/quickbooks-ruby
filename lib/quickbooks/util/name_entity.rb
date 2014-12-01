@@ -55,10 +55,13 @@ module NameEntity
     def journal_line_entry_tax
       if tax_code_ref
         # tax_applicable_on must be set
-        errors.add(:tax_applicable_on, "TaxApplicableOn must be set when TaxCodeRef is set") if tax_applicable_on.nil?
+        if tax_applicable.nil? && tax_applicable_on.nil?
+          errors.add(:tax_applicable_on, "TaxApplicableOn must be set when TaxCodeRef is set")
+        end
         errors.add(:tax_amount, "TaxAmount must be set when TaxCodeRef is set") if tax_amount.nil?
       end
     end
+
   end
 
   module PermitAlterations
