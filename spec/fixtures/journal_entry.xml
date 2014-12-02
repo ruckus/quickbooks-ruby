@@ -11,12 +11,12 @@
   <ExchangeRate>1</ExchangeRate>
   <Line>
     <Id>0</Id>
-    <Description>CIBC - Monthly fee</Description>
+    <Description>Monthly fee</Description>
     <Amount>20.00</Amount>
     <DetailType>JournalEntryLineDetail</DetailType>
     <JournalEntryLineDetail>
       <PostingType>Debit</PostingType>
-      <AccountRef name="6041 Bank Charges and Interest:Bank Charges">65</AccountRef>
+      <AccountRef name="Bank Charges and Interest:Bank Charges">65</AccountRef>
       <TaxCodeRef>5</TaxCodeRef>
       <TaxApplicableOn>Purchase</TaxApplicableOn>
       <TaxAmount>0.00</TaxAmount>
@@ -24,22 +24,22 @@
   </Line>
   <Line>
     <Id>1</Id>
-    <Description>CIBC - Monthly fee</Description>
+    <Description>Monthly fee</Description>
     <Amount>20.00</Amount>
     <DetailType>JournalEntryLineDetail</DetailType>
     <JournalEntryLineDetail>
       <PostingType>Credit</PostingType>
-      <AccountRef name="1100 CIBC Chequing">50</AccountRef>
+      <AccountRef name="Chequing">50</AccountRef>
     </JournalEntryLineDetail>
   </Line>
   <Line>
     <Id>2</Id>
-    <Description>CIBC - eTransfer fee</Description>
+    <Description>eTransfer fee</Description>
     <Amount>6.00</Amount>
     <DetailType>JournalEntryLineDetail</DetailType>
     <JournalEntryLineDetail>
       <PostingType>Debit</PostingType>
-      <AccountRef name="6041 Bank Charges and Interest:Bank Charges">65</AccountRef>
+      <AccountRef name="Bank Charges and Interest:Bank Charges">65</AccountRef>
       <TaxCodeRef>5</TaxCodeRef>
       <TaxApplicableOn>Purchase</TaxApplicableOn>
       <TaxAmount>0.00</TaxAmount>
@@ -47,22 +47,22 @@
   </Line>
   <Line>
     <Id>3</Id>
-    <Description>CIBC - eTransfer fee</Description>
+    <Description>eTransfer fee</Description>
     <Amount>6.00</Amount>
     <DetailType>JournalEntryLineDetail</DetailType>
     <JournalEntryLineDetail>
       <PostingType>Credit</PostingType>
-      <AccountRef name="1100 CIBC Chequing">50</AccountRef>
+      <AccountRef name="Chequing">50</AccountRef>
     </JournalEntryLineDetail>
   </Line>
   <Line>
     <Id>4</Id>
-    <Description>CIBC - acct maintenance</Description>
+    <Description>acct maintenance</Description>
     <Amount>2.00</Amount>
     <DetailType>JournalEntryLineDetail</DetailType>
     <JournalEntryLineDetail>
       <PostingType>Debit</PostingType>
-      <AccountRef name="6041 Bank Charges and Interest:Bank Charges">65</AccountRef>
+      <AccountRef name="Bank Charges and Interest:Bank Charges">65</AccountRef>
       <TaxCodeRef>5</TaxCodeRef>
       <TaxApplicableOn>Purchase</TaxApplicableOn>
       <TaxAmount>0.00</TaxAmount>
@@ -70,12 +70,12 @@
   </Line>
   <Line>
     <Id>5</Id>
-    <Description>CIBC - acct maintenance</Description>
+    <Description>acct maintenance</Description>
     <Amount>2.00</Amount>
     <DetailType>JournalEntryLineDetail</DetailType>
     <JournalEntryLineDetail>
       <PostingType>Credit</PostingType>
-      <AccountRef name="1100 CIBC Chequing">50</AccountRef>
+      <AccountRef name="Chequing">50</AccountRef>
     </JournalEntryLineDetail>
   </Line>
   <TxnTaxDetail>
