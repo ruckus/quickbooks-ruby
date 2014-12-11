@@ -402,6 +402,20 @@ clause2 = util.clause("CompanyName", "=", "Smith")
 service.query("SELECT * FROM Customer WHERE #{clause1} AND #{clause2}")
 ```
 
+## Change Data Capture
+
+Quickbooks has an api called Change Data Capture that provides a way of finding out which Entities have recently changed.  This gem currently supports a way of querying changed invoices.  This is the only way to find out if an invoice has been deleted (not voided), since a deleted invoice will not be returned by a standard Invoice query.
+
+It is possible to request changes up to 30 days ago.
+
+```ruby
+service = Quickbooks::Service::InvoiceChange.new
+...
+changed = service.since(Time.now.utc - 5 days)
+```
+
+see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
+
 ## Logging
 
 ```ruby
