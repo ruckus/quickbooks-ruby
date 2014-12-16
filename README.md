@@ -274,6 +274,22 @@ customer.company_name = "New Company Name"
 service.update(customer, :sparse => true)
 ```
 
+## Reference Setters
+
+Some models require a reference to be set, to a Customer, or an Item, etc. In the Quickbooks API these references
+are labeled via a property like `CustomerRef`. In `quickbooks-ruby` the assignment of these references is done
+by using the setter on the `_id` property.
+
+For example, to specify a Customer with ID 99 on an Invoice you would do this:
+
+```ruby
+invoice = Quickbooks::Model::Invoice.new
+invoice.customer_id = 99
+```
+
+This will automatically set a `CustomerRef` XML packet with a value of 99.
+
+
 ## Generating an Invoice
 
 A complete example on generating a basic invoice:
