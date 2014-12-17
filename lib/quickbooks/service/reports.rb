@@ -1,6 +1,6 @@
 module Quickbooks
   module Model
-    class Preferences < BaseModel
+    class Reports < BaseModel
       XML_COLLECTION_NODE = "Report"
       XML_NODE = "Report"
       REST_RESOURCE = 'report'
