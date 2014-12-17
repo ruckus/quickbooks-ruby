@@ -85,6 +85,7 @@ module Quickbooks
 
         start_position = ((page - 1) * per_page) + 1 # page=2, per_page=10 then we want to start at 11
         max_results = per_page
+
         response = do_http_get(url_for_query(query, start_position, max_results))
 
         parse_collection(response, model)
@@ -121,9 +122,12 @@ module Quickbooks
             if collection.count > 0
               xml.xpath(path_to_nodes).each do |xa|
                 entry = model.from_xml(xa)
+                addition = xml.xpath(path_to_nodes)[0].xpath("//xmlns:Currency").children.to_s if "#{model::XML_NODE}" == "Reports"
+                entry.currency = addition if "#{model::XML_NODE}" == "Reports"
                 results << entry
               end
-            end
+            end              
+
             collection.entries = results
           rescue => ex
             raise Quickbooks::IntuitRequestException.new("Error parsing XML: #{ex.message}")
