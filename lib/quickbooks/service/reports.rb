@@ -1,17 +1,12 @@
 module Quickbooks
-  module Model
-    class Reports < BaseModel
-      XML_COLLECTION_NODE = "Report"
-      XML_NODE = "Report"
-      REST_RESOURCE = 'report'
+  module Service
+    class Reports < BaseService
 
-      REPORTS = ['BalanceSheet', 'ProfitandLoss', 'ProfitandLossDetail', 'CashFlow']
-
-      xml_name XML_NODE
-
-      xml_accessor :currency, :from => 'Currency'
-
-
+      private
+      
+      def model
+        Quickbooks::Model::Reports
+      end
     end
   end
 end
