@@ -124,6 +124,7 @@ module Quickbooks
                 entry = model.from_xml(xa)
                 addition = xml.xpath(path_to_nodes)[0].xpath("//xmlns:Currency").children.to_s if "#{model::XML_NODE}" == "Reports"
                 entry.currency = addition if "#{model::XML_NODE}" == "Reports"
+                collection.body = response.body if "#{model::XML_NODE}" == "Reports"
                 results << entry
               end
             end              
