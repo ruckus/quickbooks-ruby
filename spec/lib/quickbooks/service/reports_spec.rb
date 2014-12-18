@@ -10,8 +10,8 @@ describe "Quickbooks::Service::Reports" do
     stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
     reports = @service.query
 
-    reports_val = reports.entries.first
-    reports_val.currency.should == 'USD'
+    balance_sheet_xml = @service.last_response_xml
+    balance_sheet_xml.xpath('//xmlns:Currency').children.to_s == 'USD'
   end
 
   # it 'can grab xml tabular data' do 
