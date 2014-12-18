@@ -10,6 +10,7 @@ module Quickbooks
       xml_name XML_NODE
 
       xml_accessor :currency, :from => 'Currency'
+      xml_accessor :body
 
     end
   end
