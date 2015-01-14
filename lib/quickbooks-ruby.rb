@@ -86,6 +86,7 @@ require 'quickbooks/model/batch_response'
 require 'quickbooks/model/preferences'
 require 'quickbooks/model/refund_receipt'
 require 'quickbooks/model/invoice_change'
+require 'quickbooks/model/reports'
 
 #== Services
 require 'quickbooks/service/service_crud'
@@ -119,6 +120,7 @@ require 'quickbooks/service/batch'
 require 'quickbooks/service/preferences'
 require 'quickbooks/service/refund_receipt'
 require 'quickbooks/service/invoice_change'
+require 'quickbooks/service/reports'
 
 module Quickbooks
   @@sandbox_mode = false
