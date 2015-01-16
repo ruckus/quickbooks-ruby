@@ -5,7 +5,7 @@ describe "Quickbooks::Service::CustomerChange" do
 
   it "can query for customers" do
     xml = fixture("customer_changes.xml")
-    model = Quickbooks::Model::customerChange
+    model = Quickbooks::Model::CustomerChange
 
     stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
     customers = @service.query
