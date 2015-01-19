@@ -3,6 +3,7 @@ module Quickbooks
     class CreditMemo < BaseModel
       include DocumentNumbering
       include GlobalTaxCalculation
+      include HasLineItems
 
       XML_COLLECTION_NODE = "CreditMemo"
       XML_NODE = "CreditMemo"
@@ -49,11 +50,6 @@ module Quickbooks
       validate :document_numbering
 
       reference_setters
-
-      def initialize(*args)
-        ensure_line_items_initialization
-        super
-      end
 
       def email=(email)
         self.bill_email = EmailAddress.new(email)

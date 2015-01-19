@@ -42,10 +42,6 @@ module Quickbooks
         HashWithIndifferentAccess[attributes]
       end
 
-      def ensure_line_items_initialization
-        self.line_items ||= []
-      end
-
       def inspect
         # it would be nice if we could inspect all the children,
         # but it's likely to blow the stack in some cases

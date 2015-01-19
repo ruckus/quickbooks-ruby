@@ -2,6 +2,7 @@ module Quickbooks
   module Model
     class RefundReceipt < BaseModel
       include GlobalTaxCalculation
+      include HasLineItems
 
       XML_COLLECTION_NODE = "RefundReceipt"
       XML_NODE = "RefundReceipt"
@@ -51,11 +52,6 @@ module Quickbooks
 
       validate :line_item_size
       validate :document_numbering
-
-      def initialize(*args)
-        ensure_line_items_initialization
-        super
-      end
 
       def email=(email)
         self.bill_email = EmailAddress.new(email)

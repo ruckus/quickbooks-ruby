@@ -9,6 +9,7 @@ module Quickbooks
   module Model
     class Estimate < BaseModel
       include GlobalTaxCalculation
+      include HasLineItems
 
       #== Constants
       REST_RESOURCE = 'estimate'
@@ -61,11 +62,6 @@ module Quickbooks
       #== Validations
       validate :line_item_size
       validate :existence_of_customer_ref
-
-      def initialize(*args)
-        ensure_line_items_initialization
-        super
-      end
 
       private
 

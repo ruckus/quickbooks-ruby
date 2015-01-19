@@ -10,6 +10,7 @@ module Quickbooks
     class Invoice < BaseModel
       include DocumentNumbering
       include GlobalTaxCalculation
+      include HasLineItems
 
       #== Constants
       REST_RESOURCE = 'invoice'
@@ -69,11 +70,6 @@ module Quickbooks
       validate :existence_of_customer_ref
       validate :required_bill_email_if_email_delivery
       validate :document_numbering
-
-      def initialize(*args)
-        ensure_line_items_initialization
-        super
-      end
 
       def required_bill_email_if_email_delivery
         return unless email_status_for_delivery?
