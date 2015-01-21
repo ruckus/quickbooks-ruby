@@ -3,6 +3,7 @@ module Quickbooks
     class SalesReceipt < BaseModel
       include DocumentNumbering
       include GlobalTaxCalculation
+      include HasLineItems
 
       XML_COLLECTION_NODE = "SalesReceipt"
       XML_NODE = "SalesReceipt"
@@ -52,11 +53,6 @@ module Quickbooks
 
       validate :line_item_size
       validate :document_numbering
-
-      def initialize(*args)
-        ensure_line_items_initialization
-        super
-      end
 
       def email=(email)
         self.bill_email = EmailAddress.new(email)

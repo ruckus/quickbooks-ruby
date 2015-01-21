@@ -1,6 +1,8 @@
 module Quickbooks
   module Model
     class JournalEntry < BaseModel
+      include HasLineItems
+
       XML_COLLECTION_NODE = "JournalEntry"
       XML_NODE = "JournalEntry"
       REST_RESOURCE = 'journalentry'

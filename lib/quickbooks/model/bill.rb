@@ -2,6 +2,7 @@ module Quickbooks
   module Model
     class Bill < BaseModel
       include GlobalTaxCalculation
+      include HasLineItems
 
       XML_COLLECTION_NODE = "Bill"
       XML_NODE = "Bill"

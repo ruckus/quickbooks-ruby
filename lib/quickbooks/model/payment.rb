@@ -1,6 +1,8 @@
 module Quickbooks
   module Model
     class Payment < BaseModel
+      include HasLineItems
+
       XML_COLLECTION_NODE = "Payment"
       XML_NODE = "Payment"
       REST_RESOURCE = 'payment'
@@ -28,11 +30,6 @@ module Quickbooks
       reference_setters :payment_method_ref, :deposit_to_account_ref, :currency_ref
 
       validate :existence_of_customer_ref
-
-      def initialize(*args)
-        ensure_line_items_initialization
-        super
-      end
 
       private
 
