@@ -372,6 +372,30 @@ customer = Quickbooks::Model::Customer.new
 customer.email_address = "foo@example.com"
 ```
 
+## Telephone Numbers
+Like Email Addresses, telephone numbers are not just basic strings but are top-level objects.
+
+```ruby
+phone1 = Quickbooks::Model::TelephoneNumber.new
+phone1.free_form_number = "97335530394"
+customer.mobile_phone = phone1
+```
+
+## Physical Addresses
+
+Addresses are also top-level objects, so they must be instantiated and set.
+
+```ruby
+address = Quickbooks::Model::PhysicalAddress.new
+
+address.line1 = "2200 Mission St."
+address.line2 = "Suite 201"
+address.city = "Santa Cruz"
+address.country_sub_division_code = "CA" # State, in United States
+address.postal_code = "95060"
+customer.billing_address = address
+```
+
 ## Batch Operations
 
 You can batch operations such creating an Invoice, updating a Customer, etc. The maximum batch size is 25 objects.
