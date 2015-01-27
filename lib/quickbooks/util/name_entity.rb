@@ -22,6 +22,7 @@ module NameEntity
     def email_address_is_valid
       if primary_email_address
         address = primary_email_address.address
+        return if address.blank?
         unless address.index('@') && address.index('.')
           errors.add(:primary_email_address, "Email address must contain @ and . (dot)")
         end
