@@ -142,9 +142,10 @@ module Quickbooks
       #     ...
       #   </Customer>
       # </IntuitResponse>
-      def parse_singular_entity_response(model, xml)
+      def parse_singular_entity_response(model, xml, node_xpath_prefix = nil)
         xmldoc = Nokogiri(xml)
-        xmldoc.xpath("//xmlns:IntuitResponse/xmlns:#{model::XML_NODE}")[0]
+        prefix = node_xpath_prefix || model::XML_NODE
+        xmldoc.xpath("//xmlns:IntuitResponse/xmlns:#{prefix}")[0]
       end
 
       # A successful delete request returns a XML packet like:
@@ -195,10 +196,15 @@ module Quickbooks
           'Content-Type' => 'multipart/form-data'
         }
         body = {}
-        body[:file_content_0] = uploadIO
+        body['file_content_0'] = uploadIO
+
         if metadata
-          body[:file_metadata_0] = metadata
+          standalone_prefix = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+          meta_data_xml = "#{standalone_prefix}\n#{metadata.to_xml_ns.to_s}"
+          param_part = UploadIO.new(StringIO.new(meta_data_xml), "application/xml")
+          body['file_metadata_0'] = param_part
         end
+
         do_http(:upload, url, body, headers)
       end
 
