@@ -456,16 +456,20 @@ changed = service.since(Time.now.utc - 5 days)
 
 see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
 
-##Change Data Capture For Customers
+##Change Data Capture For Customers and Vendors
 
-It is possible to find out which Customer Entries has recently changed.
+It is possible to find out which Customer or Vendor Entries has recently changed.
 It is possible to request changes up to 30 days ago.
 
 ```ruby
-service = Quickbooks::Service::CustomerChange.new
+customer_service = Quickbooks::Service::CustomerChange.new
 ...
-changed = service.since(Time.now.utc - 5 days)
+customer_changed = customer_service.since(Time.now.utc - 5 days)
 ```
+vendor_service = Quickbooks::Service::VendorChange.new
+...
+vendor_changed = vendor_service.since(Time.now.utc - 5 days)
+
 
 see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
 
