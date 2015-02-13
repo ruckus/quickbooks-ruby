@@ -473,6 +473,8 @@ vendor_service = Quickbooks::Service::VendorChange.new
 vendor_changed = vendor_service.since(Time.now.utc - 5 days)
 ```
 
+
+
 see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
 
 ## Logging
