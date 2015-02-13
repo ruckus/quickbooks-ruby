@@ -466,10 +466,12 @@ customer_service = Quickbooks::Service::CustomerChange.new
 ...
 customer_changed = customer_service.since(Time.now.utc - 5 days)
 ```
+
+```ruby
 vendor_service = Quickbooks::Service::VendorChange.new
 ...
 vendor_changed = vendor_service.since(Time.now.utc - 5 days)
-
+```
 
 see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
 
