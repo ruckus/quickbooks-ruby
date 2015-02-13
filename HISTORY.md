@@ -1,3 +1,16 @@
+## 0.1.8 (2015-02-13)
+
+* Merge pull request #221 from gouravmodi/master - Added support for Vendor Change Data Capture
+* Merge pull request #210 from gherry/line-items - Add HasLineItem module to DRY transaction initialization
+* Ensure line items initialization for Invoice, Bill, JournalEntry and Payment
+* Add PurchaseTaxRateList to TaxCode
+* Merge pull request #207 from gherry/master - Add ability to fetch PurchaseTaxRateList from TaxCode
+* Namespace Validator class
+* Merge pull request #201 from ahey/master - Add support for Invoice Change Data Capture
+* Fix tax applicable on being interpreted as a date.
+* Merge pull request #199 from rdeshpande/master - Adds support for CompanyInfo NameValue pairs
+* Rename TaxIncluded to TaxInclusive for GlobalTaxCalculation.
+
 ## 0.1.7 (2014-10-29)
 
 * Merge pull request #180 from arthurchui/error-401-403 - Added Quickbooks::Forbidden for HTTP 403
