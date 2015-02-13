@@ -88,6 +88,7 @@ require 'quickbooks/model/preferences'
 require 'quickbooks/model/refund_receipt'
 require 'quickbooks/model/invoice_change'
 require 'quickbooks/model/customer_change'
+require 'quickbooks/model/vendor_change'
 
 
 #== Services
@@ -123,6 +124,7 @@ require 'quickbooks/service/preferences'
 require 'quickbooks/service/refund_receipt'
 require 'quickbooks/service/invoice_change'
 require 'quickbooks/service/customer_change'
+require 'quickbooks/service/vendor_change'
 
 module Quickbooks
   @@sandbox_mode = false
