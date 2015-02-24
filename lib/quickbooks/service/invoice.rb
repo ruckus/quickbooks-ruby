@@ -9,7 +9,7 @@ module Quickbooks
       def send(invoice, emailAddress=nil)
         url = "#{url_for_base}/invoice/#{invoice.id}/send"
         url = "#{url}?sendTo=emailAddress" if emailAddress.present?
-        response = do_http_post(url, "", {}, {})
+        response = do_http_post(url, {}, {}, {})
       end
 
       private
