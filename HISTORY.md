@@ -1,3 +1,7 @@
+## 0.1.9 (2015-02-24)
+
+* Merge pull request #222 from gouravmodi/master - Added CDC for Item
+
 ## 0.1.8 (2015-02-13)
 
 * Merge pull request #221 from gouravmodi/master - Added support for Vendor Change Data Capture
