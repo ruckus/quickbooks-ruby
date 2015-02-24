@@ -1,0 +1,12 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2014-12-08T19:36:36.977-08:00">
+  <CDCResponse>
+    <QueryResponse maxResults="1" totalCount="1">
+      <Item domain="QBO" status="Deleted">
+        <Id>39</Id>
+        <MetaData>
+          <LastUpdatedTime>2014-12-08T19:36:24-08:00</LastUpdatedTime>
+        </MetaData>
+      </Item>
+    </QueryResponse>
+  </CDCResponse>
+</IntuitResponse>

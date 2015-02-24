@@ -89,6 +89,7 @@ require 'quickbooks/model/refund_receipt'
 require 'quickbooks/model/invoice_change'
 require 'quickbooks/model/customer_change'
 require 'quickbooks/model/vendor_change'
+require 'quickbooks/model/item_change'
 
 
 #== Services
@@ -125,6 +126,7 @@ require 'quickbooks/service/refund_receipt'
 require 'quickbooks/service/invoice_change'
 require 'quickbooks/service/customer_change'
 require 'quickbooks/service/vendor_change'
+require 'quickbooks/service/item_change'
 
 module Quickbooks
   @@sandbox_mode = false
