@@ -179,6 +179,8 @@ describe "Quickbooks::Service::Invoice" do
     invoice.id = 1
     sent_invoice = @service.send(invoice)
     sent_invoice.email_status.should == "EmailSent"
+    sent_invoice.delivery_info.delivery_type.should == "Email"
+    sent_invoice.delivery_info.delivery_time.should eq(Time.new(2015, 2, 24, 18, 26, 03, "-08:00"))
   end
 
   it "can send an invoice with new email_address" do
@@ -190,9 +192,8 @@ describe "Quickbooks::Service::Invoice" do
     invoice.doc_number = "1001"
     invoice.sync_token = 2
     invoice.id = 1
-    sent_invoice = @service.send(invoice)
-    sent_invoice.email_status.should == "EmailSent"
-    sent_invoice.bill_email.should == "test@intuit.com"
+    sent_invoice = @service.send(invoice,"test@intuit.com")
+    sent_invoice.bill_email.address.should == "test@intuit.com"
   end
 
 end

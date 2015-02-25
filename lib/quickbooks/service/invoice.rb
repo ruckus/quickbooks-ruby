@@ -8,7 +8,6 @@ module Quickbooks
 
       def send(invoice, email_address=nil)
         query = email_address.present? ? "?sendTo=#{email_address}" : ""
-        # url = "#{url_for_base}/invoice/#{invoice.id}/send#{email}"
         url = "#{url_for_resource(model::REST_RESOURCE)}/#{invoice.id}/send#{query}"
         response = do_http_post(url,{})
         if response.code.to_i == 200
