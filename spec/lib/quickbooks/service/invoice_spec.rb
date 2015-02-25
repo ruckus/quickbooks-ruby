@@ -168,4 +168,32 @@ describe "Quickbooks::Service::Invoice" do
     created_invoice.id.should == 4
   end
 
+  it "can send an invoice using bill_email" do
+    xml = fixture("invoice_send.xml")
+    model = Quickbooks::Model::Invoice
+    stub_request(:post, "#{@service.url_for_resource(model::REST_RESOURCE)}/1/send", ["200", "OK"], xml)
+
+    invoice = Quickbooks::Model::Invoice.new
+    invoice.doc_number = "1001"
+    invoice.sync_token = 2
+    invoice.id = 1
+    sent_invoice = @service.send(invoice)
+    sent_invoice.email_status.should == "EmailSent"
+    sent_invoice.delivery_info.delivery_type.should == "Email"
+    sent_invoice.delivery_info.delivery_time.should eq(Time.new(2015, 2, 24, 18, 26, 03, "-08:00"))
+  end
+
+  it "can send an invoice with new email_address" do
+    xml = fixture("invoice_send.xml")
+    model = Quickbooks::Model::Invoice
+    stub_request(:post, "#{@service.url_for_resource(model::REST_RESOURCE)}/1/send?sendTo=test@intuit.com", ["200", "OK"], xml)
+
+    invoice = Quickbooks::Model::Invoice.new
+    invoice.doc_number = "1001"
+    invoice.sync_token = 2
+    invoice.id = 1
+    sent_invoice = @service.send(invoice,"test@intuit.com")
+    sent_invoice.bill_email.address.should == "test@intuit.com"
+  end
+
 end

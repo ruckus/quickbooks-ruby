@@ -51,11 +51,13 @@ module Quickbooks
       xml_accessor :deposit, :from => 'Deposit', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
       xml_accessor :allow_ipn_payment?, :from => 'AllowIPNPayment'
+      xml_accessor :delivery_info, :from => 'DeliveryInfo', :as => DeliveryInfo
       xml_accessor :bill_email, :from => 'BillEmail', :as => EmailAddress
       xml_accessor :allow_online_payment?, :from => 'AllowOnlinePayment'
       xml_accessor :allow_online_credit_card_payment?, :from => 'AllowOnlineCreditCardPayment'
       xml_accessor :allow_online_ach_payment?, :from => 'AllowOnlineACHPayment'
       xml_accessor :deposit_to_account_ref, :from => 'DepositToAccountRef', :as => BaseReference
+
 
       reference_setters
 

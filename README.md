@@ -322,6 +322,34 @@ puts created_invoice.id
 
 **Notes**: `line_item.amount` must equal the `unit_price * quantity` in the sales detail packet - otherwise Intuit will raise an exception.
 
+## Emailing Invoices
+
+The Quickbooks API offers a **send invoice** feature that sends the specified invoice model via email.  By default the email is sent to the `bill_email` on the invoice.  This feature returns an invoice model with updated `email_status` and `delivery_info` as shown below:
+
+```ruby
+invoice = invoice_service.fetch_by_id("1")
+sent_invoice = invoice_service.send(invoice)
+
+puts sent_invoice.email_status
+=> EmailSent
+puts sent_invoice.delivery_info.delivery_type
+=> Email
+puts sent_invoice.delivery_info.delivery_time
+=> Wed, 25 Feb 2015 18:56:04 UTC +00:00
+```
+
+It is possible to email the invoice to an altermate email address by including the email as a second parameter in the `invoice.send` method.  When a new email address is provided the invoice model that is returned will have the `bill_email` set to the new email address as show below:
+
+```ruby
+invoice = invoice_service.fetch_by_id("1")
+sent_invoice = invoice_service.send(invoice, "name@domain.com")
+
+puts send_invoice.bill_email.address
+=> name@domain.com
+```
+
+**Notes:** Quickbooks has global company settings to customize the send invoice email message content and format.
+
 ## Generating a SalesReceipt
 
 ```ruby
