@@ -169,26 +169,30 @@ describe "Quickbooks::Service::Invoice" do
   end
 
   it "can send an invoice using bill_email" do
+    xml = fixture("invoice_send.xml")
     model = Quickbooks::Model::Invoice
+    stub_request(:post, "#{@service.url_for_resource(model::REST_RESOURCE)}/1/send", ["200", "OK"], xml)
+
     invoice = Quickbooks::Model::Invoice.new
     invoice.doc_number = "1001"
     invoice.sync_token = 2
     invoice.id = 1
-
-    xml = fixture("invoice_send.xml")
-    stub_request(:post, "#{@service.url_for_resource(model::REST_RESOURCE)}/1/send", ["200", "OK"], xml)
-
     sent_invoice = @service.send(invoice)
     sent_invoice.email_status.should == "EmailSent"
   end
 
   it "can send an invoice with new email_address" do
-    # email = "test@intuit.com"
+    xml = fixture("invoice_send.xml")
+    model = Quickbooks::Model::Invoice
+    stub_request(:post, "#{@service.url_for_resource(model::REST_RESOURCE)}/1/send?sendTo=test@intuit.com", ["200", "OK"], xml)
 
-
-    # sent_invoice.email_status.should == "EmailSent"
-    # sent_invoice.bill_email.should == email
-
+    invoice = Quickbooks::Model::Invoice.new
+    invoice.doc_number = "1001"
+    invoice.sync_token = 2
+    invoice.id = 1
+    sent_invoice = @service.send(invoice)
+    sent_invoice.email_status.should == "EmailSent"
+    sent_invoice.bill_email.should == "test@intuit.com"
   end
 
 end

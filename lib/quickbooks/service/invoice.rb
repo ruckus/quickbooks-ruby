@@ -10,7 +10,12 @@ module Quickbooks
         query = email_address.present? ? "?sendTo=#{email_address}" : ""
         # url = "#{url_for_base}/invoice/#{invoice.id}/send#{email}"
         url = "#{url_for_resource(model::REST_RESOURCE)}/#{invoice.id}/send#{query}"
-        do_http_post(url,{})
+        response = do_http_post(url,{})
+        if response.code.to_i == 200
+          model.from_xml(parse_singular_entity_response(model, response.plain_body))
+        else
+          nil
+        end
       end
 
       private
