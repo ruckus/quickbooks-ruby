@@ -322,6 +322,32 @@ puts created_invoice.id
 
 **Notes**: `line_item.amount` must equal the `unit_price * quantity` in the sales detail packet - otherwise Intuit will raise an exception.
 
+## Emailing Invoices
+
+Quickbooks api offers a **send invoice** feature that sends the specified invoice object via email.  By default the email is sent to the `bill_email` on the invoice.  This feature returns an updated invoice object with updated `email_status` and `delivery_info` as shown below:
+
+```ruby
+invoice = invoice_service.fetch_by_id("1")
+sent_invoice = invoice_service.send(invoice)
+puts sent_invoice.email_status
+=> EmailSent
+puts sent_invoice.delivery_info.delivery_type
+=> Email
+puts sent_invoice.delivery_info.delivery_time
+=> Wed, 25 Feb 2015 18:56:04 UTC +00:00
+```
+
+It is possible to email the invoice to an altermate email address by including the email as a second parameter in the `invoice.send` method.  When a new email address is provided the invoice object that is returned will have the `billing_email` set to the new email address as show below:
+
+```ruby
+invoice = invoice_service.fetch_by_id("1")
+sent_invoice = invoice_service.send(invoice, "new@email.com")
+puts send_invoice.bill_email.address
+=> new@email.com
+```
+
+**Notes:** Quickbooks has global company settings to customize the send invoice email message and format.
+
 ## Generating a SalesReceipt
 
 ```ruby
@@ -472,31 +498,6 @@ vendor_changed = vendor_service.since(Time.now.utc - 5 days)
 
 
 see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
-
-## Emailing Invoices
-Quickbooks api offer a *send invoice* feature that sends the specified invoice object via email.  By default the email is sent to the *billing_email_address* on the invoice.  This feature returns an updated invoice object with updated *email_status* and *delivery_info* as shown below:
-
-```ruby
-invoice = invoice_service.fetch_by_id("1")
-sent_invoice = invoice_service.send(invoice)
-puts sent_invoice.email_status
-=> EmailSent
-puts sent_invoice.delivery_info.delivery_type
-=> Email
-puts sent_invoice.delivery_info.delivery_time
-=> Wed, 25 Feb 2015 18:56:04 UTC +00:00
-
-It is possible to email the invoice to a differnet email address by including the email as a second parameter in the send method.  When a new email address is provided the invoice object that is returned will have the *billing_email_address* set to the new email address as show below:
-
-```ruby
-invoice = invoice_service.fetch_by_id("1")
-sent_invoice = invoice_service.send(invoice, "new@email.com")
-
-```
-
-# Note:
-
-Quickbooks has global company settings to customize the send invoice email message and format.
 
 ## Logging
 
