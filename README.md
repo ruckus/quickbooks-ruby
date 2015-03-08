@@ -537,6 +537,7 @@ Company Info      | n/a    | n/a    | yes   | n/a    | yes         |
 Credit Memo       | yes    | yes    | yes   | yes    | no          |
 Customer          | yes    | yes    | yes   | yes    | yes         |
 Department        | yes    | yes    | yes   | yes    | yes         |
+Deposit           | yes    | yes    | yes   | yes    | yes         |
 Employee          | yes    | yes    | yes   | yes    | yes         |
 Entitlements      | no     | no     | no    | no     | no          |
 Estimate          | yes    | yes    | yes   | yes    | yes         |

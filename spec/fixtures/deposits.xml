@@ -1,0 +1,165 @@
+<IntuitResponse time="2015-03-08T10:44:19.813-07:00" xmlns="http://schema.intuit.com/finance/v3">
+  <QueryResponse maxResults="7" startPosition="1" totalCount="5">
+    <Deposit domain="QBO" sparse="false">
+      <Id>121</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2014-11-13T13:00:56-08:00</CreateTime>
+        <LastUpdatedTime>2014-11-13T13:00:56-08:00</LastUpdatedTime>
+      </MetaData>
+      <PrivateNote>Test Deposit</PrivateNote>
+      <TxnDate>2014-11-13</TxnDate>
+      <Line>
+        <Amount>226</Amount>
+        <LinkedTxn>
+          <TxnId>97</TxnId>
+          <TxnType>Payment</TxnType>
+          <TxnLineId>0</TxnLineId>
+        </LinkedTxn>
+      </Line>
+      <Line>
+        <Amount>460</Amount>
+        <LinkedTxn>
+          <TxnId>94</TxnId>
+          <TxnType>Payment</TxnType>
+          <TxnLineId>0</TxnLineId>
+        </LinkedTxn>
+      </Line>
+      <Line>
+        <Amount>80</Amount>
+        <LinkedTxn>
+          <TxnId>116</TxnId>
+          <TxnType>Payment</TxnType>
+          <TxnLineId>0</TxnLineId>
+        </LinkedTxn>
+      </Line>
+      <Line>
+        <Amount>81</Amount>
+        <LinkedTxn>
+          <TxnId>98</TxnId>
+          <TxnType>Payment</TxnType>
+          <TxnLineId>0</TxnLineId>
+        </LinkedTxn>
+      </Line>
+      <Line>
+        <Amount>220</Amount>
+        <LinkedTxn>
+          <TxnId>101</TxnId>
+          <TxnType>Payment</TxnType>
+          <TxnLineId>0</TxnLineId>
+        </LinkedTxn>
+      </Line>
+      <DepositToAccountRef name="Checking">35</DepositToAccountRef>
+      <CashBack>
+        <AccountRef name="Savings">36</AccountRef>
+        <Amount>200.00</Amount>
+        <Memo>Money to savings</Memo>
+      </CashBack>
+      <TotalAmt>868.15</TotalAmt>
+    </Deposit>
+    <Deposit domain="QBO" sparse="false">
+      <Id>102</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2014-11-12T13:40:31-08:00</CreateTime>
+        <LastUpdatedTime>2014-11-12T13:40:31-08:00</LastUpdatedTime>
+      </MetaData>
+      <TxnDate>2014-11-12</TxnDate>
+      <Line>
+        <Amount>108</Amount>
+        <LinkedTxn>
+          <TxnId>31</TxnId>
+          <TxnType>Payment</TxnType>
+          <TxnLineId>0</TxnLineId>
+        </LinkedTxn>
+        <DepositLineDetail>
+          <PaymentMethodRef>2</PaymentMethodRef>
+          <CheckNum>6552</CheckNum>
+        </DepositLineDetail>
+      </Line>
+      <Line>
+        <Amount>300</Amount>
+        <LinkedTxn>
+          <TxnId>32</TxnId>
+          <TxnType>Payment</TxnType>
+          <TxnLineId>0</TxnLineId>
+        </LinkedTxn>
+        <DepositLineDetail>
+          <PaymentMethodRef>2</PaymentMethodRef>
+          <CheckNum>5421</CheckNum>
+        </DepositLineDetail>
+      </Line>
+      <DepositToAccountRef name="Checking">35</DepositToAccountRef>
+      <TotalAmt>408.00</TotalAmt>
+    </Deposit>
+    <Deposit domain="QBO" sparse="false">
+      <Id>4</Id>
+      <SyncToken>1</SyncToken>
+      <MetaData>
+        <CreateTime>2014-11-09T12:08:20-08:00</CreateTime>
+        <LastUpdatedTime>2014-11-12T13:33:24-08:00</LastUpdatedTime>
+      </MetaData>
+      <TxnDate>2014-06-30</TxnDate>
+      <PrivateNote>Opening Balance</PrivateNote>
+      <Line>
+        <Id>1</Id>
+        <LineNum>1</LineNum>
+        <Amount>5000.00</Amount>
+        <DetailType>DepositLineDetail</DetailType>
+        <DepositLineDetail>
+          <AccountRef name="Opening Balance Equity">34</AccountRef>
+        </DepositLineDetail>
+      </Line>
+      <DepositToAccountRef name="Checking">35</DepositToAccountRef>
+      <TotalAmt>5000.00</TotalAmt>
+    </Deposit>
+    <Deposit domain="QBO" sparse="false">
+      <Id>62</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2014-11-11T15:22:31-08:00</CreateTime>
+        <LastUpdatedTime>2014-11-11T15:22:31-08:00</LastUpdatedTime>
+      </MetaData>
+      <TxnDate>2014-11-11</TxnDate>
+      <Line>
+        <Amount>140</Amount>
+        <LinkedTxn>
+          <TxnId>47</TxnId>
+          <TxnType>SalesReceipt</TxnType>
+          <TxnLineId>0</TxnLineId>
+        </LinkedTxn>
+      </Line>
+      <Line>
+        <Amount>78</Amount>
+        <LinkedTxn>
+          <TxnId>38</TxnId>
+          <TxnType>SalesReceipt</TxnType>
+          <TxnLineId>0</TxnLineId>
+        </LinkedTxn>
+      </Line>
+      <DepositToAccountRef name="Checking">35</DepositToAccountRef>
+      <TotalAmt>218.75</TotalAmt>
+    </Deposit>
+    <Deposit domain="QBO" sparse="false">
+      <Id>5</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2014-11-09T12:09:00-08:00</CreateTime>
+        <LastUpdatedTime>2014-11-09T12:09:00-08:00</LastUpdatedTime>
+      </MetaData>
+      <TxnDate>2014-11-09</TxnDate>
+      <PrivateNote>Opening Balance</PrivateNote>
+      <Line>
+        <Id>1</Id>
+        <LineNum>1</LineNum>
+        <Amount>600.00</Amount>
+        <DetailType>DepositLineDetail</DetailType>
+        <DepositLineDetail>
+          <AccountRef name="Opening Balance Equity">34</AccountRef>
+        </DepositLineDetail>
+      </Line>
+      <DepositToAccountRef name="Savings">36</DepositToAccountRef>
+      <TotalAmt>600.00</TotalAmt>
+    </Deposit>
+  </QueryResponse>
+</IntuitResponse>
