@@ -32,7 +32,6 @@ describe "Quickbooks::Model::Deposit" do
     line_item2.deposit_line_detail?.should == true
     line_item2.deposit_line_detail.account_ref.value.should == "31"
     line_item2.deposit_line_detail.account_ref.name.should == "Uncategorized Expense"
-    puts line_item2.deposit_line_detail.payment_method_ref.inspect
     line_item2.deposit_line_detail.payment_method_ref.value.should == "1"
     line_item2.deposit_line_detail.payment_method_ref.name.should == "Cash"
   end
