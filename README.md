@@ -470,6 +470,49 @@ clause2 = util.clause("CompanyName", "=", "Smith")
 service.query("SELECT * FROM Customer WHERE #{clause1} AND #{clause2}")
 ```
 
+## Attachments
+
+The Quickbooks API supports two different types of attachments, depending on whether you have an actual file to upload or just
+want to upload "meta-data" about an operation.
+
+### Meta-data only: use the `Attachment` service
+
+```ruby
+meta = Quickbooks::Model::Attachable.new
+meta.file_name = "monkey.jpg"
+meta.note = "A note"
+meta.content_type = "image/jpeg"
+entity = Quickbooks::Model::EntityRef.new
+entity.type = 'Customer'
+entity.value = 3 # Id of the Customer
+meta.attachable_ref = Quickbooks::Model::AttachableRef.new(entity)
+```
+
+*Note*: No actual file is being attached, we are just describing a file.
+
+
+### Uploading an actual file
+
+```ruby
+upload_service = Quickbooks::Model::Upload.new
+
+# args:
+#     local-path to file
+#     file mime-type
+#     (optional) instance of Quickbooks::Model::Attachable - metadata
+result = upload_service.upload("tmp/monkey.jpg", "image/jpeg", attachable_metadata)
+```
+
+If successful `result` will be an instance of the `Attachable` model:
+
+```
+puts attach.temp_download_uri
+
+=> "https://intuit-qbo-prod-29.s3.amazonaws.com/12345%2Fattachments%2Fmonkey-1423760870606.jpg?Expires=1423761772&AWSAcc ... snip ..."
+```
+
+
+
 ## Change Data Capture
 
 Quickbooks has an api called Change Data Capture that provides a way of finding out which Entities have recently changed.  This gem currently supports a way of querying changed invoices.  This is the only way to find out if an invoice has been deleted (not voided), since a deleted invoice will not be returned by a standard Invoice query.
@@ -484,7 +527,7 @@ changed = service.since(Time.now.utc - 5 days)
 
 see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
 
-##Change Data Capture For Customers, Vendors and Items
+## Change Data Capture For Customers, Vendors and Items
 
 It is possible to find out which Customer, Vendor or Item Entries has recently changed.
 It is possible to request changes up to 30 days ago.

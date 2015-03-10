@@ -1,0 +1,11 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2015-02-07T15:12:13.255-08:00">
+	<Attachable domain="QBO" sparse="false">
+		<Id>2700000000002413265</Id>
+		<SyncToken>0</SyncToken>
+		<MetaData>
+			<CreateTime>2015-02-07T15:12:13-08:00</CreateTime>
+			<LastUpdatedTime>2015-02-07T15:12:13-08:00</LastUpdatedTime>
+		</MetaData>
+		<Note>A note</Note>
+	</Attachable>
+</IntuitResponse>
