@@ -22,7 +22,7 @@ describe "Quickbooks::Model::Vendor" do
     vendor.primary_email_address.should_not be_nil
     vendor.primary_email_address.address.should == 'john.vendor@intuit.com'
     vendor.billing_address.should_not be_nil
-    vendor.billing_address.id.should == 76
+    vendor.billing_address.id.should == "76"
     vendor.billing_address.line1.should == "1000 Main Street"
     vendor.billing_address.city.should == "New York"
     vendor.billing_address.country.should == "United States"

@@ -18,7 +18,7 @@ describe "Quickbooks::Model::Invoice" do
     invoice.exchange_rate.should == 1.5
 
     line_item1 = invoice.line_items[0]
-    line_item1.id.should == 1
+    line_item1.id.should == "1"
     line_item1.line_num.should == 1
     line_item1.description.should == 'Plush Baby Doll'
     line_item1.amount.should == 198.99
@@ -38,7 +38,7 @@ describe "Quickbooks::Model::Invoice" do
 
     billing_address = invoice.billing_address
     billing_address.should_not be_nil
-    billing_address.id.should == 6
+    billing_address.id.should == "6"
     billing_address.line1.should == "Rebecca Clark"
     billing_address.line2.should == "Sunset Bakery"
     billing_address.line3.should == "1040 East Tasman Drive."
@@ -48,7 +48,7 @@ describe "Quickbooks::Model::Invoice" do
 
     shipping_address = invoice.shipping_address
     shipping_address.should_not be_nil
-    shipping_address.id.should == 3
+    shipping_address.id.should == "3"
     shipping_address.line1.should == "1040 East Tasman Drive."
     shipping_address.city.should == "Los Angeles"
     shipping_address.country.should == "USA"
@@ -71,7 +71,7 @@ describe "Quickbooks::Model::Invoice" do
     second_tax_line.amount.should eq(2.85)
     second_tax_line.detail_type.should eq("TaxLineDetail")
     second_tax_line.tax_line_detail.tax_rate_ref.value.should eq("20")
-    second_tax_line.tax_line_detail.percent_based?.should be_true 
+    second_tax_line.tax_line_detail.percent_based?.should be_true
     second_tax_line.tax_line_detail.tax_percent.should eq(10.0)
     second_tax_line.tax_line_detail.net_amount_taxable.should eq(28.5)
 

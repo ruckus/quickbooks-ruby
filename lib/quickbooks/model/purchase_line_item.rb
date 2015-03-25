@@ -7,7 +7,7 @@ module Quickbooks
       ACCOUNT_BASED_EXPENSE_LINE_DETAIL = 'AccountBasedExpenseLineDetail'
       GROUP_LINE_DETAIL = 'GroupLineDetail'
 
-      xml_accessor :id, :from => 'Id', :as => Integer
+      xml_accessor :id, :from => 'Id'
       xml_accessor :line_num, :from => 'LineNum', :as => Integer
       xml_accessor :description, :from => 'Description'
       xml_accessor :amount, :from => 'Amount', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }

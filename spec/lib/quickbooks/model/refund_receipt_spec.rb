@@ -2,7 +2,7 @@ describe "Quickbooks::Model::RefundReceipt" do
   it "parse from XML" do
     xml = fixture("refund_receipt.xml")
     refund_receipt = Quickbooks::Model::RefundReceipt.from_xml(xml)
-    refund_receipt.id.should == 2
+    refund_receipt.id.should == "2"
     refund_receipt.sync_token.should == 0
 
     refund_receipt.meta_data.should_not be_nil
@@ -29,7 +29,7 @@ describe "Quickbooks::Model::RefundReceipt" do
     refund_receipt.private_note.should == "This is a memo."
 
     refund_receipt.line_items.first.should_not be_nil
-    refund_receipt.line_items.first.id.should == 1
+    refund_receipt.line_items.first.id.should == "1"
     refund_receipt.line_items.first.line_num.should == 1
     refund_receipt.line_items.first.amount.should == 345.00
     refund_receipt.line_items.first.detail_type.should == "SalesItemLineDetail"
@@ -58,7 +58,7 @@ describe "Quickbooks::Model::RefundReceipt" do
     refund_receipt.customer_memo.should == "memo!"
 
     refund_receipt.bill_address.should_not be_nil
-    refund_receipt.bill_address.id.should == 413
+    refund_receipt.bill_address.id.should == "413"
     refund_receipt.bill_address.line1.should == "Mr. Adam Bradley"
     refund_receipt.bill_address.line2.should == "Adam's Candy Shop"
     refund_receipt.bill_address.line3.should == "1528 Kitty Bang Bang St."
@@ -68,7 +68,7 @@ describe "Quickbooks::Model::RefundReceipt" do
     refund_receipt.bill_address.lon.should == "-122.0522177"
 
     refund_receipt.ship_address.should_not be_nil
-    refund_receipt.ship_address.id.should == 414
+    refund_receipt.ship_address.id.should == "414"
     refund_receipt.ship_address.line1.should == "Mr. Adam Bradley"
     refund_receipt.ship_address.line2.should == "Adam's Candy Shop"
     refund_receipt.ship_address.line3.should == "Adam's Candy Shop"

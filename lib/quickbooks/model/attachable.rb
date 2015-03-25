@@ -8,7 +8,7 @@ module Quickbooks
       XML_NODE = "Attachable"
       REST_RESOURCE = 'attachable'
 
-      xml_accessor :id, :from => 'Id', :as => Integer
+      xml_accessor :id, :from => 'Id'
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :attachable_ref, :as => AttachableRef

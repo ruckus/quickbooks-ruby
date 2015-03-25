@@ -4,7 +4,7 @@ describe "Quickbooks::Model::VendorCredit" do
     xml = fixture("vendor_credit.xml")
     vendor_credit = Quickbooks::Model::VendorCredit.from_xml(xml)
     vendor_credit.sync_token.should == 0
-    vendor_credit.id.should == 11
+    vendor_credit.id.should == "11"
     vendor_credit.txn_date.to_date.should == Date.civil(2013,9,20)
     vendor_credit.total_amount.should == 90.0
 
@@ -14,10 +14,10 @@ describe "Quickbooks::Model::VendorCredit" do
     vendor_credit.ap_account_ref.name.should == "Accounts Payable (A/P)"
 
     vendor_credit.line_items.size.should == 1
-    
+
     line1 = vendor_credit.line_items[0]
     line1.detail_type.should == "AccountBasedExpenseLineDetail"
-    line1.id.should == 1
+    line1.id.should == "1"
     line1.amount.should == 90.0
     line1.account_based_expense_line_detail.customer_ref.value.should == "2"
     line1.account_based_expense_line_detail.customer_ref.name.should == "Cust1"

@@ -4,7 +4,7 @@ module Quickbooks
     class InvoiceChange < BaseModel
       XML_NODE = "Invoice"
 
-      xml_accessor :id, :from => 'Id', :as => Integer
+      xml_accessor :id, :from => 'Id'
       xml_accessor :status, :from => '@status'
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
     end

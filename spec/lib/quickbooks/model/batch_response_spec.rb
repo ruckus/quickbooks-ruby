@@ -15,13 +15,13 @@ describe Quickbooks::Model::BatchResponse do
     item_res2.bId.should == "2b"
     item_res2.should_not be_a_fault
     item_res2.customer.should_not be_nil
-    item_res2.customer.id.should == 19891
+    item_res2.customer.id.should == "19891"
 
     item_res3 = batch_response.response_items[2]
     item_res3.bId.should == "3c"
     item_res3.should_not be_a_fault
     item_res3.item.should_not be_nil
-    item_res3.item.id.should == 19891
+    item_res3.item.id.should == "19891"
 
     item_res4 = batch_response.response_items[3]
     item_res4.account.should_not be_nil

@@ -27,7 +27,7 @@ describe "Quickbooks::Model::Deposit" do
     line_item1.linked_transactions[0].txn_type.should == 'Payment'
 
     line_item2 = deposit.line_items[1]
-    line_item2.id.should == 1
+    line_item2.id.should == "1"
     line_item2.amount.should == -62.50
     line_item2.deposit_line_detail?.should == true
     line_item2.deposit_line_detail.account_ref.value.should == "31"

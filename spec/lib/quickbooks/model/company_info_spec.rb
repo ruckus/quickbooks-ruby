@@ -2,7 +2,7 @@ describe "Quickbooks::Model::CompanyInfo" do
   it "parse from XML" do
     xml = fixture("company_info.xml")
     company_info = Quickbooks::Model::CompanyInfo.from_xml(xml)
-    company_info.id.should == 1
+    company_info.id.should == "1"
     company_info.sync_token.should == 3
 
     company_info.meta_data.should_not be_nil
@@ -13,7 +13,7 @@ describe "Quickbooks::Model::CompanyInfo" do
     company_info.legal_name.should == "Acme Legal Corp."
 
     company_info.company_address.should_not be_nil
-    company_info.company_address.id.should == 1
+    company_info.company_address.id.should == "1"
     company_info.company_address.line1.should == "Acme Something Street"
     company_info.company_address.line2.should == "Apartment Acme"
     company_info.company_address.city.should == "Sunnyvale Acme"
@@ -23,7 +23,7 @@ describe "Quickbooks::Model::CompanyInfo" do
     company_info.company_address.lon.should == "-122.0183914"
 
     company_info.customer_communication_address.should_not be_nil
-    company_info.customer_communication_address.id.should == 55
+    company_info.customer_communication_address.id.should == "55"
     company_info.customer_communication_address.line1.should == "Acme Something Street Customer Comm"
     company_info.customer_communication_address.line2.should == "Apartment Acme"
     company_info.customer_communication_address.city.should == "Sunnyvale Acme"
@@ -33,7 +33,7 @@ describe "Quickbooks::Model::CompanyInfo" do
     company_info.customer_communication_address.lon.should == "-122.0183914"
 
     company_info.legal_address.should_not be_nil
-    company_info.legal_address.id.should == 54
+    company_info.legal_address.id.should == "54"
     company_info.legal_address.line1.should == "Acme Something Street Legal"
     company_info.legal_address.line2.should == "Apartment Acme"
     company_info.legal_address.city.should == "Sunnyvale Acme"

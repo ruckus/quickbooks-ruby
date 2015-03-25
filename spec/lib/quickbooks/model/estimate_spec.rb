@@ -6,7 +6,7 @@ describe "Quickbooks::Model::Estimate" do
     xml = fixture("estimate.xml")
     estimate = Quickbooks::Model::Estimate.from_xml(xml)
     estimate.sync_token.should == 0
-    estimate.id.should == 12
+    estimate.id.should == "12"
 
     estimate.meta_data.should_not be_nil
     estimate.doc_number.should == "3BcMMoa4YQBuUbJucPeR"
@@ -17,7 +17,7 @@ describe "Quickbooks::Model::Estimate" do
     estimate.line_items.length.should == 3
 
     line_item1 = estimate.line_items[0]
-    line_item1.id.should == 1
+    line_item1.id.should == "1"
     line_item1.line_num.should == 1
     line_item1.description.should == 'dsfafdfasdfdsfasdfadsfasdfsad'
     line_item1.amount.should == 20.0
@@ -39,7 +39,7 @@ describe "Quickbooks::Model::Estimate" do
 
     billing_address = estimate.billing_address
     billing_address.should_not be_nil
-    billing_address.id.should == 7
+    billing_address.id.should == "7"
     billing_address.line1.should == "bill line1"
     billing_address.city.should == "Billville"
     billing_address.country.should == "USA"
@@ -50,7 +50,7 @@ describe "Quickbooks::Model::Estimate" do
 
     shipping_address = estimate.shipping_address
     shipping_address.should_not be_nil
-    shipping_address.id.should == 8
+    shipping_address.id.should == "8"
     shipping_address.line1.should == "ship line1"
     shipping_address.city.should == "Shipville"
     shipping_address.country.should == "USA"

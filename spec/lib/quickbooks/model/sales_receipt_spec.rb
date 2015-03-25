@@ -2,7 +2,7 @@ describe "Quickbooks::Model::SalesReceipt" do
   it "parse from XML" do
     xml = fixture("sales_receipt.xml")
     sales_receipt = Quickbooks::Model::SalesReceipt.from_xml(xml)
-    sales_receipt.id.should == 2
+    sales_receipt.id.should == "2"
     sales_receipt.sync_token.should == 0
 
     sales_receipt.meta_data.should_not be_nil
@@ -13,7 +13,7 @@ describe "Quickbooks::Model::SalesReceipt" do
     sales_receipt.txn_date.should == Time.parse("2013-12-10")
 
     sales_receipt.line_items.first.should_not be_nil
-    sales_receipt.line_items.first.id.should == 1
+    sales_receipt.line_items.first.id.should == "1"
     sales_receipt.line_items.first.line_num.should == 1
     sales_receipt.line_items.first.amount.should == 10.00
     sales_receipt.line_items.first.detail_type.should == "SalesItemLineDetail"

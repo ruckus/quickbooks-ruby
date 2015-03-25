@@ -13,7 +13,7 @@ describe "Quickbooks::Service::VendorChange" do
 
     first_vendor = vendors.entries.first
     first_vendor.status.should == 'Deleted'
-    first_vendor.id.should == 39
+    first_vendor.id.should == "39"
 
     first_vendor.meta_data.should_not be_nil
     first_vendor.meta_data.last_updated_time.should == DateTime.parse("2014-12-08T19:36:24-08:00")

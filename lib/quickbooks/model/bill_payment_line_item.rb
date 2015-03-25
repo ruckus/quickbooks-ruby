@@ -6,7 +6,7 @@ module Quickbooks
       PAYMENT_LINE_DETAIL = 'PaymentLineDetail'
       DISCOUNT_LINE_DETAIL = 'DiscountLineDetail'
 
-      xml_accessor :id, :from => 'Id', :as => Integer
+      xml_accessor :id, :from => 'Id'
       xml_accessor :line_num, :from => 'LineNum', :as => Integer
       xml_accessor :description, :from => 'Description'
       xml_accessor :amount, :from => 'Amount', :as => BigDecimal, :to_xml => to_xml_big_decimal

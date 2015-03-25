@@ -91,7 +91,7 @@ describe "Quickbooks::Service::Invoice" do
     invoice.line_items << line_item
 
     created_invoice = @service.create(invoice)
-    created_invoice.id.should == 1
+    created_invoice.id.should == "1"
   end
 
   it "can sparse update an Invoice" do
@@ -165,7 +165,7 @@ describe "Quickbooks::Service::Invoice" do
     invoice.line_items << discount_line_item
 
     created_invoice = @service.create(invoice)
-    created_invoice.id.should == 4
+    created_invoice.id.should == "4"
   end
 
   it "can send an invoice using bill_email" do

@@ -45,7 +45,7 @@ describe "Quickbooks::Service::Item" do
     item.name = "Comfy Pillow"
 
     created_item = @service.create(item)
-    created_item.id.should == 2
+    created_item.id.should == "2"
   end
 
   it "can sparse update an Item" do

@@ -15,7 +15,7 @@ module Quickbooks
         stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
 
         payment_methods = @service.query.entries
-        expect(payment_methods.count).to eq 8
+        expect(payment_methods.count).to eq(8)
       end
 
       it "queries a payment method by name" do
@@ -25,7 +25,7 @@ module Quickbooks
         stub_request(:get, url, ["200", "OK"], xml)
 
         payment_method = @service.fetch_by_name("Discover")
-        expect(payment_method.name).to eq "Discover"
+        expect(payment_method.name).to eq("Discover")
       end
 
       it "can fetch a payment_method by ID" do
@@ -33,7 +33,7 @@ module Quickbooks
         model = Quickbooks::Model::PaymentMethod
         stub_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/7", ["200", "OK"], xml)
         payment_method = @service.fetch_by_id(7)
-        payment_method.name.should == 'Discover'
+        payment_method.name.should eq('Discover')
       end
 
       it "can create a payment_method" do
@@ -45,7 +45,7 @@ module Quickbooks
         payment_method.type = Quickbooks::Model::PaymentMethod::CREDIT_CARD
         payment_method.valid_for_create?.should == true
         created_payment_method = @service.create(payment_method)
-        created_payment_method.id.should == 7
+        created_payment_method.id.should == "7"
       end
 
       it "cannot sparse update a payment method" do

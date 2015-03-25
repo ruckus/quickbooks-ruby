@@ -14,9 +14,9 @@ describe "Quickbooks::Service::Payment" do
 
     payments = @service.query
 
-    payments.entries.count.should eq(1)
+    payments.entries.count.should == 1
     payment = payments.entries.first
-    payment.private_note.should eq("H60jzmw0Uq")
+    payment.private_note.should == "H60jzmw0Uq"
   end
 
   it "can fetch a payment by ID" do
@@ -27,7 +27,7 @@ describe "Quickbooks::Service::Payment" do
 
     payment = @service.fetch_by_id(1)
 
-    payment.private_note.should eq("H60jzmw0Uq")
+    payment.private_note.should == "H60jzmw0Uq"
   end
 
   it "can create a payment" do
@@ -38,7 +38,7 @@ describe "Quickbooks::Service::Payment" do
 
     created_payment = @service.create(payment)
 
-    created_payment.id.should eq(8748)
+    created_payment.id.should == "8748"
   end
 
   it "can sparse update a payment" do
@@ -51,7 +51,7 @@ describe "Quickbooks::Service::Payment" do
 
     update_response = @service.update(payment, :sparse => true)
 
-    update_response.total.should eq(40.0)
+    update_response.total.should == 40.0
   end
 
   it "can delete a payment" do
@@ -70,8 +70,8 @@ describe "Quickbooks::Service::Payment" do
 
     xml = payment.to_xml
 
-    xml.at("TotalAmt").text.should eq("42.0")
-    xml.at("UnappliedAmt").text.should eq("42.0")
-    xml.at("ExchangeRate").text.should eq("42.0")
+    xml.at("TotalAmt").text.should == "42.0"
+    xml.at("UnappliedAmt").text.should == "42.0"
+    xml.at("ExchangeRate").text.should == "42.0"
   end
 end

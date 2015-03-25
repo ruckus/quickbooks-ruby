@@ -25,6 +25,6 @@ describe "Quickbooks::Model::JournalEntry" do
   it "parse from XML" do
     xml = fixture("journal_entry.xml")
     item = Quickbooks::Model::JournalEntry.from_xml(xml)
-    item.id.should == 450
+    item.id.should == "450"
   end
 end

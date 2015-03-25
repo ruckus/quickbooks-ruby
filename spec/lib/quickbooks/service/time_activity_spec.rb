@@ -84,7 +84,7 @@ describe "Quickbooks::Service::TimeActivity" do
 
     time_activity.valid_for_create?.should == true
     created_time_activity = @service.create(time_activity)
-    created_time_activity.id.should == 1
+    created_time_activity.id.should == "1"
   end
 
   it "can delete a time_activity" do

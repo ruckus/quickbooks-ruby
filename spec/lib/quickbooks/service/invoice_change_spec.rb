@@ -13,7 +13,7 @@ describe "Quickbooks::Service::InvoiceChange" do
 
     first_invoice = invoices.entries.first
     first_invoice.status.should == 'Deleted'
-    first_invoice.id.should == 39
+    first_invoice.id.should == "39"
 
     first_invoice.meta_data.should_not be_nil
     first_invoice.meta_data.last_updated_time.should == DateTime.parse("2014-12-08T19:36:24-08:00")

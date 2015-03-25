@@ -13,7 +13,7 @@ describe "Quickbooks::Service::CustomerChange" do
 
     first_customer = customers.entries.first
     first_customer.status.should == 'Deleted'
-    first_customer.id.should == 39
+    first_customer.id.should == "39"
 
     first_customer.meta_data.should_not be_nil
     first_customer.meta_data.last_updated_time.should == DateTime.parse("2014-12-08T19:36:24-08:00")

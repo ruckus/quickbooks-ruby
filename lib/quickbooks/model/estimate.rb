@@ -16,7 +16,7 @@ module Quickbooks
       XML_COLLECTION_NODE = "Estimate"
       XML_NODE = "Estimate"
 
-      xml_accessor :id, :from => 'Id', :as => Integer
+      xml_accessor :id, :from => 'Id'
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :custom_fields, :from => 'CustomField', :as => [CustomField]
