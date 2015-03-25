@@ -159,28 +159,6 @@ module Quickbooks
         xmldoc.xpath("//xmlns:IntuitResponse/xmlns:#{model::XML_NODE}[@status='Deleted']").length == 1
       end
 
-      def perform_write(model, body = "", params = {}, headers = {})
-        url = url_for_resource(model::REST_RESOURCE)
-        unless headers.has_key?('Content-Type')
-          headers['Content-Type'] = 'text/xml'
-        end
-
-        response = do_http_post(url, body.strip, params, headers)
-
-        result = nil
-        if response
-          case response.code.to_i
-          when 200
-            result = Quickbooks::Model::RestResponse.from_xml(response.plain_body)
-          when 401
-            raise Quickbooks::IntuitRequestException.new("Authorization failure: token timed out?")
-          when 404
-            raise Quickbooks::IntuitRequestException.new("Resource Not Found: Check URL and try again")
-          end
-        end
-        result
-      end
-
       def do_http_post(url, body = "", params = {}, headers = {}) # throws IntuitRequestException
         url = add_query_string_to_url(url, params)
         do_http(:post, url, body, headers)
