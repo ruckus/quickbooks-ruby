@@ -9,13 +9,13 @@ module Quickbooks
 
       xml_name XML_NODE
 
-      xml_accessor :id, :from => 'Id', :as => Integer
+      xml_accessor :id, :from => 'Id'
       xml_accessor :name, :from => 'Name'
       xml_accessor :type, :from => 'BudgetType'
       xml_accessor :entry_type, :from => 'BudgetEntryType'
       xml_accessor :start_date, :from => 'StartDate'
       xml_accessor :end_date, :from => 'EndDate'
-      xml_accessor :active, :from => 'Active'
+      xml_accessor :active?, :from => 'Active'
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
 

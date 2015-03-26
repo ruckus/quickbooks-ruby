@@ -5,7 +5,7 @@ describe "Quickbooks::Model::Budget" do
     budget = Quickbooks::Model::Budget.from_xml(xml)
 
     budget.sync_token.should == 1
-    budget.active.should == 'true'
+    budget.active?.should == true
     budget.line_items.count.should == 192
 
     line1 = budget.line_items[0]

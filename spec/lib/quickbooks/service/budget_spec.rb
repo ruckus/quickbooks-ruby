@@ -11,7 +11,7 @@ describe "Quickbooks::Service::Budget" do
     budgets = @service.query
     budgets.entries.count.should == 2
     first_budget = budgets.entries[0]
-    first_budget.id.should == 1
+    first_budget.id.should == "1"
   end
 
   it "can fetch a Budget by ID" do
