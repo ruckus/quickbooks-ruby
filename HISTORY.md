@@ -1,3 +1,7 @@
+## 0.2.1 (2015-03-25)
+
+* Had to yank 0.2.0 due to a gemspec versioning issue.
+
 ## 0.2.0 (2015-03-25)
 
 * Backwards Incompatible change: All `Id` attributes are parsed as strings. Previously they were parsed and cast as integer.
