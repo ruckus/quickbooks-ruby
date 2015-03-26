@@ -13,6 +13,8 @@ module Quickbooks
       xml_accessor :name, :from => 'Name'
       xml_accessor :type, :from => 'BudgetType'
       xml_accessor :entry_type, :from => 'BudgetEntryType'
+      xml_accessor :start_date, :from => 'StartDate'
+      xml_accessor :end_date, :from => 'EndDate'
       xml_accessor :active, :from => 'Active'
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
