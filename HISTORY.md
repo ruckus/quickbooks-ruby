@@ -1,3 +1,8 @@
+## 0.2.0 (2015-03-25)
+
+* Backwards Incompatible change: All `Id` attributes are parsed as strings. Previously they were parsed and cast as integer.
+* Attachable service and model for uploading static files.
+
 ## 0.1.9 (2015-02-24)
 
 * Merge pull request #222 from gouravmodi/master - Added CDC for Item
