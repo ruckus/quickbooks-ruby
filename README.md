@@ -300,6 +300,7 @@ invoice = Quickbooks::Model::Invoice.new
 invoice.customer_id = 99
 invoice.txn_date = Date.civil(2013, 11, 20)
 invoice.doc_number = "1001" # my custom Invoice # - can leave blank to have Intuit auto-generate it
+invoice.line_items = []
 
 line_item = Quickbooks::Model::InvoiceLineItem.new
 line_item.amount = 50
@@ -362,6 +363,7 @@ salesreceipt = Quickbooks::Model::SalesReceipt.new({
   payment_method_id: 333 #The ID of the PaymentMethod entity you want to be used for this transaction
 })
 salesreceipt.auto_doc_number! #allows Intuit to auto-generate the transaction number
+salesreceipt.line_items = []
 
 line_item = Quickbooks::Model::Line.new
 line_item.amount = 50
