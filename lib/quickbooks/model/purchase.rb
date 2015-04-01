@@ -13,6 +13,7 @@ module Quickbooks
   module Model
     class Purchase < BaseModel
       include GlobalTaxCalculation
+      include HasLineItems
 
       #== Constants
       REST_RESOURCE = 'purchase'

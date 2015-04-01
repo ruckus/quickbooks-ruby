@@ -1,6 +1,8 @@
 module Quickbooks
   module Model
     class BillPayment < BaseModel
+      include HasLineItems
+
       XML_COLLECTION_NODE = "BillPayment"
       XML_NODE = "BillPayment"
       REST_RESOURCE = 'billpayment'
