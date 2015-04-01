@@ -45,6 +45,9 @@ module Quickbooks
 
       reference_setters
 
+      #== Validations
+      validate :line_item_size
+
       #== This adds aliases for backwards compatability to old attributes names
       alias_method :total_amount, :total
       alias_method :total_amount=, :total=

@@ -1,0 +1,25 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2015-03-31T10:26:42.762-08:00">
+<Purchase>
+  <Id>160</Id>
+  <SyncToken>0</SyncToken>
+  <MetaData>
+    <CreateTime>2015-03-31T08:27:00-0400</CreateTime>
+    <LastUpdatedTime>2015-03-31T08:27:00-0400</LastUpdatedTime>
+  </MetaData>
+  <TxnDate>2015-03-31</TxnDate>
+  <Line>
+    <Id>1</Id>
+    <Description>Rink Liner</Description>
+    <Amount>419.99</Amount>
+    <DetailType>AccountBasedExpenseLineDetail</DetailType>
+    <AccountBasedExpenseLineDetail>
+      <CustomerRef name="Amy's Bird Sanctuary">1</CustomerRef>
+      <AccountRef name="Disposal Fees">28</AccountRef>
+      <BillableStatus>NotBillable</BillableStatus>
+      <TaxCodeRef>NON</TaxCodeRef>
+    </AccountBasedExpenseLineDetail>
+  </Line>
+  <AccountRef name="Savings">36</AccountRef>
+  <PaymentType>Cash</PaymentType>
+  <TotalAmt>419.99</TotalAmt>
+</Purchase>
