@@ -21,12 +21,14 @@ describe Quickbooks::Service::Account do
     attachable = Quickbooks::Model::Attachable.new
     attachable.file_name = "monkey.jpg"
     attachable.note = "A note"
-    entity = Quickbooks::Model::EntityRef.new
+    entity = Quickbooks::Model::BaseReference.new
     entity.type = 'Customer'
     entity.value = 3
     attachable.attachable_ref = Quickbooks::Model::AttachableRef.new(entity)
+    n = Nokogiri::XML(attachable.to_xml.to_s)
+    n.at('AttachableRef > EntityRef').content.should == '3'
+    n.at('AttachableRef > EntityRef')[:type].should == 'Customer'
     response = @service.create(attachable)
-
     response.note.should == attachable.note
   end
 

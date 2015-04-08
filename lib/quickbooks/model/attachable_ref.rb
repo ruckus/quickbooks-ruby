@@ -4,7 +4,7 @@ require 'quickbooks/model/custom_field'
 module Quickbooks
   module Model
     class AttachableRef < BaseModel
-      xml_accessor :entity_ref, :as => EntityRef
+      xml_accessor :entity_ref, :as => BaseReference
       xml_accessor :line_info
       xml_accessor :include_on_send?
       xml_accessor :inactive?
