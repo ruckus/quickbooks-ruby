@@ -15,6 +15,7 @@ require 'quickbooks/util/name_entity'
 require 'quickbooks/util/query_builder'
 
 #== Models
+require 'quickbooks/model/definition'
 require 'quickbooks/model/validator'
 require 'quickbooks/model/base_model'
 require 'quickbooks/model/base_reference'
