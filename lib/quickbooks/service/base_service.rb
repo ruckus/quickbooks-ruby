@@ -286,6 +286,10 @@ module Quickbooks
             if code_attr
               error[:code] = code_attr.value
             end
+            element_attr = error_element.attributes['element']
+            if code_attr
+              error[:element] = code_attr.value
+            end
             error[:message] = error_element.xpath("//xmlns:Message").text
             error[:detail] = error_element.xpath("//xmlns:Detail").text
           end
