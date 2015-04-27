@@ -14,7 +14,7 @@ describe "Quickbooks::Model::Bill" do
     bill.line_items.size.should == 2
 
     line_item1 = bill.line_items[0]
-    line_item1.id.should == 1
+    line_item1.id.should == "1"
     line_item1.amount.should == 700.0
     line_item1.account_based_expense_item?.should == true
     line_item1.account_based_expense_line_detail.account_ref.value.should == "42"
@@ -25,7 +25,7 @@ describe "Quickbooks::Model::Bill" do
     line_item1.account_based_expense_line_detail.tax_code_ref.to_s.should == "NON"
 
     line_item2 = bill.line_items[1]
-    line_item2.id.should == 2
+    line_item2.id.should == "2"
     line_item2.amount.should == 55.12
     line_item2.account_based_expense_item?.should == true
     line_item2.account_based_expense_line_detail.account_ref.value.should == "77"
@@ -45,7 +45,7 @@ describe "Quickbooks::Model::Bill" do
 
   describe "#global_tax_calculation" do
     subject { Quickbooks::Model::Bill.new }
-    it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxIncluded"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxInclusive"
     it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxExcluded"
     it_should_behave_like "a model with a valid GlobalTaxCalculation", "NotApplicable"
     it_should_behave_like "a model with a valid GlobalTaxCalculation", ""

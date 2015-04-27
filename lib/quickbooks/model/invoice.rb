@@ -10,6 +10,7 @@ module Quickbooks
     class Invoice < BaseModel
       include DocumentNumbering
       include GlobalTaxCalculation
+      include HasLineItems
 
       #== Constants
       REST_RESOURCE = 'invoice'
@@ -17,7 +18,7 @@ module Quickbooks
       XML_NODE = "Invoice"
       EMAIL_STATUS_NEED_TO_SEND = 'NeedToSend'
 
-      xml_accessor :id, :from => 'Id', :as => Integer
+      xml_accessor :id, :from => 'Id'
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :custom_fields, :from => 'CustomField', :as => [CustomField]
@@ -41,8 +42,8 @@ module Quickbooks
       xml_accessor :ship_date, :from => 'ShipDate', :as => Date
       xml_accessor :tracking_num, :from => 'TrackingNum'
       xml_accessor :ar_account_ref, :from => 'ARAccountRef', :as => BaseReference
-      xml_accessor :total_amount, :from => 'TotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
-      xml_accessor :home_total_amount, :from => 'HomeTotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :home_total, :from => 'HomeTotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :apply_tax_after_discount?, :from => 'ApplyTaxAfterDiscount'
       xml_accessor :print_status, :from => 'PrintStatus'
       xml_accessor :email_status, :from => 'EmailStatus'
@@ -50,24 +51,27 @@ module Quickbooks
       xml_accessor :deposit, :from => 'Deposit', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
       xml_accessor :allow_ipn_payment?, :from => 'AllowIPNPayment'
+      xml_accessor :delivery_info, :from => 'DeliveryInfo', :as => DeliveryInfo
       xml_accessor :bill_email, :from => 'BillEmail', :as => EmailAddress
       xml_accessor :allow_online_payment?, :from => 'AllowOnlinePayment'
       xml_accessor :allow_online_credit_card_payment?, :from => 'AllowOnlineCreditCardPayment'
       xml_accessor :allow_online_ach_payment?, :from => 'AllowOnlineACHPayment'
+      xml_accessor :deposit_to_account_ref, :from => 'DepositToAccountRef', :as => BaseReference
 
-      reference_setters :customer_ref, :class_ref, :sales_term_ref, :ship_method_ref
-      reference_setters :ar_account_ref, :department_ref, :ar_account_ref, :currency_ref
+
+      reference_setters
+
+      #== This adds aliases for backwards compatability to old attributes names
+      alias_method :total_amount, :total
+      alias_method :total_amount=, :total=
+      alias_method :home_total_amount, :home_total
+      alias_method :home_total_amount=, :home_total=
 
       #== Validations
       validate :line_item_size
       validate :existence_of_customer_ref
       validate :required_bill_email_if_email_delivery
       validate :document_numbering
-
-      def initialize(*args)
-        ensure_line_items_initialization
-        super
-      end
 
       def required_bill_email_if_email_delivery
         return unless email_status_for_delivery?

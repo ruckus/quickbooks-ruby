@@ -17,7 +17,7 @@ describe "Quickbooks::Model::Employee" do
     employee.mobile_phone.should be_nil
     employee.primary_email_address.address.should == 'jenny.employee@intuit.com'
     employee.address.should_not be_nil
-    employee.address.id.should == 50
+    employee.address.id.should == "50"
     employee.address.line1.should == "45 N. Elm Street"
     employee.address.city.should == "Middlefield"
     employee.address.country.should be_nil

@@ -16,9 +16,9 @@ module Quickbooks
         end until results.count < per_page
       end
 
-      def fetch_by_id(id, options = {})
+      def fetch_by_id(id, params = {})
         url = "#{url_for_resource(model.resource_for_singular)}/#{id}"
-        fetch_object(model, url, options)
+        fetch_object(model, url, params)
       end
 
       def create(entity, options = {})

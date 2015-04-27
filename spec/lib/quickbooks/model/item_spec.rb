@@ -3,7 +3,7 @@ describe "Quickbooks::Model::Item" do
   it "parse from XML" do
     xml = fixture("item.xml")
     item = Quickbooks::Model::Item.from_xml(xml)
-    item.id.should == 2
+    item.id.should == "2"
     item.sync_token.should == 0
     item.meta_data.should_not be_nil
     item.name.should == 'Plush Baby Doll'

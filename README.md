@@ -1,5 +1,7 @@
 # Quickbooks-Ruby
 
+[![Join the chat at https://gitter.im/ruckus/quickbooks-ruby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ruckus/quickbooks-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/ruckus/quickbooks-ruby.png?branch=master)](https://travis-ci.org/ruckus/quickbooks-ruby)
 
 Integration with Quickbooks Online via the Intuit Data Services v3 REST API.
@@ -274,6 +276,22 @@ customer.company_name = "New Company Name"
 service.update(customer, :sparse => true)
 ```
 
+## Reference Setters
+
+Some models require a reference to be set, to a Customer, or an Item, etc. In the Quickbooks API these references
+are labeled via a property like `CustomerRef`. In `quickbooks-ruby` the assignment of these references is done
+by using the setter on the `_id` property.
+
+For example, to specify a Customer with ID 99 on an Invoice you would do this:
+
+```ruby
+invoice = Quickbooks::Model::Invoice.new
+invoice.customer_id = 99
+```
+
+This will automatically set a `CustomerRef` XML packet with a value of 99.
+
+
 ## Generating an Invoice
 
 A complete example on generating a basic invoice:
@@ -305,6 +323,34 @@ puts created_invoice.id
 ```
 
 **Notes**: `line_item.amount` must equal the `unit_price * quantity` in the sales detail packet - otherwise Intuit will raise an exception.
+
+## Emailing Invoices
+
+The Quickbooks API offers a **send invoice** feature that sends the specified invoice model via email.  By default the email is sent to the `bill_email` on the invoice.  This feature returns an invoice model with updated `email_status` and `delivery_info` as shown below:
+
+```ruby
+invoice = invoice_service.fetch_by_id("1")
+sent_invoice = invoice_service.send(invoice)
+
+puts sent_invoice.email_status
+=> EmailSent
+puts sent_invoice.delivery_info.delivery_type
+=> Email
+puts sent_invoice.delivery_info.delivery_time
+=> Wed, 25 Feb 2015 18:56:04 UTC +00:00
+```
+
+It is possible to email the invoice to an altermate email address by including the email as a second parameter in the `invoice.send` method.  When a new email address is provided the invoice model that is returned will have the `bill_email` set to the new email address as show below:
+
+```ruby
+invoice = invoice_service.fetch_by_id("1")
+sent_invoice = invoice_service.send(invoice, "name@domain.com")
+
+puts send_invoice.bill_email.address
+=> name@domain.com
+```
+
+**Notes:** Quickbooks has global company settings to customize the send invoice email message content and format.
 
 ## Generating a SalesReceipt
 
@@ -356,6 +402,30 @@ customer = Quickbooks::Model::Customer.new
 customer.email_address = "foo@example.com"
 ```
 
+## Telephone Numbers
+Like Email Addresses, telephone numbers are not just basic strings but are top-level objects.
+
+```ruby
+phone1 = Quickbooks::Model::TelephoneNumber.new
+phone1.free_form_number = "97335530394"
+customer.mobile_phone = phone1
+```
+
+## Physical Addresses
+
+Addresses are also top-level objects, so they must be instantiated and set.
+
+```ruby
+address = Quickbooks::Model::PhysicalAddress.new
+
+address.line1 = "2200 Mission St."
+address.line2 = "Suite 201"
+address.city = "Santa Cruz"
+address.country_sub_division_code = "CA" # State, in United States
+address.postal_code = "95060"
+customer.billing_address = address
+```
+
 ## Batch Operations
 
 You can batch operations such creating an Invoice, updating a Customer, etc. The maximum batch size is 25 objects.
@@ -402,6 +472,90 @@ clause2 = util.clause("CompanyName", "=", "Smith")
 service.query("SELECT * FROM Customer WHERE #{clause1} AND #{clause2}")
 ```
 
+## Attachments
+
+The Quickbooks API supports two different types of attachments, depending on whether you have an actual file to upload or just
+want to upload "meta-data" about an operation.
+
+### Meta-data only: use the `Attachment` service
+
+```ruby
+meta = Quickbooks::Model::Attachable.new
+meta.file_name = "monkey.jpg"
+meta.note = "A note"
+meta.content_type = "image/jpeg"
+entity = Quickbooks::Model::BaseReference.new
+entity.type = 'Customer'
+entity.value = 3 # Id of the Customer
+meta.attachable_ref = Quickbooks::Model::AttachableRef.new(entity)
+```
+
+*Note*: No actual file is being attached, we are just describing a file.
+
+
+### Uploading an actual file
+
+```ruby
+upload_service = Quickbooks::Model::Upload.new
+
+# args:
+#     local-path to file
+#     file mime-type
+#     (optional) instance of Quickbooks::Model::Attachable - metadata
+result = upload_service.upload("tmp/monkey.jpg", "image/jpeg", attachable_metadata)
+```
+
+If successful `result` will be an instance of the `Attachable` model:
+
+```
+puts attach.temp_download_uri
+
+=> "https://intuit-qbo-prod-29.s3.amazonaws.com/12345%2Fattachments%2Fmonkey-1423760870606.jpg?Expires=1423761772&AWSAcc ... snip ..."
+```
+
+
+
+## Change Data Capture
+
+Quickbooks has an api called Change Data Capture that provides a way of finding out which Entities have recently changed.  This gem currently supports a way of querying changed invoices.  This is the only way to find out if an invoice has been deleted (not voided), since a deleted invoice will not be returned by a standard Invoice query.
+
+It is possible to request changes up to 30 days ago.
+
+```ruby
+service = Quickbooks::Service::InvoiceChange.new
+...
+changed = service.since(Time.now.utc - 5 days)
+```
+
+see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
+
+## Change Data Capture For Customers, Vendors and Items
+
+It is possible to find out which Customer, Vendor or Item Entries has recently changed.
+It is possible to request changes up to 30 days ago.
+
+```ruby
+customer_service = Quickbooks::Service::CustomerChange.new
+...
+customer_changed = customer_service.since(Time.now.utc - 5 days)
+```
+
+```ruby
+vendor_service = Quickbooks::Service::VendorChange.new
+...
+vendor_changed = vendor_service.since(Time.now.utc - 5 days)
+```
+
+```ruby
+item_service = Quickbooks::Service::ItemChange.new
+...
+item_changed = item_service.since(Time.now.utc - 5 days)
+```
+
+
+
+see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
+
 ## Logging
 
 ```ruby
@@ -428,6 +582,7 @@ Company Info      | n/a    | n/a    | yes   | n/a    | yes         |
 Credit Memo       | yes    | yes    | yes   | yes    | no          |
 Customer          | yes    | yes    | yes   | yes    | yes         |
 Department        | yes    | yes    | yes   | yes    | yes         |
+Deposit           | yes    | yes    | yes   | yes    | yes         |
 Employee          | yes    | yes    | yes   | yes    | yes         |
 Entitlements      | no     | no     | no    | no     | no          |
 Estimate          | yes    | yes    | yes   | yes    | yes         |

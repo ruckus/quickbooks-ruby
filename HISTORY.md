@@ -1,3 +1,42 @@
+## 0.2.2 (2015-04-08)
+
+* Fixed bug in attaching an upload to an entity. Merge pull request #239 from minimul/attach-ref. For attachable entity reference use base reference instead of entity reference
+Thanks @minimum
+
+* Ensure all models that have :line_items include the line-items initialization module. Addresses #232
+
+## 0.2.1 (2015-03-25)
+
+* Had to yank 0.2.0 due to a gemspec versioning issue.
+
+## 0.2.0 (2015-03-25)
+
+* Backwards Incompatible change: All `Id` attributes are parsed as strings. Previously they were parsed and cast as integer.
+* Attachable service and model for uploading static files.
+
+## 0.1.9 (2015-02-24)
+
+* Merge pull request #222 from gouravmodi/master - Added CDC for Item
+
+## 0.1.8 (2015-02-13)
+
+* Merge pull request #221 from gouravmodi/master - Added support for Vendor Change Data Capture
+* Merge pull request #210 from gherry/line-items - Add HasLineItem module to DRY transaction initialization
+* Ensure line items initialization for Invoice, Bill, JournalEntry and Payment
+* Add PurchaseTaxRateList to TaxCode
+* Merge pull request #207 from gherry/master - Add ability to fetch PurchaseTaxRateList from TaxCode
+* Namespace Validator class
+* Merge pull request #201 from ahey/master - Add support for Invoice Change Data Capture
+* Fix tax applicable on being interpreted as a date.
+* Merge pull request #199 from rdeshpande/master - Adds support for CompanyInfo NameValue pairs
+* Rename TaxIncluded to TaxInclusive for GlobalTaxCalculation.
+
+## 0.1.7 (2014-10-29)
+
+* Merge pull request #180 from arthurchui/error-401-403 - Added Quickbooks::Forbidden for HTTP 403
+
+* Merge pull request #181 from benzittlau/master - Connect the params argument from fetch_by_id to do_http_get
+
 ## 0.1.6 (2014-10-23)
 
 * Merge pull request #174 from arthurchui/sandbox-mode - allows for the specification of an alternate endpoints for Development / Production.

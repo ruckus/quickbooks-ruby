@@ -2,7 +2,7 @@ describe "Quickbooks::Model::TaxRate" do
   it "parse from XML" do
     xml = fixture("tax_rate.xml")
     item = Quickbooks::Model::TaxRate.from_xml(xml)
-    item.id.should == 9
+    item.id.should == "9"
     item.sync_token.should == 0
     item.meta_data.should_not be_nil
     item.name.should == "Santa Clara County"

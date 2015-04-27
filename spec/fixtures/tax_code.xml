@@ -17,5 +17,11 @@
       <TaxOrder>0</TaxOrder>
     </TaxRateDetail>
   </SalesTaxRateList>
-  <PurchaseTaxRateList/>
+  <PurchaseTaxRateList>
+    <TaxRateDetail>
+      <TaxRateRef name="Banana tax">2</TaxRateRef>
+      <TaxTypeApplicable>TaxOnAmount</TaxTypeApplicable>
+      <TaxOrder>0</TaxOrder>
+    </TaxRateDetail>
+  </PurchaseTaxRateList>
 </TaxCode>

@@ -1,0 +1,31 @@
+<Deposit domain="QBO" sparse="false">
+  <Id>155</Id>
+  <SyncToken>0</SyncToken>
+  <MetaData>
+    <CreateTime>2015-03-07T11:30:04-07:00</CreateTime>
+    <LastUpdatedTime>2015-03-07T11:30:04-07:00</LastUpdatedTime>
+  </MetaData>
+  <PrivateNote>Deposit smoke test</PrivateNote>
+  <TxnDate>2015-03-07</TxnDate>
+  <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+  <Line>
+    <Amount>262</Amount>
+    <LinkedTxn>
+      <TxnId>154</TxnId>
+      <TxnType>Payment</TxnType>
+      <TxnLineId>0</TxnLineId>
+    </LinkedTxn>
+  </Line>
+  <Line>
+    <Id>1</Id>
+    <LineNum>1</LineNum>
+    <Amount>-62.50</Amount>
+    <DetailType>DepositLineDetail</DetailType>
+    <DepositLineDetail>
+      <AccountRef name="Uncategorized Expense">31</AccountRef>
+      <PaymentMethodRef name="Cash">1</PaymentMethodRef>
+    </DepositLineDetail>
+  </Line>
+  <DepositToAccountRef name="Checking">4</DepositToAccountRef>
+  <TotalAmt>200.00</TotalAmt>
+</Deposit>

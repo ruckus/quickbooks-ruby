@@ -9,7 +9,7 @@ module Quickbooks
 
       xml_name XML_NODE
 
-      xml_accessor :id, :from => 'Id', :as => Integer
+      xml_accessor :id, :from => 'Id'
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
 
@@ -24,15 +24,37 @@ module Quickbooks
 
       xml_accessor :billable_status, :from => 'BillableStatus'
       xml_accessor :taxable, :from => 'Taxable'
-      xml_accessor :hours, :from => 'Hours', :as => Integer
       xml_accessor :hourly_rate, :from => 'HourlyRate'
       xml_accessor :minutes, :from => 'Minutes', :as => Integer
+      xml_accessor :hours, :from => 'Hours', :as => Integer
+      xml_accessor :break_minutes, :from => 'BreakMinutes', :as => Integer
+      xml_accessor :break_hours, :from => 'BreakHours', :as => Integer
       xml_accessor :description, :from => 'Description'
 
-      #== Validations
+      xml_accessor :attachable_ref, :from => 'AttachableRef', :as => BaseReference
+      xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
+      xml_accessor :start_time, :from => 'StartTime', :as => DateTime
+      xml_accessor :end_time, :from => 'EndTime', :as => DateTime
+      xml_accessor :time_zone, :from => 'TimeZone'
+
+      reference_setters
+
+      # == Validations
       validates_inclusion_of :name_of, :in => NAMEOF_OPTIONS
-      validates_presence_of :employee_ref, :if => Proc.new { |ta| ta.name_of == "Employee" }
-      validates_presence_of :vendor_ref, :if => Proc.new { |ta| ta.name_of == "Vendor" }
+      validate :existence_of_employee_ref, :if => Proc.new { |ta| ta.name_of == "Employee" }
+      validate :existence_of_vendor_ref, :if => Proc.new { |ta| ta.name_of == "Vendor" }
+
+      def existence_of_employee_ref
+        if employee_ref.nil? || (employee_ref && employee_ref.value == 0)
+          errors.add(:employee_ref, "VendorRef is required and must be a non-zero value.")
+        end
+      end
+
+      def existence_of_vendor_ref
+        if vendor_ref.nil? || (vendor_ref && vendor_ref.value == 0)
+          errors.add(:vendor_ref, "VendorRef is required and must be a non-zero value.")
+        end
+      end
 
       def valid_for_update?
         if sync_token.nil?

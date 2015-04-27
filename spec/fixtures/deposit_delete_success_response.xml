@@ -1,0 +1,5 @@
+<IntuitResponse time="2015-03-08T12:02:01.895-07:00" xmlns="http://schema.intuit.com/finance/v3">
+  <Deposit domain="QBO" status="Deleted">
+    <Id>148</Id>
+  </Deposit>
+</IntuitResponse>

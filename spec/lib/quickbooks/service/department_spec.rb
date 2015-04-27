@@ -35,7 +35,7 @@ describe "Quickbooks::Service::Department" do
     department.sub_department = false
     department.valid_for_create?.should == true
     created_department = @service.create(department)
-    created_department.id.should == 2
+    created_department.id.should == "2"
   end
 
   it "cannot sparse update a department" do

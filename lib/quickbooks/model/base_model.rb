@@ -43,10 +43,6 @@ module Quickbooks
         HashWithIndifferentAccess[attributes]
       end
 
-      def ensure_line_items_initialization
-        self.line_items ||= []
-      end
-
       def inspect
         # it would be nice if we could inspect all the children,
         # but it's likely to blow the stack in some cases
@@ -79,7 +75,9 @@ module Quickbooks
         #    self.discount_ref = BaseReference.new(id)
         # end
         def reference_setters(*args)
-          args.each do |attribute|
+          references = args.empty? ? reference_attrs : args
+
+          references.each do |attribute|
             method_name = "#{attribute.to_s.gsub('_ref', '_id')}=".to_sym
             unless instance_methods(false).include?(method_name)
               method_definition = <<-METH
@@ -92,9 +90,14 @@ module Quickbooks
           end
         end
 
+        def reference_attrs
+          matches = roxml_attrs.select{|attr| attr.sought_type == Quickbooks::Model::BaseReference}.map{|attr| attr.accessor}
+        end
+
         def inspect
           "#{super}(#{attrs_with_types.join " "})"
         end
+
         def attrs_with_types
           roxml_attrs.map do |attr|
             "#{attr.accessor}:" +
