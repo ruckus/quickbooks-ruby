@@ -5,7 +5,7 @@ module Quickbooks
       XML_NODE = "Reports"
       REST_RESOURCE = 'reports'
 
-      REPORTS = ['BalanceSheet', 'ProfitandLoss', 'ProfitandLossDetail', 'CashFlow']
+      REPORT_TYPES = ['BalanceSheet', 'ProfitandLoss', 'ProfitAndLossDetail', 'TrialBalance', 'CashFlow', 'InventoryValuationSummary', 'CustomerSales', 'ItemSales', 'DepartmentSales', 'ClassSales', 'CustomerIncome', 'CustomerBalance', 'CustomerBalanceDetail', 'AgedReceivables', 'AgedReceivableDetail', 'VendorBalance', 'VendorBalanceDetail', 'AgedPayables', 'AgedPayableDetail', 'VendorExpenses', 'GeneralLedgerDetail']
 
       xml_name XML_NODE
 
