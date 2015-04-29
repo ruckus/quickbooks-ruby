@@ -6,6 +6,7 @@ module Quickbooks
   module Model
     class VendorCredit < BaseModel
       include GlobalTaxCalculation
+      include HasLineItems
 
       #== Constants
       REST_RESOURCE = 'vendorcredit'

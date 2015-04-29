@@ -1,3 +1,10 @@
+## 0.2.2 (2015-04-08)
+
+* Fixed bug in attaching an upload to an entity. Merge pull request #239 from minimul/attach-ref. For attachable entity reference use base reference instead of entity reference
+Thanks @minimum
+
+* Ensure all models that have :line_items include the line-items initialization module. Addresses #232
+
 ## 0.2.1 (2015-03-25)
 
 * Had to yank 0.2.0 due to a gemspec versioning issue.

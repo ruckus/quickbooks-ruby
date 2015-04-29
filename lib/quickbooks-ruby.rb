@@ -15,6 +15,7 @@ require 'quickbooks/util/name_entity'
 require 'quickbooks/util/query_builder'
 
 #== Models
+require 'quickbooks/model/definition'
 require 'quickbooks/model/validator'
 require 'quickbooks/model/base_model'
 require 'quickbooks/model/base_reference'
@@ -100,6 +101,7 @@ require 'quickbooks/model/invoice_change'
 require 'quickbooks/model/customer_change'
 require 'quickbooks/model/vendor_change'
 require 'quickbooks/model/item_change'
+require 'quickbooks/model/reports'
 
 
 #== Services
@@ -142,6 +144,7 @@ require 'quickbooks/service/upload'
 require 'quickbooks/util/multipart'
 require 'quickbooks/service/vendor_change'
 require 'quickbooks/service/item_change'
+require 'quickbooks/service/reports'
 
 module Quickbooks
   @@sandbox_mode = false
