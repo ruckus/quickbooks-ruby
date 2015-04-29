@@ -1,3 +1,9 @@
+## 0.2.3 (2015-04-28)
+
+* Reports. Merged PR #204 - thank you @raksonibs
+* Parse the Fault element and surface the @element attribute - Merged PR #245 - thank you @arthurchui
+* Surface a model Transaction Type and provide inquiry methods - Merged PR #246 - thank you @arthurchui
+
 ## 0.2.2 (2015-04-08)
 
 * Fixed bug in attaching an upload to an entity. Merge pull request #239 from minimul/attach-ref. For attachable entity reference use base reference instead of entity reference
