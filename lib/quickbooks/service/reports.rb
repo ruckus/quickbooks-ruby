@@ -24,7 +24,7 @@ module Quickbooks
       end
 
       def query(object_query = 'BalanceSheet', date_macro = 'This Fiscal Year-to-date', options = {})
-        fetch_collection(model, date_macro , object_query)
+        fetch_collection(model, date_macro , object_query, options)
       end
 
       private
