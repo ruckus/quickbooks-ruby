@@ -6,6 +6,7 @@ module Quickbooks
         if(options == {})
           return "#{url_for_base}/reports/#{which_report}?date_macro=#{URI.encode_www_form_component(date_macro)}"
         else
+          options_string = ""
           options.each do |key, value|
             options_string += "#{key}=#{value}&"
           end
@@ -16,7 +17,7 @@ module Quickbooks
         end
       end
 
-      def fetch_collection(model, date_macro, object_query, options)
+      def fetch_collection(model, date_macro, object_query, options = {})
         response = do_http_get(url_for_query(object_query, date_macro, options))
 
         parse_collection(response, model)
