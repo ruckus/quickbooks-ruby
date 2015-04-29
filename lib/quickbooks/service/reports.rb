@@ -12,7 +12,7 @@ module Quickbooks
           end
           options_string = options_string[0..-2]
           options_string.gsub!(/\s/,"%20")
-          finalURL = "#{url_for_base}/reports/#{which_report}?date_macro=#{URI.encode_www_form_component(date_macro)}&#{options_string}"
+          finalURL = "#{url_for_base}/reports/#{which_report}?date_macro=#{date_macro}&#{options_string}"
           puts finalURL
           return finalURL
         end
