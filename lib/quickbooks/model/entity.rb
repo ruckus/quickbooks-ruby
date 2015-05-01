@@ -4,7 +4,7 @@ module Quickbooks
       include NameEntity::Quality
 
       xml_accessor :type, :from => 'Type'
-      xml_accessor :entity_ref, :from => 'EntityRef'
+      xml_accessor :entity_ref, :as => BaseReference
 
       reference_setters :entity_ref
 
