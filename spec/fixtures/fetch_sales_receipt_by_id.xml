@@ -47,6 +47,7 @@
       <Lat>INVALID</Lat>
       <Long>INVALID</Long>
     </ShipAddr>
+    <ShipMethodRef name="FedEx">FedEx</ShipMethodRef>
     <GlobalTaxCalculation>NotApplicable</GlobalTaxCalculation>
     <TotalAmt>10.00</TotalAmt>
     <PrintStatus>NotSet</PrintStatus>

@@ -292,6 +292,22 @@ invoice.customer_id = 99
 This will automatically set a `CustomerRef` XML packet with a value of 99.
 
 
+## SalesReceipts & Ship Methods
+
+The QBO API documentation states that `SalesReceipt` has a `ShipMethodRef` attribute. Normally, all attributes of a `Ref` type
+take an pseudo-integer argument, representing the foreign ID, which in turn point to a valid object with that ID.
+
+I say *pseudo* because they look like Integers but Intuit has made it clear they should be handled as strings.
+
+Anyways, its subtle but the value for a `SalesReceipt#ShipMethodRef` while it is a `BaseReference` needs to be set manually:
+
+```ruby
+shipping_reference = Quickbooks::Model::BaseReference.new
+shipping_reference.name = 'FedEx'
+shipping_reference.value = 'FedEx'
+receipt.ship_method_ref = shipping_reference
+```
+
 ## Generating an Invoice
 
 A complete example on generating a basic invoice:
