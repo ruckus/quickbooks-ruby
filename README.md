@@ -545,9 +545,9 @@ changed = service.since(Time.now.utc - 5 days)
 
 see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
 
-## Change Data Capture For Customers, Vendors and Items
+## Change Data Capture For Customers, Vendors, Items, Payments and Credit Memos
 
-It is possible to find out which Customer, Vendor or Item Entries has recently changed.
+It is possible to find out which Customer, Vendor, Item, Payment or Credit Memo Entries have recently changed.
 It is possible to request changes up to 30 days ago.
 
 ```ruby

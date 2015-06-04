@@ -1,14 +1,12 @@
 describe "Quickbooks::Service::ItemChange" do
-  before(:all) do
-    construct_service :item_change
-  end
+  let(:service) { construct_service :item_change }
 
   it "can query for items" do
     xml = fixture("item_changes.xml")
     model = Quickbooks::Model::ItemChange
 
-    stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
-    items = @service.query
+    stub_request(:get, service.url_for_query, ["200", "OK"], xml)
+    items = service.query
     items.entries.count.should == 1
 
     first_item = items.entries.first
@@ -17,6 +15,11 @@ describe "Quickbooks::Service::ItemChange" do
 
     first_item.meta_data.should_not be_nil
     first_item.meta_data.last_updated_time.should == DateTime.parse("2014-12-08T19:36:24-08:00")
+  end
+
+  describe "#url_for_query" do
+    subject { service.url_for_query }
+    it { should eq "#{service.url_for_base}/cdc?entities=Item" }
   end
 
 end

@@ -1,15 +1,15 @@
 module Quickbooks
   module Service
-    class InvoiceChange < ChangeService
+    class CreditMemoChange < ChangeService
 
       private
 
       def entity
-        "Invoice"
+        "CreditMemo"
       end
 
       def model
-        Quickbooks::Model::InvoiceChange
+        Quickbooks::Model::CreditMemoChange
       end
     end
   end

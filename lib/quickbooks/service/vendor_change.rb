@@ -1,20 +1,13 @@
 module Quickbooks
   module Service
-    class VendorChange < BaseService
-      
-      def url_for_query(query = nil, start_position = 1, max_results = 20)
-        q = "Vendor"
-        q = "#{q}&#{query}" if query.present?
+    class VendorChange < ChangeService
 
-        "#{url_for_base}/cdc?entities=#{q}"
-      end
-
-      def since(timestamp)
-        query("changedSince=#{URI.encode_www_form_component(timestamp.iso8601)}")
-      end
-      
       private
-      
+
+      def entity
+        "Vendor"
+      end
+
       def model
         Quickbooks::Model::VendorChange
       end
