@@ -97,11 +97,14 @@ require 'quickbooks/model/batch_request'
 require 'quickbooks/model/batch_response'
 require 'quickbooks/model/preferences'
 require 'quickbooks/model/refund_receipt'
+require 'quickbooks/model/change_model'
 require 'quickbooks/model/invoice_change'
 require 'quickbooks/model/customer_change'
 require 'quickbooks/model/vendor_change'
 require 'quickbooks/model/item_change'
 require 'quickbooks/model/reports'
+require 'quickbooks/model/credit_memo_change'
+require 'quickbooks/model/payment_change'
 
 
 #== Services
@@ -138,6 +141,7 @@ require 'quickbooks/service/tax_code'
 require 'quickbooks/service/batch'
 require 'quickbooks/service/preferences'
 require 'quickbooks/service/refund_receipt'
+require 'quickbooks/service/change_service'
 require 'quickbooks/service/invoice_change'
 require 'quickbooks/service/customer_change'
 require 'quickbooks/service/upload'
@@ -145,6 +149,8 @@ require 'quickbooks/util/multipart'
 require 'quickbooks/service/vendor_change'
 require 'quickbooks/service/item_change'
 require 'quickbooks/service/reports'
+require 'quickbooks/service/credit_memo_change'
+require 'quickbooks/service/payment_change'
 
 module Quickbooks
   @@sandbox_mode = false

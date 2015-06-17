@@ -1,0 +1,6 @@
+<Payment domain="QBO" status="Deleted">
+  <Id>39</Id>
+  <MetaData>
+    <LastUpdatedTime>2014-12-08T19:36:24-08:00</LastUpdatedTime>
+  </MetaData>
+</Payment>
