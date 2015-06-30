@@ -1,7 +1,7 @@
 describe "Quickbooks::Service::Deposit" do
   before(:all) { construct_service :deposit }
 
-  # let(:customer_ref) { Quickbooks::Model::BaseReference.new(value: 42) }
+  # let(:customer_ref) { Quickbooks::Model::BaseReference.new(42) }
   let(:model) { Quickbooks::Model::Deposit }
   let(:deposit) { model.new :id => 8748 }
   let(:resource) { model::REST_RESOURCE }

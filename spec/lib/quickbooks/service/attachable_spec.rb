@@ -21,7 +21,7 @@ describe Quickbooks::Service::Account do
     attachable = Quickbooks::Model::Attachable.new
     attachable.file_name = "monkey.jpg"
     attachable.note = "A note"
-    entity = Quickbooks::Model::BaseReference.new(type: 'Customer', value: 3)
+    entity = Quickbooks::Model::BaseReference.new(3, type: 'Customer')
     attachable.attachable_ref = Quickbooks::Model::AttachableRef.new(entity)
     n = Nokogiri::XML(attachable.to_xml.to_s)
     n.at('AttachableRef > EntityRef').content.should == '3'

@@ -72,7 +72,7 @@ module Quickbooks
         #   reference_setters :discount_ref
         # Would generate a method like:
         # def discount_id=(id)
-        #    self.discount_ref = BaseReference.new(value: id)
+        #    self.discount_ref = BaseReference.new(id)
         # end
         def reference_setters(*args)
           references = args.empty? ? reference_attrs : args
@@ -82,7 +82,7 @@ module Quickbooks
             unless instance_methods(false).include?(method_name)
               method_definition = <<-METH
               def #{method_name}(id)
-                self.#{attribute} = BaseReference.new(value: id)
+                self.#{attribute} = BaseReference.new(id)
               end
               METH
               class_eval(method_definition)

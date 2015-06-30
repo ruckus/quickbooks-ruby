@@ -1,7 +1,7 @@
 describe "Quickbooks::Service::BillPayment" do
   before(:all) { construct_service :bill_payment }
 
-  let(:vendor_ref) { Quickbooks::Model::BaseReference.new(value: 32) }
+  let(:vendor_ref) { Quickbooks::Model::BaseReference.new(32) }
   let(:model) { Quickbooks::Model::BillPayment }
   let(:bill_payment) do
     subject = model.new :id => 8748, :vendor_ref => vendor_ref

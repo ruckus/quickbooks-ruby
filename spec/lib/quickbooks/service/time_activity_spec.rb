@@ -60,11 +60,11 @@ describe "Quickbooks::Service::TimeActivity" do
 
     stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
 
-    employee = Quickbooks::Model::BaseReference.new(value: 66, name: 'John Smith')
+    employee = Quickbooks::Model::BaseReference.new(66, name: 'John Smith')
 
-    item = Quickbooks::Model::BaseReference.new(value: 49, name: 'General Consulting')
+    item = Quickbooks::Model::BaseReference.new(49, name: 'General Consulting')
 
-    customer = Quickbooks::Model::BaseReference.new(value: 123, name: 'Test Customer')
+    customer = Quickbooks::Model::BaseReference.new(123, name: 'Test Customer')
 
     time_activity = Quickbooks::Model::TimeActivity.new
     time_activity.txn_date = Date.today
