@@ -27,8 +27,7 @@ describe "Quickbooks::Model::JournalEntry" do
     jel = Quickbooks::Model::JournalEntryLineDetail.new
     entity = Quickbooks::Model::Entity.new
     entity.type = 'Customer'
-    entity_ref = Quickbooks::Model::BaseReference.new(1)
-    entity_ref.name = 'James Rockenstall'
+    entity_ref = Quickbooks::Model::BaseReference.new(value: 1, name: 'James Rockenstall')
     entity.entity_ref = entity_ref
     jel.entity = entity
     line_item.journal_entry_line_detail = jel
