@@ -48,9 +48,7 @@ module Quickbooks
         receipt = model.new
         receipt.customer_id = 2
 
-        shipping_reference = Quickbooks::Model::BaseReference.new
-        shipping_reference.name = 'FedEx'
-        shipping_reference.value = 'FedEx'
+        shipping_reference = Quickbooks::Model::BaseReference.new('FedEx', name: 'FedEx')
         receipt.ship_method_ref = shipping_reference
         receipt.txn_date = Time.now
         receipt.line_items = [line]

@@ -302,9 +302,7 @@ I say *pseudo* because they look like Integers but Intuit has made it clear they
 Anyways, its subtle but the value for a `SalesReceipt#ShipMethodRef` while it is a `BaseReference` needs to be set manually:
 
 ```ruby
-shipping_reference = Quickbooks::Model::BaseReference.new
-shipping_reference.name = 'FedEx'
-shipping_reference.value = 'FedEx'
+shipping_reference = Quickbooks::Model::BaseReference.new('FedEx', name: 'FedEx')
 receipt.ship_method_ref = shipping_reference
 ```
 
@@ -500,9 +498,7 @@ meta = Quickbooks::Model::Attachable.new
 meta.file_name = "monkey.jpg"
 meta.note = "A note"
 meta.content_type = "image/jpeg"
-entity = Quickbooks::Model::BaseReference.new
-entity.type = 'Customer'
-entity.value = 3 # Id of the Customer
+entity = Quickbooks::Model::BaseReference.new(3, type: 'Customer')
 meta.attachable_ref = Quickbooks::Model::AttachableRef.new(entity)
 ```
 
