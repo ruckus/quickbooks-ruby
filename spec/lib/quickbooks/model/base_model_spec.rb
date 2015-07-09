@@ -28,7 +28,7 @@ describe "Quickbooks::Model::BaseModel" do
 
     context "For a transaction entity" do
       before do
-        Definition::ClassMethods::TRANSACTION_ENTITIES.stub(include?: true)
+        Quickbooks::Model::Definition::ClassMethods::TRANSACTION_ENTITIES.stub(include?: true)
       end
 
       its(:is_transaction_entity?) { should be_true }
