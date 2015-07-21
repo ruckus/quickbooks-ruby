@@ -196,4 +196,40 @@ describe "Quickbooks::Service::Invoice" do
     sent_invoice.bill_email.address.should == "test@intuit.com"
   end
 
+  it "allows user to specify a RequestId in a create call" do
+    requestid = "foobar123"
+    model = Quickbooks::Model::Invoice
+    invoice = Quickbooks::Model::Invoice.new
+
+    xml = fixture("invoice_with_discount_line_item_response.xml")
+    url = "#{@service.url_for_resource(model::REST_RESOURCE)}?requestid=#{requestid}"
+    stub_request(:post, url, ["200", "OK"], xml)
+
+    invoice.customer_id = 3
+    invoice.txn_date = Date.civil(2014, 3, 12)
+    invoice.doc_number = "1001"
+    sales_line_item = Quickbooks::Model::InvoiceLineItem.new
+    sales_line_item.amount = 50
+    sales_line_item.description = "Plush Baby Doll"
+    sales_line_item.sales_item! do |detail|
+      detail.unit_price = 50
+      detail.quantity = 1
+      detail.item_id = 2 # Item ID here
+    end
+
+    discount_line_item = Quickbooks::Model::InvoiceLineItem.new
+    discount_line_item.amount = 5
+    discount_line_item.discount_item! do |detail|
+      detail.discount_percent = 10
+      detail.percent_based = true
+      detail.discount_account_id = 54
+    end
+
+    invoice.line_items << sales_line_item
+    invoice.line_items << discount_line_item
+
+    created_invoice = @service.create(invoice, :query => {:requestid => requestid})
+    created_invoice.id.should == "4"
+  end
+
 end
