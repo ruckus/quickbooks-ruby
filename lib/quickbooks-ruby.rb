@@ -106,7 +106,7 @@ require 'quickbooks/model/invoice_change'
 require 'quickbooks/model/customer_change'
 require 'quickbooks/model/vendor_change'
 require 'quickbooks/model/item_change'
-require 'quickbooks/model/reports'
+require 'quickbooks/model/report'
 require 'quickbooks/model/credit_memo_change'
 require 'quickbooks/model/payment_change'
 

@@ -125,13 +125,9 @@ module Quickbooks
             collection.count = xml.xpath(path_to_nodes).count
             if collection.count > 0
               xml.xpath(path_to_nodes).each do |xa|
-                entry = model.from_xml(xa)
-                addition = xml.xpath(path_to_nodes)[0].xpath("//xmlns:Currency").children.to_s if "#{model::XML_NODE}" == "Reports"
-                entry.currency = addition if "#{model::XML_NODE}" == "Reports"
-                collection.body = response.body if "#{model::XML_NODE}" == "Reports"
-                results << entry
+                results << model.from_xml(xa)
               end
-            end              
+            end
 
             collection.entries = results
           rescue => ex
