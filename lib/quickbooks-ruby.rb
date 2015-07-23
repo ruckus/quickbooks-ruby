@@ -18,6 +18,7 @@ require 'quickbooks/util/query_builder'
 require 'quickbooks/model/definition'
 require 'quickbooks/model/validator'
 require 'quickbooks/model/base_model'
+require 'quickbooks/model/base_model_json'
 require 'quickbooks/model/base_reference'
 require 'quickbooks/model/document_numbering'
 require 'quickbooks/model/global_tax_calculation'
@@ -89,8 +90,11 @@ require 'quickbooks/model/delivery_info'
 require 'quickbooks/model/invoice'
 require 'quickbooks/model/tax_rate'
 require 'quickbooks/model/tax_rate_detail'
+require 'quickbooks/model/tax_rate_detail_line'
 require 'quickbooks/model/sales_tax_rate_list'
 require 'quickbooks/model/purchase_tax_rate_list'
+require 'quickbooks/model/tax_agency'
+require 'quickbooks/model/tax_service'
 require 'quickbooks/model/tax_code'
 require 'quickbooks/model/fault'
 require 'quickbooks/model/batch_request'
@@ -109,7 +113,9 @@ require 'quickbooks/model/payment_change'
 
 #== Services
 require 'quickbooks/service/service_crud'
+require 'quickbooks/service/service_crud_json'
 require 'quickbooks/service/base_service'
+require 'quickbooks/service/base_service_json'
 require 'quickbooks/service/access_token'
 require 'quickbooks/service/class'
 require 'quickbooks/service/attachable'
@@ -138,6 +144,8 @@ require 'quickbooks/service/vendor_credit'
 require 'quickbooks/service/estimate'
 require 'quickbooks/service/tax_rate'
 require 'quickbooks/service/tax_code'
+require 'quickbooks/service/tax_agency'
+require 'quickbooks/service/tax_service'
 require 'quickbooks/service/batch'
 require 'quickbooks/service/preferences'
 require 'quickbooks/service/refund_receipt'
@@ -204,7 +212,7 @@ module Quickbooks
   class MissingRealmError < StandardError; end
 
   class IntuitRequestException < StandardError
-    attr_accessor :message, :code, :detail, :type, :request_xml
+    attr_accessor :message, :code, :detail, :type, :request_xml, :request_json
     def initialize(msg)
       self.message = msg
       super(msg)

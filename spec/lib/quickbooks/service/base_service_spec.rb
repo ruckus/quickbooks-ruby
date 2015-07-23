@@ -1,5 +1,12 @@
 describe Quickbooks::Service::BaseService do
 
+  it ".is_json" do
+    construct_service :invoice
+    expect(@service.is_json?).to be_false
+    construct_service :tax_service
+    expect(@service.is_json?).to be_true
+  end
+
   describe "#url_for_query" do
     shared_examples "encoding the query correctly" do |domain|
       let(:correct_url) { "https://#{domain}/v3/company/1234/query?query=SELECT+*+FROM+Customer+where+Name+%3D+%27John%27" }
@@ -56,7 +63,7 @@ describe Quickbooks::Service::BaseService do
       xml2 = fixture('customer.xml')
       response = Struct.new(:code, :plain_body).new(400, xml)
       begin
-        @service.send(:check_response, response, :request_xml => xml2)
+        @service.send(:check_response, response, :request => xml2)
       rescue Quickbooks::IntuitRequestException => ex
         ex.request_xml.should == xml2
       end

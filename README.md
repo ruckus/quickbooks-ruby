@@ -568,6 +568,15 @@ item_changed = item_service.since(Time.now.utc - 5 days)
 
 see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
 
+## JSON support
+
+Intuit started the v3 API supporting both XML and JSON. However, new
+v3 API services such as `Tax Service` [will only support
+JSON]( https://github.com/ruckus/quickbooks-ruby/issues/257#issuecomment-126834454 ). This gem has
+[ roots ](https://github.com/ruckus/quickeebooks) in the v2 API, which was XML only, and hence was constructed supporting XML only. 
+
+That said, the `Tax Service` is supported and other new v3-API-JSON-only services will be supported. Ideally, we would like to fully support JSON for all entities and services for the `1.0.0` release. Please jump in and contribute to help that aim.
+
 ## Logging
 
 ```ruby
@@ -611,22 +620,28 @@ Sales Receipt     | yes    | yes    | yes   | yes    | yes         |
 Sales Rep         | no     | no     | no    | no     | no          |
 Sales Tax         | no     | no     | no    | no     | no          |
 Sales Term        | no     | no     | no    | no     | no          |
+Tax Agency        | yes    | yes    | yes   | yes    | yes         |
 Tax Code          | no     | no     | yes   | no     | no          |
-Tax Rate          | no     | no     | yes   | no     | no          |
+Tax Rate          | yes    | yes    | yes   | no     | no          |
+*Tax Service      | yes    | yes    | no    | no     | no          |
 Term              | yes    | yes    | yes   | yes    | yes         |
 Time Activity     | yes    | yes    | yes   | yes    | yes         |
 Tracking Class    | no     | no     | no    | no     | no          |
 Vendor            | yes    | yes    | yes   | yes    | yes         |
 Vendor Credit     | yes    | yes    | yes   | yes    | yes         |
 
+*JSON only
 
 ## Related GEMS
 
 [`quickbooks-ruby-base`](https://github.com/minimul/quickbooks-ruby-base): Complements quickbooks-ruby by providing a [base class](http://minimul.com/improve-your-quickbooks-ruby-integration-experience-with-the-quickbooks-ruby-base-gem.html) to handle routine tasks like creating a model, service, and displaying information.
 
+[`qbo_rails`](https://github.com/minimul/qbo_rails): Simple Rails error handling and QuickBooks Online "Id" persistence. Uses `quickbooks-ruby`.
+
 ## TODO
 
 * Implement other Line Item types, e.g. `DescriptionLineDetail` for Invoices
+* Full JSON support
 
 ## Author
 
