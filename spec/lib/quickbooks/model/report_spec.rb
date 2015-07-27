@@ -11,10 +11,12 @@ describe Quickbooks::Model::Report do
   describe "#xml" do
     it 'exposes the full xml response' do
       report.xml.should be_a(Nokogiri::XML::Document)
+      report.xml.css('Column').length.should == 2
     end
 
-    it 'removes xml namespaces so xpath queries can be done made without specifying the namespace' do
-      report.xml.xpath('//Column').length.should == 2
+    it 'preserves the xml namespace, which must be included in xpath queries' do
+      report.xml.xpath('/Report/Columns/Column').length.should == 0
+      report.xml.xpath("/xmlns:Report/xmlns:Columns/xmlns:Column").length.should == 2
     end
   end
 
@@ -28,7 +30,7 @@ describe Quickbooks::Model::Report do
   describe "#all_rows" do
     it 'returns a flat array containing all Row and Summary elements from the response xml' do
       report.all_rows.length.should > 1
-      report.all_rows.length.should == (report.xml.xpath('//Row').length + report.xml.xpath('//Summary').length)
+      report.all_rows.length.should == report.xml.css('Row,Summary').length
     end
 
     it 'returns a flat array containing all <Row> and <Summary> elements' do
@@ -46,5 +48,13 @@ describe Quickbooks::Model::Report do
   end
 
   describe "#find_row" do
+    it "returns the given row if the label matches" do
+      report.find_row('Checking').should == ['Checking', BigDecimal("1201.00")]
+      report.find_row('Opening Balance Equity').should == ['Opening Balance Equity', BigDecimal("-9337.50")]
+    end
+
+    it "returns nil if the label was not found" do
+      report.find_row('Shoes for the dog!').should == nil
+    end
   end
 end
