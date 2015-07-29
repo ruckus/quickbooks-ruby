@@ -51,7 +51,7 @@ module Quickbooks
         raise Quickbooks::InvalidModelException.new(entity.errors.full_messages.join(',')) unless entity.valid?
         response = do_http(:post, url_for_resource, entity.to_json, options)
         if response.code.to_i == 200
-          entity.from_json(response.plain_body)
+          Quickbooks::Model::TaxService.from_json(response.plain_body)
         else
           nil
         end
