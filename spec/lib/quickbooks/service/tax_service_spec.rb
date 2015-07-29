@@ -39,7 +39,7 @@ describe Quickbooks::Service::TaxService do
     expect(tax_service.errors.messages).to have_key(:tax_rate_details)
   end
 
-  it "can not create tax agency without tax_code" do
+  it "can not create tax service without tax_code" do
     ts = model.new
     expect {
       subject.create(ts)
