@@ -7,15 +7,36 @@ describe Quickbooks::Service::TaxService do
   end
 
   let(:model) { Quickbooks::Model::TaxService }
+  let(:tax_rate_details) { [Quickbooks::Model::TaxRateDetailLine.new(
+    tax_rate_name: 'First', rate_value: '12.3', tax_agency_id: '2', tax_applicable_on: 'Sales')]}
+
   let(:tax_service) { model.new(tax_code: 'First Tax Service')}
-  let(:resource) { model::REST_RESOURCE }
+  let(:params) {
+    {
+      "TaxCode" => "MyTaxCodeName",
+      "TaxRateDetails" => [{
+        "TaxRateName" => "myNewTaxRateName",
+        "RateValue" => "8",
+        "TaxAgencyId" => "1",
+        "TaxApplicableOn" => "Sales"
+      }]
+    }
+  }
 
   it "can create tax code" do
-    xml = fixture("tax_service_entity.xml")
-    stub_request(:post, subject.url_for_resource(resource), ["200", "OK"], xml)
+    stub_request(:post, subject.url_for_resource, ["200", "OK"], params)
+    expect {
+      tax_service.tax_rate_details = tax_rate_details
+      subject.create(tax_service)
+    }.to_not raise_error(Quickbooks::InvalidModelException)
+  end
 
-    entity = subject.create(tax_service)
-    expect(entity.tax_code).to eq tax_service.tax_code
+  it "catch exception if create tax code failed" do
+    stub_request(:post, subject.url_for_resource, ["200", "OK"], params)
+    expect {
+      subject.create(tax_service)
+    }.to raise_error(Quickbooks::InvalidModelException)
+    expect(tax_service.errors.messages).to have_key(:tax_rate_details)
   end
 
   it "can not create tax agency without tax_code" do
