@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-12-10T12:27:54.876-08:00">
+  <TaxAgency domain="QBO" sparse="false">
+      <Id>1</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+          <CreateTime>2013-12-11T10:59:51-08:00</CreateTime>
+          <LastUpdatedTime>2013-12-11T10:59:51-08:00</LastUpdatedTime>
+      </MetaData>
+      <DisplayName>First TaxAgency</Name>
+      <TaxTrackedOnPurchases>false</Description>
+      <TaxTrackedOnSales>true</Active>
+  </TaxAgency>
+</IntuitResponse>
