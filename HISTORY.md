@@ -1,3 +1,11 @@
+## 0.3.0 (2015-08-12)
+
+* Tax Service with initial support for JSON. Tax Agency support and Tax Rate creation and update abilities.
+* Added support for specifying a RequestId for de-duplication
+* Refactored Change Data Capture
+* Added backwards compatibility to BaseReference initialize
+* Changed the initialize method of BaseReference model and added support for the name/value attributes.
+
 ## 0.2.3 (2015-04-28)
 
 * Reports. Merged PR #204 - thank you @raksonibs
