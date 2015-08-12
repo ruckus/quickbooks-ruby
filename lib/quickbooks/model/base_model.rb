@@ -12,6 +12,13 @@ module Quickbooks
         attributes.each {|key, value| public_send("#{key}=", value) }
       end
 
+      def self.all token, secret, realm_id
+        service = eval("Quickbooks::Service::#{self.name.split('::').last}").new
+        service.access_token = OAuth::AccessToken.new($qb_oauth_consumer, token, secret);
+        service.company_id = realm_id
+        service.query()
+      end
+
       # ROXML doesnt insert the namespaces into generated XML so we need to do it ourselves
       # insert the static namespaces in the first opening tag that matches the +model_name+
       def to_xml_inject_ns(model_name, options = {})
