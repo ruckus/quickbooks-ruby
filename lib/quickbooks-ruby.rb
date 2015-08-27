@@ -161,13 +161,22 @@ require 'quickbooks/service/credit_memo_change'
 require 'quickbooks/service/payment_change'
 
 module Quickbooks
-  @@sandbox_mode = false
+  @@sandbox_mode     = false
+  @@allow_pagination = true
 
   @@logger = nil
 
   class << self
     def sandbox_mode
       @@sandbox_mode
+    end
+
+    def allow_pagination?
+      @@allow_pagination
+    end
+
+    def allow_pagination=(allow_pagination)
+      @@allow_pagination = allow_pagination
     end
 
     def sandbox_mode=(sandbox_mode)
@@ -216,6 +225,14 @@ module Quickbooks
     def initialize(msg)
       self.message = msg
       super(msg)
+    end
+  end
+
+  class Configuration
+    def self.set_tokens_and_realm_id token, secret, realm_id
+      Thread.current[:token]    = token
+      Thread.current[:secret]   = secret
+      Thread.current[:realm_id] = realm_id
     end
   end
 
