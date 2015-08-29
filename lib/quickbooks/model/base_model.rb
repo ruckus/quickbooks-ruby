@@ -5,53 +5,12 @@ module Quickbooks
       include ActiveModel::Validations
       include Validator
       include ROXML
+      include ActiveRecordScaffold
 
       xml_convention :camelcase
 
       def initialize(attributes={})
         attributes.each {|key, value| public_send("#{key}=", value) }
-      end
-
-      def self.all query = nil, options = {}
-        model_name           = self.name.split('::').last
-        query                = "SELECT * FROM #{model_name}" if query.blank?
-        service              = eval("Quickbooks::Service::#{model_name}").new
-        service.access_token = OAuth::AccessToken.new(
-          $qb_oauth_consumer, options[:token] || Thread.current[:token],
-          options[:secret] || Thread.current[:secret]
-        )
-        service.company_id   = options[:realm_id] || Thread.current[:realm_id]
-        service.query(query).entries
-      end
-
-      def self.where options = {}
-        model_name = self.name.split('::').last
-        query      = options.present? ? "SELECT * FROM #{model_name} WHERE " : "SELECT * FROM #{model_name}"
-        if options.is_a?(String)
-          conditions = options
-        else
-          conditions = options.collect do |key, value|
-            if value.is_a?(Array)
-              "#{key} IN ('#{value.join("','")}')"
-            else
-              "#{key}='#{value}'"
-            end
-          end.join(' AND ')
-        end
-        query += conditions
-        all(query, options)
-      end
-
-      def self.find_by options = {}
-        where(options).first
-      end
-
-      def self.find id
-        find_by(id: id)
-      end
-
-      def self.count options = {}
-        where(options).length
       end
 
       # ROXML doesnt insert the namespaces into generated XML so we need to do it ourselves

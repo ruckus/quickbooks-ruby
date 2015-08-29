@@ -19,7 +19,7 @@ module Quickbooks
                   value = value.map{|v| v.to_s.gsub("'", "\\\\'") }
                 else
                   # escape single quotes with an escaped backslash
-                  value = value.gsub("'", "\\\\'")
+                  value = value.to_s.gsub("'", "\\\\'")
                 end
 
         if operator.downcase == 'in' && value.is_a?(Array)
