@@ -13,6 +13,7 @@ require 'quickbooks/util/logging'
 require 'quickbooks/util/http_encoding_helper'
 require 'quickbooks/util/name_entity'
 require 'quickbooks/util/query_builder'
+require 'configuration'
 
 #== Models
 require 'quickbooks/model/definition'
@@ -217,14 +218,6 @@ module Quickbooks
     def initialize(msg)
       self.message = msg
       super(msg)
-    end
-  end
-
-  class Configuration
-    def self.set_tokens_and_realm_id token, secret, realm_id
-      Thread.current[:token]    = token
-      Thread.current[:secret]   = secret
-      Thread.current[:realm_id] = realm_id
     end
   end
 

@@ -2,7 +2,7 @@ module Quickbooks
   module Service
     class ChangeService < BaseService
 
-      def url_for_query(query = nil, start_position = 1, max_results = 20)
+      def url_for_query(query = nil, start_position = 1, max_results = 20, options = {})
         q = entity
         q = "#{q}&#{query}" if query.present?
 
