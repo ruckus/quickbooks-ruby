@@ -255,11 +255,24 @@ customers.query(query, :page => 2, :per_page => 25)
 ### Querying in Batches
 
 Often one needs to retrieve multiple pages of records of an Entity type
-and loop over them all. Fortunately there is the `query_in_batches` collection method:
+and loop over them all. Again there are two approaches currently supported and first approach is encouraged to be used.
+
+###### Approach 1
+```ruby
+Quickbooks::Configuration.set_tokens_and_realm_id(token, secret, realm_id)
+Quickbooks::Model::Customer.query_in_batches(query, per_page: 1000) do |batch|
+  batch.each do |customer|
+    # ...
+  end
+end
+```
+###### Approach 2
+As of second approach, there is the `query_in_batches` collection method in each service:
 
 ```ruby
+service = Quickbooks::Service::Customer.new(:company_id => "123", :access_token => access_token)
 query = nil
-Customer.query_in_batches(query, per_page: 1000) do |batch|
+service.query_in_batches(query, per_page: 1000) do |batch|
   batch.each do |customer|
     # ...
   end

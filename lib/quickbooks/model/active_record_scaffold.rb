@@ -33,6 +33,10 @@ module Quickbooks
           initialize_service.query("SELECT COUNT(*) FROM #{model}").total_count
         end
 
+        def query_in_batches(options = {})
+          initialize_service(options).query_in_batches(query, options).entries
+        end
+
         private
 
         def initialize_service(options = {})
