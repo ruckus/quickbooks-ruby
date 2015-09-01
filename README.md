@@ -33,7 +33,7 @@ Moreover, there is no longer a getter method e.g. `active` (without the trailing
 
 ## Requirements
 
-This has been tested on 1.9.3, 2.0.0, and 2.1.0.
+This has been tested on 1.9.3, 2.0, 2.1.x, 2.2.x
 
 Ruby 1.8.7 and 1.9.2 are not supported.
 
@@ -567,6 +567,11 @@ item_changed = item_service.since(Time.now.utc - 5 days)
 
 
 see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
+
+## Reports API
+
+Quickbooks has an API called the [Reports API](https://developer.intuit.com/docs/0100_accounting/0400_references/reports) that provides abilities such as: business and sales overview; vendor and customer balances; review expenses and purchases and more.
+See the [specs](https://github.com/ruckus/quickbooks-ruby/blob/reports/spec/lib/quickbooks/model/report_spec.rb) for [examples](https://github.com/ruckus/quickbooks-ruby/blob/reports/spec/lib/quickbooks/service/reports_spec.rb) of how to leverage.
 
 ## JSON support
 
