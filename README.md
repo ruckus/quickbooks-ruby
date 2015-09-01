@@ -33,7 +33,7 @@ Moreover, there is no longer a getter method e.g. `active` (without the trailing
 
 ## Requirements
 
-This has been tested on 1.9.3, 2.0, 2.1.x, 2.2.x
+This has been tested on 1.9.3, 2.0, 2.1, 2.2
 
 Ruby 1.8.7 and 1.9.2 are not supported.
 
