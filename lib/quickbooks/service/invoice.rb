@@ -17,6 +17,12 @@ module Quickbooks
         end
       end
 
+      def pdf(invoice)
+        url = "#{url_for_resource(model::REST_RESOURCE)}/#{invoice.id}/pdf"
+        response = do_http_raw_get(url, {}, {'Accept' => 'application/pdf'})
+        response.plain_body
+      end
+
       private
 
       def model

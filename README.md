@@ -525,7 +525,21 @@ puts attach.temp_download_uri
 => "https://intuit-qbo-prod-29.s3.amazonaws.com/12345%2Fattachments%2Fmonkey-1423760870606.jpg?Expires=1423761772&AWSAcc ... snip ..."
 ```
 
+### Download PDF of an Invoice or SalesReceipt
 
+To download a PDF of an Invoice:
+
+```ruby
+service = Quickbooks::Service::Invoice.new # or use the SalesReceipt service
+
+# +invoice+ is an instance of Quickbooks::Model::Invoice
+raw_pdf_data = service.pdf(invoice)
+
+# write it to disk
+File.open("invoice.pdf", "wb") do |file|
+  file.write(raw_pdf_data)
+end
+```
 
 ## Change Data Capture
 

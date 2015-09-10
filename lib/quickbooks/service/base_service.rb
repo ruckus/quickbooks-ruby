@@ -49,6 +49,10 @@ module Quickbooks
         self.class::HTTP_CONTENT_TYPE == "application/json"
       end
 
+      def is_pdf?
+        self.class::HTTP_CONTENT_TYPE == "application/pdf"
+      end
+
       def default_model_query
         "SELECT * FROM #{self.class.name.split("::").last}"
       end
@@ -172,6 +176,20 @@ module Quickbooks
       def do_http_get(url, params = {}, headers = {}) # throws IntuitRequestException
         url = add_query_string_to_url(url, params)
         do_http(:get, url, {}, headers)
+      end
+
+      def do_http_raw_get(url, params = {}, headers = {})
+        url = add_query_string_to_url(url, params)
+        unless headers.has_key?('Content-Type')
+          headers['Content-Type'] = self.class::HTTP_CONTENT_TYPE
+        end
+        unless headers.has_key?('Accept')
+          headers['Accept'] = self.class::HTTP_ACCEPT
+        end
+        unless headers.has_key?('Accept-Encoding')
+          headers['Accept-Encoding'] = HTTP_ACCEPT_ENCODING
+        end
+        @oauth.get(url, headers)
       end
 
       def do_http_file_upload(uploadIO, url, metadata = nil)
