@@ -571,7 +571,7 @@ see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/cha
 ## Reports API
 
 Quickbooks has an API called the [Reports API](https://developer.intuit.com/docs/0100_accounting/0400_references/reports) that provides abilities such as: business and sales overview; vendor and customer balances; review expenses and purchases and more.
-See the [specs](https://github.com/ruckus/quickbooks-ruby/blob/reports/spec/lib/quickbooks/model/report_spec.rb) for [examples](https://github.com/ruckus/quickbooks-ruby/blob/reports/spec/lib/quickbooks/service/reports_spec.rb) of how to leverage.
+See the [specs](https://github.com/ruckus/quickbooks-ruby/blob/master/spec/lib/quickbooks/model/report_spec.rb) for [examples](https://github.com/ruckus/quickbooks-ruby/blob/master/spec/lib/quickbooks/service/reports_spec.rb) of how to leverage.
 
 ## JSON support
 
