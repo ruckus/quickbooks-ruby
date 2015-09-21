@@ -100,10 +100,10 @@ require 'quickbooks/model/tax_agency'
 require 'quickbooks/model/tax_service'
 require 'quickbooks/model/tax_code'
 require 'quickbooks/model/fault'
+require 'quickbooks/model/refund_receipt'
 require 'quickbooks/model/batch_request'
 require 'quickbooks/model/batch_response'
 require 'quickbooks/model/preferences'
-require 'quickbooks/model/refund_receipt'
 require 'quickbooks/model/change_model'
 require 'quickbooks/model/invoice_change'
 require 'quickbooks/model/customer_change'
@@ -114,6 +114,7 @@ require 'quickbooks/model/credit_memo_change'
 require 'quickbooks/model/payment_change'
 require 'quickbooks/model/transfer'
 require 'quickbooks/model/change_data_capture'
+require 'quickbooks/model/refund_receipt_change'
 
 #== Services
 require 'quickbooks/service/service_crud'
@@ -166,6 +167,7 @@ require 'quickbooks/service/credit_memo_change'
 require 'quickbooks/service/payment_change'
 require 'quickbooks/service/transfer'
 require 'quickbooks/service/change_data_capture'
+require 'quickbooks/service/refund_receipt_change'
 
 module Quickbooks
   @@sandbox_mode = false
