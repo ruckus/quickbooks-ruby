@@ -1,3 +1,12 @@
+## 0.4.1 (2015-10-28)
+
+* Item service defaults to minorversion=4 for I/O operations
+
+## 0.4.0 (2015-09-01)
+
+* Reports API enhancements
+* Tax Service with initial support for JSON. Tax Agency support and Tax Rate and update abilities.
+
 ## 0.3.0 (2015-08-12)
 
 * Tax Service with initial support for JSON. Tax Agency support and Tax Rate creation and update abilities.
