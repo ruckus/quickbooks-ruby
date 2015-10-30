@@ -130,7 +130,7 @@ Marshal.load(session[:qb_request_token]).get_access_token(:oauth_verifier => par
 Once you have your users OAuth Token & Secret you can initialize your `OAuth Consumer` and create a `OAuth Client` using the `$qb_oauth_consumer` you created earlier in your Rails initializer:
 
 ```ruby
-access_token = OAuth::AccessToken.new($qb_oauth_consumer, access_token, access_secret)
+access_token = OAuth::AccessToken.new($qb_oauth_consumer, string_access_token_from_qb, string_access_secret_from_qb)
 ```
 
 ## Persisting the Credentials
