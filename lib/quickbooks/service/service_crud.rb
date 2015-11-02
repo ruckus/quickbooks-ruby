@@ -6,6 +6,14 @@ module Quickbooks
         fetch_collection(object_query, model, options)
       end
 
+      def query_all(object_query=nil, options={})
+        collection = []
+        self.query_in_batches(object_query, options) do |batch|
+          collection << batch.entries
+        end
+        collection.flatten!
+      end
+
       def query_in_batches(object_query=nil, options={})
         page = 0
         per_page = options.delete(:per_page) || 1_000
