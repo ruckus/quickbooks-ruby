@@ -6,7 +6,8 @@ module Quickbooks
         fetch_collection(object_query, model, options)
       end
 
-      def query_all(object_query=nil, options={})
+      # fetch all records, returns an array of models
+      def all(object_query=nil, options={})
         collection = []
         self.query_in_batches(object_query, options) do |batch|
           collection << batch.entries
@@ -22,6 +23,14 @@ module Quickbooks
           results = query(object_query, page: page, per_page: per_page)
           yield results if results.count > 0
         end until results.count < per_page
+      end
+
+      def find_by(field, selector, options={})
+        if field.class == Symbol
+          field = field.to_s.camelcase
+        end
+        q = "select * from %s where %s = '%s'" % [model.resource_for_singular, field, selector]
+        self.query(q, options)
       end
 
       def fetch_by_id(id, params = {})
