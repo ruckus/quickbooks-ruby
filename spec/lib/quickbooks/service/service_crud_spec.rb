@@ -38,6 +38,20 @@ module Quickbooks
         expect(yielded.size).to eq 1
       end
 
+      it "finds by attribute" do
+        results = double(Quickbooks::Collection, count: 1)
+        ServicedClass.should_receive(:resource_for_singular).and_return ServicedClass
+        ServicedClass.should_receive(:model).and_return ServicedClass
+        ServicedClass.should_receive(:query).with("select * from ServicedClass where Name = 'test'", {})
+        ServicedClass.find_by(:name, "test")
+      end
+
+      it "finds all" do
+        results = double(Quickbooks::Collection, count: 1)
+        results.should_receive(:entries).and_return []
+        ServicedClass.should_receive(:query).with(nil, page: 1, per_page: 1000).and_return(results)
+        ServicedClass.all
+      end
     end
   end
 end

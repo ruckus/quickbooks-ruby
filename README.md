@@ -237,6 +237,14 @@ If you're are running a custom Query then pass it instead.
 The second argument is the options, which are optional.
 By default, the options are `per_page: 1000`.
 
+## Retrieving all objects
+
+You may retrieve an array of objects like so:
+```ruby
+customers = service.all
+```
+Unlike other query functions which return a Quickbooks::Collection object,
+the all method returns an array of objects.
 
 ## Retrieving a single object
 
@@ -246,6 +254,16 @@ You can retrieve a specific Intuit object like so:
 customer = service.fetch_by_id("99")
 puts customer.company_name
 => "Acme Enterprises"
+```
+## Retrieving objects with matching attributes
+
+The `find_by(attribute, value)` method allows you to retrieve objects with a simple WHERE query using a single attribute.  The attribute may be given as a symbol or a string.
+Symbols will be automatically camelcased to match the Quickbooks API field names.
+
+```ruby
+customer = service.find_by(:family_name, "Doe")
+or
+customer = service.find_by("FamilyName", "Doe")
 ```
 
 ## Updating an object
@@ -592,7 +610,7 @@ See the [specs](https://github.com/ruckus/quickbooks-ruby/blob/master/spec/lib/q
 Intuit started the v3 API supporting both XML and JSON. However, new
 v3 API services such as `Tax Service` [will only support
 JSON]( https://github.com/ruckus/quickbooks-ruby/issues/257#issuecomment-126834454 ). This gem has
-[ roots ](https://github.com/ruckus/quickeebooks) in the v2 API, which was XML only, and hence was constructed supporting XML only. 
+[ roots ](https://github.com/ruckus/quickeebooks) in the v2 API, which was XML only, and hence was constructed supporting XML only.
 
 That said, the `Tax Service` is supported and other new v3-API-JSON-only services will be supported. Ideally, we would like to fully support JSON for all entities and services for the `1.0.0` release. Please jump in and contribute to help that aim.
 
