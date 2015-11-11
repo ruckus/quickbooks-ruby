@@ -65,6 +65,18 @@ describe "Quickbooks::Service::Payment" do
     response.should be_true
   end
 
+  it 'can void a payment' do
+    stub_request(:post,
+                 "#{@service.url_for_resource(resource)}?include=void",
+                 ["200", "OK"],
+                 fixture("payment_void_response_success.xml"))
+
+    response = @service.void(payment)
+
+    response.should be_true    
+    response.total.should == 0
+  end
+
   it "properly outputs BigDecimal fields" do
     payment.total = payment.unapplied_amount = payment.exchange_rate = "42"
 
