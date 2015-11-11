@@ -7,9 +7,14 @@ module Quickbooks
         update(item, :sparse => true)
       end
 
-      def url_for_resource(resource)
-        url = super(resource)
-        "#{url}?minorversion=#{Quickbooks::Model::Item::MINORVERSION}"
+      # def url_for_resource(resource)
+      #   url = super(resource)
+      #   "#{url}?minorversion=#{Quickbooks::Model::Item::MINORVERSION}"
+      # end
+
+      def fetch_by_id(id, params = {})
+        url = "#{url_for_resource(model.resource_for_singular)}/#{id}?minorversion=#{Quickbooks::Model::Item::MINORVERSION}"
+        fetch_object(model, url, params)
       end
 
       def url_for_query(query = nil, start_position = 1, max_results = 20)
