@@ -300,7 +300,7 @@ module Quickbooks
 
       def parse_and_raise_exception(options = {})
         err = parse_intuit_error
-        ex = Quickbooks::IntuitRequestException.new("#{err[:message]}:\n\t#{err[:detail]}")
+        ex  = fetch_error_class(err).new("#{err[:message]}:\n\t#{err[:detail]}")
         ex.code = err[:code]
         ex.detail = err[:detail]
         ex.type = err[:type]
@@ -310,6 +310,10 @@ module Quickbooks
           ex.request_xml = options[:request]
         end
         raise ex
+      end
+
+      def fetch_error_class(error)
+        IntuitExceptionService.parse(error)
       end
 
       def response_is_error?
