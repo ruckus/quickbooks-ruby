@@ -102,6 +102,7 @@ require 'quickbooks/model/customer_change'
 require 'quickbooks/model/vendor_change'
 require 'quickbooks/model/item_change'
 require 'quickbooks/model/reports'
+require 'quickbooks/model/transfer'
 
 
 #== Services
@@ -145,6 +146,7 @@ require 'quickbooks/util/multipart'
 require 'quickbooks/service/vendor_change'
 require 'quickbooks/service/item_change'
 require 'quickbooks/service/reports'
+require 'quickbooks/service/transfer'
 
 module Quickbooks
   @@sandbox_mode = false
