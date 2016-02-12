@@ -4,7 +4,8 @@ end
 require "oauth"
 
 OAuth::Consumer.class_eval do
-  def create_http_request_with_multipart(http_method, path, *arguments)
+  def create_http_request(http_method, path, *arguments)
+    puts "HERE WE ARE"
     http_method = http_method.to_sym
 
     if [:post, :put].include?(http_method)
@@ -61,7 +62,7 @@ OAuth::Consumer.class_eval do
 
   end
 
-  alias_method_chain :create_http_request, :multipart
+  #alias_method_chain :create_http_request, :multipart
 end
 
 OAuth::AccessToken.class_eval do
