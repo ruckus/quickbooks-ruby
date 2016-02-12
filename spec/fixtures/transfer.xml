@@ -1,0 +1,14 @@
+<Transfer domain="QBO" sparse="false">
+  <Id>148</Id>
+  <SyncToken>0</SyncToken>
+  <MetaData>
+    <CreateTime>2016-02-11T06:00:44-08:00</CreateTime>
+    <LastUpdatedTime>2016-02-11T06:00:44-08:00</LastUpdatedTime>
+  </MetaData>
+  <TxnDate>2016-02-11</TxnDate>
+  <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+  <PrivateNote>Important notes to explain this transaction</PrivateNote>
+  <FromAccountRef name="Savings">36</FromAccountRef>
+  <ToAccountRef name="Checking">35</ToAccountRef>
+  <Amount>250.00</Amount>
+</Transfer>

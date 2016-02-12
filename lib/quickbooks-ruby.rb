@@ -109,7 +109,7 @@ require 'quickbooks/model/item_change'
 require 'quickbooks/model/report'
 require 'quickbooks/model/credit_memo_change'
 require 'quickbooks/model/payment_change'
-
+require 'quickbooks/model/transfer'
 
 #== Services
 require 'quickbooks/service/service_crud'
@@ -159,6 +159,7 @@ require 'quickbooks/service/item_change'
 require 'quickbooks/service/reports'
 require 'quickbooks/service/credit_memo_change'
 require 'quickbooks/service/payment_change'
+require 'quickbooks/service/transfer'
 
 module Quickbooks
   @@sandbox_mode = false
