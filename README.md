@@ -64,10 +64,10 @@ What follows is an example using Rails but the principles can be adapted to any 
 Create a Rails initializer with:
 
 ```ruby
-QB_KEY = "your apps Intuit App Key"
-QB_SECRET = "your apps Intuit Secret Key"
+OAUTH_CONSUMER_KEY = "OAUTH_CONSUMER_KEY"
+OAUTH_CONSUMER_SECRET = "OAUTH_CONSUMER_SECRET"
 
-$qb_oauth_consumer = OAuth::Consumer.new(QB_KEY, QB_SECRET, {
+$qb_oauth_consumer = OAuth::Consumer.new(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET, {
     :site                 => "https://oauth.intuit.com",
     :request_token_path   => "/oauth/v1/get_request_token",
     :authorize_url        => "https://appcenter.intuit.com/Connect/Begin",
