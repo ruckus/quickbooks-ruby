@@ -15,7 +15,8 @@ module Quickbooks
       INVENTORY_TYPE = 'Inventory'
       NON_INVENTORY_TYPE = 'NonInventory'
       SERVICE_TYPE = 'Service'
-      ITEM_TYPES = [INVENTORY_TYPE, NON_INVENTORY_TYPE, SERVICE_TYPE]
+      CATEGORY_TYPE = 'Category'
+      ITEM_TYPES = [INVENTORY_TYPE, NON_INVENTORY_TYPE, SERVICE_TYPE, CATEGORY_TYPE]
 
       xml_name 'Item'
       xml_accessor :id, :from => 'Id'
