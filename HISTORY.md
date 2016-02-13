@@ -1,3 +1,9 @@
+## 0.4.3 (2016-02-13)
+
+* Remove dependency on alias_method_chain from create_http_request method.
+* Support for the Transfer endpoint - thanks @Craggar
+* Added ability to download a Estimate PDF - thanks @rickbarrette
+
 ## 0.4.2 (2015-11-11)
 
 * Fixed bug in Item#fetch_by_id where the minorversion param injection was generating an incorrect URL. Thanks to @jordangraft for the PR.
