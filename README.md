@@ -67,7 +67,7 @@ Create a Rails initializer with:
 OAUTH_CONSUMER_KEY = "OAUTH_CONSUMER_KEY"
 OAUTH_CONSUMER_SECRET = "OAUTH_CONSUMER_SECRET"
 
-$qb_oauth_consumer = OAuth::Consumer.new(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET, {
+::QB_OAUTH_CONSUMER = OAuth::Consumer.new(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET, {
     :site                 => "https://oauth.intuit.com",
     :request_token_path   => "/oauth/v1/get_request_token",
     :authorize_url        => "https://appcenter.intuit.com/Connect/Begin",
@@ -96,7 +96,7 @@ Your Controller action (the `grantUrl` above) should look like this:
 ```ruby
   def authenticate
     callback = quickbooks_oauth_callback_url
-    token = $qb_oauth_consumer.get_request_token(:oauth_callback => callback)
+    token = QB_OAUTH_CONSUMER.get_request_token(:oauth_callback => callback)
     session[:qb_request_token] = token
     redirect_to("https://appcenter.intuit.com/Connect/Begin?oauth_token=#{token.token}") and return
   end
@@ -127,10 +127,10 @@ Marshal.load(session[:qb_request_token]).get_access_token(:oauth_verifier => par
 
 ## Creating an OAuth Access Token
 
-Once you have your users OAuth Token & Secret you can initialize your `OAuth Consumer` and create a `OAuth Client` using the `$qb_oauth_consumer` you created earlier in your Rails initializer:
+Once you have your users OAuth Token & Secret you can initialize your `OAuth Consumer` and create a `OAuth Client` using the `QB_OAUTH_CONSUMER` you created earlier in your Rails initializer:
 
 ```ruby
-access_token = OAuth::AccessToken.new($qb_oauth_consumer, string_access_token_from_qb, string_access_secret_from_qb)
+access_token = OAuth::AccessToken.new(QB_OAUTH_CONSUMER, string_access_token_from_qb, string_access_secret_from_qb)
 ```
 
 ## Persisting the Credentials
@@ -157,7 +157,7 @@ Then you will want to have a scheduled task / cron which runs nightly and runs t
 
 ```ruby
 expiring_tokens.each do |record|
-  access_token = OAuth::AccessToken.new($qb_oauth_consumer, record.access_token, record.access_secret)
+  access_token = OAuth::AccessToken.new(QB_OAUTH_CONSUMER, record.access_token, record.access_secret)
   service = Quickbooks::Service::AccessToken.new
   service.access_token = access_token
   service.company_id = record.company_id
