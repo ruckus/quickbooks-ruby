@@ -13,10 +13,12 @@ require 'quickbooks/util/logging'
 require 'quickbooks/util/http_encoding_helper'
 require 'quickbooks/util/name_entity'
 require 'quickbooks/util/query_builder'
+require 'configuration'
 
 #== Models
 require 'quickbooks/model/definition'
 require 'quickbooks/model/validator'
+require 'quickbooks/model/active_record_scaffold'
 require 'quickbooks/model/base_model'
 require 'quickbooks/model/base_model_json'
 require 'quickbooks/model/base_reference'
@@ -162,7 +164,7 @@ require 'quickbooks/service/payment_change'
 require 'quickbooks/service/transfer'
 
 module Quickbooks
-  @@sandbox_mode = false
+  @@sandbox_mode     = false
 
   @@logger = nil
 

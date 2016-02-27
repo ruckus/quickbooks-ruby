@@ -175,7 +175,43 @@ end
 
 ## Getting Started - Retrieving a list of Customers
 
-The general approach is you first instantiate a `Service` object based on the entity you would like to retrieve. Lets retrieve a list of Customers:
+There are two approaches to retrieve results from Quickbooks. However, you're encouraged to use the first approach as we'll be removing the second approach in the long run.
+
+###### Approach 1
+To retrieve any Quickbooks results you need to set the access token, secret key and realm id in Quickbooks configuration:
+```ruby
+Quickbooks::Configuration.set_tokens_and_realm_id(token, secret, realm_id)
+```
+Then you can simply call `Quickbooks::Model::Customer.all` to retrieve a list of all customers. However, there is a default pagination applied and only 20 records are fetched per request. If you want to skip pagination and just want to fetch all the records then you can pass `skip_pagination: true` argument to `Quickbooks::Model::Customer.all`:
+```ruby
+Quickbooks::Model::Customer.all #=> Returns array of first 20 customers
+Quickbooks::Model::Customer.all(nil, skip_pagination: true) #=> Returns array of all customers
+```
+The first argument in the method is query and if you don't pass any query then the default query will be executed which is, in this case, `SELECT * FROM Customer`
+
+Quickbooks models behave exactly the same like ActiveRecord for querying purposes. That means that these models have other methods e.g: `where` `count` `find_by` `find` etc. Following are some examples:
+```ruby
+Quickbooks::Configuration.set_tokens_and_realm_id(token, secret, realm_id)
+
+# where
+Quickbooks::Model::Customer.where('') #=> runs default query and returns first 20 customers
+Quickbooks::Model::Customer.where(id: 170) #=> runs a conditional query and returns first 20 customers having id equal to 170
+Quickbooks::Model::Customer.where(id: 170, skip_pagination: true) #=> runs the conditional query and returns all customers having id equal to 170 without pagination
+
+# find_by
+Quickbooks::Model::Customer.find_by('') #=> runs default query and returns first customer
+Quickbooks::Model::Customer.find_by(id: 170) #=> runs a conditional query and returns first customer having id equal to 170
+
+# find
+Quickbooks::Model::Customer.find('') #=> runs default query and returns first customer
+Quickbooks::Model::Customer.find(170) #=> runs a conditional query and returns first customer having id equal to 170
+
+# count
+Quickbooks::Model::Customer.count #=> returns total number of customers in your quickbooks account
+```
+
+###### Approach 2
+The second approach is you first instantiate a `Service` object based on the entity you would like to retrieve. Lets retrieve a list of Customers:
 
 ```ruby
 
@@ -219,11 +255,24 @@ customers.query(query, :page => 2, :per_page => 25)
 ### Querying in Batches
 
 Often one needs to retrieve multiple pages of records of an Entity type
-and loop over them all. Fortunately there is the `query_in_batches` collection method:
+and loop over them all. Again there are two approaches currently supported and first approach is encouraged to be used.
+
+###### Approach 1
+```ruby
+Quickbooks::Configuration.set_tokens_and_realm_id(token, secret, realm_id)
+Quickbooks::Model::Customer.query_in_batches(query, per_page: 1000) do |batch|
+  batch.each do |customer|
+    # ...
+  end
+end
+```
+###### Approach 2
+As of second approach, there is the `query_in_batches` collection method in each service:
 
 ```ruby
+service = Quickbooks::Service::Customer.new(:company_id => "123", :access_token => access_token)
 query = nil
-Customer.query_in_batches(query, per_page: 1000) do |batch|
+service.query_in_batches(query, per_page: 1000) do |batch|
   batch.each do |customer|
     # ...
   end
