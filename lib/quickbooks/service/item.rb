@@ -17,8 +17,8 @@ module Quickbooks
         fetch_object(model, url, params)
       end
 
-      def url_for_query(query = nil, start_position = 1, max_results = 20)
-        url = super(query, start_position, max_results)
+      def url_for_query(query = nil, start_position = 1, max_results = 20, options = {})
+        url = super(query, start_position, max_results, options)
         "#{url}&minorversion=#{Quickbooks::Model::Item::MINORVERSION}"
       end
 
