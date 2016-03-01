@@ -57,7 +57,7 @@ module Quickbooks
         "SELECT * FROM #{self.class.name.split("::").last}"
       end
 
-      def url_for_query(query = nil, start_position = 1, max_results = 20)
+      def url_for_query(query = nil, start_position = 1, max_results = 20, options = {})
         query ||= default_model_query
         query = "#{query} STARTPOSITION #{start_position} MAXRESULTS #{max_results}"
 
