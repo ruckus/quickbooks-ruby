@@ -1,7 +1,7 @@
 describe "Quickbooks::Service::Payment" do
   before(:all) { construct_service :payment }
 
-  let(:customer_ref) { Quickbooks::Model::BaseReference.new(:value => 42) }
+  let(:customer_ref) { Quickbooks::Model::BaseReference.new(42) }
   let(:model) { Quickbooks::Model::Payment }
   let(:payment) { model.new :id => 8748, :customer_ref => customer_ref }
   let(:resource) { model::REST_RESOURCE }
@@ -14,9 +14,9 @@ describe "Quickbooks::Service::Payment" do
 
     payments = @service.query
 
-    payments.entries.count.should eq(1)
+    payments.entries.count.should == 1
     payment = payments.entries.first
-    payment.private_note.should eq("H60jzmw0Uq")
+    payment.private_note.should == "H60jzmw0Uq"
   end
 
   it "can fetch a payment by ID" do
@@ -27,7 +27,7 @@ describe "Quickbooks::Service::Payment" do
 
     payment = @service.fetch_by_id(1)
 
-    payment.private_note.should eq("H60jzmw0Uq")
+    payment.private_note.should == "H60jzmw0Uq"
   end
 
   it "can create a payment" do
@@ -38,7 +38,7 @@ describe "Quickbooks::Service::Payment" do
 
     created_payment = @service.create(payment)
 
-    created_payment.id.should eq(8748)
+    created_payment.id.should == "8748"
   end
 
   it "can sparse update a payment" do
@@ -51,7 +51,7 @@ describe "Quickbooks::Service::Payment" do
 
     update_response = @service.update(payment, :sparse => true)
 
-    update_response.total.should eq(40.0)
+    update_response.total.should == 40.0
   end
 
   it "can delete a payment" do
@@ -65,13 +65,25 @@ describe "Quickbooks::Service::Payment" do
     response.should be_true
   end
 
+  it 'can void a payment' do
+    stub_request(:post,
+                 "#{@service.url_for_resource(resource)}?include=void",
+                 ["200", "OK"],
+                 fixture("payment_void_response_success.xml"))
+
+    response = @service.void(payment)
+
+    response.should be_true    
+    response.total.should == 0
+  end
+
   it "properly outputs BigDecimal fields" do
     payment.total = payment.unapplied_amount = payment.exchange_rate = "42"
 
     xml = payment.to_xml
 
-    xml.at("TotalAmt").text.should eq("42.0")
-    xml.at("UnappliedAmt").text.should eq("42.0")
-    xml.at("ExchangeRate").text.should eq("42.0")
+    xml.at("TotalAmt").text.should == "42.0"
+    xml.at("UnappliedAmt").text.should == "42.0"
+    xml.at("ExchangeRate").text.should == "42.0"
   end
 end

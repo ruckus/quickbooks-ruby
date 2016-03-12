@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Report xmlns="http://schema.intuit.com/finance/v3">
+  <Header>
+    <Time>2015-04-29T03:05:13-07:00</Time>
+    <ReportName>ProfitAndLossDetail</ReportName>
+    <ReportBasis>Cash</ReportBasis>
+    <StartPeriod>2015-01-01</StartPeriod>
+    <EndPeriod>2015-01-31</EndPeriod>
+    <Currency>USD</Currency>
+    <Option>
+      <Name>NoReportData</Name>
+      <Value>false</Value>
+    </Option>
+  </Header>
+  <Columns>
+    <Column>
+      <ColTitle>Amount</ColTitle>
+      <ColType>subt_nat_amount</ColType>
+    </Column>
+    <Column>
+      <ColTitle>Tax Amount</ColTitle>
+      <ColType>tax_amount</ColType>
+    </Column>
+  </Columns>
+  <Rows>
+    <Row type="Section">
+      <Header>
+        <ColData value="Ordinary Income/Expenses" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Section">
+          <Header>
+            <ColData value="Income" />
+            <ColData value="" />
+          </Header>
+          <Rows>
+            <Row type="Section">
+              <Header>
+                <ColData value="Design income" />
+                <ColData value="" />
+              </Header>
+              <Rows>
+                <Row type="Data">
+                  <ColData value="337.5" />
+                  <ColData value="" />
+                </Row>
+                <Row type="Data">
+                  <ColData value="300.0" />
+                  <ColData value="" />
+                </Row>
+              </Rows>
+              <Summary>
+                <ColData value="Total for Design income" />
+                <ColData value="637.5" />
+                <ColData value="" />
+              </Summary>
+            </Row>
+            <Row type="Section">
+              <Header>
+                <ColData value="Discounts given" />
+                <ColData value="" />
+              </Header>
+              <Rows>
+                <Row type="Data">
+                  <ColData value="-8.75" />
+                  <ColData value="" />
+                </Row>
+              </Rows>
+              <Summary>
+                <ColData value="Total for Discounts given" />
+                <ColData value="-8.75" />
+                <ColData value="" />
+              </Summary>
+            </Row>
+            <Row type="Section">
+              <Header>
+                <ColData value="Landscaping Services" />
+                <ColData value="" />
+              </Header>
+              <Rows>
+                <Row type="Data">
+                  <ColData value="58.54" />
+                  <ColData value="" />
+                </Row>
+                <Row type="Data">
+                  <ColData value="140.0" />
+                  <ColData value="" />
+                </Row>
+                <Row type="Data">
+                  <ColData value="80.0" />
+                  <ColData value="" />
+                </Row>
+                <Row type="Data">
+                  <ColData value="100.0" />
+                  <ColData value="8.0" />
+                </Row>
+                <Row type="Data">
+                  <ColData value="46.3" />
+                  <ColData value="3.7" />
+                </Row>
+                <Row type="Data">
+                  <ColData value="75.0" />
+                  <ColData value="6.0" />
+                </Row>
+                <Row type="Data">
+                  <ColData value="90.0" />
+                  <ColData value="" />
+                </Row>
+              </Rows>
+              <Summary>
+                <ColData value="Total for Landscaping Services" />
+                <ColData value="589.84" />
+                <ColData value="17.7" />
+              </Summary>
+            </Row>
+            <Row type="Section">
+              <Header>
+                <ColData value="Job Materials" />
+                <ColData value="" />
+              </Header>
+              <Rows>
+                <Row type="Section">
+                  <Header>
+                    <ColData value="Fountains and Garden Lighting" />
+                    <ColData value="" />
+                  </Header>
+                  <Rows>
+                    <Row type="Data">
+                      <ColData value="131.8" />
+                      <ColData value="10.55" />
+                    </Row>
+                    <Row type="Data">
+                      <ColData value="275.0" />
+                      <ColData value="22.0" />
+                    </Row>
+                  </Rows>
+                  <Summary>
+                    <ColData value="Total for Fountains and Garden Lighting" />
+                    <ColData value="406.8" />
+                    <ColData value="32.55" />
+                  </Summary>
+                </Row>
+                <Row type="Section">
+                  <Header>
+                    <ColData value="Plants and Soil" />
+                    <ColData value="" />
+                  </Header>
+                  <Rows>
+                    <Row type="Data">
+                      <ColData value="-24.36" />
+                      <ColData value="" />
+                    </Row>
+                    <Row type="Data">
+                      <ColData value="-54.92" />
+                      <ColData value="" />
+                    </Row>
+                    <Row type="Data">
+                      <ColData value="512.55" />
+                      <ColData value="41.01" />
+                    </Row>
+                    <Row type="Data">
+                      <ColData value="71.9" />
+                      <ColData value="5.75" />
+                    </Row>
+                    <Row type="Data">
+                      <ColData value="1237.45" />
+                      <ColData value="98.99" />
+                    </Row>
+                  </Rows>
+                  <Summary>
+                    <ColData value="Total for Plants and Soil" />
+                    <ColData value="1742.62" />
+                    <ColData value="145.75" />
+                  </Summary>
+                </Row>
+              </Rows>
+              <Summary>
+                <ColData value="Total for Job Materials" />
+                <ColData value="2149.42" />
+                <ColData value="178.3" />
+              </Summary>
+            </Row>
+            <Row type="Section">
+              <Header>
+                <ColData value="Labor" />
+                <ColData value="" />
+              </Header>
+              <Rows>
+                <Row type="Section">
+                  <Header>
+                    <ColData value="Maintenance and Repair" />
+                    <ColData value="" />
+                  </Header>
+                  <Rows>
+                    <Row type="Data">
+                      <ColData value="24.39" />
+                      <ColData value="" />
+                    </Row>
+                  </Rows>
+                  <Summary>
+                    <ColData value="Total for Maintenance and Repair" />
+                    <ColData value="24.39" />
+                    <ColData value="" />
+                  </Summary>
+                </Row>
+              </Rows>
+              <Summary>
+                <ColData value="Total for Labor" />
+                <ColData value="24.39" />
+                <ColData value="" />
+              </Summary>
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="accountsTotal for Landscaping Services with sub-accounts." />
+            <ColData value="2763.65" />
+            <ColData value="196.0" />
+          </Summary>
+        </Row>
+        <Row type="Section">
+          <Header>
+            <ColData value="Pest Control Services" />
+            <ColData value="" />
+          </Header>
+          <Rows>
+            <Row type="Data">
+              <ColData value="-100.0" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="17.07" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="87.5" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="-87.5" />
+              <ColData value="" />
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total for Pest Control Services" />
+            <ColData value="-82.93" />
+            <ColData value="" />
+          </Summary>
+        </Row>
+        <Row type="Section">
+          <Header>
+            <ColData value="Sales of Product Income" />
+            <ColData value="" />
+          </Header>
+          <Rows>
+            <Row type="Data">
+              <ColData value="5.86" />
+              <ColData value="0.47" />
+            </Row>
+            <Row type="Data">
+              <ColData value="7.03" />
+              <ColData value="0.56" />
+            </Row>
+            <Row type="Data">
+              <ColData value="16.97" />
+              <ColData value="1.36" />
+            </Row>
+            <Row type="Data">
+              <ColData value="14.14" />
+              <ColData value="1.13" />
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total for Sales of Product Income" />
+            <ColData value="44.0" />
+            <ColData value="3.52" />
+          </Summary>
+        </Row>
+        <Row type="Section">
+          <Header>
+            <ColData value="Services" />
+            <ColData value="" />
+          </Header>
+          <Rows>
+            <Row type="Data">
+              <ColData value="117.15" />
+              <ColData value="9.37" />
+            </Row>
+            <Row type="Data">
+              <ColData value="103.55" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="282.85" />
+              <ColData value="22.63" />
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total for Services" />
+            <ColData value="503.55" />
+            <ColData value="32.0" />
+          </Summary>
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total for Income" />
+        <ColData value="3857.02" />
+        <ColData value="231.52" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Cost of Goods Sold" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Section">
+          <Header>
+            <ColData value="Cost of Goods Sold" />
+            <ColData value="" />
+          </Header>
+          <Rows>
+            <Row type="Data">
+              <ColData value="62.5" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="125.0" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="30.0" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="11.25" />
+              <ColData value="" />
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total for Cost of Goods Sold" />
+            <ColData value="228.75" />
+            <ColData value="" />
+          </Summary>
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total for Cost of Goods Sold" />
+        <ColData value="228.75" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Summary>
+        <ColData value="Gross Profit" />
+        <ColData value="3628.27" />
+        <ColData value="231.52" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Expenses" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Section">
+          <Header>
+            <ColData value="Advertising" />
+            <ColData value="" />
+          </Header>
+          <Rows>
+            <Row type="Data">
+              <ColData value="74.86" />
+              <ColData value="" />
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total for Advertising" />
+            <ColData value="74.86" />
+            <ColData value="" />
+          </Summary>
+        </Row>
+        <Row type="Section">
+          <Header>
+            <ColData value="Automobile" />
+            <ColData value="" />
+          </Header>
+          <Rows>
+            <Row type="Data">
+              <ColData value="19.99" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="19.99" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="19.99" />
+              <ColData value="" />
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total for Automobile" />
+            <ColData value="59.97" />
+            <ColData value="" />
+          </Summary>
+        </Row>
+        <Row type="Section">
+          <Header>
+            <ColData value="Fuel" />
+            <ColData value="" />
+          </Header>
+          <Rows>
+            <Row type="Data">
+              <ColData value="65.0" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="52.14" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="63.15" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="52.56" />
+              <ColData value="" />
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total for Fuel" />
+            <ColData value="232.85" />
+            <ColData value="" />
+          </Summary>
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="accountsTotal for Automobile with sub-accounts." />
+        <ColData value="292.82" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Equipment Rental" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Data">
+          <ColData value="112.0" />
+          <ColData value="" />
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total for Equipment Rental" />
+        <ColData value="112.0" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Job Expenses" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Data">
+          <ColData value="46.98" />
+          <ColData value="" />
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total for Job Expenses" />
+        <ColData value="46.98" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Job Materials" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Section">
+          <Header>
+            <ColData value="Decks and Patios" />
+            <ColData value="" />
+          </Header>
+          <Rows>
+            <Row type="Data">
+              <ColData value="88.09" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="103.55" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="42.4" />
+              <ColData value="" />
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total for Decks and Patios" />
+            <ColData value="234.04" />
+            <ColData value="" />
+          </Summary>
+        </Row>
+        <Row type="Section">
+          <Header>
+            <ColData value="Plants and Soil" />
+            <ColData value="" />
+          </Header>
+          <Rows>
+            <Row type="Data">
+              <ColData value="82.45" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="23.5" />
+              <ColData value="" />
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total for Plants and Soil" />
+            <ColData value="105.95" />
+            <ColData value="" />
+          </Summary>
+        </Row>
+        <Row type="Section">
+          <Header>
+            <ColData value="Sprinklers and Drip Systems" />
+            <ColData value="" />
+          </Header>
+          <Rows>
+            <Row type="Data">
+              <ColData value="215.66" />
+              <ColData value="" />
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total for Sprinklers and Drip Systems" />
+            <ColData value="215.66" />
+            <ColData value="" />
+          </Summary>
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total for Job Materials" />
+        <ColData value="555.65" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Summary>
+        <ColData value="accountsTotal for Job Expenses with sub-accounts." />
+        <ColData value="602.63" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Legal &amp; Professional Fees" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Data">
+          <ColData value="75.0" />
+          <ColData value="" />
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total for Legal &amp; Professional Fees" />
+        <ColData value="75.0" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Accounting" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Data">
+          <ColData value="75.0" />
+          <ColData value="" />
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total for Accounting" />
+        <ColData value="75.0" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Lawyer" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Data">
+          <ColData value="100.0" />
+          <ColData value="" />
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total for Lawyer" />
+        <ColData value="100.0" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Summary>
+        <ColData value="accountsTotal for Legal &amp; Professional Fees with sub-accounts." />
+        <ColData value="250.0" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Maintenance and Repair" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Data">
+          <ColData value="185.0" />
+          <ColData value="" />
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total for Maintenance and Repair" />
+        <ColData value="185.0" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Meals and Entertainment" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Data">
+          <ColData value="5.66" />
+          <ColData value="" />
+        </Row>
+        <Row type="Data">
+          <ColData value="3.86" />
+          <ColData value="" />
+        </Row>
+        <Row type="Data">
+          <ColData value="18.97" />
+          <ColData value="" />
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total for Meals and Entertainment" />
+        <ColData value="28.49" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Office Expenses" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Data">
+          <ColData value="18.08" />
+          <ColData value="" />
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total for Office Expenses" />
+        <ColData value="18.08" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Rent or Lease" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Data">
+          <ColData value="900.0" />
+          <ColData value="" />
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total for Rent or Lease" />
+        <ColData value="900.0" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Utilities" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Section">
+          <Header>
+            <ColData value="Gas and Electric" />
+            <ColData value="" />
+          </Header>
+          <Rows>
+            <Row type="Data">
+              <ColData value="114.09" />
+              <ColData value="" />
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total for Gas and Electric" />
+            <ColData value="114.09" />
+            <ColData value="" />
+          </Summary>
+        </Row>
+        <Row type="Section">
+          <Header>
+            <ColData value="Telephone" />
+            <ColData value="" />
+          </Header>
+          <Rows>
+            <Row type="Data">
+              <ColData value="74.36" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="56.5" />
+              <ColData value="" />
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total for Telephone" />
+            <ColData value="130.86" />
+            <ColData value="" />
+          </Summary>
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total for Utilities" />
+        <ColData value="244.95" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Summary>
+        <ColData value="Total for Expenses" />
+        <ColData value="2708.83" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Summary>
+        <ColData value="Net Ordinary Income" />
+        <ColData value="919.44" />
+        <ColData value="231.52" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Other Income/Expense" />
+        <ColData value="" />
+      </Header>
+      <Rows />
+    </Row>
+    <Row type="Section">
+      <Header>
+        <ColData value="Other Expense" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Section">
+          <Header>
+            <ColData value="Miscellaneous" />
+            <ColData value="" />
+          </Header>
+          <Rows>
+            <Row type="Data">
+              <ColData value="2000.0" />
+              <ColData value="" />
+            </Row>
+            <Row type="Data">
+              <ColData value="666.0" />
+              <ColData value="" />
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total for Miscellaneous" />
+            <ColData value="2666.0" />
+            <ColData value="" />
+          </Summary>
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total for Other Expense" />
+        <ColData value="2666.0" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Summary>
+        <ColData value="Net Other Income" />
+        <ColData value="-2666.0" />
+        <ColData value="" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Summary>
+        <ColData value="Net Income" />
+        <ColData value="-1746.56" />
+        <ColData value="231.52" />
+      </Summary>
+    </Row>
+  </Rows>
+</Report>

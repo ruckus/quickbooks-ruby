@@ -1,11 +1,14 @@
 module Quickbooks
   module Model
     class RefundReceipt < BaseModel
+      include GlobalTaxCalculation
+      include HasLineItems
+
       XML_COLLECTION_NODE = "RefundReceipt"
       XML_NODE = "RefundReceipt"
       REST_RESOURCE = 'refundreceipt'
 
-      xml_accessor :id, :from => 'Id', :as => Integer
+      xml_accessor :id, :from => 'Id'
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :auto_doc_number, :from => 'AutoDocNumber' # See auto_doc_number! method below for usage
@@ -34,6 +37,9 @@ module Quickbooks
       xml_accessor :print_status, :from => 'PrintStatus'
       xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => to_xml_big_decimal
 
+      xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :linked_transactions, :from => 'LinkedTxn', :as => [LinkedTransaction]
+
       # readonly
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
       xml_accessor :home_total, :from => 'HomeTotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
@@ -42,15 +48,10 @@ module Quickbooks
       alias_attribute :placed_on, :txn_date
 
       include DocumentNumbering
-      reference_setters :customer_ref, :payment_method_ref, :deposit_to_account_ref, :department_ref, :currency_ref, :class_ref
+      reference_setters
 
       validate :line_item_size
       validate :document_numbering
-
-      def initialize(*args)
-        ensure_line_items_initialization
-        super
-      end
 
       def email=(email)
         self.bill_email = EmailAddress.new(email)

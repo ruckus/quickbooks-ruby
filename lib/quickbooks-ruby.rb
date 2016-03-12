@@ -7,6 +7,7 @@ require 'uri'
 require 'date'
 require 'forwardable'
 require 'oauth'
+require 'net/http/post/multipart'
 require 'quickbooks/util/collection'
 require 'quickbooks/util/logging'
 require 'quickbooks/util/http_encoding_helper'
@@ -14,13 +15,20 @@ require 'quickbooks/util/name_entity'
 require 'quickbooks/util/query_builder'
 
 #== Models
+require 'quickbooks/model/definition'
 require 'quickbooks/model/validator'
 require 'quickbooks/model/base_model'
+require 'quickbooks/model/base_model_json'
 require 'quickbooks/model/base_reference'
 require 'quickbooks/model/document_numbering'
+require 'quickbooks/model/global_tax_calculation'
+require 'quickbooks/model/has_line_items'
 require 'quickbooks/model/access_token_response'
 require 'quickbooks/model/meta_data'
 require 'quickbooks/model/class'
+require 'quickbooks/model/entity_ref'
+require 'quickbooks/model/attachable_ref'
+require 'quickbooks/model/attachable'
 require 'quickbooks/model/custom_field'
 require 'quickbooks/model/sales_item_line_detail'
 require 'quickbooks/model/sub_total_line_detail'
@@ -39,8 +47,13 @@ require 'quickbooks/model/journal_entry_line_detail'
 require 'quickbooks/model/line'
 require 'quickbooks/model/journal_entry'
 require 'quickbooks/model/item'
+require 'quickbooks/model/budget_line_item'
+require 'quickbooks/model/budget'
 require 'quickbooks/model/account'
 require 'quickbooks/model/check_payment'
+require 'quickbooks/model/deposit_line_detail'
+require 'quickbooks/model/deposit_line_item'
+require 'quickbooks/model/deposit'
 require 'quickbooks/model/credit_card_payment'
 require 'quickbooks/model/telephone_number'
 require 'quickbooks/model/other_contact_info'
@@ -48,6 +61,7 @@ require 'quickbooks/model/email_address'
 require 'quickbooks/model/web_site_address'
 require 'quickbooks/model/physical_address'
 require 'quickbooks/model/invoice_line_item'
+require 'quickbooks/model/name_value'
 require 'quickbooks/model/company_info'
 require 'quickbooks/model/customer'
 require 'quickbooks/model/sales_receipt'
@@ -72,27 +86,46 @@ require 'quickbooks/model/purchase'
 require 'quickbooks/model/purchase_order'
 require 'quickbooks/model/vendor_credit'
 require 'quickbooks/model/estimate'
+require 'quickbooks/model/delivery_info'
 require 'quickbooks/model/invoice'
 require 'quickbooks/model/tax_rate'
 require 'quickbooks/model/tax_rate_detail'
+require 'quickbooks/model/tax_rate_detail_line'
 require 'quickbooks/model/sales_tax_rate_list'
+require 'quickbooks/model/purchase_tax_rate_list'
+require 'quickbooks/model/tax_agency'
+require 'quickbooks/model/tax_service'
 require 'quickbooks/model/tax_code'
 require 'quickbooks/model/fault'
 require 'quickbooks/model/batch_request'
 require 'quickbooks/model/batch_response'
 require 'quickbooks/model/preferences'
 require 'quickbooks/model/refund_receipt'
+require 'quickbooks/model/change_model'
+require 'quickbooks/model/invoice_change'
+require 'quickbooks/model/customer_change'
+require 'quickbooks/model/vendor_change'
+require 'quickbooks/model/item_change'
+require 'quickbooks/model/report'
+require 'quickbooks/model/credit_memo_change'
+require 'quickbooks/model/payment_change'
+require 'quickbooks/model/transfer'
 
 #== Services
 require 'quickbooks/service/service_crud'
+require 'quickbooks/service/service_crud_json'
 require 'quickbooks/service/base_service'
+require 'quickbooks/service/base_service_json'
 require 'quickbooks/service/access_token'
 require 'quickbooks/service/class'
+require 'quickbooks/service/attachable'
 require 'quickbooks/service/company_info'
 require 'quickbooks/service/customer'
 require 'quickbooks/service/department'
 require 'quickbooks/service/invoice'
+require 'quickbooks/service/deposit'
 require 'quickbooks/service/item'
+require 'quickbooks/service/budget'
 require 'quickbooks/service/journal_entry'
 require 'quickbooks/service/sales_receipt'
 require 'quickbooks/service/account'
@@ -111,14 +144,37 @@ require 'quickbooks/service/vendor_credit'
 require 'quickbooks/service/estimate'
 require 'quickbooks/service/tax_rate'
 require 'quickbooks/service/tax_code'
+require 'quickbooks/service/tax_agency'
+require 'quickbooks/service/tax_service'
 require 'quickbooks/service/batch'
 require 'quickbooks/service/preferences'
 require 'quickbooks/service/refund_receipt'
+require 'quickbooks/service/change_service'
+require 'quickbooks/service/invoice_change'
+require 'quickbooks/service/customer_change'
+require 'quickbooks/service/upload'
+require 'quickbooks/util/multipart'
+require 'quickbooks/service/vendor_change'
+require 'quickbooks/service/item_change'
+require 'quickbooks/service/reports'
+require 'quickbooks/service/credit_memo_change'
+require 'quickbooks/service/payment_change'
+require 'quickbooks/service/transfer'
 
 module Quickbooks
+  @@sandbox_mode = false
+
   @@logger = nil
 
   class << self
+    def sandbox_mode
+      @@sandbox_mode
+    end
+
+    def sandbox_mode=(sandbox_mode)
+      @@sandbox_mode = sandbox_mode
+    end
+
     def logger
       @@logger ||= ::Logger.new($stdout) # TODO: replace with a real log file
     end
@@ -151,12 +207,13 @@ module Quickbooks
   class InvalidModelException < StandardError; end
 
   class AuthorizationFailure < StandardError; end
+  class Forbidden < StandardError; end
 
   class ServiceUnavailable < StandardError; end
   class MissingRealmError < StandardError; end
 
   class IntuitRequestException < StandardError
-    attr_accessor :message, :code, :detail, :type, :request_xml
+    attr_accessor :message, :code, :detail, :type, :request_xml, :request_json
     def initialize(msg)
       self.message = msg
       super(msg)

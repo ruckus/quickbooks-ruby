@@ -7,10 +7,12 @@ describe Quickbooks::Model::Fault do
     fault.errors.size.should == 2
     first_error = fault.errors.first
     first_error.code.should == "2050"
+    first_error.element.should == "firstname"
     first_error.message.should == "Length exceeds limit"
     first_error.detail.should == "Length of the field exceeds 21 chars"
     last_error = fault.errors.last
     last_error.code.should == "2080"
+    last_error.element.should == "postalcode"
     last_error.message.should == "Illegal number format"
     last_error.detail.should == "ZipCode should be a number with at least 5 digits"
   end

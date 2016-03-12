@@ -60,14 +60,11 @@ describe "Quickbooks::Service::TimeActivity" do
 
     stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
 
-    employee = Quickbooks::Model::BaseReference.new(66)
-    employee.name = "John Smith"
+    employee = Quickbooks::Model::BaseReference.new(66, name: 'John Smith')
 
-    item = Quickbooks::Model::BaseReference.new(49)
-    item.name = "General Consulting"
+    item = Quickbooks::Model::BaseReference.new(49, name: 'General Consulting')
 
-    customer = Quickbooks::Model::BaseReference.new(123)
-    customer.name = "Test Customer"
+    customer = Quickbooks::Model::BaseReference.new(123, name: 'Test Customer')
 
     time_activity = Quickbooks::Model::TimeActivity.new
     time_activity.txn_date = Date.today
@@ -84,7 +81,7 @@ describe "Quickbooks::Service::TimeActivity" do
 
     time_activity.valid_for_create?.should == true
     created_time_activity = @service.create(time_activity)
-    created_time_activity.id.should == 1
+    created_time_activity.id.should == "1"
   end
 
   it "can delete a time_activity" do

@@ -18,7 +18,7 @@ describe "Quickbooks::Model::Customer" do
     customer.default_tax_code_ref.to_s.should == 'NON'
 
     customer.billing_address.should_not be_nil
-    customer.billing_address.id.should == 2
+    customer.billing_address.id.should == "2"
     customer.billing_address.line1.should == "123 Swift St."
     customer.billing_address.city.should == "Santa Cruz"
     customer.billing_address.country.should == "USA"
@@ -27,7 +27,7 @@ describe "Quickbooks::Model::Customer" do
     customer.billing_address.lon.should == "-122.0477003"
 
     customer.shipping_address.should_not be_nil
-    customer.shipping_address.id.should == 2
+    customer.shipping_address.id.should == "2"
     customer.shipping_address.line1.should == "123 Swift St."
     customer.shipping_address.city.should == "Santa Cruz"
     customer.shipping_address.country.should == "USA"

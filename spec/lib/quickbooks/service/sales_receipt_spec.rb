@@ -47,12 +47,16 @@ module Quickbooks
 
         receipt = model.new
         receipt.customer_id = 2
-        receipt.ship_method_ref = "Ship Method"
+
+        shipping_reference = Quickbooks::Model::BaseReference.new('FedEx', name: 'FedEx')
+        receipt.ship_method_ref = shipping_reference
         receipt.txn_date = Time.now
         receipt.line_items = [line]
 
         receipt = subject.create(receipt)
         expect(receipt.line_items.first.description).to eq line.description
+
+        receipt.ship_method_ref.name.should == 'FedEx'
       end
 
       it "fetches sales receipt by ID" do

@@ -8,6 +8,7 @@
 	<DocNumber>1001</DocNumber>
 	<TxnDate>2013-11-15</TxnDate>
 	<CurrencyRef name="United States Dollar">USD</CurrencyRef>
+	<ExchangeRate>1.5</ExchangeRate> <!-- Present for non-USA accounts -->
 	<PrivateNote>Statement Memo</PrivateNote>
 	<Line>
 		<Id>1</Id>
@@ -74,6 +75,7 @@
 	<SalesTermRef>2</SalesTermRef>
 	<DueDate>2013-11-30</DueDate>
 	<TotalAmt>50.00</TotalAmt>
+	<HomeTotalAmt>75.00</HomtTotalAmt> <!-- Present for non-USA accounts -->
 	<ApplyTaxAfterDiscount>false</ApplyTaxAfterDiscount>
 	<PrintStatus>NotSet</PrintStatus>
 	<EmailStatus>NotSet</EmailStatus>

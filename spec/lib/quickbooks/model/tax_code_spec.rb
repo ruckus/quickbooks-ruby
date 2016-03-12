@@ -11,10 +11,16 @@ describe "Quickbooks::Model::TaxCode" do
     item.should be_taxable
     item.should be_tax_group
 
-    tax_rate_detail = item.sales_tax_rate_list.tax_rate_detail.first
-    tax_rate_detail.tax_rate_ref.value.should == "1"
-    tax_rate_detail.tax_rate_ref.name.should == "Stupid tax"
-    tax_rate_detail.tax_type_applicable.should == "TaxOnAmount"
-    tax_rate_detail.tax_order.should == "0"
+    sales_tax_rate_detail = item.sales_tax_rate_list.tax_rate_detail.first
+    sales_tax_rate_detail.tax_rate_ref.value.should == "1"
+    sales_tax_rate_detail.tax_rate_ref.name.should == "Stupid tax"
+    sales_tax_rate_detail.tax_type_applicable.should == "TaxOnAmount"
+    sales_tax_rate_detail.tax_order.should == "0"
+
+    purchase_tax_rate_detail = item.purchase_tax_rate_list.tax_rate_detail.first
+    purchase_tax_rate_detail.tax_rate_ref.value.should == "2"
+    purchase_tax_rate_detail.tax_rate_ref.name.should == "Banana tax"
+    purchase_tax_rate_detail.tax_type_applicable.should == "TaxOnAmount"
+    purchase_tax_rate_detail.tax_order.should == "0"
   end
 end

@@ -1,0 +1,19 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2015-02-07T14:43:34.561-08:00">
+	<QueryResponse startPosition="1" maxResults="1">
+		<Attachable domain="QBO" sparse="false">
+			<Id>2700000000001439108</Id>
+			<SyncToken>0</SyncToken>
+			<MetaData>
+				<CreateTime>2014-08-18T09:58:06-07:00</CreateTime>
+				<LastUpdatedTime>2014-08-18T09:58:06-07:00</LastUpdatedTime>
+			</MetaData>
+			<FileName>monkey.jpg</FileName>
+			<FileAccessUri>/v3/company/1002341430/download/2700000000001439108</FileAccessUri>
+			<TempDownloadUri>https://intuit-qbo-prod-30.s3.amazonaws.com/1002341430%2Fattachments%2Fmonkey.jpg</TempDownloadUri>
+			<Size>105840</Size>
+			<ContentType>image/jpeg</ContentType>
+			<ThumbnailFileAccessUri>/v3/company/1002341430/attachable-thumbnail/2700000000001439108</ThumbnailFileAccessUri>
+			<ThumbnailTempDownloadUri>https://intuit-qbo-prod-30.s3.amazonaws.com/1002341430%2Fattachmentthumbnails%2Ftn_monkey.jpg</ThumbnailTempDownloadUri>
+		</Attachable>
+	</QueryResponse>
+</IntuitResponse>

@@ -1,5 +1,7 @@
 # Quickbooks-Ruby
 
+[![Join the chat at https://gitter.im/ruckus/quickbooks-ruby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ruckus/quickbooks-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/ruckus/quickbooks-ruby.png?branch=master)](https://travis-ci.org/ruckus/quickbooks-ruby)
 
 Integration with Quickbooks Online via the Intuit Data Services v3 REST API.
@@ -31,7 +33,7 @@ Moreover, there is no longer a getter method e.g. `active` (without the trailing
 
 ## Requirements
 
-This has been tested on 1.9.3, 2.0.0, and 2.1.0.
+This has been tested on 1.9.3, 2.0, 2.1, 2.2
 
 Ruby 1.8.7 and 1.9.2 are not supported.
 
@@ -44,6 +46,17 @@ Gems:
 * `nokogiri` : XML parsing
 * `active_model` : For validations
 
+## Sandbox Mode
+An API app provides two sets of OAuth key for production and development. Since October 22, 2014, only [Sandbox Companies](https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services)
+are allowed to connected to the QBO via the development key. The end-point for sandbox mode is https://sandbox-quickbooks.api.intuit.com.
+
+By default, the gem runs in production mode. If you prefer to develop / test the integration with the development key,
+you need to config the gem to run in sandbox mode:
+
+```ruby
+Quickbooks.sandbox_mode = true
+```
+
 ## Getting Started & Initiating Authentication Flow with Intuit
 
 What follows is an example using Rails but the principles can be adapted to any other framework / pure Ruby.
@@ -51,10 +64,10 @@ What follows is an example using Rails but the principles can be adapted to any 
 Create a Rails initializer with:
 
 ```ruby
-QB_KEY = "your apps Intuit App Key"
-QB_SECRET = "your apps Intuit Secret Key"
+OAUTH_CONSUMER_KEY = "OAUTH_CONSUMER_KEY"
+OAUTH_CONSUMER_SECRET = "OAUTH_CONSUMER_SECRET"
 
-$qb_oauth_consumer = OAuth::Consumer.new(QB_KEY, QB_SECRET, {
+::QB_OAUTH_CONSUMER = OAuth::Consumer.new(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET, {
     :site                 => "https://oauth.intuit.com",
     :request_token_path   => "/oauth/v1/get_request_token",
     :authorize_url        => "https://appcenter.intuit.com/Connect/Begin",
@@ -83,7 +96,7 @@ Your Controller action (the `grantUrl` above) should look like this:
 ```ruby
   def authenticate
     callback = quickbooks_oauth_callback_url
-    token = $qb_oauth_consumer.get_request_token(:oauth_callback => callback)
+    token = QB_OAUTH_CONSUMER.get_request_token(:oauth_callback => callback)
     session[:qb_request_token] = token
     redirect_to("https://appcenter.intuit.com/Connect/Begin?oauth_token=#{token.token}") and return
   end
@@ -114,10 +127,10 @@ Marshal.load(session[:qb_request_token]).get_access_token(:oauth_verifier => par
 
 ## Creating an OAuth Access Token
 
-Once you have your users OAuth Token & Secret you can initialize your `OAuth Consumer` and create a `OAuth Client` using the `$qb_oauth_consumer` you created earlier in your Rails initializer:
+Once you have your users OAuth Token & Secret you can initialize your `OAuth Consumer` and create a `OAuth Client` using the `QB_OAUTH_CONSUMER` you created earlier in your Rails initializer:
 
 ```ruby
-access_token = OAuth::AccessToken.new($qb_oauth_consumer, access_token, access_secret)
+access_token = OAuth::AccessToken.new(QB_OAUTH_CONSUMER, string_access_token_from_qb, string_access_secret_from_qb)
 ```
 
 ## Persisting the Credentials
@@ -140,11 +153,11 @@ token_expires_at datetime # Set to 6.months.from_now upon insertion
 reconnect_token_at datetime # Set to 5.months.from_now upon insertion
 ```
 
-Then you will want to have a scheduled task / cron which runs nightly and runs thru your tokens and checks for records where `reconnect_token_at >= now()` and it then performs the following logic:
+Then you will want to have a scheduled task / cron which runs nightly and runs thru your tokens and checks for records where `reconnect_token_at <= now()` and it then performs the following logic:
 
 ```ruby
 expiring_tokens.each do |record|
-  access_token = OAuth::AccessToken.new($qb_oauth_consumer, record.access_token, record.access_secret)
+  access_token = OAuth::AccessToken.new(QB_OAUTH_CONSUMER, record.access_token, record.access_secret)
   service = Quickbooks::Service::AccessToken.new
   service.access_token = access_token
   service.company_id = record.company_id
@@ -224,6 +237,14 @@ If you're are running a custom Query then pass it instead.
 The second argument is the options, which are optional.
 By default, the options are `per_page: 1000`.
 
+## Retrieving all objects
+
+You may retrieve an array of objects like so:
+```ruby
+customers = service.all
+```
+Unlike other query functions which return a Quickbooks::Collection object,
+the all method returns an array of objects.
 
 ## Retrieving a single object
 
@@ -233,6 +254,16 @@ You can retrieve a specific Intuit object like so:
 customer = service.fetch_by_id("99")
 puts customer.company_name
 => "Acme Enterprises"
+```
+## Retrieving objects with matching attributes
+
+The `find_by(attribute, value)` method allows you to retrieve objects with a simple WHERE query using a single attribute.  The attribute may be given as a symbol or a string.
+Symbols will be automatically camelcased to match the Quickbooks API field names.
+
+```ruby
+customer = service.find_by(:family_name, "Doe")
+or
+customer = service.find_by("FamilyName", "Doe")
 ```
 
 ## Updating an object
@@ -261,6 +292,36 @@ customer = Quickbooks::Model::Customer.new
 customer.id = 99
 customer.company_name = "New Company Name"
 service.update(customer, :sparse => true)
+```
+
+## Reference Setters
+
+Some models require a reference to be set, to a Customer, or an Item, etc. In the Quickbooks API these references
+are labeled via a property like `CustomerRef`. In `quickbooks-ruby` the assignment of these references is done
+by using the setter on the `_id` property.
+
+For example, to specify a Customer with ID 99 on an Invoice you would do this:
+
+```ruby
+invoice = Quickbooks::Model::Invoice.new
+invoice.customer_id = 99
+```
+
+This will automatically set a `CustomerRef` XML packet with a value of 99.
+
+
+## SalesReceipts & Ship Methods
+
+The QBO API documentation states that `SalesReceipt` has a `ShipMethodRef` attribute. Normally, all attributes of a `Ref` type
+take an pseudo-integer argument, representing the foreign ID, which in turn point to a valid object with that ID.
+
+I say *pseudo* because they look like Integers but Intuit has made it clear they should be handled as strings.
+
+Anyways, its subtle but the value for a `SalesReceipt#ShipMethodRef` while it is a `BaseReference` needs to be set manually:
+
+```ruby
+shipping_reference = Quickbooks::Model::BaseReference.new('FedEx', name: 'FedEx')
+receipt.ship_method_ref = shipping_reference
 ```
 
 ## Generating an Invoice
@@ -295,6 +356,34 @@ puts created_invoice.id
 
 **Notes**: `line_item.amount` must equal the `unit_price * quantity` in the sales detail packet - otherwise Intuit will raise an exception.
 
+## Emailing Invoices
+
+The Quickbooks API offers a **send invoice** feature that sends the specified invoice model via email.  By default the email is sent to the `bill_email` on the invoice.  This feature returns an invoice model with updated `email_status` and `delivery_info` as shown below:
+
+```ruby
+invoice = invoice_service.fetch_by_id("1")
+sent_invoice = invoice_service.send(invoice)
+
+puts sent_invoice.email_status
+=> EmailSent
+puts sent_invoice.delivery_info.delivery_type
+=> Email
+puts sent_invoice.delivery_info.delivery_time
+=> Wed, 25 Feb 2015 18:56:04 UTC +00:00
+```
+
+It is possible to email the invoice to an altermate email address by including the email as a second parameter in the `invoice.send` method.  When a new email address is provided the invoice model that is returned will have the `bill_email` set to the new email address as show below:
+
+```ruby
+invoice = invoice_service.fetch_by_id("1")
+sent_invoice = invoice_service.send(invoice, "name@domain.com")
+
+puts send_invoice.bill_email.address
+=> name@domain.com
+```
+
+**Notes:** Quickbooks has global company settings to customize the send invoice email message content and format.
+
 ## Generating a SalesReceipt
 
 ```ruby
@@ -303,7 +392,7 @@ salesreceipt = Quickbooks::Model::SalesReceipt.new({
   customer_id: 99,
   txn_date: Date.civil(2013, 11, 20),
   payment_ref_number: "111", #optional payment reference number/string - e.g. stripe token
-  deposit_to_account_id: 222, #The ID of the Account entity you want the SalesReciept to be deposited to
+  deposit_to_account_id: 222, #The ID of the Account entity you want the SalesReceipt to be deposited to
   payment_method_id: 333 #The ID of the PaymentMethod entity you want to be used for this transaction
 })
 salesreceipt.auto_doc_number! #allows Intuit to auto-generate the transaction number
@@ -343,6 +432,30 @@ A `Customer` has a setter method to make assigning an email address easier.
 ```ruby
 customer = Quickbooks::Model::Customer.new
 customer.email_address = "foo@example.com"
+```
+
+## Telephone Numbers
+Like Email Addresses, telephone numbers are not just basic strings but are top-level objects.
+
+```ruby
+phone1 = Quickbooks::Model::TelephoneNumber.new
+phone1.free_form_number = "97335530394"
+customer.mobile_phone = phone1
+```
+
+## Physical Addresses
+
+Addresses are also top-level objects, so they must be instantiated and set.
+
+```ruby
+address = Quickbooks::Model::PhysicalAddress.new
+
+address.line1 = "2200 Mission St."
+address.line2 = "Suite 201"
+address.city = "Santa Cruz"
+address.country_sub_division_code = "CA" # State, in United States
+address.postal_code = "95060"
+customer.billing_address = address
 ```
 
 ## Batch Operations
@@ -391,6 +504,116 @@ clause2 = util.clause("CompanyName", "=", "Smith")
 service.query("SELECT * FROM Customer WHERE #{clause1} AND #{clause2}")
 ```
 
+## Attachments
+
+The Quickbooks API supports two different types of attachments, depending on whether you have an actual file to upload or just
+want to upload "meta-data" about an operation.
+
+### Meta-data only: use the `Attachment` service
+
+```ruby
+meta = Quickbooks::Model::Attachable.new
+meta.file_name = "monkey.jpg"
+meta.note = "A note"
+meta.content_type = "image/jpeg"
+entity = Quickbooks::Model::BaseReference.new(3, type: 'Customer')
+meta.attachable_ref = Quickbooks::Model::AttachableRef.new(entity)
+```
+
+*Note*: No actual file is being attached, we are just describing a file.
+
+
+### Uploading an actual file
+
+```ruby
+upload_service = Quickbooks::Model::Upload.new
+
+# args:
+#     local-path to file
+#     file mime-type
+#     (optional) instance of Quickbooks::Model::Attachable - metadata
+result = upload_service.upload("tmp/monkey.jpg", "image/jpeg", attachable_metadata)
+```
+
+If successful `result` will be an instance of the `Attachable` model:
+
+```
+puts attach.temp_download_uri
+
+=> "https://intuit-qbo-prod-29.s3.amazonaws.com/12345%2Fattachments%2Fmonkey-1423760870606.jpg?Expires=1423761772&AWSAcc ... snip ..."
+```
+
+### Download PDF of an Invoice or SalesReceipt
+
+To download a PDF of an Invoice:
+
+```ruby
+service = Quickbooks::Service::Invoice.new # or use the SalesReceipt service
+
+# +invoice+ is an instance of Quickbooks::Model::Invoice
+raw_pdf_data = service.pdf(invoice)
+
+# write it to disk
+File.open("invoice.pdf", "wb") do |file|
+  file.write(raw_pdf_data)
+end
+```
+
+## Change Data Capture
+
+Quickbooks has an api called Change Data Capture that provides a way of finding out which Entities have recently changed.  This gem currently supports a way of querying changed invoices.  This is the only way to find out if an invoice has been deleted (not voided), since a deleted invoice will not be returned by a standard Invoice query.
+
+It is possible to request changes up to 30 days ago.
+
+```ruby
+service = Quickbooks::Service::InvoiceChange.new
+...
+changed = service.since(Time.now.utc - 5 days)
+```
+
+see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
+
+## Change Data Capture For Customers, Vendors, Items, Payments and Credit Memos
+
+It is possible to find out which Customer, Vendor, Item, Payment or Credit Memo Entries have recently changed.
+It is possible to request changes up to 30 days ago.
+
+```ruby
+customer_service = Quickbooks::Service::CustomerChange.new
+...
+customer_changed = customer_service.since(Time.now.utc - 5 days)
+```
+
+```ruby
+vendor_service = Quickbooks::Service::VendorChange.new
+...
+vendor_changed = vendor_service.since(Time.now.utc - 5 days)
+```
+
+```ruby
+item_service = Quickbooks::Service::ItemChange.new
+...
+item_changed = item_service.since(Time.now.utc - 5 days)
+```
+
+
+
+see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
+
+## Reports API
+
+Quickbooks has an API called the [Reports API](https://developer.intuit.com/docs/0100_accounting/0400_references/reports) that provides abilities such as: business and sales overview; vendor and customer balances; review expenses and purchases and more.
+See the [specs](https://github.com/ruckus/quickbooks-ruby/blob/master/spec/lib/quickbooks/model/report_spec.rb) for [examples](https://github.com/ruckus/quickbooks-ruby/blob/master/spec/lib/quickbooks/service/reports_spec.rb) of how to leverage.
+
+## JSON support
+
+Intuit started the v3 API supporting both XML and JSON. However, new
+v3 API services such as `Tax Service` [will only support
+JSON]( https://github.com/ruckus/quickbooks-ruby/issues/257#issuecomment-126834454 ). This gem has
+[ roots ](https://github.com/ruckus/quickeebooks) in the v2 API, which was XML only, and hence was constructed supporting XML only.
+
+That said, the `Tax Service` is supported and other new v3-API-JSON-only services will be supported. Ideally, we would like to fully support JSON for all entities and services for the `1.0.0` release. Please jump in and contribute to help that aim.
+
 ## Logging
 
 ```ruby
@@ -417,6 +640,7 @@ Company Info      | n/a    | n/a    | yes   | n/a    | yes         |
 Credit Memo       | yes    | yes    | yes   | yes    | no          |
 Customer          | yes    | yes    | yes   | yes    | yes         |
 Department        | yes    | yes    | yes   | yes    | yes         |
+Deposit           | yes    | yes    | yes   | yes    | yes         |
 Employee          | yes    | yes    | yes   | yes    | yes         |
 Entitlements      | no     | no     | no    | no     | no          |
 Estimate          | yes    | yes    | yes   | yes    | yes         |
@@ -433,44 +657,35 @@ Sales Receipt     | yes    | yes    | yes   | yes    | yes         |
 Sales Rep         | no     | no     | no    | no     | no          |
 Sales Tax         | no     | no     | no    | no     | no          |
 Sales Term        | no     | no     | no    | no     | no          |
+Tax Agency        | yes    | yes    | yes   | yes    | yes         |
 Tax Code          | no     | no     | yes   | no     | no          |
-Tax Rate          | no     | no     | yes   | no     | no          |
+Tax Rate          | yes    | yes    | yes   | no     | no          |
+*Tax Service      | yes    | yes    | no    | no     | no          |
 Term              | yes    | yes    | yes   | yes    | yes         |
 Time Activity     | yes    | yes    | yes   | yes    | yes         |
 Tracking Class    | no     | no     | no    | no     | no          |
 Vendor            | yes    | yes    | yes   | yes    | yes         |
 Vendor Credit     | yes    | yes    | yes   | yes    | yes         |
 
+*JSON only
 
 ## Related GEMS
 
 [`quickbooks-ruby-base`](https://github.com/minimul/quickbooks-ruby-base): Complements quickbooks-ruby by providing a [base class](http://minimul.com/improve-your-quickbooks-ruby-integration-experience-with-the-quickbooks-ruby-base-gem.html) to handle routine tasks like creating a model, service, and displaying information.
 
+[`qbo_rails`](https://github.com/minimul/qbo_rails): Simple Rails error handling and QuickBooks Online "Id" persistence. Uses `quickbooks-ruby`.
+
 ## TODO
 
 * Implement other Line Item types, e.g. `DescriptionLineDetail` for Invoices
+* Full JSON support
 
 ## Author
 
 Cody Caughlan
 
 ## Contributors
-`quickbooks-ruby` has been a community effort and I am thankful for all the amazing contributors. If I have missed
-your name please email me or submit a Pull Request.
-
-* Bruno Buccolo
-* Christian Pelczarski
-* Eggy
-* Evan Walsh
-* Exe Curia
-* Jason Dew
-* jleo3
-* Joe Wright
-* Josh Wilson
-* Pavel Pachkovskij
-* Sean Xie
-* Steven Chau
-* Washington Luiz
+`quickbooks-ruby` has been a community effort and I am extremely thankful for all the [amazing contributors](https://github.com/ruckus/quickbooks-ruby/network/members).
 
 ## License
 

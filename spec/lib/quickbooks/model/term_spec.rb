@@ -3,21 +3,19 @@ describe "Quickbooks::Model::Term" do
     xml = fixture("term.xml")
     term = Quickbooks::Model::Term.from_xml(xml)
 
-    term.id.should eq(11)
-    term.sync_token.should eq(0)
-    term.meta_data.create_time.
-      should eq(Time.new(2013, 7, 11, 17, 46, 39, "-07:00"))
-    term.meta_data.last_updated_time.
-      should eq(Time.new(2013, 7, 11, 17, 46, 42, "-07:00"))
-    term.name.should eq("TermForV3Testing-1373590184130")
+    term.id.should == "11"
+    term.sync_token.should == 0
+    term.meta_data.create_time.should == Time.new(2013, 7, 11, 17, 46, 39, "-07:00")
+    term.meta_data.last_updated_time.should == Time.new(2013, 7, 11, 17, 46, 42, "-07:00")
+    term.name.should == "TermForV3Testing-1373590184130"
     term.active?.should be_true
-    term.type.should eq("DATE_DRIVEN")
-    term.discount_percent.should eq(4.0)
+    term.type.should == "DATE_DRIVEN"
+    term.discount_percent.should == 4.0
     term.due_days.should be_nil
     term.discount_days.should be_nil
-    term.day_of_month_due.should eq(1)
-    term.due_next_month_days.should eq(2)
-    term.discount_day_of_month.should eq(3)
+    term.day_of_month_due.should == 1
+    term.due_next_month_days.should == 2
+    term.discount_day_of_month.should == 3
   end
 
   it "is invalid without a name" do

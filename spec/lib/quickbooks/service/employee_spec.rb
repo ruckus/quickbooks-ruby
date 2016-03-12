@@ -56,7 +56,7 @@ describe "Quickbooks::Service::Employee" do
     employee.address = address
     employee.valid_for_create?.should == true
     created_employee = @service.create(employee)
-    created_employee.id.should == 2
+    created_employee.id.should == "2"
   end
 
   it "cannot sparse update a employee" do

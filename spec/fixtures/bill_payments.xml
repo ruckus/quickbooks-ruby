@@ -1,0 +1,22 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-07-11T17:54:47.580-07:00">
+  <QueryResponse startPosition="1" maxResults="1">
+    <BillPayment domain="QBO" sparse="false">
+      <Id>623</Id>
+      <SyncToken>1</SyncToken>
+      <MetaData>
+        <CreateTime>2015-12-15T00:00:00-08:00</CreateTime>
+        <LastUpdatedTime>2015-12-15T00:00:00-08:00</LastUpdatedTime>
+      </MetaData>
+      <DocNumber>1</DocNumber>
+      <TxnDate>2015-12-15</TxnDate>
+      <PrivateNote>Acct. 1JK90</PrivateNote>
+      <VendorRef name="Computer Services by DJ">32</VendorRef>
+      <PayType>Check</PayType>
+      <CheckPayment>
+        <BankAccountRef name="Barter Account">133</BankAccountRef>
+        <PrintStatus>NotSet</PrintStatus>
+      </CheckPayment>
+      <TotalAmt>110.00</TotalAmt>
+    </BillPayment>
+  </QueryResponse>
+</IntuitResponse>

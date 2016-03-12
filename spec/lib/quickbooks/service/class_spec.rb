@@ -38,7 +38,7 @@ describe "Quickbooks::Service::Class" do
     classs.sub_class = false
     classs.valid_for_create?.should == true
     created_classs = @service.create(classs)
-    created_classs.id.should == 2
+    created_classs.id.should == "2"
   end
 
   it "cannot sparse update a class" do
