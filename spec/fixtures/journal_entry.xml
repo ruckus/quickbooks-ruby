@@ -1,0 +1,94 @@
+<JournalEntry domain="QBO" sparse="false">
+  <Id>450</Id>
+  <SyncToken>0</SyncToken>
+  <MetaData>
+    <CreateTime>2014-12-02T06:53:16-08:00</CreateTime>
+    <LastUpdatedTime>2014-12-02T06:53:16-08:00</LastUpdatedTime>
+  </MetaData>
+  <DocNumber>49</DocNumber>
+  <TxnDate>2014-11-28</TxnDate>
+  <CurrencyRef name="Canadian Dollar">CAD</CurrencyRef>
+  <ExchangeRate>1</ExchangeRate>
+  <Line>
+    <Id>0</Id>
+    <Description>Monthly fee</Description>
+    <Amount>20.00</Amount>
+    <DetailType>JournalEntryLineDetail</DetailType>
+    <JournalEntryLineDetail>
+      <PostingType>Debit</PostingType>
+      <AccountRef name="Bank Charges and Interest:Bank Charges">65</AccountRef>
+      <TaxCodeRef>5</TaxCodeRef>
+      <TaxApplicableOn>Purchase</TaxApplicableOn>
+      <TaxAmount>0.00</TaxAmount>
+    </JournalEntryLineDetail>
+  </Line>
+  <Line>
+    <Id>1</Id>
+    <Description>Monthly fee</Description>
+    <Amount>20.00</Amount>
+    <DetailType>JournalEntryLineDetail</DetailType>
+    <JournalEntryLineDetail>
+      <PostingType>Credit</PostingType>
+      <AccountRef name="Chequing">50</AccountRef>
+    </JournalEntryLineDetail>
+  </Line>
+  <Line>
+    <Id>2</Id>
+    <Description>eTransfer fee</Description>
+    <Amount>6.00</Amount>
+    <DetailType>JournalEntryLineDetail</DetailType>
+    <JournalEntryLineDetail>
+      <PostingType>Debit</PostingType>
+      <AccountRef name="Bank Charges and Interest:Bank Charges">65</AccountRef>
+      <TaxCodeRef>5</TaxCodeRef>
+      <TaxApplicableOn>Purchase</TaxApplicableOn>
+      <TaxAmount>0.00</TaxAmount>
+    </JournalEntryLineDetail>
+  </Line>
+  <Line>
+    <Id>3</Id>
+    <Description>eTransfer fee</Description>
+    <Amount>6.00</Amount>
+    <DetailType>JournalEntryLineDetail</DetailType>
+    <JournalEntryLineDetail>
+      <PostingType>Credit</PostingType>
+      <AccountRef name="Chequing">50</AccountRef>
+    </JournalEntryLineDetail>
+  </Line>
+  <Line>
+    <Id>4</Id>
+    <Description>acct maintenance</Description>
+    <Amount>2.00</Amount>
+    <DetailType>JournalEntryLineDetail</DetailType>
+    <JournalEntryLineDetail>
+      <PostingType>Debit</PostingType>
+      <AccountRef name="Bank Charges and Interest:Bank Charges">65</AccountRef>
+      <TaxCodeRef>5</TaxCodeRef>
+      <TaxApplicableOn>Purchase</TaxApplicableOn>
+      <TaxAmount>0.00</TaxAmount>
+    </JournalEntryLineDetail>
+  </Line>
+  <Line>
+    <Id>5</Id>
+    <Description>acct maintenance</Description>
+    <Amount>2.00</Amount>
+    <DetailType>JournalEntryLineDetail</DetailType>
+    <JournalEntryLineDetail>
+      <PostingType>Credit</PostingType>
+      <AccountRef name="Chequing">50</AccountRef>
+    </JournalEntryLineDetail>
+  </Line>
+  <TxnTaxDetail>
+    <TaxLine>
+      <Amount>0</Amount>
+      <DetailType>TaxLineDetail</DetailType>
+      <TaxLineDetail>
+        <TaxRateRef>2</TaxRateRef>
+        <PercentBased>true</PercentBased>
+        <TaxPercent>0</TaxPercent>
+        <NetAmountTaxable>28.00</NetAmountTaxable>
+      </TaxLineDetail>
+    </TaxLine>
+  </TxnTaxDetail>
+  <Adjustment>false</Adjustment>
+</JournalEntry>

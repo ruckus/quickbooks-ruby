@@ -1,0 +1,7 @@
+<TaxRateDetails domain="QBO" sparse="false">
+  <TaxRateId>1</TaxRateId>
+  <TaxRateName>Rate Detail Line Spec</TaxRateName>
+  <RateValue>3.5</RateValue>
+  <TaxAgencyId>2</TaxAgencyId>
+  <TaxApplicableOn>Sales</TaxApplicableOn>
+</TaxRateDetails>

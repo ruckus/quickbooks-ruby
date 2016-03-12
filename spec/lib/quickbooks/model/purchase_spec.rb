@@ -14,10 +14,10 @@ describe "Quickbooks::Model::Purchase" do
     purchase.entity_ref.name.should == "Mr V3 Service Customer Jr2"
 
     purchase.line_items.size.should == 2
-    
+
     line1 = purchase.line_items[0]
     line1.detail_type.should == "AccountBasedExpenseLineDetail"
-    line1.id.should == 1
+    line1.id.should == "1"
     line1.amount.should == 10.0
     line1.description.should == "this is line 1"
     line1.account_based_expense_line_detail.account_ref.value.should == "60"
@@ -27,7 +27,7 @@ describe "Quickbooks::Model::Purchase" do
 
     line2 = purchase.line_items[1]
     line2.detail_type.should == "ItemBasedExpenseLineDetail"
-    line2.id.should == 2
+    line2.id.should == "2"
     line2.amount.should == 1.0
     line2.description.should == "this is item line 1"
     line2.item_based_expense_line_detail.quantity.should == 1
@@ -79,7 +79,7 @@ describe "Quickbooks::Model::Purchase" do
     purchase.entity_ref.name.should == "Mr V3 Service Customer Jr2"
     purchase.entity_ref.type.should == "Customer"
 
-    purchase.remit_to_address.id.should == 2
+    purchase.remit_to_address.id.should == "2"
     purchase.remit_to_address.line1.should == "Google"
     purchase.remit_to_address.line2.should == "Building 1"
     purchase.remit_to_address.line3.should == "123 street"
@@ -91,10 +91,10 @@ describe "Quickbooks::Model::Purchase" do
     purchase.remit_to_address.postal_code.should == "95123"
 
     purchase.line_items.size.should == 2
-    
+
     line1 = purchase.line_items[0]
     line1.detail_type.should == "AccountBasedExpenseLineDetail"
-    line1.id.should == 1
+    line1.id.should == "1"
     line1.amount.should == 10.0
     line1.description.should == "this is line 1"
     line1.account_based_expense_line_detail.account_ref.value.should == "60"
@@ -104,7 +104,7 @@ describe "Quickbooks::Model::Purchase" do
 
     line2 = purchase.line_items[1]
     line2.detail_type.should == "ItemBasedExpenseLineDetail"
-    line2.id.should == 2
+    line2.id.should == "2"
     line2.amount.should == 1.0
     line2.description.should == "this is item line 1"
     line2.item_based_expense_line_detail.quantity.should == 1
@@ -156,15 +156,24 @@ describe "Quickbooks::Model::Purchase" do
     purchase.entity_ref.name.should == "Mr V3 Service Customer Jr2"
 
     purchase.line_items.size.should == 1
-    
+
     line1 = purchase.line_items[0]
     line1.detail_type.should == "AccountBasedExpenseLineDetail"
-    line1.id.should == 1
+    line1.id.should == "1"
     line1.amount.should == 0
     line1.description.should == "this is description only."
     line1.account_based_expense_line_detail.account_ref.value.should == "60"
     line1.account_based_expense_line_detail.account_ref.name.should == "Advertising"
     line1.account_based_expense_line_detail.billable_status.should == "NotBillable"
     line1.account_based_expense_line_detail.tax_code_ref.value.should == "NON"
+  end
+
+  describe "#global_tax_calculation" do
+    subject { Quickbooks::Model::Purchase.new }
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxInclusive"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxExcluded"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "NotApplicable"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", ""
+    it_should_behave_like "a model with an invalid GlobalTaxCalculation"
   end
 end

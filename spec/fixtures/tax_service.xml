@@ -1,0 +1,11 @@
+<TaxService domain="QBO" sparse="false">
+  <TaxCode>Rate Spec</TaxCode>
+  <TaxCodeId>1</TaxCode>
+  <TaxRateDetails>
+    <TaxRateId>1</TaxRateId>
+    <TaxRateName>Rate Spec</TaxRateName>
+    <RateValue>3.5</RateValue>
+    <TaxAgencyId>2</TaxAgencyId>
+    <TaxApplicableOn>Sales</TaxApplicableOn>
+  </TaxRateDetails>
+</TaxService>

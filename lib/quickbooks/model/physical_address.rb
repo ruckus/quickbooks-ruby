@@ -1,7 +1,7 @@
 module Quickbooks
   module Model
     class PhysicalAddress < BaseModel
-      xml_accessor :id, :from => 'Id', :as => Integer
+      xml_accessor :id, :from => 'Id'
       xml_accessor :line1, :from => 'Line1'
       xml_accessor :line2, :from => 'Line2'
       xml_accessor :line3, :from => 'Line3'

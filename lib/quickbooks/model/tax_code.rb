@@ -14,6 +14,7 @@ module Quickbooks
       xml_accessor :taxable?, :from => "Taxable"
       xml_accessor :tax_group?, :from => "TaxGroup"
       xml_accessor :sales_tax_rate_list, :from => "SalesTaxRateList", :as => SalesTaxRateList
+      xml_accessor :purchase_tax_rate_list, :from => "PurchaseTaxRateList", :as => PurchaseTaxRateList
 
     end
   end

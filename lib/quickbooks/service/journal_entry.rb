@@ -2,7 +2,7 @@ module Quickbooks
   module Service
     class JournalEntry < BaseService
 
-      def delete(entry, options = {})
+      def delete(entry)
         delete_by_query_string(entry)
       end
 

@@ -1,0 +1,17 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-04-23T08:30:33.626-07:00">
+ <Payment domain="QBO" sparse="true">
+    <Id>8748</Id>
+    <SyncToken>0</SyncToken>
+    <MetaData>
+       <CreateTime>2013-07-11T17:51:41-07:00</CreateTime>
+       <LastUpdatedTime>2013-07-11T17:51:42-07:00</LastUpdatedTime>
+    </MetaData>
+    <TxnDate>2013-07-11</TxnDate>
+    <PrivateNote>Voided</PrivateNote>
+    <CustomerRef>25342</CustomerRef>
+    <DepositToAccountRef>4</DepositToAccountRef>
+    <TotalAmt>0</TotalAmt>
+    <UnappliedAmt>0</UnappliedAmt>
+    <ProcessPayment>false</ProcessPayment>
+ </Payment>
+</IntuitResponse>

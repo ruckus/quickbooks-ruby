@@ -6,8 +6,9 @@ module Quickbooks
       xml_accessor :value, :from => :content
       xml_accessor :type, :from => '@type' # Attribute with name 'type'
 
-      def initialize(value = nil)
+      def initialize(value=nil, attributes={})
         self.value = value
+        attributes.each {|key, value| public_send("#{key}=", value) }
       end
 
       def to_i

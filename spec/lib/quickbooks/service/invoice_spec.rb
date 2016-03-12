@@ -91,7 +91,7 @@ describe "Quickbooks::Service::Invoice" do
     invoice.line_items << line_item
 
     created_invoice = @service.create(invoice)
-    created_invoice.id.should == 1
+    created_invoice.id.should == "1"
   end
 
   it "can sparse update an Invoice" do
@@ -165,7 +165,71 @@ describe "Quickbooks::Service::Invoice" do
     invoice.line_items << discount_line_item
 
     created_invoice = @service.create(invoice)
-    created_invoice.id.should == 4
+    created_invoice.id.should == "4"
+  end
+
+  it "can send an invoice using bill_email" do
+    xml = fixture("invoice_send.xml")
+    model = Quickbooks::Model::Invoice
+    stub_request(:post, "#{@service.url_for_resource(model::REST_RESOURCE)}/1/send", ["200", "OK"], xml)
+
+    invoice = Quickbooks::Model::Invoice.new
+    invoice.doc_number = "1001"
+    invoice.sync_token = 2
+    invoice.id = 1
+    sent_invoice = @service.send(invoice)
+    sent_invoice.email_status.should == "EmailSent"
+    sent_invoice.delivery_info.delivery_type.should == "Email"
+    sent_invoice.delivery_info.delivery_time.should eq(Time.new(2015, 2, 24, 18, 26, 03, "-08:00"))
+  end
+
+  it "can send an invoice with new email_address" do
+    xml = fixture("invoice_send.xml")
+    model = Quickbooks::Model::Invoice
+    stub_request(:post, "#{@service.url_for_resource(model::REST_RESOURCE)}/1/send?sendTo=test@intuit.com", ["200", "OK"], xml)
+
+    invoice = Quickbooks::Model::Invoice.new
+    invoice.doc_number = "1001"
+    invoice.sync_token = 2
+    invoice.id = 1
+    sent_invoice = @service.send(invoice,"test@intuit.com")
+    sent_invoice.bill_email.address.should == "test@intuit.com"
+  end
+
+  it "allows user to specify a RequestId in a create call" do
+    requestid = "foobar123"
+    model = Quickbooks::Model::Invoice
+    invoice = Quickbooks::Model::Invoice.new
+
+    xml = fixture("invoice_with_discount_line_item_response.xml")
+    url = "#{@service.url_for_resource(model::REST_RESOURCE)}?requestid=#{requestid}"
+    stub_request(:post, url, ["200", "OK"], xml)
+
+    invoice.customer_id = 3
+    invoice.txn_date = Date.civil(2014, 3, 12)
+    invoice.doc_number = "1001"
+    sales_line_item = Quickbooks::Model::InvoiceLineItem.new
+    sales_line_item.amount = 50
+    sales_line_item.description = "Plush Baby Doll"
+    sales_line_item.sales_item! do |detail|
+      detail.unit_price = 50
+      detail.quantity = 1
+      detail.item_id = 2 # Item ID here
+    end
+
+    discount_line_item = Quickbooks::Model::InvoiceLineItem.new
+    discount_line_item.amount = 5
+    discount_line_item.discount_item! do |detail|
+      detail.discount_percent = 10
+      detail.percent_based = true
+      detail.discount_account_id = 54
+    end
+
+    invoice.line_items << sales_line_item
+    invoice.line_items << discount_line_item
+
+    created_invoice = @service.create(invoice, :query => {:requestid => requestid})
+    created_invoice.id.should == "4"
   end
 
 end

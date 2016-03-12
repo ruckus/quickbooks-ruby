@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Report>
+  <Header>
+    <Time>2015-07-22T12:29:22-07:00</Time>
+    <ReportName>BalanceSheet</ReportName>
+    <DateMacro>all</DateMacro>
+    <ReportBasis>Accrual</ReportBasis>
+    <SummarizeColumnsBy>Year</SummarizeColumnsBy>
+    <Currency>USD</Currency>
+    <Option>
+      <Name>AccountingStandard</Name>
+      <Value>GAAP</Value>
+    </Option>
+    <Option>
+      <Name>NoReportData</Name>
+      <Value>false</Value>
+    </Option>
+  </Header>
+  <Columns>
+    <Column>
+      <ColTitle/>
+      <ColType>Account</ColType>
+    </Column>
+    <Column>
+      <ColTitle>Jul 4 - Dec 31, 2013</ColTitle>
+      <ColType>Money</ColType>
+      <MetaData>
+        <Name>StartDate</Name>
+        <Value>2013-07-04</Value>
+      </MetaData>
+      <MetaData>
+        <Name>EndDate</Name>
+        <Value>2013-12-31</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Jan - Dec 2014</ColTitle>
+      <ColType>Money</ColType>
+      <MetaData>
+        <Name>StartDate</Name>
+        <Value>2014-01-01</Value>
+      </MetaData>
+      <MetaData>
+        <Name>EndDate</Name>
+        <Value>2014-12-31</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Jan 1 - Jun 21, 2015</ColTitle>
+      <ColType>Money</ColType>
+      <MetaData>
+        <Name>StartDate</Name>
+        <Value>2015-01-01</Value>
+      </MetaData>
+      <MetaData>
+        <Name>EndDate</Name>
+        <Value>2015-06-21</Value>
+      </MetaData>
+    </Column>
+  </Columns>
+  <Rows>
+    <Row type="Section" group="TotalAssets">
+      <Header>
+        <ColData value="ASSETS"/>
+        <ColData value=""/>
+        <ColData value=""/>
+        <ColData value=""/>
+      </Header>
+      <Rows>
+        <Row type="Section" group="CurrentAssets">
+          <Header>
+            <ColData value="Current Assets"/>
+            <ColData value=""/>
+            <ColData value=""/>
+            <ColData value=""/>
+          </Header>
+          <Rows>
+            <Row type="Section" group="BankAccounts">
+              <Header>
+                <ColData value="Bank Accounts"/>
+                <ColData value=""/>
+                <ColData value=""/>
+                <ColData value=""/>
+              </Header>
+              <Rows>
+                <Row type="Data">
+                  <ColData value="Checking" id="35"/>
+                  <ColData value=""/>
+                  <ColData value=""/>
+                  <ColData value="1201.00"/>
+                </Row>
+                <Row type="Data">
+                  <ColData value="Savings" id="36"/>
+                  <ColData value="19.99"/>
+                  <ColData value="19.99"/>
+                  <ColData value="819.99"/>
+                </Row>
+              </Rows>
+              <Summary>
+                <ColData value="Total Bank Accounts"/>
+                <ColData value="19.99"/>
+                <ColData value="19.99"/>
+                <ColData value="2020.99"/>
+              </Summary>
+            </Row>
+            <Row type="Section" group="AR">
+              <Header>
+                <ColData value="Accounts Receivable"/>
+                <ColData value=""/>
+                <ColData value=""/>
+                <ColData value=""/>
+              </Header>
+              <Rows>
+                <Row type="Data">
+                  <ColData value="Accounts Receivable (A/R)" id="84"/>
+                  <ColData value="-19.99"/>
+                  <ColData value="-19.99"/>
+                  <ColData value="5261.53"/>
+                </Row>
+              </Rows>
+              <Summary>
+                <ColData value="Total Accounts Receivable"/>
+                <ColData value="-19.99"/>
+                <ColData value="-19.99"/>
+                <ColData value="5261.53"/>
+              </Summary>
+            </Row>
+            <Row type="Section" group="OtherCurrentAssets">
+              <Header>
+                <ColData value="Other current assets"/>
+                <ColData value=""/>
+                <ColData value=""/>
+                <ColData value=""/>
+              </Header>
+              <Rows>
+                <Row type="Data">
+                  <ColData value="Inventory Asset" id="81"/>
+                  <ColData value=""/>
+                  <ColData value=""/>
+                  <ColData value="596.25"/>
+                </Row>
+                <Row type="Data">
+                  <ColData value="Undeposited Funds" id="4"/>
+                  <ColData value=""/>
+                  <ColData value=""/>
+                  <ColData value="2062.52"/>
+                </Row>
+              </Rows>
+              <Summary>
+                <ColData value="Total Other current assets"/>
+                <ColData value="0.00"/>
+                <ColData value="0.00"/>
+                <ColData value="2658.77"/>
+              </Summary>
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total Current Assets"/>
+            <ColData value="0.00"/>
+            <ColData value="0.00"/>
+            <ColData value="9941.29"/>
+          </Summary>
+        </Row>
+        <Row type="Section" group="FixedAssets">
+          <Header>
+            <ColData value="Fixed Assets"/>
+            <ColData value=""/>
+            <ColData value=""/>
+            <ColData value=""/>
+          </Header>
+          <Rows>
+            <Row type="Section">
+              <Header>
+                <ColData value="Truck" id="37"/>
+                <ColData value=""/>
+                <ColData value=""/>
+                <ColData value=""/>
+              </Header>
+              <Rows>
+                <Row type="Data">
+                  <ColData value="Depreciation" id="39"/>
+                  <ColData value=""/>
+                  <ColData value=""/>
+                  <ColData value="34.00"/>
+                </Row>
+                <Row type="Data">
+                  <ColData value="Original Cost" id="38"/>
+                  <ColData value=""/>
+                  <ColData value=""/>
+                  <ColData value="13495.00"/>
+                </Row>
+              </Rows>
+              <Summary>
+                <ColData value="Total Truck"/>
+                <ColData value="0.00"/>
+                <ColData value="0.00"/>
+                <ColData value="13529.00"/>
+              </Summary>
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total Fixed Assets"/>
+            <ColData value="0.00"/>
+            <ColData value="0.00"/>
+            <ColData value="13529.00"/>
+          </Summary>
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="TOTAL ASSETS"/>
+        <ColData value="0.00"/>
+        <ColData value="0.00"/>
+        <ColData value="23470.29"/>
+      </Summary>
+    </Row>
+    <Row type="Section" group="TotalLiabilitiesAndEquity">
+      <Header>
+        <ColData value="LIABILITIES AND EQUITY"/>
+        <ColData value=""/>
+        <ColData value=""/>
+        <ColData value=""/>
+      </Header>
+      <Rows>
+        <Row type="Section" group="Liabilities">
+          <Header>
+            <ColData value="Liabilities"/>
+            <ColData value=""/>
+            <ColData value=""/>
+            <ColData value=""/>
+          </Header>
+          <Rows>
+            <Row type="Section" group="CurrentLiabilities">
+              <Header>
+                <ColData value="Current Liabilities"/>
+                <ColData value=""/>
+                <ColData value=""/>
+                <ColData value=""/>
+              </Header>
+              <Rows>
+                <Row type="Section" group="AP">
+                  <Header>
+                    <ColData value="Accounts Payable"/>
+                    <ColData value=""/>
+                    <ColData value=""/>
+                    <ColData value=""/>
+                  </Header>
+                  <Rows>
+                    <Row type="Data">
+                      <ColData value="Accounts Payable (A/P)" id="33"/>
+                      <ColData value=""/>
+                      <ColData value=""/>
+                      <ColData value="1602.67"/>
+                    </Row>
+                  </Rows>
+                  <Summary>
+                    <ColData value="Total Accounts Payable"/>
+                    <ColData value="0.00"/>
+                    <ColData value="0.00"/>
+                    <ColData value="1602.67"/>
+                  </Summary>
+                </Row>
+                <Row type="Section" group="CreditCards">
+                  <Header>
+                    <ColData value="Credit Cards"/>
+                    <ColData value=""/>
+                    <ColData value=""/>
+                    <ColData value=""/>
+                  </Header>
+                  <Rows>
+                    <Row type="Data">
+                      <ColData value="Mastercard" id="41"/>
+                      <ColData value=""/>
+                      <ColData value=""/>
+                      <ColData value="157.72"/>
+                    </Row>
+                  </Rows>
+                  <Summary>
+                    <ColData value="Total Credit Cards"/>
+                    <ColData value="0.00"/>
+                    <ColData value="0.00"/>
+                    <ColData value="157.72"/>
+                  </Summary>
+                </Row>
+                <Row type="Section" group="OtherCurrentLiabilities">
+                  <Header>
+                    <ColData value="Other Current Liabilities"/>
+                    <ColData value=""/>
+                    <ColData value=""/>
+                    <ColData value=""/>
+                  </Header>
+                  <Rows>
+                    <Row type="Data">
+                      <ColData value="Arizona Dept. of Revenue Payable" id="89"/>
+                      <ColData value=""/>
+                      <ColData value=""/>
+                      <ColData value="0.00"/>
+                    </Row>
+                    <Row type="Data">
+                      <ColData value="Board of Equalization Payable" id="90"/>
+                      <ColData value=""/>
+                      <ColData value=""/>
+                      <ColData value="370.94"/>
+                    </Row>
+                    <Row type="Data">
+                      <ColData value="Loan Payable" id="43"/>
+                      <ColData value=""/>
+                      <ColData value=""/>
+                      <ColData value="4000.00"/>
+                    </Row>
+                  </Rows>
+                  <Summary>
+                    <ColData value="Total Other Current Liabilities"/>
+                    <ColData value="0.00"/>
+                    <ColData value="0.00"/>
+                    <ColData value="4370.94"/>
+                  </Summary>
+                </Row>
+              </Rows>
+              <Summary>
+                <ColData value="Total Current Liabilities"/>
+                <ColData value="0.00"/>
+                <ColData value="0.00"/>
+                <ColData value="6131.33"/>
+              </Summary>
+            </Row>
+            <Row type="Section" group="LongTermLiabilities">
+              <Header>
+                <ColData value="Long-Term Liabilities"/>
+                <ColData value=""/>
+                <ColData value=""/>
+                <ColData value=""/>
+              </Header>
+              <Rows>
+                <Row type="Data">
+                  <ColData value="Notes Payable" id="44"/>
+                  <ColData value=""/>
+                  <ColData value=""/>
+                  <ColData value="25000.00"/>
+                </Row>
+              </Rows>
+              <Summary>
+                <ColData value="Total Long-Term Liabilities"/>
+                <ColData value="0.00"/>
+                <ColData value="0.00"/>
+                <ColData value="25000.00"/>
+              </Summary>
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total Liabilities"/>
+            <ColData value="0.00"/>
+            <ColData value="0.00"/>
+            <ColData value="31131.33"/>
+          </Summary>
+        </Row>
+        <Row type="Section" group="Equity">
+          <Header>
+            <ColData value="Equity"/>
+            <ColData value=""/>
+            <ColData value=""/>
+            <ColData value=""/>
+          </Header>
+          <Rows>
+            <Row type="Data">
+              <ColData value="Opening Balance Equity" id="34"/>
+              <ColData value=""/>
+              <ColData value=""/>
+              <ColData value="-9337.50"/>
+            </Row>
+            <Row type="Data">
+              <ColData value="Retained Earnings" id="2"/>
+              <ColData value=""/>
+              <ColData value=""/>
+              <ColData value="1676.46"/>
+            </Row>
+            <Row type="Data" group="NetIncome">
+              <ColData value="Net Income"/>
+              <ColData value=""/>
+              <ColData value=""/>
+              <ColData value=""/>
+            </Row>
+          </Rows>
+          <Summary>
+            <ColData value="Total Equity"/>
+            <ColData value="0.00"/>
+            <ColData value="0.00"/>
+            <ColData value="-7661.04"/>
+          </Summary>
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="TOTAL LIABILITIES AND EQUITY"/>
+        <ColData value="0.00"/>
+        <ColData value="0.00"/>
+        <ColData value="23470.29"/>
+      </Summary>
+    </Row>
+  </Rows>
+</Report>

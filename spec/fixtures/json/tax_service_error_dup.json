@@ -1,0 +1,14 @@
+{
+"Fault": {
+  "Error": [
+    {
+      "Message": "Duplicate Name Exists Error",
+      "Detail": "The name supplied already exists. : Another tax rate is already using this \nname. Please use a different name.",
+      "code": "6240",
+      "element": ""
+    }
+  ],
+  "type": "ValidationFault"
+},
+"time": "2015-08-07T05:35:56.791-07:00"
+}

@@ -1,0 +1,30 @@
+<IntuitResponse time="2015-03-08T11:47:54.017-07:00" xmlns="http://schema.intuit.com/finance/v3">
+  <Deposit domain="QBO" sparse="false">
+    <Id>62</Id>
+    <SyncToken>0</SyncToken>
+    <MetaData>
+      <CreateTime>2014-11-11T15:22:31-08:00</CreateTime>
+      <LastUpdatedTime>2014-11-11T15:22:31-08:00</LastUpdatedTime>
+    </MetaData>
+    <PrivateNote>Deposit Note</PrivateNote>
+    <TxnDate>2014-11-11</TxnDate>
+    <Line>
+      <Amount>78</Amount>
+      <LinkedTxn>
+        <TxnId>38</TxnId>
+        <TxnType>SalesReceipt</TxnType>
+        <TxnLineId>0</TxnLineId>
+      </LinkedTxn>
+    </Line>
+    <Line>
+      <Amount>140</Amount>
+      <LinkedTxn>
+        <TxnId>47</TxnId>
+        <TxnType>SalesReceipt</TxnType>
+        <TxnLineId>0</TxnLineId>
+      </LinkedTxn>
+    </Line>
+    <DepositToAccountRef name="Checking">35</DepositToAccountRef>
+    <TotalAmt>218.75</TotalAmt>
+  </Deposit>
+</IntuitResponse>

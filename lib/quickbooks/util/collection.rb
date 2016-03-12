@@ -3,6 +3,8 @@ module Quickbooks
     include Enumerable
     attr_accessor :entries
 
+    attr_accessor :body
+
     # Legacy Attributes (v2)
     attr_accessor :count, :current_page
 

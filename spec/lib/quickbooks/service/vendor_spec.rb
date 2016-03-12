@@ -57,7 +57,7 @@ describe "Quickbooks::Service::Vendor" do
     vendor.billing_address = billing_address
     vendor.valid_for_create?.should == true
     created_vendor = @service.create(vendor)
-    created_vendor.id.should == 1129
+    created_vendor.id.should == "1129"
   end
 
   it "cannot sparse update a vendor" do

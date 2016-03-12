@@ -10,17 +10,20 @@ module Quickbooks
       XML_COLLECTION_NODE = "Item"
       XML_NODE = "Item"
       REST_RESOURCE = 'item'
+      MINORVERSION = 4
 
       INVENTORY_TYPE = 'Inventory'
-      NON_INVENTORY_TYPE = 'Non Inventory'
+      NON_INVENTORY_TYPE = 'NonInventory'
       SERVICE_TYPE = 'Service'
-      ITEM_TYPES = [INVENTORY_TYPE, NON_INVENTORY_TYPE, SERVICE_TYPE]
+      CATEGORY_TYPE = 'Category'
+      ITEM_TYPES = [INVENTORY_TYPE, NON_INVENTORY_TYPE, SERVICE_TYPE, CATEGORY_TYPE]
 
       xml_name 'Item'
-      xml_accessor :id, :from => 'Id', :as => Integer
+      xml_accessor :id, :from => 'Id'
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :name, :from => 'Name'
+      xml_accessor :sku, :from => 'Sku'
       xml_accessor :description, :from => 'Description'
       xml_accessor :active?, :from => 'Active'
       xml_accessor :sub_item?, :from => 'SubItem'

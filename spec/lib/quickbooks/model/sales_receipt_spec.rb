@@ -2,7 +2,7 @@ describe "Quickbooks::Model::SalesReceipt" do
   it "parse from XML" do
     xml = fixture("sales_receipt.xml")
     sales_receipt = Quickbooks::Model::SalesReceipt.from_xml(xml)
-    sales_receipt.id.should == 2
+    sales_receipt.id.should == "2"
     sales_receipt.sync_token.should == 0
 
     sales_receipt.meta_data.should_not be_nil
@@ -13,7 +13,7 @@ describe "Quickbooks::Model::SalesReceipt" do
     sales_receipt.txn_date.should == Time.parse("2013-12-10")
 
     sales_receipt.line_items.first.should_not be_nil
-    sales_receipt.line_items.first.id.should == 1
+    sales_receipt.line_items.first.id.should == "1"
     sales_receipt.line_items.first.line_num.should == 1
     sales_receipt.line_items.first.amount.should == 10.00
     sales_receipt.line_items.first.detail_type.should == "SalesItemLineDetail"
@@ -49,5 +49,13 @@ describe "Quickbooks::Model::SalesReceipt" do
   describe "#auto_doc_number" do
     it_should_behave_like "a model that has auto_doc_number support", 'SalesReceipt'
   end
-  
+
+  describe "#global_tax_calculation" do
+    subject { Quickbooks::Model::SalesReceipt.new }
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxInclusive"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxExcluded"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", "NotApplicable"
+    it_should_behave_like "a model with a valid GlobalTaxCalculation", ""
+    it_should_behave_like "a model with an invalid GlobalTaxCalculation"
+  end
 end

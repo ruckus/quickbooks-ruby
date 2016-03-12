@@ -68,7 +68,7 @@ describe "Quickbooks::Service::Customer" do
 
     customer.valid_for_create?.should == true
     created_customer = @service.create(customer)
-    created_customer.id.should == 1
+    created_customer.id.should == "1"
   end
 
   it "can sparse update a customer" do

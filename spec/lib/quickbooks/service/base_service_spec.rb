@@ -1,14 +1,36 @@
 describe Quickbooks::Service::BaseService do
 
-  describe "#url_for_query" do
-    it "correctly encodes the query" do
-      subject.realm_id = 1234
-      query = "SELECT * FROM Customer where Name = 'John'"
+  it ".is_json" do
+    construct_service :invoice
+    expect(@service.is_json?).to be_false
+    construct_service :tax_service
+    expect(@service.is_json?).to be_true
+  end
 
-      domain = Quickbooks::Service::BaseService::BASE_DOMAIN
-      correct_url = "https://#{domain}/v3/company/1234/query?query=SELECT+*+FROM+Customer+where+Name+%3D+%27John%27"
-      subject.url_for_query(query).should include(correct_url)
+  describe "#url_for_query" do
+    shared_examples "encoding the query correctly" do |domain|
+      let(:correct_url) { "https://#{domain}/v3/company/1234/query?query=SELECT+*+FROM+Customer+where+Name+%3D+%27John%27" }
+
+      it "correctly encodes the query" do
+        subject.realm_id = 1234
+        query = "SELECT * FROM Customer where Name = 'John'"
+        subject.url_for_query(query).should include(correct_url)
+      end
     end
+
+    context "with the production API" do
+      it_behaves_like "encoding the query correctly", Quickbooks::Service::BaseService::BASE_DOMAIN
+    end
+
+    context "with the sandbox API" do
+      around do |example|
+        Quickbooks.sandbox_mode = true
+        example.run
+        Quickbooks.sandbox_mode = false
+      end
+      it_behaves_like "encoding the query correctly", Quickbooks::Service::BaseService::SANDBOX_DOMAIN
+    end
+
     it "raises an error if there is not realm id" do
       expect{subject.url_for_query("")}.to raise_error(Quickbooks::MissingRealmError)
     end
@@ -21,7 +43,6 @@ describe Quickbooks::Service::BaseService do
 
     it "correctly initializes with an access_token and realm" do
       @service.company_id.should == "9991111222"
-      puts
       @service.oauth.is_a?(OAuth::AccessToken).should == true
     end
   end
@@ -42,9 +63,55 @@ describe Quickbooks::Service::BaseService do
       xml2 = fixture('customer.xml')
       response = Struct.new(:code, :plain_body).new(400, xml)
       begin
-        @service.send(:check_response, response, :request_xml => xml2)
+        @service.send(:check_response, response, :request => xml2)
       rescue Quickbooks::IntuitRequestException => ex
         ex.request_xml.should == xml2
+      end
+    end
+
+    it "should raise AuthorizationFailure on HTTP 401" do
+      xml = fixture('generic_error.xml')
+
+      response = Struct.new(:code, :plain_body).new(401, xml)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::AuthorizationFailure)
+    end
+
+    it "should raise Forbidden on HTTP 403" do
+      xml = fixture('generic_error.xml')
+
+      response = Struct.new(:code, :plain_body).new(403, xml)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::Forbidden)
+    end
+
+    it "should raise ServiceUnavailable on HTTP 503 and 504" do
+      xml = fixture('generic_error.xml')
+
+      response = Struct.new(:code, :plain_body).new(503, xml)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ServiceUnavailable)
+
+      response = Struct.new(:code, :plain_body).new(504, xml)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ServiceUnavailable)
+    end
+
+    it "handles error XML with a missing namespace" do
+      xml = <<-XML
+<?xml version=\"1.0\"?>
+<IntuitResponse time="2013-11-15T13:16:49.528-08:00">
+  <Fault type="SystemFault">
+    <Error code="10000">
+      <Message>An application error has occurred while processing your request</Message>
+      <Detail>System Failure Error: Could not find resource for relative : some more info here</Detail>
+    </Error>
+  </Fault>
+</IntuitResponse>
+      XML
+      response = Struct.new(:code, :plain_body).new(200, xml)
+
+      begin
+        @service.send :check_response, response
+        fail "Exception expected"
+      rescue Quickbooks::IntuitRequestException => exception
+        expect(exception.detail).to eq(xml)
       end
     end
   end

@@ -18,6 +18,24 @@ describe "Quickbooks::Model::BaseModel" do
 <Foo><baz>quux</baz><bar><foo>42</foo></bar></Foo>
   XML
 
+  context "definition" do
+    subject { Quickbooks::Model::FooModel.new }
+
+    context "For a non-transaction entity" do
+      its(:is_transaction_entity?) { should be_false }
+      its(:is_name_list_entity?) { should be_true }
+    end
+
+    context "For a transaction entity" do
+      before do
+        Quickbooks::Model::Definition::ClassMethods::TRANSACTION_ENTITIES.stub(include?: true)
+      end
+
+      its(:is_transaction_entity?) { should be_true }
+      its(:is_name_list_entity?) { should be_false }
+    end
+  end
+
   describe ".new" do
     it "allows attributes to be passed in" do
       Quickbooks::Model::FooModel.new(:baz => "value").baz.should eq("value")
