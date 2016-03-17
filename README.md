@@ -526,7 +526,7 @@ meta.attachable_ref = Quickbooks::Model::AttachableRef.new(entity)
 ### Uploading an actual file
 
 ```ruby
-upload_service = Quickbooks::Model::Upload.new
+upload_service = Quickbooks::Service::Upload.new
 
 # args:
 #     local-path to file
