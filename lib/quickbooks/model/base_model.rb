@@ -27,6 +27,14 @@ module Quickbooks
         step2
       end
 
+      def as_json(options = nil)
+        options = {} if options.nil?
+        except_conditions = ["roxml_references"]
+        except_conditions << options[:except]
+        options[:except] = except_conditions.flatten.uniq.compact
+        super(options)
+      end
+
       def to_xml_ns(options = {})
         to_xml_inject_ns(self.class::XML_NODE, options)
       end
