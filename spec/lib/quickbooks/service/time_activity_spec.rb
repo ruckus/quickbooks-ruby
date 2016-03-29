@@ -43,7 +43,7 @@ describe "Quickbooks::Service::TimeActivity" do
     time_activity.errors.keys.include?(:employee_ref).should == true
   end
 
-  it "cannot create a time_activity with an empty employee_ref" do
+  it "cannot create a time_activity with an empty vendor_ref" do
     time_activity = Quickbooks::Model::TimeActivity.new
     time_activity.name_of = "Vendor"
     lambda do
