@@ -25,7 +25,8 @@ module Quickbooks
       xml_accessor :name_values, :from => 'NameValue', :as => [NameValue]
 
       def find_name_value(name)
-        name_values.select { |nv| nv.name == name }.first.value
+        nv = name_values.find { |nv| nv.name == name }
+        nv ? nv.value : nil
       end
 
       def find_boolean_name_value(name)
