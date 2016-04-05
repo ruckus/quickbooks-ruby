@@ -66,5 +66,7 @@ describe "Quickbooks::Model::CompanyInfo" do
     company_info.neo_enabled.should be_false
     company_info.payroll_feature.should be_false
     company_info.accountant_feature.should be_false
+
+    company_info.find_name_value('Missing').should be_nil
   end
 end
