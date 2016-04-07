@@ -134,6 +134,31 @@ describe "Quickbooks::Service::Invoice" do
     response.should == true
   end
 
+  it "can void an Invoice" do
+    model = Quickbooks::Model::Invoice
+    invoice = Quickbooks::Model::Invoice.new
+    invoice.doc_number = "1001"
+    invoice.sync_token = 2
+    invoice.id = 1
+    invoice.customer_id = 3
+    line_item = Quickbooks::Model::InvoiceLineItem.new
+    line_item.amount = 50
+    line_item.description = "Plush Baby Doll"
+    line_item.sales_item! do |detail|
+      detail.unit_price = 50
+      detail.quantity = 1
+      detail.item_id = 1
+      detail.tax_code_id = 'NON'
+    end
+    invoice.line_items << line_item
+
+    xml = fixture("invoice_void_success_response.xml")
+    stub_request(:post, "#{@service.url_for_resource(model::REST_RESOURCE)}?include=void", ["200", "OK"], xml)
+
+    response = @service.void(invoice)
+    response.private_note.should == 'Voided'
+  end
+
   it "can generate an invoice with a discount line item" do
     model = Quickbooks::Model::Invoice
     invoice = Quickbooks::Model::Invoice.new
