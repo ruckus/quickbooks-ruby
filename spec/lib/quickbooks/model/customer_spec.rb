@@ -60,4 +60,12 @@ describe "Quickbooks::Model::Customer" do
     customer.errors.keys.include?(:sync_token).should == true
   end
 
+  it "should handle a nil/blank email address" do
+    customer = Quickbooks::Model::Customer.new
+    email = Quickbooks::Model::EmailAddress.new
+    email.address = nil
+    customer.email_address = email
+    customer.valid?.should == false
+  end
+
 end
