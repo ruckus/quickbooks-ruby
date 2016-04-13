@@ -2,7 +2,7 @@ module Quickbooks
   module Model
     class DepositLineDetail < BaseModel
 
-      xml_accessor :entity, :from => 'Entity', :as => Entity
+      xml_accessor :entity, :from => 'Entity', :as => BaseReference
       xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
       xml_accessor :account_ref, :from => 'AccountRef', :as => BaseReference
       xml_accessor :payment_method_ref, :from => 'PaymentMethodRef', :as => BaseReference
