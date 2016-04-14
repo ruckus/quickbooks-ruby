@@ -161,6 +161,7 @@ require 'quickbooks/service/reports'
 require 'quickbooks/service/credit_memo_change'
 require 'quickbooks/service/payment_change'
 require 'quickbooks/service/transfer'
+require 'quickbooks/service/change_data_capture'
 
 module Quickbooks
   @@sandbox_mode = false
