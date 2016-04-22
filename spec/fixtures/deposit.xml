@@ -22,6 +22,7 @@
     <Amount>-62.50</Amount>
     <DetailType>DepositLineDetail</DetailType>
     <DepositLineDetail>
+      <Entity name="Nicole Tang" type="CUSTOMER">58</Entity>
       <AccountRef name="Uncategorized Expense">31</AccountRef>
       <PaymentMethodRef name="Cash">1</PaymentMethodRef>
     </DepositLineDetail>
