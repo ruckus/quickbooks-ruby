@@ -4,15 +4,14 @@ module Quickbooks
 
       attr_accessor :xml
 
+      TYPES = ["Bill", "BillPayment", "CreditMemo", "Deposit", "Invoice", "JournalEntry", "Payment",
+        "Purchase", "RefundReceipt", "SalesReceipt", "PurchaseOrder", "VendorCredit", "Transfer",
+        "Estimate", "Account", "Budget", "Class", "Customer", "Department", "Employee", "Item", 
+        "PaymentMethod", "Term", "Vendor"]
+
       def all_types
-        types = ["Bill", "BillPayment", "CreditMemo", "Deposit", "Invoice",
-         "JournalEntry", "Payment", "Purchase", "RefundReceipt",
-         "SalesReceipt", "PurchaseOrder", "VendorCredit", "Transfer",
-         "Estimate", "Account", "Budget", "Class",
-         "Customer", "Department", "Employee", "Item", 
-         "PaymentMethod", "Term", "Vendor"]
          data = {}
-         types.each do |entity|
+         TYPES.each do |entity|
            if xml.css(entity).first != nil
              data[entity] = all_of_type(entity)
            end
