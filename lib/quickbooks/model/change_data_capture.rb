@@ -29,7 +29,11 @@ module Quickbooks
         model = "Quickbooks::Model::#{entity}".constantize
         models = []
         all_items = node.css(entity).map do |item|
-          model.from_xml(item)
+          if item.attribute("status").try(:value) == "Deleted"
+            Quickbooks::Model::ChangeModel.from_xml(item)
+          else
+            model.from_xml(item)
+          end
         end
       end
 

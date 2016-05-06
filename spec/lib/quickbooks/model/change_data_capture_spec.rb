@@ -40,4 +40,12 @@ describe "Quickbooks::Model::ChangeDataCapture" do
     invoice.customer_ref.name.should == "Geeta Kalapatapu"
     invoice.customer_memo.should == "Thank you for your business and have a great day!"
   end
+
+  it "should create ChangeModels for deleted entities" do
+    xml = Nokogiri::XML(fixture("change_data_capture_response.xml"))
+    response = Quickbooks::Model::ChangeDataCapture.new(xml: xml)
+    invoice = response.all_types["Invoice"].last
+
+    invoice.status.should == "Deleted"
+  end
 end
