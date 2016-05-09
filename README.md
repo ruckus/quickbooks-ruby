@@ -561,8 +561,30 @@ end
 
 ## Change Data Capture
 
-Quickbooks has an api called Change Data Capture that provides a way of finding out which Entities have recently changed.  This gem currently supports a way of querying changed invoices.  This is the only way to find out if an invoice has been deleted (not voided), since a deleted invoice will not be returned by a standard Invoice query.
+Quickbooks has an api called Change Data Capture that provides a way of finding out which Entities have recently changed, as deleted entities will not be returned by a standard query. It is possible to request changes up to 30 days ago.
 
+The primary method for querying to ChangeDataCapture is through Quickbooks::Service::ChangeDataCapture.
+
+Quickbooks::Model::ChangeDataCapture also supports parsing the XML response into a hash of entity types through the all_types method.
+
+```ruby
+service = Quickbooks::Service::ChangeDataCapture.new
+...
+# define the list of entities to query
+entities = ["Invoice", "Bill", "Payment"] #etc
+changed = service.since(entities, Time.now.utc - 5 days)
+...
+# parse the XML to a list of Quickbooks::Models
+changed_as_hash = changed.all_types
+```
+
+Deleted entities can be found in the XML by checking their @status is "Deleted". In the return from the all_types method, deleted items will be of type Quickbooks::Model::ChangeModel.
+
+see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
+
+## ChangeModel alternative Change Data Capture For Invoices, Customers, Vendors, Items, Payments and Credit Memos
+
+It is possible to get a sparse summary of which Invoice, Customer, Vendor, Item, Payment or Credit Memo Entries have recently changed.
 It is possible to request changes up to 30 days ago.
 
 ```ruby
@@ -570,13 +592,6 @@ service = Quickbooks::Service::InvoiceChange.new
 ...
 changed = service.since(Time.now.utc - 5 days)
 ```
-
-see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
-
-## Change Data Capture For Customers, Vendors, Items, Payments and Credit Memos
-
-It is possible to find out which Customer, Vendor, Item, Payment or Credit Memo Entries have recently changed.
-It is possible to request changes up to 30 days ago.
 
 ```ruby
 customer_service = Quickbooks::Service::CustomerChange.new
