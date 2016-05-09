@@ -25,6 +25,4 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rr',     '~> 1.0.2'
   gem.add_development_dependency 'rspec',  '2.13.0'
   gem.add_development_dependency 'fakeweb', '1.3.0'
-  gem.add_development_dependency 'guard', '1.8.0'
-  gem.add_development_dependency 'guard-rspec', '3.0.0'
 end

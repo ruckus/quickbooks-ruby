@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2016-04-13T07:52:34.949-07:00">
+  <CDCResponse>
+    <QueryResponse startPosition="1" maxResults="2" totalCount="2">
+      <Bill domain="QBO" sparse="false">
+        <Id>126</Id>
+        <SyncToken>1</SyncToken>
+        <MetaData>
+          <CreateTime>2016-02-24T13:10:36-08:00</CreateTime>
+          <LastUpdatedTime>2016-04-13T07:34:55-07:00</LastUpdatedTime>
+        </MetaData>
+        <TxnDate>2016-02-24</TxnDate>
+        <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+        <LinkedTxn>
+          <TxnId>148</TxnId>
+          <TxnType>BillPaymentCheck</TxnType>
+        </LinkedTxn>
+        <Line>
+          <Id>1</Id>
+          <Description>Fountain Pump</Description>
+          <Amount>80.00</Amount>
+          <DetailType>ItemBasedExpenseLineDetail</DetailType>
+          <ItemBasedExpenseLineDetail>
+            <ItemRef name="Pump">11</ItemRef>
+            <UnitPrice>10</UnitPrice>
+            <Qty>8</Qty>
+            <TaxCodeRef>NON</TaxCodeRef>
+            <BillableStatus>NotBillable</BillableStatus>
+          </ItemBasedExpenseLineDetail>
+        </Line>
+        <Line>
+          <Id>2</Id>
+          <Description>Rock Fountain</Description>
+          <Amount>125.00</Amount>
+          <DetailType>ItemBasedExpenseLineDetail</DetailType>
+          <ItemBasedExpenseLineDetail>
+            <ItemRef name="Rock Fountain">5</ItemRef>
+            <UnitPrice>125</UnitPrice>
+            <Qty>1</Qty>
+            <TaxCodeRef>NON</TaxCodeRef>
+            <BillableStatus>NotBillable</BillableStatus>
+          </ItemBasedExpenseLineDetail>
+        </Line>
+        <VendorRef name="Norton Lumber and Building Materials">46</VendorRef>
+        <APAccountRef name="Accounts Payable (A/P)">33</APAccountRef>
+        <TotalAmt>205.00</TotalAmt>
+        <DueDate>2016-02-24</DueDate>
+        <Balance>0</Balance>
+      </Bill>
+      <Bill domain="QBO" sparse="false">
+        <Id>19</Id>
+        <SyncToken>1</SyncToken>
+        <MetaData>
+          <CreateTime>2016-02-21T15:24:48-08:00</CreateTime>
+          <LastUpdatedTime>2016-04-13T07:35:06-07:00</LastUpdatedTime>
+        </MetaData>
+        <TxnDate>2016-02-17</TxnDate>
+        <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+        <LinkedTxn>
+          <TxnId>149</TxnId>
+          <TxnType>BillPaymentCheck</TxnType>
+        </LinkedTxn>
+        <Line>
+          <Id>1</Id>
+          <Amount>241.23</Amount>
+          <DetailType>AccountBasedExpenseLineDetail</DetailType>
+          <AccountBasedExpenseLineDetail>
+            <AccountRef name="Insurance">11</AccountRef>
+            <BillableStatus>NotBillable</BillableStatus>
+            <TaxCodeRef>NON</TaxCodeRef>
+          </AccountBasedExpenseLineDetail>
+        </Line>
+        <VendorRef name="Brosnahan Insurance Agency">31</VendorRef>
+        <APAccountRef name="Accounts Payable (A/P)">33</APAccountRef>
+        <TotalAmt>241.23</TotalAmt>
+        <SalesTermRef>5</SalesTermRef>
+        <DueDate>2016-02-27</DueDate>
+        <Balance>100.00</Balance>
+      </Bill>
+    </QueryResponse>
+    <QueryResponse startPosition="1" maxResults="2" totalCount="2">
+      <BillPayment domain="QBO" sparse="false">
+        <Id>148</Id>
+        <SyncToken>0</SyncToken>
+        <MetaData>
+          <CreateTime>2016-04-13T07:34:55-07:00</CreateTime>
+          <LastUpdatedTime>2016-04-13T07:34:55-07:00</LastUpdatedTime>
+        </MetaData>
+        <DocNumber>1</DocNumber>
+        <TxnDate>2016-04-13</TxnDate>
+        <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+        <PrivateNote>32980256</PrivateNote>
+        <Line>
+          <Amount>205.00</Amount>
+          <LinkedTxn>
+            <TxnId>126</TxnId>
+            <TxnType>Bill</TxnType>
+          </LinkedTxn>
+        </Line>
+        <VendorRef name="Norton Lumber and Building Materials">46</VendorRef>
+        <PayType>CreditCard</PayType>
+        <CreditCardPayment>
+          <CCAccountRef name="Mastercard">41</CCAccountRef>
+        </CreditCardPayment>
+        <TotalAmt>205.00</TotalAmt>
+      </BillPayment>
+      <BillPayment domain="QBO" sparse="false">
+        <Id>149</Id>
+        <SyncToken>0</SyncToken>
+        <MetaData>
+          <CreateTime>2016-04-13T07:35:06-07:00</CreateTime>
+          <LastUpdatedTime>2016-04-13T07:35:06-07:00</LastUpdatedTime>
+        </MetaData>
+        <DocNumber>1</DocNumber>
+        <TxnDate>2016-04-13</TxnDate>
+        <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+        <PrivateNote>7653412</PrivateNote>
+        <Line>
+          <Amount>141.23</Amount>
+          <LinkedTxn>
+            <TxnId>19</TxnId>
+            <TxnType>Bill</TxnType>
+          </LinkedTxn>
+        </Line>
+        <VendorRef name="Brosnahan Insurance Agency">31</VendorRef>
+        <PayType>CreditCard</PayType>
+        <CreditCardPayment>
+          <CCAccountRef name="Mastercard">41</CCAccountRef>
+        </CreditCardPayment>
+        <TotalAmt>141.23</TotalAmt>
+      </BillPayment>
+    </QueryResponse>
+    <QueryResponse/>
+    <QueryResponse/>
+    <QueryResponse startPosition="1" maxResults="2" totalCount="2">
+      <Invoice domain="QBO" sparse="false">
+        <Id>103</Id>
+        <SyncToken>2</SyncToken>
+        <MetaData>
+          <CreateTime>2016-02-23T13:41:59-08:00</CreateTime>
+          <LastUpdatedTime>2016-04-13T07:34:40-07:00</LastUpdatedTime>
+        </MetaData>
+        <CustomField>
+          <DefinitionId>1</DefinitionId>
+          <Name>Crew #</Name>
+          <Type>StringType</Type>
+        </CustomField>
+        <DocNumber>1033</DocNumber>
+        <TxnDate>2016-02-23</TxnDate>
+        <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+        <LinkedTxn>
+          <TxnId>41</TxnId>
+          <TxnType>Estimate</TxnType>
+        </LinkedTxn>
+        <LinkedTxn>
+          <TxnId>147</TxnId>
+          <TxnType>Payment</TxnType>
+        </LinkedTxn>
+        <Line>
+          <Id>1</Id>
+          <LineNum>1</LineNum>
+          <Description>Rock Fountain</Description>
+          <Amount>275.00</Amount>
+          <DetailType>SalesItemLineDetail</DetailType>
+          <SalesItemLineDetail>
+            <ItemRef name="Rock Fountain">5</ItemRef>
+            <UnitPrice>275</UnitPrice>
+            <Qty>1</Qty>
+            <TaxCodeRef>TAX</TaxCodeRef>
+          </SalesItemLineDetail>
+        </Line>
+        <Line>
+          <Id>2</Id>
+          <LineNum>2</LineNum>
+          <Description>Custom Design</Description>
+          <Amount>262.50</Amount>
+          <DetailType>SalesItemLineDetail</DetailType>
+          <SalesItemLineDetail>
+            <ItemRef name="Design">4</ItemRef>
+            <UnitPrice>75</UnitPrice>
+            <Qty>3.5</Qty>
+            <TaxCodeRef>NON</TaxCodeRef>
+          </SalesItemLineDetail>
+        </Line>
+        <Line>
+          <Id>3</Id>
+          <LineNum>3</LineNum>
+          <Description>Fountain Pump</Description>
+          <Amount>45.00</Amount>
+          <DetailType>SalesItemLineDetail</DetailType>
+          <SalesItemLineDetail>
+            <ItemRef name="Pump">11</ItemRef>
+            <UnitPrice>22.5</UnitPrice>
+            <Qty>2</Qty>
+            <TaxCodeRef>TAX</TaxCodeRef>
+          </SalesItemLineDetail>
+        </Line>
+        <Line>
+          <Amount>582.50</Amount>
+          <DetailType>SubTotalLineDetail</DetailType>
+          <SubTotalLineDetail/>
+        </Line>
+        <TxnTaxDetail>
+          <TxnTaxCodeRef>2</TxnTaxCodeRef>
+          <TotalTax>46.60</TotalTax>
+          <TaxLine>
+            <Amount>46.60</Amount>
+            <DetailType>TaxLineDetail</DetailType>
+            <TaxLineDetail>
+              <TaxRateRef>3</TaxRateRef>
+              <PercentBased>true</PercentBased>
+              <TaxPercent>8</TaxPercent>
+              <NetAmountTaxable>582.50</NetAmountTaxable>
+            </TaxLineDetail>
+          </TaxLine>
+        </TxnTaxDetail>
+        <CustomerRef name="Geeta Kalapatapu">10</CustomerRef>
+        <CustomerMemo>Thank you for your business and have a great day!</CustomerMemo>
+        <BillAddr>
+          <Id>87</Id>
+          <Line1>Geeta Kalapatapu</Line1>
+          <Line2>1987 Main St.</Line2>
+          <Line3>Middlefield, CA  94303</Line3>
+          <Lat>37.4530553</Lat>
+          <Long>-122.1178261</Long>
+        </BillAddr>
+        <ShipAddr>
+          <Id>10</Id>
+          <Line1>1987 Main St.</Line1>
+          <City>Middlefield</City>
+          <CountrySubDivisionCode>CA</CountrySubDivisionCode>
+          <PostalCode>94303</PostalCode>
+          <Lat>37.445013</Lat>
+          <Long>-122.1391443</Long>
+        </ShipAddr>
+        <SalesTermRef>3</SalesTermRef>
+        <DueDate>2016-03-24</DueDate>
+        <TotalAmt>629.10</TotalAmt>
+        <ApplyTaxAfterDiscount>false</ApplyTaxAfterDiscount>
+        <PrintStatus>NeedToPrint</PrintStatus>
+        <EmailStatus>NotSet</EmailStatus>
+        <BillEmail>
+          <Address>Geeta@Kalapatapu.com</Address>
+        </BillEmail>
+        <Balance>0</Balance>
+        <Deposit>0</Deposit>
+        <AllowIPNPayment>false</AllowIPNPayment>
+        <AllowOnlinePayment>false</AllowOnlinePayment>
+        <AllowOnlineCreditCardPayment>false</AllowOnlineCreditCardPayment>
+        <AllowOnlineACHPayment>false</AllowOnlineACHPayment>
+      </Invoice>
+      <Invoice domain="QBO" status="Deleted">
+        <Id>65</Id>
+        <MetaData>
+          <LastUpdatedTime>2016-04-13T07:34:31-07:00</LastUpdatedTime>
+        </MetaData>
+      </Invoice>
+    </QueryResponse>
+    <QueryResponse/>
+    <QueryResponse startPosition="1" maxResults="1">
+      <Payment domain="QBO" sparse="false">
+        <Id>147</Id>
+        <SyncToken>0</SyncToken>
+        <MetaData>
+          <CreateTime>2016-04-13T07:34:40-07:00</CreateTime>
+          <LastUpdatedTime>2016-04-13T07:34:40-07:00</LastUpdatedTime>
+        </MetaData>
+        <TxnDate>2016-04-13</TxnDate>
+        <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+        <Line>
+          <Amount>629.10</Amount>
+          <LinkedTxn>
+            <TxnId>103</TxnId>
+            <TxnType>Invoice</TxnType>
+          </LinkedTxn>
+          <LineEx>
+            <NameValue>
+              <Name>txnId</Name>
+              <Value>103</Value>
+            </NameValue>
+            <NameValue>
+              <Name>txnOpenBalance</Name>
+              <Value>629.10</Value>
+            </NameValue>
+            <NameValue>
+              <Name>txnReferenceNumber</Name>
+              <Value>1033</Value>
+            </NameValue>
+          </LineEx>
+        </Line>
+        <CustomerRef name="Geeta Kalapatapu">10</CustomerRef>
+        <DepositToAccountRef>35</DepositToAccountRef>
+        <TotalAmt>629.10</TotalAmt>
+        <UnappliedAmt>0</UnappliedAmt>
+        <ProcessPayment>false</ProcessPayment>
+      </Payment>
+    </QueryResponse>
+    <QueryResponse/>
+    <QueryResponse/>
+    <QueryResponse/>
+    <QueryResponse/>
+  </CDCResponse>
+</IntuitResponse>
