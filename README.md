@@ -642,6 +642,22 @@ Quickbooks.log = true
 Quickbooks.log_xml_pretty_print = false
 ```
 
+## Debugging
+
+While logging is helpful the best debugging (in my opinion) is available by using a HTTP proxy such as [Charles Proxy](https://www.charlesproxy.com/).
+
+To enable HTTP proxying you pass in `:http_proxy` when you generate your OAuth Consumer:
+
+```ruby
+$qb = OAuth::Consumer.new($consumer_key, $consumer_secret, {
+    :site                 => "https://oauth.intuit.com",
+    :request_token_path   => "/oauth/v1/get_request_token",
+    :authorize_path       => "/oauth/v1/get_access_token",
+    :access_token_path    => "/oauth/v1/get_access_token",
+    :proxy => "http://127.0.0.1:8888"
+})
+```
+
 ## Entities Implemented
 
 Entity            | Create | Update | Query | Delete | Fetch by ID | Other
