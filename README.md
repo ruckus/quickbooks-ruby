@@ -67,12 +67,14 @@ Create a Rails initializer with:
 QB_KEY = "your apps Intuit App Key"
 QB_SECRET = "your apps Intuit Secret Key"
 
-$qb_oauth_consumer = OAuth::Consumer.new(QB_KEY, QB_SECRET, {
+consumer = OAuth::Consumer.new(QB_KEY, QB_SECRET, {
     :site                 => "https://oauth.intuit.com",
     :request_token_path   => "/oauth/v1/get_request_token",
     :authorize_url        => "https://appcenter.intuit.com/Connect/Begin",
     :access_token_path    => "/oauth/v1/get_access_token"
 })
+
+Quickbooks::Configuration.set_oauth_consumer(consumer)
 ```
 
 To start the authentication flow with Intuit you include the Intuit Javascript and on a page of your choosing you present the "Connect to Quickbooks" button by including this XHTML:
@@ -178,6 +180,9 @@ end
 There are two approaches to retrieve results from Quickbooks. However, you're encouraged to use the first approach as we'll be removing the second approach in the long run.
 
 ###### Approach 1
+
+Make sure that you've followed the steps mentioned in [Getting Started & Initiating Authentication Flow with Intuit](#getting-started--initiating-authentication-flow-with-intuit) before you proceed to use Approach 1.
+
 To retrieve any Quickbooks results you need to set the access token, secret key and realm id in Quickbooks configuration:
 ```ruby
 Quickbooks::Configuration.set_tokens_and_realm_id(token, secret, realm_id)
@@ -258,6 +263,9 @@ Often one needs to retrieve multiple pages of records of an Entity type
 and loop over them all. Again there are two approaches currently supported and first approach is encouraged to be used.
 
 ###### Approach 1
+
+Make sure that you've followed the steps mentioned in [Getting Started & Initiating Authentication Flow with Intuit](#getting-started--initiating-authentication-flow-with-intuit) before you proceed to use Approach 1.
+
 ```ruby
 Quickbooks::Configuration.set_tokens_and_realm_id(token, secret, realm_id)
 Quickbooks::Model::Customer.query_in_batches(query, per_page: 1000) do |batch|
