@@ -12,7 +12,7 @@ https://github.com/ruckus/quickeebooks
 
 This library communicates with the Quickbooks Data Services `v3` API, documented at:
 
-[Data Services v3](https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services)
+[Data Services v3](https://developer.intuit.com/docs/api/accounting)
 
 ## Changes in 0.1.x from 0.0.x
 
@@ -47,7 +47,7 @@ Gems:
 * `active_model` : For validations
 
 ## Sandbox Mode
-An API app provides two sets of OAuth key for production and development. Since October 22, 2014, only [Sandbox Companies](https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services)
+An API app provides two sets of OAuth key for production and development. Since October 22, 2014, only [Sandbox Companies](https://developer.intuit.com/docs/api/accounting)
 are allowed to connected to the QBO via the development key. The end-point for sandbox mode is https://sandbox-quickbooks.api.intuit.com.
 
 By default, the gem runs in production mode. If you prefer to develop / test the integration with the development key,
@@ -489,7 +489,7 @@ end
 ```
 
 For complete details on Batch Operations see:
-https://developer.intuit.com/docs/0025_quickbooksapi/0050_data_services/020_key_concepts/00700_batch_operation
+https://developer.intuit.com/docs/api/accounting/batch
 
 ## Query Building / Filtering
 Intuit requires that complex queries be escaped in a certain way. To make it easier to build queries that will be accepted I have provided a *basic* Query builder.
@@ -580,7 +580,7 @@ changed_as_hash = changed.all_types
 
 Deleted entities can be found in the XML by checking their @status is "Deleted". In the return from the all_types method, deleted items will be of type Quickbooks::Model::ChangeModel.
 
-see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
+see: https://developer.intuit.com/docs/0100_quickbooks_online/0200_dev_guides/accounting/change_data_capture for more information.
 
 ## ChangeModel alternative Change Data Capture For Invoices, Customers, Vendors, Items, Payments and Credit Memos
 
@@ -613,7 +613,7 @@ item_changed = item_service.since(Time.now.utc - 5 days)
 
 
 
-see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
+see: https://developer.intuit.com/docs/0100_quickbooks_online/0200_dev_guides/accounting/change_data_capture for more information.
 
 ## Reports API
 
