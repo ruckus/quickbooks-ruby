@@ -7,6 +7,7 @@ describe "Quickbooks::Model::Item" do
     item.sync_token.should == 0
     item.meta_data.should_not be_nil
     item.name.should == 'Plush Baby Doll'
+    item.sku.should == 'PBD01'
     item.description.should == 'A fine baby doll - in many colors'
     item.active?.should == true
     item.taxable?.should == false

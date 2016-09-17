@@ -5,7 +5,6 @@ module Quickbooks
       include ActiveModel::Validations
       include Validator
       include ROXML
-      include ActiveRecordScaffold
 
       xml_convention :camelcase
 
@@ -26,6 +25,14 @@ module Quickbooks
         step1 = s.string.sub("<#{model_name}>", "<#{destination_name} #{Quickbooks::Service::BaseService::XML_NS} #{sparse_string}>")
         step2 = step1.sub("</#{model_name}>", "</#{destination_name}>")
         step2
+      end
+
+      def as_json(options = nil)
+        options = {} if options.nil?
+        except_conditions = ["roxml_references"]
+        except_conditions << options[:except]
+        options[:except] = except_conditions.flatten.uniq.compact
+        super(options)
       end
 
       def to_xml_ns(options = {})

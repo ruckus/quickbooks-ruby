@@ -1,3 +1,57 @@
+## 0.4.4 (2016-06-02)
+
+* Allow an invoice to be voided using only the Id and SyncToken - thank you @insphire
+```ruby
+# Both Invoice ID and SyncToken are required - you can either fetch an invoice to void or construct a new
+# instance and specify those two parameters
+invoice_service = Quickbooks::Service::Invoice.new(...)
+
+# void from a fetched invoice
+invoice = invoice_service.fetch_by_id(invoice_id)
+invoice_service.void(invoice)
+
+# or construct new instance with the required parameters
+invoice = Quickbooks::Model::Invoice.new
+invoice.id = 99
+invoice.sync_token = 23
+invoice_service.void(invoice)
+```
+
+* Add support for Change Data Capture: https://github.com/ruckus/quickbooks-ruby#change-data-capture - thank you @craggar
+
+* Add time activity batch support - thank you @lmatiolis
+
+## 0.4.3 (2016-02-13)
+
+* Remove dependency on alias_method_chain from create_http_request method.
+* Support for the Transfer endpoint - thanks @Craggar
+* Added ability to download a Estimate PDF - thanks @rickbarrette
+
+## 0.4.2 (2015-11-11)
+
+* Fixed bug in Item#fetch_by_id where the minorversion param injection was generating an incorrect URL. Thanks to @jordangraft for the PR.
+
+* Added helpers to ServiceCrud: all and find_by. Thanks to @vanboom for the PR.
+
+* Added void method for service/payment. Thanks to @jordangraft for the PR.
+
+## 0.4.1 (2015-10-28)
+
+* Item service defaults to minorversion=4 for I/O operations
+
+## 0.4.0 (2015-09-01)
+
+* Reports API enhancements
+* Tax Service with initial support for JSON. Tax Agency support and Tax Rate and update abilities.
+
+## 0.3.0 (2015-08-12)
+
+* Tax Service with initial support for JSON. Tax Agency support and Tax Rate creation and update abilities.
+* Added support for specifying a RequestId for de-duplication
+* Refactored Change Data Capture
+* Added backwards compatibility to BaseReference initialize
+* Changed the initialize method of BaseReference model and added support for the name/value attributes.
+
 ## 0.2.3 (2015-04-28)
 
 * Reports. Merged PR #204 - thank you @raksonibs

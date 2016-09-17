@@ -49,15 +49,17 @@ module Quickbooks
         self.class::HTTP_CONTENT_TYPE == "application/json"
       end
 
+      def is_pdf?
+        self.class::HTTP_CONTENT_TYPE == "application/pdf"
+      end
+
       def default_model_query
         "SELECT * FROM #{self.class.name.split("::").last}"
       end
 
       def url_for_query(query = nil, start_position = 1, max_results = 20, options = {})
         query ||= default_model_query
-        unless options[:skip_pagination]
-          query = "#{query} STARTPOSITION #{start_position} MAXRESULTS #{max_results}"
-        end
+        query = "#{query} STARTPOSITION #{start_position} MAXRESULTS #{max_results}"
 
         "#{url_for_base}/query?query=#{URI.encode_www_form_component(query)}"
       end
@@ -92,7 +94,7 @@ module Quickbooks
         start_position = ((page - 1) * per_page) + 1 # page=2, per_page=10 then we want to start at 11
         max_results = per_page
 
-        response = do_http_get(url_for_query(query, start_position, max_results, options))
+        response = do_http_get(url_for_query(query, start_position, max_results))
 
         parse_collection(response, model)
       end
@@ -127,13 +129,9 @@ module Quickbooks
             collection.count = xml.xpath(path_to_nodes).count
             if collection.count > 0
               xml.xpath(path_to_nodes).each do |xa|
-                entry = model.from_xml(xa)
-                addition = xml.xpath(path_to_nodes)[0].xpath("//xmlns:Currency").children.to_s if "#{model::XML_NODE}" == "Reports"
-                entry.currency = addition if "#{model::XML_NODE}" == "Reports"
-                collection.body = response.body if "#{model::XML_NODE}" == "Reports"
-                results << entry
+                results << model.from_xml(xa)
               end
-            end              
+            end
 
             collection.entries = results
           rescue => ex
@@ -178,6 +176,20 @@ module Quickbooks
       def do_http_get(url, params = {}, headers = {}) # throws IntuitRequestException
         url = add_query_string_to_url(url, params)
         do_http(:get, url, {}, headers)
+      end
+
+      def do_http_raw_get(url, params = {}, headers = {})
+        url = add_query_string_to_url(url, params)
+        unless headers.has_key?('Content-Type')
+          headers['Content-Type'] = self.class::HTTP_CONTENT_TYPE
+        end
+        unless headers.has_key?('Accept')
+          headers['Accept'] = self.class::HTTP_ACCEPT
+        end
+        unless headers.has_key?('Accept-Encoding')
+          headers['Accept-Encoding'] = HTTP_ACCEPT_ENCODING
+        end
+        @oauth.get(url, headers)
       end
 
       def do_http_file_upload(uploadIO, url, metadata = nil)

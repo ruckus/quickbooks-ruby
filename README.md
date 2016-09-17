@@ -33,7 +33,7 @@ Moreover, there is no longer a getter method e.g. `active` (without the trailing
 
 ## Requirements
 
-This has been tested on 1.9.3, 2.0.0, and 2.1.0.
+This has been tested on 1.9.3, 2.0, 2.1, 2.2
 
 Ruby 1.8.7 and 1.9.2 are not supported.
 
@@ -64,10 +64,10 @@ What follows is an example using Rails but the principles can be adapted to any 
 Create a Rails initializer with:
 
 ```ruby
-QB_KEY = "your apps Intuit App Key"
-QB_SECRET = "your apps Intuit Secret Key"
+OAUTH_CONSUMER_KEY = "OAUTH_CONSUMER_KEY"
+OAUTH_CONSUMER_SECRET = "OAUTH_CONSUMER_SECRET"
 
-consumer = OAuth::Consumer.new(QB_KEY, QB_SECRET, {
+consumer = OAuth::Consumer.new(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET, {
     :site                 => "https://oauth.intuit.com",
     :request_token_path   => "/oauth/v1/get_request_token",
     :authorize_url        => "https://appcenter.intuit.com/Connect/Begin",
@@ -75,7 +75,11 @@ consumer = OAuth::Consumer.new(QB_KEY, QB_SECRET, {
 })
 
 Quickbooks::Configuration.set_oauth_consumer(consumer)
+
+Quickbooks::Configuration.set_tokens_and_realm_id(token, secret, realm_id, :scope => :application)
 ```
+
+You can pass an optional key value pair as last argument to `set_tokens_and_realm_id` method. The key value pair can be `:scope => :application` or `:scope => :thread`. If you want to set the tokens, secret and realm_id on application then you need to pass `:scope => :application`. The default value for `:scope` is `:thread`.
 
 To start the authentication flow with Intuit you include the Intuit Javascript and on a page of your choosing you present the "Connect to Quickbooks" button by including this XHTML:
 
@@ -98,7 +102,7 @@ Your Controller action (the `grantUrl` above) should look like this:
 ```ruby
   def authenticate
     callback = quickbooks_oauth_callback_url
-    token = $qb_oauth_consumer.get_request_token(:oauth_callback => callback)
+    token = QB_OAUTH_CONSUMER.get_request_token(:oauth_callback => callback)
     session[:qb_request_token] = token
     redirect_to("https://appcenter.intuit.com/Connect/Begin?oauth_token=#{token.token}") and return
   end
@@ -129,10 +133,10 @@ Marshal.load(session[:qb_request_token]).get_access_token(:oauth_verifier => par
 
 ## Creating an OAuth Access Token
 
-Once you have your users OAuth Token & Secret you can initialize your `OAuth Consumer` and create a `OAuth Client` using the `$qb_oauth_consumer` you created earlier in your Rails initializer:
+Once you have your users OAuth Token & Secret you can initialize your `OAuth Consumer` and create a `OAuth Client` using the `QB_OAUTH_CONSUMER` you created earlier in your Rails initializer:
 
 ```ruby
-access_token = OAuth::AccessToken.new($qb_oauth_consumer, access_token, access_secret)
+access_token = OAuth::AccessToken.new(QB_OAUTH_CONSUMER, string_access_token_from_qb, string_access_secret_from_qb)
 ```
 
 ## Persisting the Credentials
@@ -159,7 +163,7 @@ Then you will want to have a scheduled task / cron which runs nightly and runs t
 
 ```ruby
 expiring_tokens.each do |record|
-  access_token = OAuth::AccessToken.new($qb_oauth_consumer, record.access_token, record.access_secret)
+  access_token = OAuth::AccessToken.new(QB_OAUTH_CONSUMER, record.access_token, record.access_secret)
   service = Quickbooks::Service::AccessToken.new
   service.access_token = access_token
   service.company_id = record.company_id
@@ -183,10 +187,6 @@ There are two approaches to retrieve results from Quickbooks. However, you're en
 
 Make sure that you've followed the steps mentioned in [Getting Started & Initiating Authentication Flow with Intuit](#getting-started--initiating-authentication-flow-with-intuit) before you proceed to use Approach 1.
 
-To retrieve any Quickbooks results you need to set the access token, secret key and realm id in Quickbooks configuration:
-```ruby
-Quickbooks::Configuration.set_tokens_and_realm_id(token, secret, realm_id)
-```
 Then you can simply call `Quickbooks::Model::Customer.all` to retrieve a list of all customers. However, there is a default pagination applied and only 20 records are fetched per request. If you want to skip pagination and just want to fetch all the records then you can pass `skip_pagination: true` argument to `Quickbooks::Model::Customer.all`:
 ```ruby
 Quickbooks::Model::Customer.all #=> Returns array of first 20 customers
@@ -196,7 +196,6 @@ The first argument in the method is query and if you don't pass any query then t
 
 Quickbooks models behave exactly the same like ActiveRecord for querying purposes. That means that these models have other methods e.g: `where` `count` `find_by` `find` etc. Following are some examples:
 ```ruby
-Quickbooks::Configuration.set_tokens_and_realm_id(token, secret, realm_id)
 
 # where
 Quickbooks::Model::Customer.where('') #=> runs default query and returns first 20 customers
@@ -259,15 +258,13 @@ customers.query(query, :page => 2, :per_page => 25)
 ```
 ### Querying in Batches
 
-Often one needs to retrieve multiple pages of records of an Entity type
-and loop over them all. Again there are two approaches currently supported and first approach is encouraged to be used.
+Often one needs to retrieve multiple pages of records of an Entity type and loop over them all. Again there are two approaches currently supported and first approach is encouraged to be used.
 
 ###### Approach 1
 
 Make sure that you've followed the steps mentioned in [Getting Started & Initiating Authentication Flow with Intuit](#getting-started--initiating-authentication-flow-with-intuit) before you proceed to use Approach 1.
 
 ```ruby
-Quickbooks::Configuration.set_tokens_and_realm_id(token, secret, realm_id)
 Quickbooks::Model::Customer.query_in_batches(query, per_page: 1000) do |batch|
   batch.each do |customer|
     # ...
@@ -278,9 +275,8 @@ end
 As of second approach, there is the `query_in_batches` collection method in each service:
 
 ```ruby
-service = Quickbooks::Service::Customer.new(:company_id => "123", :access_token => access_token)
 query = nil
-service.query_in_batches(query, per_page: 1000) do |batch|
+Customer.query_in_batches(query, per_page: 1000) do |batch|
   batch.each do |customer|
     # ...
   end
@@ -294,6 +290,14 @@ If you're are running a custom Query then pass it instead.
 The second argument is the options, which are optional.
 By default, the options are `per_page: 1000`.
 
+## Retrieving all objects
+
+You may retrieve an array of objects like so:
+```ruby
+customers = service.all
+```
+Unlike other query functions which return a Quickbooks::Collection object,
+the all method returns an array of objects.
 
 ## Retrieving a single object
 
@@ -303,6 +307,16 @@ You can retrieve a specific Intuit object like so:
 customer = service.fetch_by_id("99")
 puts customer.company_name
 => "Acme Enterprises"
+```
+## Retrieving objects with matching attributes
+
+The `find_by(attribute, value)` method allows you to retrieve objects with a simple WHERE query using a single attribute.  The attribute may be given as a symbol or a string.
+Symbols will be automatically camelcased to match the Quickbooks API field names.
+
+```ruby
+customer = service.find_by(:family_name, "Doe")
+or
+customer = service.find_by("FamilyName", "Doe")
 ```
 
 ## Updating an object
@@ -431,7 +445,7 @@ salesreceipt = Quickbooks::Model::SalesReceipt.new({
   customer_id: 99,
   txn_date: Date.civil(2013, 11, 20),
   payment_ref_number: "111", #optional payment reference number/string - e.g. stripe token
-  deposit_to_account_id: 222, #The ID of the Account entity you want the SalesReciept to be deposited to
+  deposit_to_account_id: 222, #The ID of the Account entity you want the SalesReceipt to be deposited to
   payment_method_id: 333 #The ID of the PaymentMethod entity you want to be used for this transaction
 })
 salesreceipt.auto_doc_number! #allows Intuit to auto-generate the transaction number
@@ -565,7 +579,7 @@ meta.attachable_ref = Quickbooks::Model::AttachableRef.new(entity)
 ### Uploading an actual file
 
 ```ruby
-upload_service = Quickbooks::Model::Upload.new
+upload_service = Quickbooks::Service::Upload.new
 
 # args:
 #     local-path to file
@@ -582,12 +596,48 @@ puts attach.temp_download_uri
 => "https://intuit-qbo-prod-29.s3.amazonaws.com/12345%2Fattachments%2Fmonkey-1423760870606.jpg?Expires=1423761772&AWSAcc ... snip ..."
 ```
 
+### Download PDF of an Invoice or SalesReceipt
 
+To download a PDF of an Invoice:
+
+```ruby
+service = Quickbooks::Service::Invoice.new # or use the SalesReceipt service
+
+# +invoice+ is an instance of Quickbooks::Model::Invoice
+raw_pdf_data = service.pdf(invoice)
+
+# write it to disk
+File.open("invoice.pdf", "wb") do |file|
+  file.write(raw_pdf_data)
+end
+```
 
 ## Change Data Capture
 
-Quickbooks has an api called Change Data Capture that provides a way of finding out which Entities have recently changed.  This gem currently supports a way of querying changed invoices.  This is the only way to find out if an invoice has been deleted (not voided), since a deleted invoice will not be returned by a standard Invoice query.
+Quickbooks has an api called Change Data Capture that provides a way of finding out which Entities have recently changed, as deleted entities will not be returned by a standard query. It is possible to request changes up to 30 days ago.
 
+The primary method for querying to ChangeDataCapture is through Quickbooks::Service::ChangeDataCapture.
+
+Quickbooks::Model::ChangeDataCapture also supports parsing the XML response into a hash of entity types through the all_types method.
+
+```ruby
+service = Quickbooks::Service::ChangeDataCapture.new
+...
+# define the list of entities to query
+entities = ["Invoice", "Bill", "Payment"] #etc
+changed = service.since(entities, Time.now.utc - 5 days)
+...
+# parse the XML to a list of Quickbooks::Models
+changed_as_hash = changed.all_types
+```
+
+Deleted entities can be found in the XML by checking their @status is "Deleted". In the return from the all_types method, deleted items will be of type Quickbooks::Model::ChangeModel.
+
+see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
+
+## ChangeModel alternative Change Data Capture For Invoices, Customers, Vendors, Items, Payments and Credit Memos
+
+It is possible to get a sparse summary of which Invoice, Customer, Vendor, Item, Payment or Credit Memo Entries have recently changed.
 It is possible to request changes up to 30 days ago.
 
 ```ruby
@@ -595,13 +645,6 @@ service = Quickbooks::Service::InvoiceChange.new
 ...
 changed = service.since(Time.now.utc - 5 days)
 ```
-
-see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
-
-## Change Data Capture For Customers, Vendors, Items, Payments and Credit Memos
-
-It is possible to find out which Customer, Vendor, Item, Payment or Credit Memo Entries have recently changed.
-It is possible to request changes up to 30 days ago.
 
 ```ruby
 customer_service = Quickbooks::Service::CustomerChange.new
@@ -625,12 +668,17 @@ item_changed = item_service.since(Time.now.utc - 5 days)
 
 see: https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/change_data_capture for more information.
 
+## Reports API
+
+Quickbooks has an API called the [Reports API](https://developer.intuit.com/docs/0100_accounting/0400_references/reports) that provides abilities such as: business and sales overview; vendor and customer balances; review expenses and purchases and more.
+See the [specs](https://github.com/ruckus/quickbooks-ruby/blob/master/spec/lib/quickbooks/model/report_spec.rb) for [examples](https://github.com/ruckus/quickbooks-ruby/blob/master/spec/lib/quickbooks/service/reports_spec.rb) of how to leverage.
+
 ## JSON support
 
 Intuit started the v3 API supporting both XML and JSON. However, new
 v3 API services such as `Tax Service` [will only support
 JSON]( https://github.com/ruckus/quickbooks-ruby/issues/257#issuecomment-126834454 ). This gem has
-[ roots ](https://github.com/ruckus/quickeebooks) in the v2 API, which was XML only, and hence was constructed supporting XML only. 
+[ roots ](https://github.com/ruckus/quickeebooks) in the v2 API, which was XML only, and hence was constructed supporting XML only.
 
 That said, the `Tax Service` is supported and other new v3-API-JSON-only services will be supported. Ideally, we would like to fully support JSON for all entities and services for the `1.0.0` release. Please jump in and contribute to help that aim.
 
@@ -645,6 +693,22 @@ Quickbooks.logger = Rails.logger
 Quickbooks.log = true
 # Pretty-printing logged xml is true by default
 Quickbooks.log_xml_pretty_print = false
+```
+
+## Debugging
+
+While logging is helpful the best debugging (in my opinion) is available by using a HTTP proxy such as [Charles Proxy](https://www.charlesproxy.com/).
+
+To enable HTTP proxying you pass in `:http_proxy` when you generate your OAuth Consumer:
+
+```ruby
+$qb = OAuth::Consumer.new($consumer_key, $consumer_secret, {
+    :site                 => "https://oauth.intuit.com",
+    :request_token_path   => "/oauth/v1/get_request_token",
+    :authorize_path       => "/oauth/v1/get_access_token",
+    :access_token_path    => "/oauth/v1/get_access_token",
+    :proxy => "http://127.0.0.1:8888"
+})
 ```
 
 ## Entities Implemented

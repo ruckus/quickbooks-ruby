@@ -53,4 +53,9 @@
       <Id>19891</Id>
     </Payment>
   </BatchItemResponse>
+  <BatchItemResponse bId="8h">
+    <TimeActivity>
+      <Id>19891</Id>
+    </TimeActivity>
+  </BatchItemResponse>
 </IntuitResponse>

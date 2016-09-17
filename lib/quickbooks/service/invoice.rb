@@ -17,6 +17,24 @@ module Quickbooks
         end
       end
 
+      def pdf(invoice)
+        url = "#{url_for_resource(model::REST_RESOURCE)}/#{invoice.id}/pdf"
+        response = do_http_raw_get(url, {}, {'Accept' => 'application/pdf'})
+        response.plain_body
+      end
+
+      def void(invoice, options = {})
+        url = "#{url_for_resource(model::REST_RESOURCE)}?operation=void"
+
+        xml = invoice.to_xml_ns(options)
+        response = do_http_post(url, valid_xml_document(xml))
+        if response.code.to_i == 200
+          model.from_xml(parse_singular_entity_response(model, response.plain_body))
+        else
+          false
+        end
+      end
+
       private
 
       def model

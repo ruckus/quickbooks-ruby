@@ -1,3 +1,4 @@
+# Docs: https://developer.intuit.com/docs/0100_accounting/0400_references/reports
 module Quickbooks
   module Service
     class Reports < BaseService
@@ -16,21 +17,15 @@ module Quickbooks
         end
       end
 
-      def fetch_collection(model, date_macro, object_query, options = {})
-        response = do_http_get(url_for_query(object_query, date_macro, options))
-
-        parse_collection(response, model)
-
-      end
-
       def query(object_query = 'BalanceSheet', date_macro = 'This Fiscal Year-to-date', options = {})
-        fetch_collection(model, date_macro , object_query, options)
+        do_http_get(url_for_query(object_query, date_macro, options))
+        model.new(:xml => @last_response_xml)
       end
 
       private
 
       def model
-        Quickbooks::Model::Reports
+        Quickbooks::Model::Report
       end
 
     end

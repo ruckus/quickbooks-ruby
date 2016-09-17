@@ -13,12 +13,10 @@ require 'quickbooks/util/logging'
 require 'quickbooks/util/http_encoding_helper'
 require 'quickbooks/util/name_entity'
 require 'quickbooks/util/query_builder'
-require 'configuration'
 
 #== Models
 require 'quickbooks/model/definition'
 require 'quickbooks/model/validator'
-require 'quickbooks/model/active_record_scaffold'
 require 'quickbooks/model/base_model'
 require 'quickbooks/model/base_model_json'
 require 'quickbooks/model/base_reference'
@@ -108,10 +106,11 @@ require 'quickbooks/model/invoice_change'
 require 'quickbooks/model/customer_change'
 require 'quickbooks/model/vendor_change'
 require 'quickbooks/model/item_change'
-require 'quickbooks/model/reports'
+require 'quickbooks/model/report'
 require 'quickbooks/model/credit_memo_change'
 require 'quickbooks/model/payment_change'
-
+require 'quickbooks/model/transfer'
+require 'quickbooks/model/change_data_capture'
 
 #== Services
 require 'quickbooks/service/service_crud'
@@ -161,9 +160,11 @@ require 'quickbooks/service/item_change'
 require 'quickbooks/service/reports'
 require 'quickbooks/service/credit_memo_change'
 require 'quickbooks/service/payment_change'
+require 'quickbooks/service/transfer'
+require 'quickbooks/service/change_data_capture'
 
 module Quickbooks
-  @@sandbox_mode     = false
+  @@sandbox_mode = false
 
   @@logger = nil
 

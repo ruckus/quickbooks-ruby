@@ -1,0 +1,93 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-12-10T12:38:26.908-08:00">
+  <SalesReceipt domain="QBO" sparse="false">
+    <Id>2</Id>
+    <SyncToken>0</SyncToken>
+    <MetaData>
+      <CreateTime>2013-12-10T05:35:42-08:00</CreateTime>
+      <LastUpdatedTime>2013-12-10T05:35:42-08:00</LastUpdatedTime>
+    </MetaData>
+    <DocNumber>1002</DocNumber>
+    <TxnDate>2013-12-10</TxnDate>
+    <PrivateNote>Voided</PrivateNote>
+    <CurrencyRef name="Brazilian Real">BRL</CurrencyRef>
+    <Line>
+      <Id>1</Id>
+      <LineNum>1</LineNum>
+      <Amount>10.00</Amount>
+      <DetailType>SalesItemLineDetail</DetailType>
+      <SalesItemLineDetail>
+        <ItemRef name="Sales">1</ItemRef>
+        <UnitPrice>10</UnitPrice>
+        <Qty>1</Qty>
+      </SalesItemLineDetail>
+    </Line>
+    <Line>
+      <Amount>10.00</Amount>
+      <DetailType>SubTotalLineDetail</DetailType>
+      <SubTotalLineDetail/>
+    </Line>
+    <CustomerRef name="Luis Braga">1</CustomerRef>
+    <CustomerMemo>memo!</CustomerMemo>
+    <GlobalTaxCalculation>NotApplicable</GlobalTaxCalculation>
+    <TotalAmt>10.00</TotalAmt>
+    <PrintStatus>NotSet</PrintStatus>
+    <EmailStatus>NotSet</EmailStatus>
+    <Balance>0</Balance>
+    <DepositToAccountRef name="Cash and cash equivalents">28</DepositToAccountRef>
+  </SalesReceipt>
+  <SalesReceipt domain="QBO" sparse="false">
+    <Id>1</Id>
+    <SyncToken>1</SyncToken>
+    <MetaData>
+      <CreateTime>2013-12-10T05:27:10-08:00</CreateTime>
+      <LastUpdatedTime>2013-12-10T05:27:26-08:00</LastUpdatedTime>
+    </MetaData>
+    <DocNumber>1001</DocNumber>
+    <TxnDate>2013-12-10</TxnDate>
+    <CurrencyRef name="Brazilian Real">BRL</CurrencyRef>
+    <Line>
+      <Id>1</Id>
+      <LineNum>1</LineNum>
+      <Description>Games</Description>
+      <Amount>10.00</Amount>
+      <DetailType>SalesItemLineDetail</DetailType>
+      <SalesItemLineDetail>
+        <ItemRef name="Sales">1</ItemRef>
+        <UnitPrice>10</UnitPrice>
+        <Qty>1</Qty>
+      </SalesItemLineDetail>
+    </Line>
+    <Line>
+      <Amount>10.00</Amount>
+      <DetailType>SubTotalLineDetail</DetailType>
+      <SubTotalLineDetail/>
+    </Line>
+    <CustomerRef name="Vanessa Feitosa">2</CustomerRef>
+    <BillAddr>
+      <Id>4</Id>
+      <Line1>Vanessa Feitosa</Line1>
+      <Line2>Rua Jorn Helder Feitosa</Line2>
+      <Line3>Bethesda  22000 US</Line3>
+      <Lat>INVALID</Lat>
+      <Long>INVALID</Long>
+    </BillAddr>
+    <ShipAddr>
+      <Id>3</Id>
+      <Line1>Rua Jorn Helder Feitosa</Line1>
+      <City>Bethesda</City>
+      <Country>US</Country>
+      <PostalCode>22000</PostalCode>
+      <Lat>INVALID</Lat>
+      <Long>INVALID</Long>
+    </ShipAddr>
+    <GlobalTaxCalculation>NotApplicable</GlobalTaxCalculation>
+    <TotalAmt>10.00</TotalAmt>
+    <PrintStatus>NotSet</PrintStatus>
+    <EmailStatus>NotSet</EmailStatus>
+    <BillEmail>
+      <Address>vanessa.feitosa@hotmail.com</Address>
+    </BillEmail>
+    <Balance>0</Balance>
+    <DepositToAccountRef name="Cash and cash equivalents">28</DepositToAccountRef>
+  </SalesReceipt>
+</IntuitResponse>

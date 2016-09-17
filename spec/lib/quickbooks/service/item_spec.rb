@@ -18,7 +18,7 @@ describe "Quickbooks::Service::Item" do
   it "can fetch an Item by ID" do
     xml = fixture("fetch_item_by_id.xml")
     model = Quickbooks::Model::Item
-    stub_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/2", ["200", "OK"], xml)
+    stub_request(:get, "#{@service.url_for_base}/item/2?minorversion=#{Quickbooks::Model::Item::MINORVERSION}", ["200", "OK"], xml)
     item = @service.fetch_by_id(2)
     item.name.should == "Plush Baby Doll"
   end

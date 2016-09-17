@@ -1,68 +1,51 @@
-describe "Quickbooks::Service::Reports" do
+describe "Quickbooks::Service::Report" do
   before(:all) do
     construct_service :reports
   end
 
-  it "can query for Balance Sheets", focus: true do
+  describe '.url_for_query()' do
+    it 'uses "BalanceSheet" and "This Fiscal Year to date" as the default parameters' do
+      @service.url_for_query().should == 'https://quickbooks.api.intuit.com/v3/company/9991111222/reports/BalanceSheet?date_macro=This+Fiscal+Year-to-date'
+    end
+
+    it 'allows overriding the report type' do
+      @service.url_for_query('ProfitAndLoss').should == 'https://quickbooks.api.intuit.com/v3/company/9991111222/reports/ProfitAndLoss?date_macro=This+Fiscal+Year-to-date'
+    end
+
+    it 'allows overriding the date_macro' do
+      @service.url_for_query('BalanceSheet', 'Last Year').should == 'https://quickbooks.api.intuit.com/v3/company/9991111222/reports/BalanceSheet?date_macro=Last+Year'
+    end
+
+    it 'allows passing additional query parameters' do
+      url = @service.url_for_query('BalanceSheet', 'Last Year',
+        :start_date => '2015-01-01',
+        :end_date => '2015-01-31',
+        :accounting_method => 'Cash',
+        :columns => 'subt_nat_amount,tax_amount',
+      )
+      url.should == 'https://quickbooks.api.intuit.com/v3/company/9991111222/reports/BalanceSheet?start_date=2015-01-01&end_date=2015-01-31&accounting_method=Cash&columns=subt_nat_amount,tax_amount'
+    end
+
+    it 'currently ignores the date_macro argument when passed in additional options' do
+      @service.url_for_query('BalanceSheet', 'Today', :accounting_method => 'Cash').should == 'https://quickbooks.api.intuit.com/v3/company/9991111222/reports/BalanceSheet?accounting_method=Cash'
+    end
+  end
+
+  it 'forwards arguments to .url_for_query' do
     xml = fixture("balancesheet.xml")
-    model = Quickbooks::Model::Reports
+    url = @service.url_for_query('BalanceSheet', 'Today', :accounting_method => 'Cash')
+    stub_request(:get, url, ["200", "OK"], xml)
+
+    @service.query('BalanceSheet', 'Today', :accounting_method => 'Cash')
+  end
+
+  it "returns a Report model" do
+    xml = fixture("balancesheet.xml")
 
     stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
-    reports = @service.query('BalanceSheet')
+    report = @service.query('BalanceSheet')
 
-    balance_sheet_xml = @service.last_response_xml
-    balance_sheet_xml.xpath('//xmlns:ReportName').children.to_s == 'BalanceSheet'
+    report.should be_a Quickbooks::Model::Report
   end
 
-  it 'can query Balance Sheets between different dates' do
-    xml = fixture("balancesheet.xml")
-    model = Quickbooks::Model::Reports
-
-    stub_request(:get, @service.url_for_query('BalanceSheet', 'This Fiscal Quarter This Fiscal Quarter-to-date' ), ["200", "OK"], xml)
-    reports = @service.query('BalanceSheet', 'This Fiscal Quarter This Fiscal Quarter-to-date' )
-
-    balance_sheet_xml = @service.last_response_xml
-    balance_sheet_xml.xpath('//xmlns:ReportName').children.to_s == 'BalanceSheet'
-  end
-
-  it 'can query Cash Flow' do
-    xml = fixture("cashflow.xml")
-    model = Quickbooks::Model::Reports
-
-    stub_request(:get, @service.url_for_query('CashFlow'), ["200", "OK"], xml)
-
-    reports = @service.query('CashFlow')
-
-    cash_flow_xml = @service.last_response_xml
-    cash_flow_xml.xpath('//xmlns:ReportName').children.to_s == 'CashFlow'
-  end
-
-  it 'can query Profit and Loss' do
-    xml = fixture("profitloss.xml")
-    model = Quickbooks::Model::Reports
-
-    stub_request(:get, @service.url_for_query('ProfitAndLoss'), ["200", "OK"], xml)
-
-    reports = @service.query('ProfitAndLoss')
-
-    profit_loss_xml = @service.last_response_xml
-    profit_loss_xml.xpath('//xmlns:ReportName').children.to_s == 'ProfitAndLoss'
-  end
-
-  it 'can accept additional options for a query' do
-    xml = fixture("profitandlossdetailwithoptions.xml")
-    model = Quickbooks::Model::Reports
-    options = {}
-    options[:start_date] = '2015-01-01'
-    options[:end_date] = '2015-01-31'
-    options[:accounting_method] = 'Cash'
-    options[:columns] = 'subt_nat_amount,tax_amount'
-
-    stub_request(:get, @service.url_for_query('ProfitAndLossDetail', {}, options), ["200", "OK"], xml)
-
-    reports = @service.query('ProfitAndLossDetail', {}, options)
-
-    profit_loss_xml = @service.last_response_xml
-    profit_loss_xml.xpath('//xmlns:ReportName').children.to_s == 'ProfitAndLoss'
-  end
 end

@@ -67,6 +67,32 @@ module Quickbooks
         receipt = subject.fetch_by_id(1)
         expect(receipt.doc_number).to eq "1001"
       end
+
+      it "can void a Sales Receipt" do
+        model = Quickbooks::Model::SalesReceipt
+        receipt = Quickbooks::Model::SalesReceipt.new
+        receipt.doc_number = "1001"
+        receipt.sync_token = 2
+        receipt.id = 1
+        receipt.customer_id = 3
+        line_item = Quickbooks::Model::Line.new
+        line_item.amount = 50
+        line_item.description = "Plush Baby Doll"
+        line_item.sales_item! do |detail|
+          detail.unit_price = 50
+          detail.quantity = 1
+          detail.item_id = 1
+          detail.tax_code_id = 'NON'
+        end
+        receipt.line_items << line_item
+
+        xml = fixture("sales_receipt_void_success_response.xml")
+        stub_request(:post, "#{subject.url_for_resource(model::REST_RESOURCE)}?include=void", ["200", "OK"], xml)
+
+        response = subject.void(receipt)
+        response.private_note.should == 'Voided'
+      end
+
     end
   end
 end
