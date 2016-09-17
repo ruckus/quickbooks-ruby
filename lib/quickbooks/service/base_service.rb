@@ -59,7 +59,9 @@ module Quickbooks
 
       def url_for_query(query = nil, start_position = 1, max_results = 20, options = {})
         query ||= default_model_query
-        query = "#{query} STARTPOSITION #{start_position} MAXRESULTS #{max_results}"
+        unless options[:skip_pagination]
+          query = "#{query} STARTPOSITION #{start_position} MAXRESULTS #{max_results}"
+        end
 
         "#{url_for_base}/query?query=#{URI.encode_www_form_component(query)}"
       end
@@ -94,7 +96,7 @@ module Quickbooks
         start_position = ((page - 1) * per_page) + 1 # page=2, per_page=10 then we want to start at 11
         max_results = per_page
 
-        response = do_http_get(url_for_query(query, start_position, max_results))
+        response = do_http_get(url_for_query(query, start_position, max_results, options))
 
         parse_collection(response, model)
       end
