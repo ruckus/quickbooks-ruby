@@ -6,9 +6,21 @@ module Quickbooks
         base.extend(ClassMethods)
       end
 
+      def save(options = {})
+        if id.blank?
+          self.class.send(:initialize_service).create(self, options)
+        else
+          self.class.send(:initialize_service).update(self, options)
+        end
+      end
+
       module ClassMethods
         def all(query = nil, options = {})
           initialize_service(options).query(query, options).entries
+        end
+
+        def first
+          all.first
         end
 
         def where(options = {})
@@ -40,9 +52,13 @@ module Quickbooks
         private
 
         def initialize_service(options = {})
+          if Quickbooks::Configuration.qb_oauth_consumer.blank?
+            raise "QB_OAUTH_CONSUMER not set. Please follow instructions at " +
+              "https://github.com/ruckus/quickbooks-ruby#getting-started--initiating-authentication-flow-with-intuit"
+          end
           service              = eval("Quickbooks::Service::#{model}").new
           service.access_token = OAuth::AccessToken.new(
-            ::QB_OAUTH_CONSUMER, options[:token] || get_token,
+            Quickbooks::Configuration.qb_oauth_consumer, options[:token] || get_token,
             options[:secret] || get_secret
           )
           service.company_id   = options[:realm_id] || get_realm_id
@@ -81,15 +97,15 @@ module Quickbooks
         end
 
         def get_token
-          QB_TOKENS_SCOPE == :thread ? Thread.current[:token] : QB_TOKEN
+          Quickbooks::Configuration.qb_token_scope == :thread ? Thread.current[:token] : Quickbooks::Configuration.qb_token
         end
 
         def get_secret
-          QB_TOKENS_SCOPE == :thread ? Thread.current[:secret] : QB_SECRET
+          Quickbooks::Configuration.qb_token_scope == :thread ? Thread.current[:secret] : Quickbooks::Configuration.qb_secret
         end
 
         def get_realm_id
-          QB_TOKENS_SCOPE == :thread ? Thread.current[:realm_id] : QB_REALM_ID
+          Quickbooks::Configuration.qb_token_scope == :thread ? Thread.current[:realm_id] : Quickbooks::Configuration.qb_realm_id
         end
       end
     end
