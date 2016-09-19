@@ -67,14 +67,14 @@ Create a Rails initializer with:
 OAUTH_CONSUMER_KEY = "OAUTH_CONSUMER_KEY"
 OAUTH_CONSUMER_SECRET = "OAUTH_CONSUMER_SECRET"
 
-consumer = OAuth::Consumer.new(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET, {
+::QB_OAUTH_CONSUMER = OAuth::Consumer.new(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET, {
     :site                 => "https://oauth.intuit.com",
     :request_token_path   => "/oauth/v1/get_request_token",
     :authorize_url        => "https://appcenter.intuit.com/Connect/Begin",
     :access_token_path    => "/oauth/v1/get_access_token"
 })
 
-Quickbooks::Configuration.set_oauth_consumer(consumer)
+Quickbooks::Configuration.set_oauth_consumer(QB_OAUTH_CONSUMER)
 
 Quickbooks::Configuration.set_tokens_and_realm_id(token, secret, realm_id, :scope => :application)
 ```
