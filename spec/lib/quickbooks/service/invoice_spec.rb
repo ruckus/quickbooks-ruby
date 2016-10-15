@@ -245,4 +245,48 @@ describe "Quickbooks::Service::Invoice" do
     created_invoice.id.should == "4"
   end
 
+  it "can read line items from a bundle" do
+    xml = fixture("invoice_with_bundle_line_item.xml")
+    model = Quickbooks::Model::Invoice
+    stub_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/186", ["200", "OK"], xml)
+    invoice = @service.fetch_by_id(186)
+    invoice.valid?.should == true
+
+    invoice.doc_number.should == "1020"
+
+    invoice.line_items.size.should == 3
+    bundles = invoice.line_items.select{|line| line.group_line_detail?}
+    bundles.should_not == nil
+    bundle = bundles.first
+
+    bundle.description.should == 'chocolate covered cookies and other sweets'
+    bundle.amount.should == 0
+    bundle.group_line_detail.group_item_ref.name.should == 'Assorted sweets'
+    bundle.group_line_detail.group_item_ref.value.should == '24'
+    bundle.group_line_detail.quantity.to_i.should == 3
+
+    bundle.group_line_detail.line_items.size.should == 2
+
+    bundle_line = bundle.group_line_detail.line_items[0]
+    bundle_line.sales_item?.should == true
+    bundle_line.id.should == '2'
+    bundle_line.amount.should == 7.96
+    bundle_line.sales_line_item_detail.item_ref["name"].should == "Chocolate Covered Strawberries"
+    bundle_line.sales_line_item_detail.quantity.should == 15
+    bundle_line.sales_line_item_detail.unit_price.should == 0.5306667
+    bundle_line.sales_line_item_detail.tax_code_ref.value.should == '5'
+
+    bundle_line = bundle.group_line_detail.line_items[1]
+    bundle_line.sales_item?.should == true
+    bundle_line.id.should == '3'
+    bundle_line.amount.should == 2.65
+    bundle_line.sales_line_item_detail.item_ref["name"].should == "Snow Cookie"
+    bundle_line.sales_line_item_detail.quantity.should == 24
+    bundle_line.sales_line_item_detail.unit_price.should == 0.1104167
+    bundle_line.sales_line_item_detail.tax_code_ref.value.should == '5'
+
+    bundle_total = bundle.group_line_detail.line_items.inject(0){|acc, l| acc + (l.sales_line_item_detail.quantity * l.sales_line_item_detail.unit_price)}
+    bundle_total.round(2).should == 10.61
+
+  end
 end
