@@ -356,6 +356,41 @@ puts created_invoice.id
 
 **Notes**: `line_item.amount` must equal the `unit_price * quantity` in the sales detail packet - otherwise Intuit will raise an exception.
 
+## Generating an Invoice containing a Bundle
+
+Example (code fragments) of adding a bundle line item, to an invoice:
+
+```ruby
+items = service.find_by(:sku, 'AHH_SWEETS')
+bundle = items.entries.first
+# be sure to check if you found the bundle you want
+# ...
+
+line_item = Quickbooks::Model::InvoiceLineItem.new
+  line_item.description = bundle.description
+
+  line_item.group_line_detail! do |detail|
+    detail.id = bundle.id
+    detail.group_item_ref = Quickbooks::Model::BaseReference.new(bundle.name, value: bundle.id)
+    detail.quantity = 1
+
+    bundle.item_group_details.line_items.each do |l|
+      g_line_item = Quickbooks::Model::InvoiceLineItem.new
+      g_line_item.amount = 50
+
+      g_line_item.sales_item! do |gl|
+        gl.item_id    = l.id
+        gl.quantity   = 1
+        gl.unit_price = 50
+      end
+
+      detail.line_items << g_line_item
+    end
+  end
+
+  invoice.line_items << line_item
+```
+
 ## Emailing Invoices
 
 The Quickbooks API offers a **send invoice** feature that sends the specified invoice model via email.  By default the email is sent to the `bill_email` on the invoice.  This feature returns an invoice model with updated `email_status` and `delivery_info` as shown below:
