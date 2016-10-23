@@ -21,8 +21,6 @@ module Quickbooks
       xml_accessor :sub_total_line_detail, :from => 'SubTotalLineDetail', :as => SubTotalLineDetail
       xml_accessor :payment_line_detail, :from => 'PaymentLineDetail', :as => PaymentLineDetail
       xml_accessor :discount_line_detail, :from => 'DiscountLineDetail', :as => DiscountLineDetail
-
-      # INVOICE_GROUP_LINE_DETAIL, used for Bundles
       xml_accessor :group_line_detail, :from => INVOICE_GROUP_LINE_DETAIL, :as => InvoiceGroupLineDetail
 
       def group_line_detail?
@@ -48,6 +46,13 @@ module Quickbooks
         yield self.sales_line_item_detail if block_given?
       end
 
+      def group_line_detail!
+        self.detail_type = INVOICE_GROUP_LINE_DETAIL
+        self.group_line_detail = InvoiceGroupLineDetail.new
+
+        yield self.group_line_detail if block_given?
+      end
+
       def payment_item!
         self.detail_type = PAYMENT_LINE_DETAIL
         self.payment_line_detail = PaymentLineDetail.new
@@ -61,7 +66,6 @@ module Quickbooks
 
         yield self.discount_line_detail if block_given?
       end
-
     end
   end
 end

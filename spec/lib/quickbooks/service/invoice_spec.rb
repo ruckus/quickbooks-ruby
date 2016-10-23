@@ -205,7 +205,7 @@ describe "Quickbooks::Service::Invoice" do
     invoice.doc_number = "1001"
     invoice.sync_token = 2
     invoice.id = 1
-    sent_invoice = @service.send(invoice,"test@intuit.com")
+    sent_invoice = @service.send(invoice, "test@intuit.com")
     sent_invoice.bill_email.address.should == "test@intuit.com"
   end
 
@@ -247,15 +247,14 @@ describe "Quickbooks::Service::Invoice" do
 
   it "can read line items from a bundle" do
     xml = fixture("invoice_with_bundle_line_item.xml")
-    model = Quickbooks::Model::Invoice
-    stub_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/186", ["200", "OK"], xml)
+    stub_request(:get, "#{@service.url_for_resource(Quickbooks::Model::Invoice::REST_RESOURCE)}/186", ["200", "OK"], xml)
     invoice = @service.fetch_by_id(186)
     invoice.valid?.should == true
 
     invoice.doc_number.should == "1020"
 
     invoice.line_items.size.should == 3
-    bundles = invoice.line_items.select{|line| line.group_line_detail?}
+    bundles = invoice.line_items.select { |line| line.group_line_detail? }
     bundles.should_not == nil
     bundle = bundles.first
 
@@ -285,8 +284,29 @@ describe "Quickbooks::Service::Invoice" do
     bundle_line.sales_line_item_detail.unit_price.should == 0.1104167
     bundle_line.sales_line_item_detail.tax_code_ref.value.should == '5'
 
-    bundle_total = bundle.group_line_detail.line_items.inject(0){|acc, l| acc + (l.sales_line_item_detail.quantity * l.sales_line_item_detail.unit_price)}
+    bundle_total = bundle.group_line_detail.line_items.inject(0) { |acc, l| acc + (l.sales_line_item_detail.quantity * l.sales_line_item_detail.unit_price) }
     bundle_total.round(2).should == 10.61
+  end
 
+  it "can sparse update an Invoice containing a bundle" do
+    xml = fixture("invoice_with_bundle_line_item.xml")
+    stub_request(:get, "#{@service.url_for_resource(Quickbooks::Model::Invoice::REST_RESOURCE)}/186", ["200", "OK"], xml)
+    invoice = @service.fetch_by_id(186)
+
+    invoice.line_items.each do |l|
+      if l.group_line_detail?
+        l.description << " - updated"
+        l.description.should == 'chocolate covered cookies and other sweets - updated'
+        l.group_line_detail.line_items.each do |group_line_item|
+          if group_line_item.sales_item?
+            group_line_item.description << " - updated"
+          end
+        end
+      end
+    end
+
+    stub_request(:post, @service.url_for_resource(Quickbooks::Model::Invoice::REST_RESOURCE), ["200", "OK"], xml)
+    update_response = @service.update(invoice, :sparse => true)
+    update_response.doc_number.should == '1020'
   end
 end
