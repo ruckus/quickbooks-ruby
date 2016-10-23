@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2016-10-15T11:26:56.900-07:00">
+  <Invoice domain="QBO" sparse="false">
+    <Id>186</Id>
+    <SyncToken>2</SyncToken>
+    <MetaData>
+      <CreateTime>2016-10-15T10:30:00-07:00</CreateTime>
+      <LastUpdatedTime>2016-10-15T11:26:47-07:00</LastUpdatedTime>
+    </MetaData>
+    <DocNumber>1020</DocNumber>
+    <TxnDate>2016-10-15</TxnDate>
+    <CurrencyRef name="Canadian Dollar">CAD</CurrencyRef>
+    <ExchangeRate>1</ExchangeRate>
+    <Line>
+      <Id>1</Id>
+      <LineNum>1</LineNum>
+      <Description>chocolate covered cookies and other sweets</Description>
+      <Amount>0</Amount>
+      <DetailType>GroupLineDetail</DetailType>
+      <GroupLineDetail>
+        <GroupItemRef name="Assorted sweets">24</GroupItemRef>
+        <Quantity>3</Quantity>
+        <Line>
+          <Id>2</Id>
+          <LineNum>2</LineNum>
+          <Description>Chocolate, Strawberries and Awesomeness</Description>
+          <Amount>7.96</Amount>
+          <DetailType>SalesItemLineDetail</DetailType>
+          <SalesItemLineDetail>
+            <ItemRef name="Chocolate Covered Strawberries">25</ItemRef>
+            <UnitPrice>0.5306667</UnitPrice>
+            <Qty>15</Qty>
+            <TaxCodeRef>5</TaxCodeRef>
+          </SalesItemLineDetail>
+        </Line>
+        <Line>
+          <Id>3</Id>
+          <LineNum>3</LineNum>
+          <Description>Snow Cookie with marzipan</Description>
+          <Amount>2.65</Amount>
+          <DetailType>SalesItemLineDetail</DetailType>
+          <SalesItemLineDetail>
+            <ItemRef name="Snow Cookie">26</ItemRef>
+            <UnitPrice>0.1104167</UnitPrice>
+            <Qty>24</Qty>
+            <TaxCodeRef>5</TaxCodeRef>
+          </SalesItemLineDetail>
+        </Line>
+      </GroupLineDetail>
+    </Line>
+    <Line>
+      <Amount>10.61</Amount>
+      <DetailType>SubTotalLineDetail</DetailType>
+      <SubTotalLineDetail/>
+    </Line>
+    <Line>
+      <Amount>2.12</Amount>
+      <DetailType>DiscountLineDetail</DetailType>
+      <DiscountLineDetail>
+        <PercentBased>true</PercentBased>
+        <DiscountPercent>20</DiscountPercent>
+        <DiscountAccountRef name="Discounts given">28</DiscountAccountRef>
+      </DiscountLineDetail>
+    </Line>
+    <TxnTaxDetail>
+      <TotalTax>1.11</TotalTax>
+      <TaxLine>
+        <Amount>1.11</Amount>
+        <DetailType>TaxLineDetail</DetailType>
+        <TaxLineDetail>
+          <TaxRateRef>12</TaxRateRef>
+          <PercentBased>true</PercentBased>
+          <TaxPercent>13</TaxPercent>
+          <NetAmountTaxable>8.49</NetAmountTaxable>
+        </TaxLineDetail>
+      </TaxLine>
+    </TxnTaxDetail>
+    <CustomerRef name="Cathy's Consulting Company">4</CustomerRef>
+    <CustomerMemo>It's a pleasure doing business with you. Remember, referrals are appreciated!</CustomerMemo>
+    <BillAddr>
+      <Id>5</Id>
+      <Line1>317 Pearce St.</Line1>
+      <City>Toronto</City>
+      <CountrySubDivisionCode>ON</CountrySubDivisionCode>
+      <PostalCode>M3E 3E4</PostalCode>
+      <Lat>INVALID</Lat>
+      <Long>INVALID</Long>
+    </BillAddr>
+    <ShipAddr>
+      <Id>5</Id>
+      <Line1>317 Pearce St.</Line1>
+      <City>Toronto</City>
+      <CountrySubDivisionCode>ON</CountrySubDivisionCode>
+      <PostalCode>M3E 3E4</PostalCode>
+      <Lat>INVALID</Lat>
+      <Long>INVALID</Long>
+    </ShipAddr>
+    <SalesTermRef>3</SalesTermRef>
+    <DueDate>2016-11-14</DueDate>
+    <GlobalTaxCalculation>TaxInclusive</GlobalTaxCalculation>
+    <TotalAmt>9.60</TotalAmt>
+    <HomeTotalAmt>9.60</HomeTotalAmt>
+    <PrintStatus>NotSet</PrintStatus>
+    <EmailStatus>NotSet</EmailStatus>
+    <Balance>9.60</Balance>
+    <Deposit>0</Deposit>
+    <AllowIPNPayment>false</AllowIPNPayment>
+    <AllowOnlinePayment>false</AllowOnlinePayment>
+    <AllowOnlineCreditCardPayment>false</AllowOnlineCreditCardPayment>
+    <AllowOnlineACHPayment>false</AllowOnlineACHPayment>
+  </Invoice>
+</IntuitResponse>
