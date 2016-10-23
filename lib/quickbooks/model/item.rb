@@ -49,6 +49,10 @@ module Quickbooks
       xml_accessor :purchase_tax_code_ref, :from => 'PurchaseTaxCodeRef', :as => BaseReference
       xml_accessor :inv_start_date, :from => 'InvStartDate', :as => Date
 
+      xml_accessor :print_grouped_items?, :from => 'PrintGroupedItems'
+
+      xml_accessor :item_group_details, :from => 'ItemGroupDetail', :as => ItemGroupDetail
+
       reference_setters :parent_ref, :income_account_ref, :expense_account_ref
       reference_setters :asset_account_ref, :sales_tax_code_ref, :purchase_tax_code_ref
 
@@ -78,7 +82,6 @@ module Quickbooks
         end
         errors.empty?
       end
-
     end
   end
 end

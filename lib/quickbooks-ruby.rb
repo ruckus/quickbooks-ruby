@@ -46,6 +46,8 @@ require 'quickbooks/model/entity'
 require 'quickbooks/model/journal_entry_line_detail'
 require 'quickbooks/model/line'
 require 'quickbooks/model/journal_entry'
+require 'quickbooks/model/item_group_line'
+require 'quickbooks/model/item_group_detail'
 require 'quickbooks/model/item'
 require 'quickbooks/model/budget_line_item'
 require 'quickbooks/model/budget'
@@ -126,6 +128,7 @@ require 'quickbooks/service/customer'
 require 'quickbooks/service/department'
 require 'quickbooks/service/invoice'
 require 'quickbooks/service/deposit'
+
 require 'quickbooks/service/item'
 require 'quickbooks/service/budget'
 require 'quickbooks/service/journal_entry'
@@ -207,16 +210,22 @@ module Quickbooks
     end
   end # << self
 
-  class InvalidModelException < StandardError; end
+  class InvalidModelException < StandardError;
+  end
 
-  class AuthorizationFailure < StandardError; end
-  class Forbidden < StandardError; end
+  class AuthorizationFailure < StandardError;
+  end
+  class Forbidden < StandardError;
+  end
 
-  class ServiceUnavailable < StandardError; end
-  class MissingRealmError < StandardError; end
+  class ServiceUnavailable < StandardError;
+  end
+  class MissingRealmError < StandardError;
+  end
 
   class IntuitRequestException < StandardError
     attr_accessor :message, :code, :detail, :type, :request_xml, :request_json
+
     def initialize(msg)
       self.message = msg
       super(msg)

@@ -7,16 +7,6 @@
       <CreateTime>2016-10-15T10:30:00-07:00</CreateTime>
       <LastUpdatedTime>2016-10-15T11:26:47-07:00</LastUpdatedTime>
     </MetaData>
-    <CustomField>
-      <DefinitionId>1</DefinitionId>
-      <Name>Event Rep</Name>
-      <Type>StringType</Type>
-    </CustomField>
-    <CustomField>
-      <DefinitionId>2</DefinitionId>
-      <Name>thumbnail_path</Name>
-      <Type>StringType</Type>
-    </CustomField>
     <DocNumber>1020</DocNumber>
     <TxnDate>2016-10-15</TxnDate>
     <CurrencyRef name="Canadian Dollar">CAD</CurrencyRef>
@@ -33,6 +23,7 @@
         <Line>
           <Id>2</Id>
           <LineNum>2</LineNum>
+          <Description>Chocolate, Strawberries and Awesomeness</Description>
           <Amount>7.96</Amount>
           <DetailType>SalesItemLineDetail</DetailType>
           <SalesItemLineDetail>
@@ -45,6 +36,7 @@
         <Line>
           <Id>3</Id>
           <LineNum>3</LineNum>
+          <Description>Snow Cookie with marzipan</Description>
           <Amount>2.65</Amount>
           <DetailType>SalesItemLineDetail</DetailType>
           <SalesItemLineDetail>
