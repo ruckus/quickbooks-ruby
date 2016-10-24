@@ -1,12 +1,14 @@
 module Quickbooks
   module Model
     class InvoiceLineItem < BaseModel
+      require 'quickbooks/model/invoice_group_line_detail'
 
       #== Constants
       SALES_LINE_ITEM_DETAIL = 'SalesItemLineDetail'
       SUB_TOTAL_LINE_DETAIL = 'SubTotalLineDetail'
       PAYMENT_LINE_DETAIL = 'PaymentLineDetail'
       DISCOUNT_LINE_DETAIL = 'DiscountLineDetail'
+      INVOICE_GROUP_LINE_DETAIL = 'GroupLineDetail'
 
       xml_accessor :id, :from => 'Id'
       xml_accessor :line_num, :from => 'LineNum', :as => Integer
@@ -19,6 +21,11 @@ module Quickbooks
       xml_accessor :sub_total_line_detail, :from => 'SubTotalLineDetail', :as => SubTotalLineDetail
       xml_accessor :payment_line_detail, :from => 'PaymentLineDetail', :as => PaymentLineDetail
       xml_accessor :discount_line_detail, :from => 'DiscountLineDetail', :as => DiscountLineDetail
+      xml_accessor :group_line_detail, :from => INVOICE_GROUP_LINE_DETAIL, :as => InvoiceGroupLineDetail
+
+      def group_line_detail?
+        detail_type.to_s == INVOICE_GROUP_LINE_DETAIL
+      end
 
       def sales_item?
         detail_type.to_s == SALES_LINE_ITEM_DETAIL
@@ -39,6 +46,13 @@ module Quickbooks
         yield self.sales_line_item_detail if block_given?
       end
 
+      def group_line_detail!
+        self.detail_type = INVOICE_GROUP_LINE_DETAIL
+        self.group_line_detail = InvoiceGroupLineDetail.new
+
+        yield self.group_line_detail if block_given?
+      end
+
       def payment_item!
         self.detail_type = PAYMENT_LINE_DETAIL
         self.payment_line_detail = PaymentLineDetail.new
@@ -52,7 +66,6 @@ module Quickbooks
 
         yield self.discount_line_detail if block_given?
       end
-
     end
   end
 end
