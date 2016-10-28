@@ -268,7 +268,11 @@ module Quickbooks
         when 401
           raise Quickbooks::AuthorizationFailure
         when 403
-          raise Quickbooks::Forbidden
+          message = parse_intuit_error[:message]
+          if message.include?('ThrottleExceeded')
+            raise Quickbooks::ThrottleExceeded, message
+          end
+          raise Quickbooks::Forbidden, message
         when 400, 500
           parse_and_raise_exception(options)
         when 503, 504

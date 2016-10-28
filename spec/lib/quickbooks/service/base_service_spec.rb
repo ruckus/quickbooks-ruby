@@ -83,6 +83,13 @@ describe Quickbooks::Service::BaseService do
       expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::Forbidden)
     end
 
+    it "should raise ThrottleExceeded on HTTP 403 with appropriate message" do
+      xml = fixture('throttle_exceeded_error.xml')
+
+      response = Struct.new(:code, :plain_body).new(403, xml)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ThrottleExceeded)
+    end
+
     it "should raise ServiceUnavailable on HTTP 503 and 504" do
       xml = fixture('generic_error.xml')
 
