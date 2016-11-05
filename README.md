@@ -6,10 +6,6 @@
 
 Integration with Quickbooks Online via the Intuit Data Services v3 REST API.
 
-**NOTE**: If you are looking for the v2 API then you need to use my other library - Quickeebooks:
-
-https://github.com/ruckus/quickeebooks
-
 This library communicates with the Quickbooks Data Services `v3` API, documented at:
 
 [Data Services v3](https://developer.intuit.com/docs/api/accounting)
