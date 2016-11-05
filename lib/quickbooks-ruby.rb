@@ -217,6 +217,8 @@ module Quickbooks
   end
   class Forbidden < StandardError;
   end
+  class ThrottleExceeded < Forbidden;
+  end
 
   class ServiceUnavailable < StandardError;
   end
