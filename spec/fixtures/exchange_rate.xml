@@ -1,0 +1,12 @@
+<ExchangeRate domain="QBO" sparse="false">
+    <Id>9</Id>
+    <SyncToken>0</SyncToken>
+    <MetaData>
+        <CreateTime>2013-12-11T10:59:51-08:00</CreateTime>
+        <LastUpdatedTime>2013-12-11T10:59:51-08:00</LastUpdatedTime>
+    </MetaData>
+    <SourceCurrencyCode>EUR</SourceCurrencyCode>
+    <TargetCurrencyCode>USD</TargetCurrencyCode>
+    <Rate>2.5</Rate>
+    <AsOfDate>2015-07-07</AsOfDate>
+</TaxRate>
