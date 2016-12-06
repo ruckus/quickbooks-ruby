@@ -1,0 +1,11 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-04-23T09:13:47.085-07:00">
+  <ExchangeRate domain="QBO" sparse="false">
+    <MetaData>
+        <LastUpdatedTime>2013-12-11T10:59:51-08:00</LastUpdatedTime>
+    </MetaData>
+    <SourceCurrencyCode>EUR</SourceCurrencyCode>
+    <TargetCurrencyCode>USD</TargetCurrencyCode>
+    <Rate>2.5</Rate>
+    <AsOfDate>2015-07-07</AsOfDate>
+  </ExchangeRate>
+</IntuitResponse>
