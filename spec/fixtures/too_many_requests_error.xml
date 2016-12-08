@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<IntuitResponse time="2016-12-07T15:27:09.527-08:00" xmlns="http://schema.intuit.com/finance/v3">
+  <Fault type="SERVICE">
+    <Error code="3001">
+      <Message>message=ThrottleExceeded; errorCode=003001; statusCode=429</Message>
+      <Detail>The request limit was reached.  Try again later</Detail>
+    </Error>
+  </Fault>
+</IntuitResponse>
