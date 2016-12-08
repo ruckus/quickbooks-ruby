@@ -90,6 +90,16 @@ describe Quickbooks::Service::BaseService do
       expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ThrottleExceeded)
     end
 
+    it "should raise TooManyRequests on HTTP 429 with appropriate message" do
+      xml = fixture('too_many_requests_error.xml')
+      message = Nokogiri::XML::Document.parse(xml) do |config|
+        config.noblanks
+      end.css('Message').text
+
+      response = Struct.new(:code, :plain_body).new(429, xml)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::TooManyRequests, message)
+    end
+
     it "should raise ServiceUnavailable on HTTP 503 and 504" do
       xml = fixture('generic_error.xml')
 
