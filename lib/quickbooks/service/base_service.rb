@@ -275,6 +275,9 @@ module Quickbooks
           raise Quickbooks::Forbidden, message
         when 400, 500
           parse_and_raise_exception(options)
+        when 429
+          message = parse_intuit_error[:message]
+          raise Quickbooks::TooManyRequests, message
         when 503, 504
           raise Quickbooks::ServiceUnavailable
         else

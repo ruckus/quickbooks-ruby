@@ -214,20 +214,13 @@ module Quickbooks
     end
   end # << self
 
-  class InvalidModelException < StandardError;
-  end
-
-  class AuthorizationFailure < StandardError;
-  end
-  class Forbidden < StandardError;
-  end
-  class ThrottleExceeded < Forbidden;
-  end
-
-  class ServiceUnavailable < StandardError;
-  end
-  class MissingRealmError < StandardError;
-  end
+  class InvalidModelException < StandardError; end
+  class AuthorizationFailure < StandardError; end
+  class Forbidden < StandardError; end
+  class ThrottleExceeded < Forbidden; end
+  class TooManyRequests < StandardError; end
+  class ServiceUnavailable < StandardError; end
+  class MissingRealmError < StandardError; end
 
   class IntuitRequestException < StandardError
     attr_accessor :message, :code, :detail, :type, :request_xml, :request_json
