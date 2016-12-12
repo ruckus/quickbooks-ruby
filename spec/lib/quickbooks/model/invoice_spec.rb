@@ -83,6 +83,7 @@ describe "Quickbooks::Model::Invoice" do
     invoice.print_status.should == 'NotSet'
     invoice.email_status.should == 'NotSet'
     invoice.balance.should == 50
+    invoice.home_balance.should == 75
     invoice.deposit.should == 0
     invoice.allow_ipn_payment?.should == true
     invoice.allow_online_payment?.should == false
