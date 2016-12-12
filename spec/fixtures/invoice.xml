@@ -80,6 +80,7 @@
 	<PrintStatus>NotSet</PrintStatus>
 	<EmailStatus>NotSet</EmailStatus>
 	<Balance>50.00</Balance>
+	<HomeBalance>75.00</HomeBalance> <!-- Present for non-USA accounts -->
 	<Deposit>0</Deposit>
 	<AllowIPNPayment>true</AllowIPNPayment>
 	<AllowOnlinePayment>false</AllowOnlinePayment>
