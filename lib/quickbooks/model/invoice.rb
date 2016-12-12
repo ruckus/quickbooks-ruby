@@ -48,6 +48,7 @@ module Quickbooks
       xml_accessor :print_status, :from => 'PrintStatus'
       xml_accessor :email_status, :from => 'EmailStatus'
       xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :home_balance, :from => 'HomeBalance', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :deposit, :from => 'Deposit', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
       xml_accessor :allow_ipn_payment?, :from => 'AllowIPNPayment'
