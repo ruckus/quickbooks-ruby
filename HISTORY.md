@@ -1,3 +1,13 @@
+## 0.4.6 (2016-12-12)
+
+* Add HomeBalance field to Invoice - thank you @mhssmnn
+* Added exception handling for new 429 too many requests throttling. - thank you @stevedev
+* Add ExchangeRate basic support - thank you @larissa
+* Pass query params (e.g. requestid) with batch - thank you @drewish
+* Support batch processing and change api of RefundReceipt - thank you @arthurchui
+* Raise ThrottleExceeded when rate limited - thank you @drewish
+* Add support for line item groups, aka: Bundle - thank you @florinpatrascu
+
 ## 0.4.4 (2016-06-02)
 
 * Allow an invoice to be voided using only the Id and SyncToken - thank you @insphire
