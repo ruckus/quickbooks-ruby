@@ -17,12 +17,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'oauth', '0.4.7'
   gem.add_dependency 'roxml', '3.3.1'
   gem.add_dependency 'nokogiri'  # promiscuous mode
-  # ActiveModel 5.0 requires ruby 2.2.2 or greater
-  if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.2.2')
-    gem.add_dependency 'activemodel', '< 6.0.0'
-  else
-    gem.add_dependency 'activemodel', '< 5.0.0'
-  end
+  gem.add_dependency 'activemodel' # promiscuous mode
   gem.add_dependency 'multipart-post' # promiscuous mode
 
   gem.add_development_dependency 'rake', '10.1.0'
