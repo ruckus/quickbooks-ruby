@@ -134,22 +134,19 @@ access_token = OAuth::AccessToken.new(QB_OAUTH_CONSUMER, string_access_token_fro
 Most likely you will want to persist the OAuth access credentials so you don't have to connect to QBO
 each and every time.
 
-QBO allows the access credentials to live for 6 months, and after 5 months they can be renewed. You will
-get an error if you try and renew prior to 5 months. Thus, you will need to keep track of the dates and
-manage the renewal process yourself.
+The access credentials are valid for 180 days. 30 days before they expire, they can be renewed. You'll need
+to keep track of the expiration date and manage the renewal process yourself.
 
 An example database table would have fields likes:
 
-
 ```sql
 access_token varchar(255),
-access_secret varchar(255)
+access_secret varchar(255),
 company_id varchar(255),
-token_expires_at datetime # Set to 6.months.from_now upon insertion
-reconnect_token_at datetime # Set to 5.months.from_now upon insertion
+token_expires_at datetime # Set to 180.days.from_now upon insertion
 ```
 
-Then you will want to have a scheduled task / cron which runs nightly and runs thru your tokens and checks for records where `reconnect_token_at <= now()` and it then performs the following logic:
+Then you will want to have a scheduled task which runs nightly looking for records `where('token_expires_at < ?', 30.days.from_now)` and then performs the renewal:
 
 ```ruby
 expiring_tokens.each do |record|
@@ -157,15 +154,31 @@ expiring_tokens.each do |record|
   service = Quickbooks::Service::AccessToken.new
   service.access_token = access_token
   service.company_id = record.company_id
-  result = service.renew
+  new_token = service.renew
 
-  # result is an AccessTokenResponse, which has fields +token+ and +secret+
-  # update your local record with these new params
-  record.access_token = result.token
-  record.access_secret = result.secret
-  record.token_expires_at = 6.months.from_now.utc
-  record.reconnect_token_at = 5.months.from_now.utc
-  record.save!
+  case new_token.error_code
+  when "0" # Success
+    # Update the stored values
+    record.update_attributes!(
+      access_token: new_token.token,
+      access_secret: new_token.secret,
+      token_expires_at: 180.days.from_now.utc,
+    )
+    puts "Renewal succeeded"
+  when "270" # The OAuth access token has expired.
+    # Discard any saved credentials, need to restart the OAuth process
+    record.update_attributes!(
+      access_token: nil,
+      access_secret: nil,
+      token_expires_at: nil,
+    )
+    puts "Renewal failed"
+  when "212" # Token Refresh Window Out of Bounds
+    # Tried to renew it more than 30 days before expiration
+    puts "Renewal ignored, tried too soon"
+  else
+    puts "Renewal failed, code: #{new_token.error_code} message: #{new_token.error_message}"
+  end
 end
 ```
 
