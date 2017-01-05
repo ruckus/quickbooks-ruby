@@ -12,7 +12,7 @@ module Quickbooks
         self.query_in_batches(object_query, options) do |batch|
           collection << batch.entries
         end
-        collection.flatten!
+        collection.flatten
       end
 
       def query_in_batches(object_query=nil, options={})
