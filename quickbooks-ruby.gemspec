@@ -14,7 +14,7 @@ Gem::Specification.new do |gem|
 
   gem.files = Dir['lib/**/*']
 
-  gem.add_dependency 'oauth', '0.5.1'
+  gem.add_dependency 'oauth', '0.4.7'
   gem.add_dependency 'roxml', '3.3.1'
   gem.add_dependency 'nokogiri'  # promiscuous mode
   gem.add_dependency 'activemodel' # promiscuous mode
