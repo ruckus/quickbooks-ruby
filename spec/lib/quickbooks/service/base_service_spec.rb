@@ -108,6 +108,27 @@ describe Quickbooks::Service::BaseService do
       expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::NotFound)
     end
 
+    it "should raise NotFound on HTTP 404" do
+      html = <<-HTML
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+  <head>
+    <title>413 Request Entity Too Large</title>
+  </head>
+  <body>
+    <h1>Request Entity Too Large</h1>
+    The requested resource<br />
+    /v3/company/123145730715194/batch<br />
+    does not allow request data with POST requests, or the amount of data provided in
+    the request exceeds the capacity limit.
+  </body>
+</html>
+      HTML
+
+      response = Struct.new(:code, :plain_body).new(413, html)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::RequestTooLarge)
+    end
+
     it "should raise TooManyRequests on HTTP 429 with appropriate message" do
       xml = fixture('too_many_requests_error.xml')
       message = Nokogiri::XML::Document.parse(xml) do |config|

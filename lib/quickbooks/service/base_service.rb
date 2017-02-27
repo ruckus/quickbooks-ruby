@@ -275,6 +275,8 @@ module Quickbooks
           raise Quickbooks::Forbidden, message
         when 404
           raise Quickbooks::NotFound
+        when 413
+          raise Quickbooks::RequestTooLarge
         when 400, 500
           parse_and_raise_exception(options)
         when 429
