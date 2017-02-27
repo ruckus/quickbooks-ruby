@@ -90,6 +90,24 @@ describe Quickbooks::Service::BaseService do
       expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ThrottleExceeded)
     end
 
+    it "should raise NotFound on HTTP 404" do
+      html = <<-HTML
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+  <head>
+    <title>404 Not Found</title>
+  </head>
+  <body>
+    <h1>Not Found</h1>
+    <p>The requested URL /v3/company/1413511890/query was not found on this server.</p>
+  </body>
+</html>
+      HTML
+
+      response = Struct.new(:code, :plain_body).new(404, html)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::NotFound)
+    end
+
     it "should raise TooManyRequests on HTTP 429 with appropriate message" do
       xml = fixture('too_many_requests_error.xml')
       message = Nokogiri::XML::Document.parse(xml) do |config|

@@ -217,6 +217,7 @@ module Quickbooks
   class InvalidModelException < StandardError; end
   class AuthorizationFailure < StandardError; end
   class Forbidden < StandardError; end
+  class NotFound < StandardError; end
   class ThrottleExceeded < Forbidden; end
   class TooManyRequests < StandardError; end
   class ServiceUnavailable < StandardError; end
