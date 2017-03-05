@@ -17,9 +17,9 @@ describe "Quickbooks::Model::Deposit" do
     deposit.total.should eq(200.0)
     deposit.currency_ref.value.should == 'USD'
     deposit.exchange_rate.should be_nil
-    deposit.line_items[1].deposit_line_detail.entity.type.should == 'CUSTOMER'
-    deposit.line_items[1].deposit_line_detail.entity.name.should == 'Nicole Tang'
-    deposit.line_items[1].deposit_line_detail.entity.value.should == '58'
+    deposit.line_items[1].deposit_line_detail.entity_ref.type.should == 'CUSTOMER'
+    deposit.line_items[1].deposit_line_detail.entity_ref.name.should == 'Nicole Tang'
+    deposit.line_items[1].deposit_line_detail.entity_ref.value.should == '58'
 
     line_item1 = deposit.line_items[0]
     line_item1.id.should be_nil
