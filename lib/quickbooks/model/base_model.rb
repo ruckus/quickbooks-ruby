@@ -86,7 +86,8 @@ module Quickbooks
           references = args.empty? ? reference_attrs : args
 
           references.each do |attribute|
-            method_name = "#{attribute.to_s.gsub('_ref', '_id')}=".to_sym
+            field_name = attribute.slice(0, attribute.rindex('_ref'))
+            method_name = "#{field_name}_id=".to_sym
             unless instance_methods(false).include?(method_name)
               method_definition = <<-METH
               def #{method_name}(id)
