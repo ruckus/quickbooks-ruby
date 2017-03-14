@@ -1,3 +1,13 @@
+## 0.4.7 (2017-03-07)
+
+* add entity as reference - pull request #365 from @cohendvir - thank you!
+* Add more exceptions for HTTP errors - pull request #364 from @drewish - thank you!
+* Enhance the token renewal example - pull request #356 from @drewish - thank you!
+* Fix bundler versioning -  pull request #357 from @drewish - thank you!
+* Service.all returns nil if no elements exist, should return [] - pull request #358 from @vanboom - thank you!
+
+* Lots of smaller fixes and cleanup from @drewish - thank you!
+
 ## 0.4.6 (2016-12-12)
 
 * Add HomeBalance field to Invoice - thank you @mhssmnn
