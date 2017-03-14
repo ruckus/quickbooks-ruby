@@ -1,3 +1,7 @@
+## 0.4.8 (2017-03-14)
+
+* Fixes from @cohendvir to resolve a regression in 0.4.7
+
 ## 0.4.7 (2017-03-07)
 
 * add entity as reference - pull request #365 from @cohendvir - thank you!
