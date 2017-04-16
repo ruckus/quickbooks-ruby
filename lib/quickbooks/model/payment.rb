@@ -34,8 +34,8 @@ module Quickbooks
       private
 
       def existence_of_customer_ref
-        if customer_ref.nil? || (customer_ref && customer_ref.value == 0)
-          errors.add(:customer_ref, "CustomerRef is required and must be a non-zero value.")
+        if customer_ref.nil? || (customer_ref && !customer_ref.active?)
+          errors.add(:customer_ref, "CustomerRef is required and must be active customer.")
         end
       end
     end
