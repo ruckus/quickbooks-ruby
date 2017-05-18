@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2015-02-24T18:26:03.734-08:00">
+ <SalesReceipt domain="QBO" sparse="false">
+  <Id>2</Id>
+  <SyncToken>0</SyncToken>
+  <MetaData>
+    <CreateTime>2013-12-10T05:35:42-08:00</CreateTime>
+    <LastUpdatedTime>2013-12-10T05:35:42-08:00</LastUpdatedTime>
+  </MetaData>
+  <DocNumber>1002</DocNumber>
+  <TxnDate>2013-12-10</TxnDate>
+  <PrivateNote>private</PrivateNote>
+  <CurrencyRef name="Brazilian Real">BRL</CurrencyRef>
+  <Line>
+    <Id>1</Id>
+    <LineNum>1</LineNum>
+    <Amount>10.00</Amount>
+    <DetailType>SalesItemLineDetail</DetailType>
+    <SalesItemLineDetail>
+      <ItemRef name="Sales">1</ItemRef>
+      <UnitPrice>10</UnitPrice>
+      <Qty>1</Qty>
+    </SalesItemLineDetail>
+  </Line>
+  <Line>
+    <Amount>10.00</Amount>
+    <DetailType>SubTotalLineDetail</DetailType>
+    <SubTotalLineDetail/>
+  </Line>
+  <CustomerRef name="Luis Braga">1</CustomerRef>
+  <CustomerMemo>memo!</CustomerMemo>
+  <GlobalTaxCalculation>NotApplicable</GlobalTaxCalculation>
+  <TotalAmt>10.00</TotalAmt>
+  <PrintStatus>NotSet</PrintStatus>
+  <EmailStatus>EmailSent</EmailStatus>
+  <BillEmail>
+    <Address>test@intuit.com</Address>
+  </BillEmail>
+  <DeliveryInfo>
+    <DeliveryType>Email</DeliveryType>
+    <DeliveryTime>2015-02-24T18:26:03-08:00</DeliveryTime>
+  </DeliveryInfo>
+  <Balance>0</Balance>
+  <DepositToAccountRef name="Cash and cash equivalents">28</DepositToAccountRef>
+</SalesReceipt>
+</IntuitResponse>
