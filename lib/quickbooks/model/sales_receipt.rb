@@ -20,6 +20,7 @@ module Quickbooks
       xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
       xml_accessor :bill_email, :from => 'BillEmail', :as => EmailAddress
       xml_accessor :bill_address, :from => 'BillAddr', :as => PhysicalAddress
+      xml_accessor :delivery_info, :from => 'DeliveryInfo', :as => DeliveryInfo
       xml_accessor :ship_address, :from => 'ShipAddr', :as => PhysicalAddress
       xml_accessor :po_number, :from => 'PONumber'
       xml_accessor :ship_method_ref, :from => 'ShipMethodRef', :as => BaseReference
