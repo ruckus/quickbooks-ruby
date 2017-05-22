@@ -46,6 +46,19 @@ describe "Quickbooks::Model::SalesReceipt" do
      sales_receipt.line_items.length.should == 0
   end
 
+  describe "#bill_email" do
+    it "sets the billing email address" do
+      sales_receipt = Quickbooks::Model::SalesReceipt.new
+      sales_receipt.billing_email_address = "test@test.com"
+      expect(sales_receipt.bill_email.address).to eq "test@test.com"
+    end
+    it "sets the billing email address using email= (backward compatibility to v0.4.6)" do
+      sales_receipt = Quickbooks::Model::SalesReceipt.new
+      sales_receipt.email = "test@test.com"
+      expect(sales_receipt.bill_email.address).to eq "test@test.com"
+    end
+  end
+
   describe "#auto_doc_number" do
     it_should_behave_like "a model that has auto_doc_number support", 'SalesReceipt'
   end
