@@ -54,9 +54,10 @@ module Quickbooks
       validate :line_item_size
       validate :document_numbering
 
-      def email=(email)
-        self.bill_email = EmailAddress.new(email)
+      def billing_email_address=(email_address_string)
+        self.bill_email = EmailAddress.new(email_address_string)
       end
+      alias_method :email=, :billing_email_address=  # backward backward compatibility to v0.4.6
 
     end
   end
