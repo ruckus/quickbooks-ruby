@@ -13,6 +13,10 @@ describe "Quickbooks::Model::Preferences" do
     preferences.email_messages.invoice_message.subject.should == "Invoice from Demo Company"
     preferences.email_messages.estimate_message.message.should include("We look forward to working with you.")
 
+    preferences.sales_forms.custom_fields.should_not be_empty
+    preferences.sales_forms.custom_fields[0].name.should == "SalesFormsPrefs.UseSalesCustom1"
+    preferences.sales_forms.custom_fields[3].name.should == "SalesFormsPrefs.SalesCustomName1"
+
     preferences.other_prefs["SalesFormsPrefs.DefaultItem"].should == "1"
   end
 end
