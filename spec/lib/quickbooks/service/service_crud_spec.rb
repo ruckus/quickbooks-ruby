@@ -46,11 +46,21 @@ module Quickbooks
         ServicedClass.find_by(:name, "test")
       end
 
-      it "finds all" do
-        results = double(Quickbooks::Collection, count: 1)
-        results.should_receive(:entries).and_return []
-        ServicedClass.should_receive(:query).with(nil, page: 1, per_page: 1000).and_return(results)
-        ServicedClass.all
+      describe "all" do
+        it "returns array of all results" do
+          record1 = double("Record 1")
+          record2 = double("Record 2")
+          ServicedClass.should_receive(:query).with(nil, page: 1, per_page: 1).exactly(:once).and_return(double(Quickbooks::Collection, count: 1, entries: [record1]))
+          ServicedClass.should_receive(:query).with(nil, page: 2, per_page: 1).exactly(:once).and_return(double(Quickbooks::Collection, count: 1, entries: [record2]))
+          ServicedClass.should_receive(:query).with(nil, page: 3, per_page: 1).exactly(:once).and_return(double(Quickbooks::Collection, count: 0))
+          expect(ServicedClass.all(nil, per_page: 1)).to eq([record1, record2])
+        end
+
+        it "returns array for no results" do
+          results = double(Quickbooks::Collection, count: 0, entries: [])
+          ServicedClass.should_receive(:query).with(nil, page: 1, per_page: 1000).and_return(results)
+          expect(ServicedClass.all).to eq([])
+        end
       end
     end
   end
