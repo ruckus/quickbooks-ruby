@@ -78,4 +78,11 @@ describe Quickbooks::Model::BatchRequest do
     req.add("1", time_activity, 'create')
     req.request_items.first.time_activity.class.should == Quickbooks::Model::TimeActivity
   end
+
+  it "should add a journal_entry" do
+    req = Quickbooks::Model::BatchRequest.new
+    journal_entry = Quickbooks::Model::JournalEntry.new
+    req.add("1", journal_entry, 'create')
+    req.request_items.first.journal_entry.class.should == Quickbooks::Model::JournalEntry
+  end
 end
