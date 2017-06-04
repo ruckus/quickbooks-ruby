@@ -58,4 +58,9 @@
       <Id>19891</Id>
     </TimeActivity>
   </BatchItemResponse>
+  <BatchItemResponse bId="9i">
+    <JournalEntry>
+      <Id>19891</Id>
+    </JournalEntry>
+  </BatchItemResponse>
 </IntuitResponse>
