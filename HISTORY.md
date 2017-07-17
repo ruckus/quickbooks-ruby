@@ -1,3 +1,8 @@
+## 0.5.1 (2017-07-17)
+
+* Added purchase order to the list of batch request/response entities. Thank you @BitPerformanceLabs
+* Added vendor to list of supported batch request entities. Thank you @BitPerformanceLabs
+
 ## 0.5.0 (2017-07-17)
 
 * Added support for Line Extras and Name Values to Payment model. This is needed to read payments against invoices.
