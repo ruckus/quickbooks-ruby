@@ -33,4 +33,20 @@ describe "Quickbooks::Model::Payment" do
     invoice.should be_valid
   end
 
+  it "can parse payments with LineExtras" do
+    xml = fixture("payment_with_line_extras.xml")
+    payment = Quickbooks::Model::Payment.from_xml(xml)
+    payment.line_items.size.should == 1
+
+    line = payment.line_items[0]
+    line.line_extras.should_not be_nil
+
+    extras = line.line_extras.name_values
+    extras.size.should == 3
+
+    txnReferenceNumber = extras.detect { |a| a.name == "txnReferenceNumber" }
+    txnReferenceNumber.should_not be_nil
+
+  end
+
 end

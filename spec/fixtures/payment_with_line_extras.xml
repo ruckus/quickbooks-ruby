@@ -1,0 +1,37 @@
+<Payment domain="QBO">
+  <Id>83</Id>
+  <SyncToken>0</SyncToken>
+  <MetaData>
+    <CreateTime>2017-07-17T14:26:54-07:00</CreateTime>
+    <LastUpdatedTime>2017-07-17T14:26:54-07:00</LastUpdatedTime>
+  </MetaData>
+  <TxnDate>2016-09-16</TxnDate>
+  <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+  <Line>
+    <Amount>2400.00</Amount>
+    <LinkedTxn>
+      <TxnId>68</TxnId>
+      <TxnType>Invoice</TxnType>
+    </LinkedTxn>
+    <LineEx>
+      <NameValue>
+        <Name>txnId</Name>
+        <Value>68</Value>
+      </NameValue>
+      <NameValue>
+        <Name>txnOpenBalance</Name>
+        <Value>2400.00</Value>
+      </NameValue>
+      <NameValue>
+        <Name>txnReferenceNumber</Name>
+        <Value>1246</Value>
+      </NameValue>
+    </LineEx>
+  </Line>
+  <CustomerRef name="Acme Enterprises">3</CustomerRef>
+  <DepositToAccountRef>4</DepositToAccountRef>
+  <TotalAmt>2400.00</TotalAmt>
+  <UnappliedAmt>0</UnappliedAmt>
+  <ProcessPayment>false</ProcessPayment>
+</Payment>
+
