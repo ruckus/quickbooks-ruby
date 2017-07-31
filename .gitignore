@@ -8,3 +8,4 @@ Gemfile.lock
 .ruby-gemset
 .bundle
 .idea
+.env

@@ -14,7 +14,8 @@ Gem::Specification.new do |gem|
 
   gem.files = Dir['lib/**/*']
 
-  gem.add_dependency 'oauth', '0.4.7'
+  #gem.add_dependency 'oauth', '0.4.7'
+  gem.add_dependency 'oauth2', '1.4.0'
   gem.add_dependency 'roxml', '3.3.1'
   gem.add_dependency 'nokogiri'  # promiscuous mode
   gem.add_dependency 'activemodel' # promiscuous mode
@@ -25,4 +26,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rr',     '~> 1.0.2'
   gem.add_development_dependency 'rspec',  '2.13.0'
   gem.add_development_dependency 'fakeweb', '1.3.0'
+  gem.add_development_dependency 'dotenv', '2.2.1'
+
 end
