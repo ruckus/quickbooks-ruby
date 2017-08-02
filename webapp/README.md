@@ -20,3 +20,7 @@ https://developer.intuit.com/docs/0100_quickbooks_online/0100_essentials/000500_
 ### OAuth 2.0 Playground
 
 https://developer.intuit.com/docs/0100_quickbooks_online/0400_tools/0020_oauth_playground
+
+#### Access the QuickBooks Online API with OAuth2 by @minimul
+
+http://minimul.com/access-the-quickbooks-online-api-with-oauth2.html?utm_source%3Dnewsletter%26utm_medium%3Demail%26utm_campaign%3DQuickbooks+Ruby+Newsletter+Issue+25
