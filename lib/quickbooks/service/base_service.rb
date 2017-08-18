@@ -229,16 +229,19 @@ module Quickbooks
         log_request_body(body)
         log "REQUEST HEADERS = #{headers.inspect}"
 
-        response = case method
-          when :get
-            @oauth.get(url, headers)
-          when :post
-            @oauth.post(url, body, headers)
-          when :upload
-            @oauth.post_with_multipart(url, body, headers)
-          else
-            raise "Do not know how to perform that HTTP operation"
-          end
+        raw_response = case method
+        when :get
+          @oauth.get(url, headers)
+        when :post
+          @oauth.post(url, body, headers)
+        when :upload
+          raise "TODO: Need to implement/resolve for OAuth2"
+          @oauth.post_with_multipart(url, body, headers)
+        else
+          raise "Do not know how to perform that HTTP operation"
+        end
+        response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
+        binding.pry
         check_response(response, :request => body)
       end
 

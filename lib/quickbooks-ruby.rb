@@ -6,13 +6,19 @@ require 'cgi'
 require 'uri'
 require 'date'
 require 'forwardable'
-require 'oauth'
+require 'oauth2'
 require 'net/http/post/multipart'
 require 'quickbooks/util/collection'
 require 'quickbooks/util/logging'
 require 'quickbooks/util/http_encoding_helper'
 require 'quickbooks/util/name_entity'
 require 'quickbooks/util/query_builder'
+
+#== OAuth Responses
+require 'quickbooks/service/responses/oauth_http_response'
+require 'quickbooks/service/responses/methods'
+require 'quickbooks/service/responses/oauth1_http_response'
+require 'quickbooks/service/responses/oauth2_http_response'
 
 #== Models
 require 'quickbooks/model/definition'
@@ -174,8 +180,8 @@ require 'quickbooks/service/refund_receipt_change'
 
 module Quickbooks
   @@sandbox_mode = false
-
   @@logger = nil
+  @@oauth_version = 1
 
   class << self
     def sandbox_mode
@@ -184,6 +190,14 @@ module Quickbooks
 
     def sandbox_mode=(sandbox_mode)
       @@sandbox_mode = sandbox_mode
+    end
+
+    def oauth_version=(version)
+      @@oauth_version = 2
+    end
+
+    def oauth_version
+      @@oauth_version
     end
 
     def logger
