@@ -5,7 +5,7 @@ describe Quickbooks::Service::Account do
 
   it "can query for attachables" do
     xml = fixture("attachables.xml")
-    stub_request(:get, @service.url_for_query, ["200", "OK"], xml, true)
+    stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml, true)
 
     attachables = @service.query
     attachables.entries.count.should == 1
@@ -16,7 +16,7 @@ describe Quickbooks::Service::Account do
 
   it "can create an attachble" do
     xml = fixture("attachable_create_response.xml")
-    stub_request(:post, @service.url_for_resource('attachable'), ["200", "OK"], xml, true)
+    stub_http_request(:post, @service.url_for_resource('attachable'), ["200", "OK"], xml, true)
 
     attachable = Quickbooks::Model::Attachable.new
     attachable.file_name = "monkey.jpg"

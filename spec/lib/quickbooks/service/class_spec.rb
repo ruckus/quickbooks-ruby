@@ -6,7 +6,7 @@ describe "Quickbooks::Service::Class" do
   it "can query for classes" do
     xml = fixture("classes.xml")
     model = Quickbooks::Model::Class
-    stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     classes = @service.query
     classes.entries.count.should == 4
     class1 = classes.entries[0]
@@ -24,7 +24,7 @@ describe "Quickbooks::Service::Class" do
   it "can fetch a class by ID" do
     xml = fixture("fetch_class_by_id.xml")
     model = Quickbooks::Model::Class
-    stub_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/2", ["200", "OK"], xml)
+    stub_http_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/2", ["200", "OK"], xml)
     classs = @service.fetch_by_id(2)
     classs.fully_qualified_name.should == 'Design'
   end
@@ -32,7 +32,7 @@ describe "Quickbooks::Service::Class" do
   it "can create a class" do
     xml = fixture("fetch_class_by_id.xml")
     model = Quickbooks::Model::Class
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
+    stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
     classs = Quickbooks::Model::Class.new
     classs.name = 'Design'
     classs.sub_class = false
@@ -59,7 +59,7 @@ describe "Quickbooks::Service::Class" do
     classs.sync_token = 1
     classs.id = 2
     xml = fixture("deleted_class.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+    stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
     classs.valid_for_deletion?.should == true
     response = @service.delete(classs)
     response.name.should == "#{classs.name} (Deleted)"

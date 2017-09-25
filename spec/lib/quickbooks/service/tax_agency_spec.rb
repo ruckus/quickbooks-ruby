@@ -11,7 +11,7 @@ describe Quickbooks::Service::TaxAgency do
   let(:resource) { model::REST_RESOURCE }
 
   it "can query tax agency" do
-    stub_request(:get,
+    stub_http_request(:get,
                  @service.url_for_query,
                  ["200", "OK"],
                  fixture("tax_agencies.xml"))
@@ -22,7 +22,7 @@ describe Quickbooks::Service::TaxAgency do
 
   it "can create tax agency" do
     xml = fixture("tax_agency_entity.xml")
-    stub_request(:post, subject.url_for_resource(resource), ["200", "OK"], xml)
+    stub_http_request(:post, subject.url_for_resource(resource), ["200", "OK"], xml)
 
     entity = subject.create(tax_agency)
     expect(entity.display_name).to eq tax_agency.display_name

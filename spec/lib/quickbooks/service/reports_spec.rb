@@ -34,7 +34,7 @@ describe "Quickbooks::Service::Report" do
   it 'forwards arguments to .url_for_query' do
     xml = fixture("balancesheet.xml")
     url = @service.url_for_query('BalanceSheet', 'Today', :accounting_method => 'Cash')
-    stub_request(:get, url, ["200", "OK"], xml)
+    stub_http_request(:get, url, ["200", "OK"], xml)
 
     @service.query('BalanceSheet', 'Today', :accounting_method => 'Cash')
   end
@@ -42,7 +42,7 @@ describe "Quickbooks::Service::Report" do
   it "returns a Report model" do
     xml = fixture("balancesheet.xml")
 
-    stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     report = @service.query('BalanceSheet')
 
     report.should be_a Quickbooks::Model::Report

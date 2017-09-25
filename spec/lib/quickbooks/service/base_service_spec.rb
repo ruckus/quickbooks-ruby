@@ -43,7 +43,7 @@ describe Quickbooks::Service::BaseService do
 
     it "correctly initializes with an access_token and realm" do
       @service.company_id.should == "9991111222"
-      @service.oauth.is_a?(OAuth::AccessToken).should == true
+      @service.oauth.should_not be_nil
     end
   end
 
@@ -184,7 +184,7 @@ describe Quickbooks::Service::BaseService do
 
     before do
       construct_service :vendor
-      stub_request(:get, @service.url_for_query, ["200", "OK"], fixture("vendors.xml"))
+      stub_http_request(:get, @service.url_for_query, ["200", "OK"], fixture("vendors.xml"))
     end
 
     it "should not log by default" do

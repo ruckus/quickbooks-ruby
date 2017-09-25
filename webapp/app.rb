@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'oauth2'
 require 'dotenv'
+require 'cgi'
 
 Dotenv.load(File.dirname(__FILE__) + '/.env')
 
@@ -33,8 +34,14 @@ get '/oauth2callback' do
 
       # construct a request to fetch some data from the API
       at = OAuth2::AccessToken.new(oauth_client, @data[:token])
-      resp = at.get("https://sandbox-quickbooks.api.intuit.com/v3/company/#{@data[:realmId]}/customer/1")
-      @xml = resp.body
+      resp1 = at.get("https://sandbox-quickbooks.api.intuit.com/v3/company/#{@data[:realmId]}/customer/1")
+      @single_xml = resp1.body
+
+      query = CGI.escape("Select From Customer")
+      resp2 = at.get("https://sandbox-quickbooks.api.intuit.com/v3/company/#{@data[:realmId]}/query?query=#{query}")
+      @query_xml = resp2.body
+
+
     end
   end
 

@@ -2,7 +2,7 @@ describe "Quickbooks::Service::TaxCode" do
   before(:all) { construct_service :tax_code }
 
   it "can query tax codes" do
-    stub_request(:get,
+    stub_http_request(:get,
                  @service.url_for_query,
                  ["200", "OK"],
                  fixture("tax_codes.xml"))

@@ -6,7 +6,7 @@ describe "Quickbooks::Service::Vendor" do
   it "can query for vendors" do
     xml = fixture("vendors.xml")
     model = Quickbooks::Model::Vendor
-    stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     vendors = @service.query
     vendors.entries.count.should == 2
     vendor1 = vendors.entries.first
@@ -18,7 +18,7 @@ describe "Quickbooks::Service::Vendor" do
   it "can fetch a vendor by ID" do
     xml = fixture("fetch_vendor_by_id.xml")
     model = Quickbooks::Model::Vendor
-    stub_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/1129", ["200", "OK"], xml)
+    stub_http_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/1129", ["200", "OK"], xml)
     vendor = @service.fetch_by_id(1129)
     vendor.company_name.should == 'John Vendor Company'
   end
@@ -44,7 +44,7 @@ describe "Quickbooks::Service::Vendor" do
   it "can create a vendor" do
     xml = fixture("fetch_vendor_by_id.xml")
     model = Quickbooks::Model::Vendor
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
+    stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
     vendor = Quickbooks::Model::Vendor.new
     vendor.company_name = "New Vendor Co"
     vendor.email_address = "info@newvendorco.com"
@@ -78,7 +78,7 @@ describe "Quickbooks::Service::Vendor" do
     vendor.sync_token = 4
     vendor.id = 1129
     xml = fixture("deleted_vendor.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+    stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
     vendor.valid_for_deletion?.should == true
     response = @service.delete(vendor)
     response.display_name.should == "#{vendor.display_name} (Deleted)"

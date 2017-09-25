@@ -4,7 +4,7 @@ describe "Quickbooks::Service::ChangeDataCapture" do
    "JournalEntry", "Payment", "Purchase", "RefundReceipt",
    "SalesReceipt", "PurchaseOrder", "VendorCredit", "Transfer",
    "Estimate", "Account", "Budget", "Class",
-   "Customer", "Department", "Employee", "Item", 
+   "Customer", "Department", "Employee", "Item",
    "PaymentMethod", "Term", "Vendor"] }
 
   it "can query for a range of entities at once" do
@@ -14,7 +14,7 @@ describe "Quickbooks::Service::ChangeDataCapture" do
     date = Date.today
     since = "changedSince=#{URI.encode_www_form_component(Date.today.iso8601)}"
     url = service.url_for_query(entities, since)
-    stub_request(:get, url, ["200", "OK"], xml)
+    stub_http_request(:get, url, ["200", "OK"], xml)
     response = service.since(entities, Date.today)
     response.all_types["Bill"].count.should == 2
     response.all_types["BillPayment"].count.should == 2

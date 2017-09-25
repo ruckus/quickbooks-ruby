@@ -5,7 +5,7 @@ describe "Quickbooks::Service::VendorChange" do
     xml = fixture("vendor_changes.xml")
     model = Quickbooks::Model::VendorChange
 
-    stub_request(:get, service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, service.url_for_query, ["200", "OK"], xml)
     vendors = service.query
     vendors.entries.count.should == 1
 

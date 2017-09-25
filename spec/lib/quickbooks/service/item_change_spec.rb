@@ -5,7 +5,7 @@ describe "Quickbooks::Service::ItemChange" do
     xml = fixture("item_changes.xml")
     model = Quickbooks::Model::ItemChange
 
-    stub_request(:get, service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, service.url_for_query, ["200", "OK"], xml)
     items = service.query
     items.entries.count.should == 1
 

@@ -54,7 +54,7 @@ module Quickbooks
       end
 
       def default_model_query
-        "SELECT * FROM #{self.class.name.split("::").last}"
+        "SELECT FROM #{self.class.name.split("::").last}"
       end
 
       def url_for_query(query = nil, start_position = 1, max_results = 20, options = {})
@@ -189,7 +189,7 @@ module Quickbooks
         unless headers.has_key?('Accept-Encoding')
           headers['Accept-Encoding'] = HTTP_ACCEPT_ENCODING
         end
-        @oauth.get(url, headers)
+        oauth_get(url, headers)
       end
 
       def do_http_file_upload(uploadIO, url, metadata = nil)
@@ -229,20 +229,44 @@ module Quickbooks
         log_request_body(body)
         log "REQUEST HEADERS = #{headers.inspect}"
 
-        raw_response = case method
-        when :get
-          @oauth.get(url, headers)
-        when :post
-          @oauth.post(url, body, headers)
-        when :upload
-          raise "TODO: Need to implement/resolve for OAuth2"
-          @oauth.post_with_multipart(url, body, headers)
-        else
-          raise "Do not know how to perform that HTTP operation"
+        begin
+          raw_response = case method
+          when :get
+            oauth_get(url, headers)
+          when :post
+            oauth_post(url, body, headers)
+          when :upload
+            oauth_post_with_multipart(url, body, headers)
+          else
+            raise "Do not know how to perform that HTTP operation"
+          end
+          response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
+          check_response(response, :request => body)
+        rescue => ex
+          raise Quickbooks::IntuitRequestException.new
         end
-        response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
-        binding.pry
-        check_response(response, :request => body)
+      end
+
+      def oauth_get(url, headers)
+        if Quickbooks.oauth_version == 1
+          @oauth.get(url, headers)
+        end
+        if Quickbooks.oauth_version == 2
+          @oauth.get(url, headers: headers)
+        end
+      end
+
+      def oauth_post(url, body, headers)
+        if Quickbooks.oauth_version == 1
+          @oauth.post(url, body, headers)
+        end
+        if Quickbooks.oauth_version == 2
+          @oauth.post(url, headers: headers, body: body)
+        end
+      end
+
+      def oauth_post_with_multipart(url, body, headers)
+        @oauth.post_with_multipart(url, body, headers)
       end
 
       def add_query_string_to_url(url, params)

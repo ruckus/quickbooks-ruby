@@ -24,7 +24,7 @@ module Quickbooks
       it "queries for refund receipts" do
         xml = fixture("refund_receipts.xml")
         model = Model::RefundReceipt
-        stub_request(:get, subject.url_for_query, ["200", "OK"], xml)
+        stub_http_request(:get, subject.url_for_query, ["200", "OK"], xml)
 
         receipts = subject.query
         expect(receipts.entries.count).to eq 1
@@ -43,7 +43,7 @@ module Quickbooks
       it "creates a refund receipt" do
         xml = fixture("fetch_refund_receipt_by_id.xml")
         model = Model::RefundReceipt
-        stub_request(:post, subject.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
+        stub_http_request(:post, subject.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
 
         receipt = model.new
         receipt.customer_id = 2
@@ -58,7 +58,7 @@ module Quickbooks
       it "fetches refund receipt by ID" do
         xml = fixture("fetch_refund_receipt_by_id.xml")
         model = Model::RefundReceipt
-        stub_request(:get, "#{subject.url_for_resource(model::REST_RESOURCE)}/927", ["200", "OK"], xml)
+        stub_http_request(:get, "#{subject.url_for_resource(model::REST_RESOURCE)}/927", ["200", "OK"], xml)
 
         receipt = subject.fetch_by_id(927)
         expect(receipt.doc_number).to eq "10030"

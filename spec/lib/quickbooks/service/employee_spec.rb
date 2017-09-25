@@ -6,7 +6,7 @@ describe "Quickbooks::Service::Employee" do
   it "can query for employees" do
     xml = fixture("employees.xml")
     model = Quickbooks::Model::Employee
-    stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     employees = @service.query
     employees.entries.count.should == 2
     employee1 = employees.entries.first
@@ -18,7 +18,7 @@ describe "Quickbooks::Service::Employee" do
   it "can fetch an employee by ID" do
     xml = fixture("fetch_employee_by_id.xml")
     model = Quickbooks::Model::Employee
-    stub_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/2", ["200", "OK"], xml)
+    stub_http_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/2", ["200", "OK"], xml)
     employee = @service.fetch_by_id(2)
     employee.print_on_check_name.should == 'Lindy Miller'
   end
@@ -44,7 +44,7 @@ describe "Quickbooks::Service::Employee" do
   it "can create a employee" do
     xml = fixture("fetch_employee_by_id.xml")
     model = Quickbooks::Model::Employee
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
+    stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
     employee = Quickbooks::Model::Employee.new
     employee.organization = false
     employee.email_address = "lindy.employee@intuit.com"
@@ -77,7 +77,7 @@ describe "Quickbooks::Service::Employee" do
     employee.sync_token = 1
     employee.id = 2
     xml = fixture("deleted_employee.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+    stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
     employee.valid_for_deletion?.should == true
     response = @service.delete(employee)
     response.display_name.should == "#{employee.display_name} (Deleted)"
