@@ -61,7 +61,7 @@ module Quickbooks
         query ||= default_model_query
         query = "#{query} STARTPOSITION #{start_position} MAXRESULTS #{max_results}"
 
-        "#{url_for_base}/query?query=#{URI.encode_www_form_component(query)}"
+        "#{url_for_base}/query?query=#{CGI.escape(query)}"
       end
 
       private
