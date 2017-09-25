@@ -5,7 +5,7 @@ describe "Quickbooks::Service::CreditMemoChange" do
     xml = fixture("credit_memo_changes.xml")
     model = Quickbooks::Model::CreditMemoChange
 
-    stub_request(:get, service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, service.url_for_query, ["200", "OK"], xml)
     credit_memos = service.query
     credit_memos.entries.count.should == 1
 

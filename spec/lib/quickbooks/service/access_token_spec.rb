@@ -5,7 +5,7 @@ describe Quickbooks::Service::AccessToken do
 
   it "can renew a token" do
     xml = fixture("access_token_200.xml")
-    stub_request(:get, Quickbooks::Service::AccessToken::RENEW_URL, ["200", "OK"], xml, true)
+    stub_http_request(:get, Quickbooks::Service::AccessToken::RENEW_URL, ["200", "OK"], xml, true)
 
     response = @service.renew
     response.error?.should == false
@@ -14,7 +14,7 @@ describe Quickbooks::Service::AccessToken do
   it "fails to renew if the token has expired" do
     xml = fixture("access_token_270.xml")
 
-    stub_request(:get, Quickbooks::Service::AccessToken::RENEW_URL, ["200", "OK"], xml, true)
+    stub_http_request(:get, Quickbooks::Service::AccessToken::RENEW_URL, ["200", "OK"], xml, true)
 
     response = @service.renew
     response.error?.should == true
@@ -25,7 +25,7 @@ describe Quickbooks::Service::AccessToken do
   it "fails to renew if the request is out-of-bounds" do
     xml = fixture("access_token_212.xml")
 
-    stub_request(:get, Quickbooks::Service::AccessToken::RENEW_URL, ["200", "OK"], xml, true)
+    stub_http_request(:get, Quickbooks::Service::AccessToken::RENEW_URL, ["200", "OK"], xml, true)
 
     response = @service.renew
     response.error?.should == true
@@ -36,7 +36,7 @@ describe Quickbooks::Service::AccessToken do
   it "fails to renew if the app is not approved" do
     xml = fixture("access_token_24.xml")
 
-    stub_request(:get, Quickbooks::Service::AccessToken::RENEW_URL, ["200", "OK"], xml, true)
+    stub_http_request(:get, Quickbooks::Service::AccessToken::RENEW_URL, ["200", "OK"], xml, true)
 
     response = @service.renew
     response.error?.should == true
@@ -46,7 +46,7 @@ describe Quickbooks::Service::AccessToken do
 
   it "can successfully disconnect" do
     xml = fixture("disconnect_200.xml")
-    stub_request(:get, Quickbooks::Service::AccessToken::DISCONNECT_URL, ["200", "OK"], xml, true)
+    stub_http_request(:get, Quickbooks::Service::AccessToken::DISCONNECT_URL, ["200", "OK"], xml, true)
 
     response = @service.disconnect
     response.error?.should == false
@@ -54,7 +54,7 @@ describe Quickbooks::Service::AccessToken do
 
   it "can fail to disconnect if the auth token is invalid" do
     xml = fixture("disconnect_270.xml")
-    stub_request(:get, Quickbooks::Service::AccessToken::DISCONNECT_URL, ["200", "OK"], xml, true)
+    stub_http_request(:get, Quickbooks::Service::AccessToken::DISCONNECT_URL, ["200", "OK"], xml, true)
 
     response = @service.disconnect
     response.error?.should == true

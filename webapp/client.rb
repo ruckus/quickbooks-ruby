@@ -4,7 +4,7 @@ require 'dotenv'
 
 Dotenv.load(File.dirname(__FILE__) + '/.env')
 
-mode = 1
+mode = 2
 
 token = ENV['TOKEN']
 realm_id = ENV['REALM_ID']
@@ -33,8 +33,8 @@ if mode == 2
   # get the refresh token from the original access token response, store it, because
   # its needed during the refresh cycle
   at = OAuth2::AccessToken.new(client, token, refresh_token: refresh_token)
-  at.refresh!
+  refreshed = at.refresh!
   puts "refreshed!"
-  puts "\n===== Access Token =======\n\n#{at.token}\n\n"
-  puts "\n===== Refresh Token =======\n\n#{at.refresh_token}\n\n"
+  puts "\n===== Access Token =======\n\n#{refreshed.token}\n\n"
+  puts "\n===== Refresh Token =======\n\n#{refreshed.refresh_token}\n\n"
 end

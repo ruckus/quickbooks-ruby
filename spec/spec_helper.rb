@@ -8,8 +8,10 @@ end
 
 require 'rubygems'
 require 'rspec'
-require 'fakeweb'
+#require 'fakeweb'
+require 'webmock/rspec'
 require 'oauth'
+require 'oauth2'
 require 'quickbooks-ruby'
 require 'json'
 require 'pry'
@@ -19,5 +21,7 @@ Dir[File.expand_path('../support/**/*.rb', __FILE__)].each { |f| require f }
 RSpec.configure do |config|
   config.color = true
 end
+
+Quickbooks.oauth_version = 2
 
 I18n.enforce_available_locales = false

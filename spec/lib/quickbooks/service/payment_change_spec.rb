@@ -5,7 +5,7 @@ describe "Quickbooks::Service::PaymentChange" do
     xml = fixture("payment_changes.xml")
     model = Quickbooks::Model::PaymentChange
 
-    stub_request(:get, service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, service.url_for_query, ["200", "OK"], xml)
     payments = service.query
     payments.entries.count.should == 1
 
