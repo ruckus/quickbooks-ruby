@@ -248,19 +248,17 @@ module Quickbooks
       end
 
       def oauth_get(url, headers)
-        if Quickbooks.oauth_version == 1
+        if @oauth.is_a? OAuth::AccessToken
           @oauth.get(url, headers)
-        end
-        if Quickbooks.oauth_version == 2
+        elsif @oauth.is_a? OAuth2::AccessToken
           @oauth.get(url, headers: headers)
         end
       end
 
       def oauth_post(url, body, headers)
-        if Quickbooks.oauth_version == 1
+        if @oauth.is_a? OAuth::AccessToken
           @oauth.post(url, body, headers)
-        end
-        if Quickbooks.oauth_version == 2
+        elsif @oauth.is_a? OAuth2::AccessToken
           @oauth.post(url, headers: headers, body: body)
         end
       end
