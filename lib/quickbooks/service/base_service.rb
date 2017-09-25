@@ -267,6 +267,8 @@ module Quickbooks
 
       def oauth_post_with_multipart(url, body, headers)
         @oauth.post_with_multipart(url, body, headers)
+        response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
+        check_response(response, :request => body)
       end
 
       def add_query_string_to_url(url, params)
