@@ -80,6 +80,6 @@ OAuth2::AccessToken.class_eval do
   end
 
   def multipart_post(*args)
-   request(:multipart_post, *args)
+   request(:post, *args)
   end
 end

@@ -243,7 +243,7 @@ module Quickbooks
           response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
           check_response(response, :request => body)
         rescue => ex
-          raise Quickbooks::IntuitRequestException.new
+          raise Quickbooks::IntuitRequestException, ex.message
         end
       end
 
@@ -264,7 +264,11 @@ module Quickbooks
       end
 
       def oauth_post_with_multipart(url, body, headers)
-        @oauth.post_with_multipart(url, body, headers)
+        raw_response = if @oauth.is_a? OAuth::AccessToken
+                         oauth.post_with_multipart(url, body, headers)
+                       elsif @oauth.is_a? OAuth2::AccessToken
+                         oauth.post_with_multipart(url, headers: headers, body: body)
+                       end
         response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
         check_response(response, :request => body)
       end
