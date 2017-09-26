@@ -25,6 +25,7 @@ module Quickbooks
 
       def access_token=(token)
         @oauth = token
+        verify_multipart!
       end
 
       def company_id=(company_id)
@@ -34,6 +35,25 @@ module Quickbooks
       # realm & company are synonymous
       def realm_id=(company_id)
         @company_id = company_id
+      end
+
+      def oauth_v1?
+        @oauth.is_a? OAuth::AccessToken
+      end
+
+      def oauth_v2?
+        @oauth.is_a? OAuth2::AccessToken
+      end
+
+      # Multipart is required for file upload
+      def verify_multipart!
+        if oauth_v2? && !@oauth.client.connection.builder.handlers.include?(Faraday::Request::Multipart)
+          @oauth.client.connection.build do |builder|
+            builder.request :multipart
+            builder.request :url_encoded
+            builder.adapter :net_http
+          end
+        end
       end
 
       def url_for_resource(resource)
@@ -248,25 +268,25 @@ module Quickbooks
       end
 
       def oauth_get(url, headers)
-        if @oauth.is_a? OAuth::AccessToken
+        if oauth_v1?
           @oauth.get(url, headers)
-        elsif @oauth.is_a? OAuth2::AccessToken
+        elsif oauth_v2?
           @oauth.get(url, headers: headers)
         end
       end
 
       def oauth_post(url, body, headers)
-        if @oauth.is_a? OAuth::AccessToken
+        if oauth_v1?
           @oauth.post(url, body, headers)
-        elsif @oauth.is_a? OAuth2::AccessToken
+        elsif oauth_v2?
           @oauth.post(url, headers: headers, body: body)
         end
       end
 
       def oauth_post_with_multipart(url, body, headers)
-        raw_response = if @oauth.is_a? OAuth::AccessToken
+        raw_response = if oauth_v1?
                          oauth.post_with_multipart(url, body, headers)
-                       elsif @oauth.is_a? OAuth2::AccessToken
+                       elsif oauth_v2?
                          oauth.post_with_multipart(url, headers: headers, body: body)
                        end
         response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
