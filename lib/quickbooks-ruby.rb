@@ -182,7 +182,6 @@ require 'quickbooks/service/refund_receipt_change'
 module Quickbooks
   @@sandbox_mode = false
   @@logger = nil
-  @@oauth_version = 1
 
   class << self
     def sandbox_mode
@@ -191,14 +190,6 @@ module Quickbooks
 
     def sandbox_mode=(sandbox_mode)
       @@sandbox_mode = sandbox_mode
-    end
-
-    def oauth_version=(version)
-      @@oauth_version = 2
-    end
-
-    def oauth_version
-      @@oauth_version
     end
 
     def logger

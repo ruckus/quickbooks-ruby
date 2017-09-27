@@ -7,13 +7,10 @@ module Quickbooks
       class OAuthHttpResponse
 
         def self.wrap(response)
-          return case ::Quickbooks.oauth_version
-          when 1
-            Quickbooks::Service::Responses::OAuth1HttpResponse.new(response)
-          when 2
+          if response.is_a?(OAuth2::Response)
             Quickbooks::Service::Responses::OAuth2HttpResponse.new(response)
           else
-            raise "Dont know how to load a OAuth response of version=#{::Quickbooks.oauth_version}"
+            Quickbooks::Service::Responses::OAuth1HttpResponse.new(response)
           end
         end
 
