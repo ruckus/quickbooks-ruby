@@ -249,29 +249,25 @@ module Quickbooks
         log_request_body(body)
         log "REQUEST HEADERS = #{headers.inspect}"
 
-        begin
-          raw_response = case method
-          when :get
-            oauth_get(url, headers)
-          when :post
-            oauth_post(url, body, headers)
-          when :upload
-            oauth_post_with_multipart(url, body, headers)
-          else
-            raise "Do not know how to perform that HTTP operation"
-          end
-          response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
-          check_response(response, :request => body)
-        rescue => ex
-          raise Quickbooks::IntuitRequestException, ex.message
+        raw_response = case method
+        when :get
+          oauth_get(url, headers)
+        when :post
+          oauth_post(url, body, headers)
+        when :upload
+          oauth_post_with_multipart(url, body, headers)
+        else
+          raise "Do not know how to perform that HTTP operation"
         end
+        response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
+        check_response(response, :request => body)
       end
 
       def oauth_get(url, headers)
         if oauth_v1?
           @oauth.get(url, headers)
         elsif oauth_v2?
-          @oauth.get(url, headers: headers)
+          @oauth.get(url, headers: headers, raise_errors: false)
         end
       end
 
@@ -279,7 +275,7 @@ module Quickbooks
         if oauth_v1?
           @oauth.post(url, body, headers)
         elsif oauth_v2?
-          @oauth.post(url, headers: headers, body: body)
+          @oauth.post(url, headers: headers, body: body, raise_errors: false)
         end
       end
 
@@ -287,7 +283,7 @@ module Quickbooks
         raw_response = if oauth_v1?
                          oauth.post_with_multipart(url, body, headers)
                        elsif oauth_v2?
-                         oauth.post_with_multipart(url, headers: headers, body: body)
+                         oauth.post_with_multipart(url, headers: headers, body: body, raise_errors: false)
                        end
         response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
         check_response(response, :request => body)
