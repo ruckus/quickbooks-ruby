@@ -9,7 +9,7 @@ describe Quickbooks::Service::BaseService do
 
   describe "#url_for_query" do
     shared_examples "encoding the query correctly" do |domain|
-      let(:correct_url) { "https://#{domain}/v3/company/1234/query?query=SELECT+*+FROM+Customer+where+Name+%3D+%27John%27" }
+      let(:correct_url) { "https://#{domain}/v3/company/1234/query?query=SELECT+%2A+FROM+Customer+where+Name+%3D+%27John%27" }
 
       it "correctly encodes the query" do
         subject.realm_id = 1234

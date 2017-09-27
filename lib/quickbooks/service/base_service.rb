@@ -25,6 +25,7 @@ module Quickbooks
 
       def access_token=(token)
         @oauth = token
+        verify_multipart!
       end
 
       def company_id=(company_id)
@@ -34,6 +35,25 @@ module Quickbooks
       # realm & company are synonymous
       def realm_id=(company_id)
         @company_id = company_id
+      end
+
+      def oauth_v1?
+        @oauth.is_a? OAuth::AccessToken
+      end
+
+      def oauth_v2?
+        @oauth.is_a? OAuth2::AccessToken
+      end
+
+      # Multipart is required for file upload
+      def verify_multipart!
+        if oauth_v2? && !@oauth.client.connection.builder.handlers.include?(Faraday::Request::Multipart)
+          @oauth.client.connection.build do |builder|
+            builder.request :multipart
+            builder.request :url_encoded
+            builder.adapter :net_http
+          end
+        end
       end
 
       def url_for_resource(resource)
@@ -61,7 +81,7 @@ module Quickbooks
         query ||= default_model_query
         query = "#{query} STARTPOSITION #{start_position} MAXRESULTS #{max_results}"
 
-        "#{url_for_base}/query?query=#{URI.encode_www_form_component(query)}"
+        "#{url_for_base}/query?query=#{CGI.escape(query)}"
       end
 
       private
@@ -229,44 +249,44 @@ module Quickbooks
         log_request_body(body)
         log "REQUEST HEADERS = #{headers.inspect}"
 
-        begin
-          raw_response = case method
-          when :get
-            oauth_get(url, headers)
-          when :post
-            oauth_post(url, body, headers)
-          when :upload
-            oauth_post_with_multipart(url, body, headers)
-          else
-            raise "Do not know how to perform that HTTP operation"
-          end
-          response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
-          check_response(response, :request => body)
-        rescue => ex
-          raise Quickbooks::IntuitRequestException.new
+        raw_response = case method
+        when :get
+          oauth_get(url, headers)
+        when :post
+          oauth_post(url, body, headers)
+        when :upload
+          oauth_post_with_multipart(url, body, headers)
+        else
+          raise "Do not know how to perform that HTTP operation"
         end
+        response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
+        check_response(response, :request => body)
       end
 
       def oauth_get(url, headers)
-        if Quickbooks.oauth_version == 1
+        if oauth_v1?
           @oauth.get(url, headers)
-        end
-        if Quickbooks.oauth_version == 2
-          @oauth.get(url, headers: headers)
+        elsif oauth_v2?
+          @oauth.get(url, headers: headers, raise_errors: false)
         end
       end
 
       def oauth_post(url, body, headers)
-        if Quickbooks.oauth_version == 1
+        if oauth_v1?
           @oauth.post(url, body, headers)
-        end
-        if Quickbooks.oauth_version == 2
-          @oauth.post(url, headers: headers, body: body)
+        elsif oauth_v2?
+          @oauth.post(url, headers: headers, body: body, raise_errors: false)
         end
       end
 
       def oauth_post_with_multipart(url, body, headers)
-        @oauth.post_with_multipart(url, body, headers)
+        raw_response = if oauth_v1?
+                         oauth.post_with_multipart(url, body, headers)
+                       elsif oauth_v2?
+                         oauth.post_with_multipart(url, headers: headers, body: body, raise_errors: false)
+                       end
+        response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
+        check_response(response, :request => body)
       end
 
       def add_query_string_to_url(url, params)

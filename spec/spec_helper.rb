@@ -22,6 +22,4 @@ RSpec.configure do |config|
   config.color = true
 end
 
-Quickbooks.oauth_version = 2
-
 I18n.enforce_available_locales = false
