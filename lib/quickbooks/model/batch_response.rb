@@ -22,6 +22,7 @@ class Quickbooks::Model::BatchResponse < Quickbooks::Model::BaseModel
     xml_accessor :sales_receipt, from: "SalesReceipt", as: Quickbooks::Model::SalesReceipt
     xml_accessor :time_activity, from: "TimeActivity", as: Quickbooks::Model::TimeActivity
     xml_accessor :vendor, from: "Vendor", as: Quickbooks::Model::Vendor
+    xml_accessor :query_response, from: "QueryResponse", as: Quickbooks::Model::QueryResponse
 
     def fault?
       fault

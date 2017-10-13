@@ -23,6 +23,7 @@ class Quickbooks::Model::BatchRequest < Quickbooks::Model::BaseModel
     xml_accessor :sales_receipt, from: "SalesReceipt", as: Quickbooks::Model::SalesReceipt
     xml_accessor :time_activity, from: "TimeActivity", as: Quickbooks::Model::TimeActivity
     xml_accessor :vendor, from: "Vendor", as: Quickbooks::Model::Vendor
+    xml_accessor :query, from: "Query"
   end
 
   XML_COLLECTION_NODE = "IntuitBatchRequest"
@@ -37,9 +38,13 @@ class Quickbooks::Model::BatchRequest < Quickbooks::Model::BaseModel
 
   def add(batch_item_id, batch_item, operation)
     bir = Quickbooks::Model::BatchRequest::BatchItemRequest.new
-    bir.operation = operation
     bir.bId = batch_item_id
-    bir.send("#{batch_item.class::XML_NODE.underscore}=", batch_item)
+    if operation == "query"
+      bir.query = batch_item
+    else
+      bir.operation = operation
+      bir.send("#{batch_item.class::XML_NODE.underscore}=", batch_item)
+    end
     self.request_items << bir
   end
 end

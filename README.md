@@ -529,6 +529,8 @@ item = Quickbooks::Model::Item.new
 batch_req.add("bId1", customer, "create")
 batch_req.add("bId2", item, "create")
 
+batch_req.add("bId3", 'select * from SalesReceipt where TotalAmt > '300.00'', "query")
+
 # Add more items to create/update as needed, up to 25
 
 batch_service = Quickbooks::Service::Batch.new
