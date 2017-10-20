@@ -47,6 +47,31 @@ describe Quickbooks::Service::BaseService do
     end
   end
 
+  describe '#verify_multipart!' do
+    let(:service) { Quickbooks::Service::BaseService.new }
+
+    if ENV['OAUTH'] == '1'
+      it 'is not called' do
+        service.should_not_receive(:verify_multipart!)
+        service.access_token = construct_oauth
+      end
+    else
+
+      it 'rebuilds the connection' do
+        oauth = construct_oauth
+        oauth.client.connection.should_receive(:build)
+        service.access_token = oauth
+      end
+
+      it 'does not rebuild the connection' do
+        oauth = construct_oauth
+        oauth.client.connection.builder.lock!
+        oauth.client.connection.should_not_receive(:build)
+        service.access_token = oauth
+      end
+    end
+  end
+
   describe 'check_response' do
     before do
       construct_service :base_service
