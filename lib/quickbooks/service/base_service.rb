@@ -25,7 +25,7 @@ module Quickbooks
 
       def access_token=(token)
         @oauth = token
-        verify_multipart!
+        verify_multipart! if oauth_v2?
       end
 
       def company_id=(company_id)
@@ -47,7 +47,7 @@ module Quickbooks
 
       # Multipart is required for OAuthv2 file upload
       def verify_multipart!
-        return if oauth_v1? || @oauth.client.connection.builder.handlers.include?(Faraday::Request::Multipart)
+        return if @oauth.client.connection.builder.handlers.include?(Faraday::Request::Multipart)
 
         if @oauth.client.connection.builder.locked?
           log('Cannot rebuild a locked connection with multipart support. As a result, file uploads will not work.')
