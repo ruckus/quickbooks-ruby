@@ -45,14 +45,19 @@ module Quickbooks
         @oauth.is_a? OAuth2::AccessToken
       end
 
-      # Multipart is required for file upload
+      # Multipart is required for OAuthv2 file upload
       def verify_multipart!
-        if oauth_v2? && !@oauth.client.connection.builder.handlers.include?(Faraday::Request::Multipart)
-          @oauth.client.connection.build do |builder|
-            builder.request :multipart
-            builder.request :url_encoded
-            builder.adapter :net_http
-          end
+        return if oauth_v1? || @oauth.client.connection.builder.handlers.include?(Faraday::Request::Multipart)
+
+        if @oauth.client.connection.builder.locked?
+          log('Cannot rebuild a locked connection with multipart support. As a result, file uploads will not work.')
+          return
+        end
+
+        @oauth.client.connection.build do |builder|
+          builder.request :multipart
+          builder.request :url_encoded
+          builder.adapter :net_http
         end
       end
 
