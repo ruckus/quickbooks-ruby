@@ -273,6 +273,8 @@ module Quickbooks
           @oauth.get(url, headers)
         elsif oauth_v2?
           @oauth.get(url, headers: headers, raise_errors: false)
+        else
+          raise InvalidOauthAccessTokenObject.new(@oauth)
         end
       end
 
@@ -281,6 +283,8 @@ module Quickbooks
           @oauth.post(url, body, headers)
         elsif oauth_v2?
           @oauth.post(url, headers: headers, body: body, raise_errors: false)
+        else
+          raise InvalidOauthAccessTokenObject.new(@oauth)
         end
       end
 
@@ -289,6 +293,8 @@ module Quickbooks
                          oauth.post_with_multipart(url, body, headers)
                        elsif oauth_v2?
                          oauth.post_with_multipart(url, headers: headers, body: body, raise_errors: false)
+                       else
+                         raise InvalidOauthAccessTokenObject.new(@oauth)
                        end
         response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
         check_response(response, :request => body)
