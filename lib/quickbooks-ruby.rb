@@ -240,4 +240,10 @@ module Quickbooks
     end
   end
 
+  class InvalidOauthAccessTokenObject < StandardError
+    def initialize(access_token)
+      super("Expected access token to be an instance of OAuth::AccessToken or OAuth2::AccessToken, got #{access_token.class}.")
+    end
+  end
+
 end
