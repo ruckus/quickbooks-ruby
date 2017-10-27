@@ -2,9 +2,15 @@ require 'rubygems'
 require 'oauth2'
 require 'dotenv'
 
+$:.unshift File.expand_path("../../lib", __FILE__)
+require "quickbooks-ruby"
+
 Dotenv.load(File.dirname(__FILE__) + '/.env')
 
-mode = 2
+Quickbooks.sandbox_mode = true
+Quickbooks.log = true
+
+mode = 3
 
 token = ENV['TOKEN']
 realm_id = ENV['REALM_ID']
@@ -37,4 +43,18 @@ if mode == 2
   puts "refreshed!"
   puts "\n===== Access Token =======\n\n#{refreshed.token}\n\n"
   puts "\n===== Refresh Token =======\n\n#{refreshed.refresh_token}\n\n"
+end
+
+if mode == 3
+  client = OAuth2::Client.new(client_id, client_secret, oauth_params)
+  at = OAuth2::AccessToken.new(client, token, refresh_token: refresh_token)
+  service = Quickbooks::Service::Customer.new
+  service.access_token = at
+  service.realm_id = realm_id
+
+  customer = Quickbooks::Model::Customer.new
+  customer.display_name = "Test 123"
+  customer.company_name = "Test 123"
+  customer.email_address = "test@example.com"
+  service.create(customer)
 end
