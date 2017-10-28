@@ -52,8 +52,99 @@ you need to config the gem to run in sandbox mode:
 ```ruby
 Quickbooks.sandbox_mode = true
 ```
+## Authorization through OAuth 2.0
+This section is only for newer developer accounts that uses OAuth 2.0 for the apps. For apps that are authorized by OAuth 1, please refer to the next section.
 
-## Getting Started & Initiating Authentication Flow with Intuit
+### Getting Started & Initiating Authentication Flow with Intuit
+
+What follows is an example using Rails but the principles can be adapted to any other framework / pure Ruby.
+
+Create a Rails initializer with:
+
+```ruby
+OAUTH_CONSUMER_KEY = ENV["OAUTH_CONSUMER_KEY"]
+OAUTH_CONSUMER_SECRET = ENV["OAUTH_CONSUMER_SECRET"]
+
+oauth_params = {
+  :site => "https://appcenter.intuit.com/connect/oauth2",
+  :authorize_url => "https://appcenter.intuit.com/connect/oauth2",
+  :token_url => "https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer"
+}
+
+::QB_OAUTH2_CONSUMER = OAuth2::Client.new(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET, oauth_params)
+
+```
+
+Your Controller action (the `grantUrl` above) should look like this:
+
+```ruby
+def authenticate
+  redirect_uri = quickbooks_oauth_callback_url
+  grant_url = ::QB_OAUTH2_CONSUMER.auth_code.authorize_url(:redirect_uri => redirect_uri, :response_type => "code", :state => SecureRandom.hex(12), :scope => "com.intuit.quickbooks.accounting")
+  redirect_to grant_url
+end
+```
+
+Where `quickbooks_oauth_callback_url` is the absolute URL of your application that Intuit should send the user when authentication succeeds. 
+
+That action should look like:
+
+```ruby
+def oauth_callback
+  if params[:state]
+    redirect_uri = oauth_callback_quickbooks_url
+    if resp = ::QB_OAUTH2_CONSUMER.auth_code.get_token(params[:code], :redirect_uri => redirect_uri)
+
+      # save your tokens here. For example:
+      # quickbooks_credentials.update_attributes(access_token: resp.token, refresh_token: resp.refresh_token, realm_id: params[:realmId])
+    end
+  end
+end
+```
+
+Most likely you will want to persist the OAuth access credentials so that users don't need to re-authorize your application in every session.
+
+An example database table would have fields likes:
+
+```sql
+access_token varchar(255),
+refresh_token varchar(255),
+realm_id varchar(255)
+```
+
+### Creating an OAuth Access Token
+
+Once you have your user's OAuth token, you can re-use the `OAuth Consumer` and create a `OAuth Client` using the `QB_OAUTH2_CONSUMER` you created earlier in your Rails initializer:
+
+```ruby
+qb_access_token = quickbooks_credentials.access_token
+qb_refresh_token = quickbooks_credentials.refresh_token
+
+access_token = OAuth2::AccessToken.new(::QB_OAUTH2_CONSUMER, qb_access_token, {refresh_token: qb_refresh_token})
+```
+
+### Access Token Validity and Token Refresh
+
+Each access token is only valid for one hour. The access token and refresh token can be refreshed directly by using OAuth Client:
+
+```ruby
+new_access_token = access_token.refresh!
+```
+
+The token must be assigned to a variable to prevent the loss of your new access token, which will void your credentials and a new set of credentials have to be acquired by authorizing the application again.
+Unauthorized (expired) access to the API will raise a `Quickbooks::AuthorizationFailure` error.
+
+For more information on access token expiration and refresh token expiration, please refer to the [official documentation](https://developer.intuit.com/docs/0100_quickbooks_online/0100_essentials/000500_authentication_and_authorization/connect_from_within_your_app#/Refreshing_the_access_token).
+
+### Credentials Encryption
+For simplicity, this example does not encrypt the access credentials. If you are developing an app and
+plan on publishing it to Intuit's marketplace you will need to encrypt the credentials to comply with
+their [security requirements](https://developer.intuit.com/docs/0100_quickbooks_online/0100_essentials/0085_develop_quickbooks_apps/0006_publish_and_market_your_app_with_quickbooks/0005_security_requirements).
+We'd suggest looking at the [attr_encrypted gem](https://github.com/attr-encrypted/attr_encrypted) to
+handle the actual encryption and decryption.
+
+## Authorization through OAuth 1
+### Getting Started & Initiating Authentication Flow with Intuit
 
 What follows is an example using Rails but the principles can be adapted to any other framework / pure Ruby.
 
@@ -121,7 +212,7 @@ Marshal.load(session[:qb_request_token]).get_access_token(:oauth_verifier => par
 
 :star: Also, check out regular Quickbooks-Ruby contributor, [minimul](https://github.com/minimul)'s, article [Integrating Rails and QuickBooks Online via the version 3 API](http://minimul.com/integrating-rails-and-quickbooks-online-via-the-version-3-api-part-1.html) for a step-by-step guide along with screencasts.
 
-## Creating an OAuth Access Token
+### Creating an OAuth Access Token
 
 Once you have your users OAuth Token & Secret you can initialize your `OAuth Consumer` and create a `OAuth Client` using the `QB_OAUTH_CONSUMER` you created earlier in your Rails initializer:
 
@@ -129,7 +220,7 @@ Once you have your users OAuth Token & Secret you can initialize your `OAuth Con
 access_token = OAuth::AccessToken.new(QB_OAUTH_CONSUMER, string_access_token_from_qb, string_access_secret_from_qb)
 ```
 
-## Persisting the Credentials
+### Persisting the Credentials
 
 Most likely you will want to persist the OAuth access credentials so you don't have to connect to QBO
 each and every time.
@@ -426,7 +517,7 @@ puts sent_invoice.delivery_info.delivery_time
 It is possible to email the invoice to an altermate email address by including the email as a second parameter in the `invoice.send` method.  When a new email address is provided the invoice model that is returned will have the `bill_email` set to the new email address as show below:
 
 ```ruby
-invoice = invoice_service.fetch_by_id("1")
+invoice = invoice_service.fetch_by_id("1") 
 sent_invoice = invoice_service.send(invoice, "name@domain.com")
 
 puts send_invoice.bill_email.address
