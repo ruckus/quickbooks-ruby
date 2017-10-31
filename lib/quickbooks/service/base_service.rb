@@ -363,7 +363,23 @@ module Quickbooks
         if is_json?
           log(body.inspect)
         else
-          log(log_xml(body))
+          #multipart request for uploads arrive here in a Hash with UploadIO vals
+          if body.is_a?(Hash)
+            body.each do |k,v|
+              log('BODY PART:')
+              val_content = v.inspect
+              if v.is_a?(UploadIO)
+                if v.content_type == 'application/xml'
+                  if v.io.is_a?(StringIO)
+                    val_content = log_xml(v.io.string)
+                  end
+                end
+              end
+              log("#{k}: #{val_content}")
+            end
+          else
+            log(log_xml(body))
+          end
         end
       end
 
