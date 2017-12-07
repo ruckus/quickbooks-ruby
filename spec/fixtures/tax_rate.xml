@@ -10,6 +10,11 @@
     <Active>true</Active>
     <RateValue>0.5</RateValue>
     <AgencyRef>3</AgencyRef>
+    <EffectiveTaxRate>
+        <RateValue>17.5</RateValue>
+        <EffectiveDate>1970-01-01T00:00:00-08:00</EffectiveDate>
+        <EndDate>2014-06-30T00:00:00-07:00</EndDate>
+    </EffectiveTaxRate>
     <SpecialTaxType>NONE</SpecialTaxType>
     <DisplayType>ReadOnly</DisplayType>
 </TaxRate>

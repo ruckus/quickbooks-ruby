@@ -10,6 +10,7 @@ describe "Quickbooks::Model::TaxRate" do
     item.should be_active
     item.rate_value.should == 0.5
     item.agency_ref.value.should == "3"
+    item.effective_tax_rate.should_not be_nil
     item.special_tax_type.should == "NONE"
     item.display_type.should == "ReadOnly"
   end
