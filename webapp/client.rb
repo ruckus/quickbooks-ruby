@@ -10,7 +10,7 @@ Dotenv.load(File.dirname(__FILE__) + '/.env')
 Quickbooks.sandbox_mode = true
 Quickbooks.log = true
 
-mode = 3
+mode = 4
 
 token = ENV['TOKEN']
 realm_id = ENV['REALM_ID']
@@ -57,4 +57,15 @@ if mode == 3
   customer.company_name = "Test 123"
   customer.email_address = "test@example.com"
   service.create(customer)
+end
+
+
+if mode == 4
+  client = OAuth2::Client.new(client_id, client_secret, oauth_params)
+  at = OAuth2::AccessToken.new(client, token, refresh_token: refresh_token)
+  service = Quickbooks::Service::Customer.new
+  service.access_token = at
+  service.realm_id = realm_id
+  b = service.query
+  #puts b.inspect
 end
