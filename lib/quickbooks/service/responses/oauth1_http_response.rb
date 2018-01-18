@@ -23,6 +23,10 @@ module Quickbooks
           @real_response.plain_body
         end
 
+        def headers
+          @real_response.headers
+        end
+
       end
 
     end
