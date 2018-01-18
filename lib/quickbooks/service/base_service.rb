@@ -214,7 +214,8 @@ module Quickbooks
         unless headers.has_key?('Accept-Encoding')
           headers['Accept-Encoding'] = HTTP_ACCEPT_ENCODING
         end
-        oauth_get(url, headers)
+        raw_response = oauth_get(url, headers)
+        Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
       end
 
       def do_http_file_upload(uploadIO, url, metadata = nil)
@@ -311,6 +312,9 @@ module Quickbooks
       def check_response(response, options = {})
         log "------ QUICKBOOKS-RUBY RESPONSE ------"
         log "RESPONSE CODE = #{response.code}"
+        if response.respond_to?(:headers)
+          log "RESPONSE HEADERS = #{response.headers}"
+        end
         log_response_body(response)
         status = response.code.to_i
         case status
@@ -352,6 +356,8 @@ module Quickbooks
         if is_json?
           log ">>>>#{response.plain_body.inspect}"
           parse_json(response.plain_body)
+        elsif is_pdf?
+          log("BODY is a PDF : not dumping")
         else
           log(log_xml(response.plain_body))
           parse_xml(response.plain_body)
@@ -362,6 +368,8 @@ module Quickbooks
         log "REQUEST BODY:"
         if is_json?
           log(body.inspect)
+        elsif is_pdf?
+          log("BODY is a PDF : not dumping")
         else
           #multipart request for uploads arrive here in a Hash with UploadIO vals
           if body.is_a?(Hash)

@@ -10,7 +10,7 @@ Dotenv.load(File.dirname(__FILE__) + '/.env')
 Quickbooks.sandbox_mode = true
 Quickbooks.log = true
 
-mode = 4
+mode = 5
 
 token = ENV['TOKEN']
 realm_id = ENV['REALM_ID']
@@ -68,4 +68,20 @@ if mode == 4
   service.realm_id = realm_id
   b = service.query
   #puts b.inspect
+end
+
+
+if mode == 5
+  client = OAuth2::Client.new(client_id, client_secret, oauth_params)
+  at = OAuth2::AccessToken.new(client, token, refresh_token: refresh_token)
+  service = Quickbooks::Service::Invoice.new
+  service.access_token = at
+  service.realm_id = realm_id
+
+  invoiceStruct = Struct.new(:id)
+  invoice = invoiceStruct.new("67")
+  rawbody = service.pdf(invoice)
+  File.open("foo.pdf", "wb") do |file|
+    file.write(rawbody)
+  end
 end

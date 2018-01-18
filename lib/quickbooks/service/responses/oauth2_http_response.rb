@@ -28,6 +28,10 @@ module Quickbooks
           @real_response.status.to_i
         end
 
+        def headers
+          @real_response.headers
+        end
+
       end
 
     end
