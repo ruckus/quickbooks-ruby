@@ -1,3 +1,16 @@
+## 0.6.1 (2018-01-31)
+
+Added support for Description-only line item details on Invoices
+
+Usage:
+
+```
+line_item = Quickbooks::Model::InvoiceLineItem.new
+line_item.description = "Plush Baby Doll"
+line_item.description_only!
+invoice.line_items << line_item
+```
+
 ## 0.6.0 (2018-01-25)
 
 * Updated dependent gem ROXML to 4.0.0 to address Ruby 2.4.x issues:
