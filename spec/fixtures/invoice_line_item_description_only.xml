@@ -1,0 +1,63 @@
+<Invoice domain="QBO" sparse="false">
+  <Id>104</Id>
+  <SyncToken>0</SyncToken>
+  <MetaData>
+    <CreateTime>2018-01-31T07:48:22-08:00</CreateTime>
+    <LastUpdatedTime>2018-01-31T07:48:22-08:00</LastUpdatedTime>
+  </MetaData>
+  <CustomField>
+    <DefinitionId>1</DefinitionId>
+    <Name>PONumber</Name>
+    <Type>StringType</Type>
+  </CustomField>
+  <CustomField>
+    <DefinitionId>2</DefinitionId>
+    <Name>Sales Rep</Name>
+    <Type>StringType</Type>
+  </CustomField>
+  <DocNumber>FR23171</DocNumber>
+  <TxnDate>2018-01-31</TxnDate>
+  <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+  <Line>
+    <Id>1</Id>
+    <LineNum>1</LineNum>
+    <Description>Just a Description</Description>
+    <DetailType>DescriptionOnly</DetailType>
+    <DescriptionLineDetail />
+  </Line>
+  <Line>
+    <Amount>0</Amount>
+    <DetailType>SubTotalLineDetail</DetailType>
+    <SubTotalLineDetail />
+  </Line>
+  <CustomerRef name="1300 on Fillmore">21</CustomerRef>
+  <BillAddr>
+    <Id>39</Id>
+    <Line1>1300 Fillmore St.</Line1>
+    <City>San Francisco</City>
+    <CountrySubDivisionCode>CA</CountrySubDivisionCode>
+    <PostalCode>94115</PostalCode>
+  </BillAddr>
+  <ShipAddr>
+    <Id>40</Id>
+    <Line1>1300 Fillmore St.</Line1>
+    <City>San Francisco</City>
+    <CountrySubDivisionCode>CA</CountrySubDivisionCode>
+    <PostalCode>94115</PostalCode>
+  </ShipAddr>
+  <SalesTermRef>3</SalesTermRef>
+  <DueDate>2018-03-02</DueDate>
+  <TotalAmt>0</TotalAmt>
+  <ApplyTaxAfterDiscount>false</ApplyTaxAfterDiscount>
+  <PrintStatus>NotSet</PrintStatus>
+  <EmailStatus>NotSet</EmailStatus>
+  <BillEmail>
+    <Address>foo@example.com</Address>
+  </BillEmail>
+  <Balance>0</Balance>
+  <Deposit>0</Deposit>
+  <AllowIPNPayment>false</AllowIPNPayment>
+  <AllowOnlinePayment>false</AllowOnlinePayment>
+  <AllowOnlineCreditCardPayment>false</AllowOnlineCreditCardPayment>
+  <AllowOnlineACHPayment>false</AllowOnlineACHPayment>
+</Invoice>
