@@ -123,6 +123,32 @@ describe "Quickbooks::Model::Invoice" do
     invoice.errors.keys.include?(:bill_email).should == false
   end
 
+  it "can load a description-only line item detail from XML" do
+    input_xml = fixture("invoice_line_item_description_only.xml")
+    invoice = Quickbooks::Model::Invoice.from_xml(input_xml)
+    desc_line = invoice.line_items.detect { |a| a.description_only? }
+
+    desc_line.should_not be_nil
+    desc_line.description.should == 'Just a Description'
+  end
+
+  it "can create a description-only line item from building" do
+    invoice = Quickbooks::Model::Invoice.new
+
+    invoice.customer_id = 1
+    invoice.txn_date = Date.civil(2018, 1, 20)
+
+    line_item = Quickbooks::Model::InvoiceLineItem.new
+    line_item.amount = 50
+    line_item.description = "Plush Baby Doll"
+    line_item.description_only!
+    invoice.line_items << line_item
+
+    xml = invoice.to_xml
+    xml.should_not be_nil
+  end
+
+
   describe "#auto_doc_number" do
     it_should_behave_like "a model that has auto_doc_number support", 'Invoice'
   end
