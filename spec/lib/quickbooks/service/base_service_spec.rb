@@ -47,6 +47,60 @@ describe Quickbooks::Service::BaseService do
     end
   end
 
+  describe 'do_http' do
+    let(:base_url) { 'http://example.com/'}
+
+    context 'when no access_token exists' do
+      before do
+        construct_service :base_service, nil
+      end
+
+      it "should raise RunTimeError" do
+        expect { @service.send(:do_http, :get, base_url, nil, {}) }.to raise_error
+      end
+    end
+
+    context 'when an access token exists' do
+      before do
+        construct_service :base_service
+        @service.stub(:do_http).and_call_original
+      end
+
+      context 'when a non-302 response is received' do
+        before do
+          stub_request(:get, base_url, ["200", "OK"], fixture("items.xml"))
+        end
+
+        it "calls do_http only once" do
+          @service.send(:do_http, :get, base_url, nil, {})
+          @service.should have_received(:do_http).once
+        end
+      end
+
+      context 'when a 302 response is received' do
+        let(:headers) do
+          {
+            "Content-Type" => "application/xml",
+            "Accept" => "application/xml",
+            "Accept-Encoding" => "gzip, deflate"
+          }
+        end
+        let(:redirect_location) { "#{base_url}elsewhere" }
+
+        before do
+          stub_request(:get, base_url, ["302", "Found"], fixture("items.xml"), :location => redirect_location)
+          stub_request(:get, redirect_location, ["200", "OK"], fixture("items.xml"))
+        end
+
+        it "calls do_http twice" do
+          @service.send(:do_http, :get, 'http://example.com/', nil, headers)
+          @service.should have_received(:do_http).with(:get, base_url, nil, headers).once
+          @service.should have_received(:do_http).with(:get, redirect_location, nil, headers).once
+        end
+      end
+    end
+  end
+
   describe 'check_response' do
     before do
       construct_service :base_service

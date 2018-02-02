@@ -42,6 +42,7 @@ describe "Quickbooks::Service::Term" do
                  @service.url_for_resource(resource),
                  ["200", "OK"],
                  fixture("fetch_term_by_id.xml"),
+                 {},
                  true)
 
     updated_term = @service.update(term, :sparse => true)

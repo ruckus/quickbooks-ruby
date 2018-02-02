@@ -239,7 +239,12 @@ module Quickbooks
           else
             raise "Do not know how to perform that HTTP operation"
           end
-        check_response(response, :request => body)
+
+        if response.code.to_i == 302
+          do_http(method, response['location'], body, headers)
+        else
+          check_response(response, :request => body)
+        end
       end
 
       def add_query_string_to_url(url, params)
@@ -263,8 +268,6 @@ module Quickbooks
           else
             response
           end
-        when 302
-          raise "Unhandled HTTP Redirect"
         when 401
           raise Quickbooks::AuthorizationFailure
         when 403

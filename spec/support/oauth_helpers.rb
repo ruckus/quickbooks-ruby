@@ -12,9 +12,9 @@ module OauthHelpers
     OAuth::AccessToken.new(oauth_consumer, "token", "secret")
   end
 
-  def construct_service(model)
+  def construct_service(model, access_token=construct_oauth)
     @service = "Quickbooks::Service::#{model.to_s.camelcase}".constantize.new
-    @service.access_token = construct_oauth
+    @service.access_token = access_token
     @service.company_id = "9991111222"
     @service
   end
