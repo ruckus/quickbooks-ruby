@@ -16,7 +16,7 @@ module Quickbooks
       xml_accessor :tax_return_line_ref, :from => "TaxReturnLineRef", :as => BaseReference
       xml_accessor :special_tax_type, :from => "SpecialTaxType"
       xml_accessor :display_type, :from => "DisplayType"
-      xml_accessor :effective_tax_rate, :from => "EffectiveTaxRate"
+      xml_accessor :effective_tax_rate, :from => "EffectiveTaxRate", :as => [EffectiveTaxRate]
 
       validates_presence_of :name, :rate_value
 
