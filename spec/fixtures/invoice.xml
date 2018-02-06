@@ -75,7 +75,7 @@
 	<SalesTermRef>2</SalesTermRef>
 	<DueDate>2013-11-30</DueDate>
 	<TotalAmt>50.00</TotalAmt>
-	<HomeTotalAmt>75.00</HomtTotalAmt> <!-- Present for non-USA accounts -->
+	<HomeTotalAmt>75.00</HomeTotalAmt> <!-- Present for non-USA accounts -->
 	<ApplyTaxAfterDiscount>false</ApplyTaxAfterDiscount>
 	<PrintStatus>NotSet</PrintStatus>
 	<EmailStatus>NotSet</EmailStatus>
