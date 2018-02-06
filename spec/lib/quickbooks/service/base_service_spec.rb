@@ -50,52 +50,103 @@ describe Quickbooks::Service::BaseService do
   describe 'do_http' do
     let(:base_url) { 'http://example.com/'}
 
-    context 'when no access_token exists' do
-      before do
-        construct_service :base_service, nil
-      end
+    [:get, :post, :upload].each do |request_method|
+      context 'when no access_token exists' do
+        before do
+          construct_service :base_service, nil
+        end
 
-      it "should raise RunTimeError" do
-        expect { @service.send(:do_http, :get, base_url, nil, {}) }.to raise_error
+        it "should raise RunTimeError" do
+          expect { @service.send(:do_http, request_method, base_url, nil, {}) }.to raise_error
+        end
       end
     end
 
     context 'when an access token exists' do
-      before do
-        construct_service :base_service
-        @service.stub(:do_http).and_call_original
+      [:get, :post].each do |request_method|
+        context "when the method is #{request_method}" do
+          before do
+            construct_service :base_service
+            @service.stub(:do_http).and_call_original
+          end
+
+          context 'when a non-302 response is received' do
+            before do
+              stub_request(request_method, base_url, ["200", "OK"], fixture("items.xml"))
+            end
+
+            it "calls do_http only once" do
+              @service.send(:do_http, request_method, base_url, nil, {})
+              @service.should have_received(:do_http).once
+            end
+          end
+
+          context 'when a 302 response is received' do
+            let(:headers) do
+              {
+                "Content-Type" => "application/xml",
+                "Accept" => "application/xml",
+                "Accept-Encoding" => "gzip, deflate"
+              }
+            end
+            let(:redirect_location) { "#{base_url}elsewhere" }
+
+            before do
+              stub_request(request_method, base_url, ["302", "Found"], fixture("items.xml"), :location => redirect_location)
+              stub_request(request_method, redirect_location, ["200", "OK"], fixture("items.xml"))
+            end
+
+            it "calls do_http twice" do
+              @service.send(:do_http, request_method, base_url, nil, headers)
+              @service.should have_received(:do_http).with(request_method, base_url, nil, headers).once
+              @service.should have_received(:do_http).with(request_method, redirect_location, nil, headers).once
+            end
+          end
+        end
       end
 
-      context 'when a non-302 response is received' do
+      context 'when the method is upload' do
         before do
-          stub_request(:get, base_url, ["200", "OK"], fixture("items.xml"))
+          construct_service :base_service
+          @service.stub(:do_http).and_call_original
         end
 
-        it "calls do_http only once" do
-          @service.send(:do_http, :get, base_url, nil, {})
-          @service.should have_received(:do_http).once
-        end
-      end
+        context 'when a non-302 response is received' do
+          before do
+            stub_request(:post, base_url, ["200", "OK"], fixture("items.xml"))
+          end
 
-      context 'when a 302 response is received' do
-        let(:headers) do
-          {
-            "Content-Type" => "application/xml",
-            "Accept" => "application/xml",
-            "Accept-Encoding" => "gzip, deflate"
-          }
-        end
-        let(:redirect_location) { "#{base_url}elsewhere" }
-
-        before do
-          stub_request(:get, base_url, ["302", "Found"], fixture("items.xml"), :location => redirect_location)
-          stub_request(:get, redirect_location, ["200", "OK"], fixture("items.xml"))
+          it "calls do_http only once" do
+            @service.send(:do_http, :upload, base_url, nil, {})
+            @service.should have_received(:do_http).once
+          end
         end
 
-        it "calls do_http twice" do
-          @service.send(:do_http, :get, 'http://example.com/', nil, headers)
-          @service.should have_received(:do_http).with(:get, base_url, nil, headers).once
-          @service.should have_received(:do_http).with(:get, redirect_location, nil, headers).once
+        context 'when a 302 response is received' do
+          let(:headers) do
+            {
+              "Content-Type" => "application/xml",
+              "Accept" => "application/xml",
+              "Accept-Encoding" => "gzip, deflate"
+            }
+          end
+          let(:redirect_location) { "#{base_url}elsewhere" }
+
+          before do
+            stub_request(:post, base_url, ["302", "Found"], fixture("items.xml"), :location => redirect_location)
+          end
+
+          it "calls do_http only once" do
+            begin
+              @service.send(:do_http, :upload, base_url, nil, {})
+            rescue
+              @service.should have_received(:do_http).once
+            end
+          end
+
+          it 'raises an error' do
+            expect { @service.send(:do_http, :upload, base_url, nil, headers) }.to raise_error(RuntimeError)
+          end
         end
       end
     end
