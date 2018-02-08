@@ -46,7 +46,7 @@ module Quickbooks
 
       def existence_of_employee_ref
         if employee_ref.nil? || (employee_ref && employee_ref.value == 0)
-          errors.add(:employee_ref, "VendorRef is required and must be a non-zero value.")
+          errors.add(:employee_ref, "EmployeeRef is required and must be a non-zero value.")
         end
       end
 
