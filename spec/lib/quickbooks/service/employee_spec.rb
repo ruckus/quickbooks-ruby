@@ -77,7 +77,7 @@ describe "Quickbooks::Service::Employee" do
     employee.sync_token = 1
     employee.id = 2
     xml = fixture("deleted_employee.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
     employee.valid_for_deletion?.should == true
     response = @service.delete(employee)
     response.display_name.should == "#{employee.display_name} (Deleted)"

@@ -59,7 +59,7 @@ describe "Quickbooks::Service::Class" do
     classs.sync_token = 1
     classs.id = 2
     xml = fixture("deleted_class.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
     classs.valid_for_deletion?.should == true
     response = @service.delete(classs)
     response.name.should == "#{classs.name} (Deleted)"

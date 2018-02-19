@@ -47,6 +47,7 @@ describe "Quickbooks::Service::Payment" do
                  @service.url_for_resource(resource),
                  ["200", "OK"],
                  fixture("fetch_payment_by_id.xml"),
+                 {},
                  true)
 
     update_response = @service.update(payment, :sparse => true)

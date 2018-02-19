@@ -239,7 +239,12 @@ module Quickbooks
           else
             raise "Do not know how to perform that HTTP operation"
           end
-        check_response(response, :request => body)
+
+        if response.code.to_i == 302 && [:get, :post].include?(method)
+          do_http(method, response['location'], body, headers)
+        else
+          check_response(response, :request => body)
+        end
       end
 
       def add_query_string_to_url(url, params)

@@ -5,7 +5,7 @@ describe Quickbooks::Service::Upload do
 
   it "can create an upload" do
     xml = fixture("upload_create_response.xml")
-    stub_request(:post, @service.url_for_resource('upload'), ["200", "OK"], xml, true)
+    stub_request(:post, @service.url_for_resource('upload'), ["200", "OK"], xml, {}, true)
 
     attachable = Quickbooks::Model::Attachable.new
     attachable.file_name = "monkey.jpg"

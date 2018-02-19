@@ -66,7 +66,7 @@ module Quickbooks
         payment_method.sync_token = 0
         payment_method.id = 7
         xml = fixture("deleted_payment_method.xml")
-        stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+        stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
         payment_method.valid_for_deletion?.should == true
         response = @service.delete(payment_method)
         response.name.should == "#{payment_method.name} (Deleted)"
