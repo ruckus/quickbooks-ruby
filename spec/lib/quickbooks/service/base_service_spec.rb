@@ -145,7 +145,7 @@ describe Quickbooks::Service::BaseService do
           end
 
           it 'raises an error' do
-            expect { @service.send(:do_http, :upload, base_url, nil, headers) }.to raise_error(RuntimeError)
+            expect { @service.send(:do_http, :upload, base_url, nil, headers) }.to raise_error(Quickbooks::UnhandledHttpRedirect)
           end
         end
       end

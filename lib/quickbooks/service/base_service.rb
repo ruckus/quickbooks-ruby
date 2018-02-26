@@ -269,7 +269,7 @@ module Quickbooks
             response
           end
         when 302
-          raise "Unhandled HTTP Redirect"
+          raise Quickbooks::UnhandledHttpRedirect
         when 401
           raise Quickbooks::AuthorizationFailure
         when 403
