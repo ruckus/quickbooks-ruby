@@ -21,7 +21,7 @@ module Quickbooks
         end
 
         def plain_body
-          @real_response.body
+          body
         end
 
         def code
@@ -29,7 +29,11 @@ module Quickbooks
         end
 
         def headers
-          @real_response.headers
+          if @real_response.respond_to?(:headers)
+            @real_response.headers
+          else
+            nil
+          end
         end
 
       end
