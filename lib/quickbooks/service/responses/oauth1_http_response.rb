@@ -20,11 +20,19 @@ module Quickbooks
         end
 
         def plain_body
-          @real_response.plain_body
+          if @real_response.respond_to?(:plain_body)
+            @real_response.plain_body
+          else
+            nil
+          end
         end
 
         def headers
-          @real_response.headers
+          if @real_response.respond_to?(:headers)
+            @real_response.headers
+          else
+            nil
+          end
         end
 
       end
