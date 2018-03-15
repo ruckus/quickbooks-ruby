@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'oauth2'
 require 'dotenv'
+require 'securerandom'
 
 $:.unshift File.expand_path("../../lib", __FILE__)
 require "quickbooks-ruby"
@@ -10,7 +11,7 @@ Dotenv.load(File.dirname(__FILE__) + '/.env')
 Quickbooks.sandbox_mode = true
 Quickbooks.log = true
 
-mode = 5
+mode = 3
 
 token = ENV['TOKEN']
 realm_id = ENV['REALM_ID']
@@ -53,10 +54,15 @@ if mode == 3
   service.realm_id = realm_id
 
   customer = Quickbooks::Model::Customer.new
-  customer.display_name = "Test 123"
-  customer.company_name = "Test 123"
+  customer.display_name = "Test 123-#{SecureRandom.hex(3)}"
+  customer.company_name = customer.display_name
   customer.email_address = "test@example.com"
-  service.create(customer)
+  begin
+    service.create(customer)
+  rescue Quickbooks::IntuitRequestException => ex
+    puts "Quickbooks::IntuitRequestException: #{ex.message}"
+    puts ex.backtrace.join("\n")
+  end
 end
 
 
