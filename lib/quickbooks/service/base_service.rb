@@ -55,6 +55,7 @@ module Quickbooks
         end
 
         @oauth.client.connection.build do |builder|
+          builder.use :gzip
           builder.request :multipart
           builder.request :url_encoded
           builder.adapter :net_http
@@ -406,9 +407,12 @@ module Quickbooks
       end
 
       def response_is_error?
-        @last_response_xml.xpath("//xmlns:IntuitResponse/xmlns:Fault")[0] != nil
-      rescue Nokogiri::XML::XPath::SyntaxError => exception
-        true
+        begin
+          @last_response_xml.xpath("//xmlns:IntuitResponse/xmlns:Fault")[0] != nil
+        rescue Nokogiri::XML::XPath::SyntaxError => exception
+          puts "WTF: #{exception.inspect}"
+          true
+        end
       end
 
       def parse_intuit_error
