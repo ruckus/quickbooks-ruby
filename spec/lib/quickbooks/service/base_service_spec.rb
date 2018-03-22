@@ -47,31 +47,6 @@ describe Quickbooks::Service::BaseService do
     end
   end
 
-  describe '#verify_multipart!' do
-    let(:service) { Quickbooks::Service::BaseService.new }
-
-    if ENV['OAUTH'] == '1'
-      it 'is not called' do
-        service.should_not_receive(:verify_multipart!)
-        service.access_token = construct_oauth
-      end
-    else
-
-      it 'rebuilds the connection' do
-        oauth = construct_oauth
-        oauth.client.connection.should_receive(:build)
-        service.access_token = oauth
-      end
-
-      it 'does not rebuild the connection' do
-        oauth = construct_oauth
-        oauth.client.connection.builder.lock!
-        oauth.client.connection.should_not_receive(:build)
-        service.access_token = oauth
-      end
-    end
-  end
-
   describe 'check_response' do
     before do
       construct_service :base_service
@@ -172,28 +147,6 @@ describe Quickbooks::Service::BaseService do
 
       response = Struct.new(:code, :plain_body).new(504, xml)
       expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ServiceUnavailable)
-    end
-
-    it "handles error XML with a missing namespace" do
-      xml = <<-XML
-<?xml version=\"1.0\"?>
-<IntuitResponse time="2013-11-15T13:16:49.528-08:00">
-  <Fault type="SystemFault">
-    <Error code="10000">
-      <Message>An application error has occurred while processing your request</Message>
-      <Detail>System Failure Error: Could not find resource for relative : some more info here</Detail>
-    </Error>
-  </Fault>
-</IntuitResponse>
-      XML
-      response = Struct.new(:code, :plain_body).new(200, xml)
-
-      begin
-        @service.send :check_response, response
-        fail "Exception expected"
-      rescue Quickbooks::IntuitRequestException => exception
-        expect(exception.detail).to eq(xml)
-      end
     end
   end
 
