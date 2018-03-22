@@ -25,7 +25,7 @@ module Quickbooks
 
       def access_token=(token)
         @oauth = token
-        verify_multipart! if oauth_v2?
+        rebuild_connection!
       end
 
       def company_id=(company_id)
@@ -45,15 +45,11 @@ module Quickbooks
         @oauth.is_a? OAuth2::AccessToken
       end
 
-      # Multipart is required for OAuthv2 file upload
-      def verify_multipart!
-        return if @oauth.client.connection.builder.handlers.include?(Faraday::Request::Multipart)
-
-        if @oauth.client.connection.builder.locked?
-          log('Cannot rebuild a locked connection with multipart support. As a result, file uploads will not work.')
-          return
-        end
-
+      # [OAuth2] The default Faraday connection does not have gzip or multipart support.
+      # We need to reset the existing connection and build a new one.
+      def rebuild_connection!
+        return unless oauth_v2?
+        @oauth.client.connection = nil
         @oauth.client.connection.build do |builder|
           builder.use :gzip
           builder.request :multipart
@@ -410,7 +406,8 @@ module Quickbooks
         begin
           @last_response_xml.xpath("//xmlns:IntuitResponse/xmlns:Fault")[0] != nil
         rescue Nokogiri::XML::XPath::SyntaxError => exception
-          puts "WTF: #{exception.inspect}"
+          #puts @last_response_xml.to_xml.to_s
+          #puts "WTF: #{exception.inspect}:#{exception.backtrace.join("\n")}"
           true
         end
       end
