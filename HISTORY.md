@@ -1,3 +1,7 @@
+## 0.6.2 (2018-05-16)
+
+Fixed bug with generating an invalid URL when both requestid and minorversions are specified. Addresses #430
+
 ## 0.6.1 (2018-01-31)
 
 Added support for Description-only line item details on Invoices
