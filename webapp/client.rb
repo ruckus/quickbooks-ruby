@@ -11,7 +11,7 @@ Dotenv.load(File.dirname(__FILE__) + '/.env')
 Quickbooks.sandbox_mode = true
 Quickbooks.log = true
 
-mode = 3
+mode = 6
 
 token = ENV['TOKEN']
 realm_id = ENV['REALM_ID']
@@ -73,6 +73,12 @@ if mode == 4
   service.access_token = at
   service.realm_id = realm_id
   b = service.query
+
+  item_service = Quickbooks::Service::Item.new
+  item_service.access_token = at
+  item_service.realm_id = realm_id
+  b = item_service.query
+
   #puts b.inspect
 end
 
@@ -90,4 +96,45 @@ if mode == 5
   File.open("foo.pdf", "wb") do |file|
     file.write(rawbody)
   end
+
+end
+
+
+if mode == 6
+
+  client = OAuth2::Client.new(client_id, client_secret, oauth_params)
+  at = OAuth2::AccessToken.new(client, token, refresh_token: refresh_token)
+  service = Quickbooks::Service::Invoice.new
+  service.access_token = at
+  service.realm_id = realm_id
+
+  invoice = Quickbooks::Model::Invoice.new
+  invoice.customer_id = 1
+  invoice.txn_date = DateTime.now.to_date
+
+  line_item = Quickbooks::Model::InvoiceLineItem.new
+  line_item.amount = 50
+  line_item.description = "Plush Baby Doll"
+  line_item.sales_item! do |detail|
+    detail.unit_price = 50
+    detail.quantity = 1
+    detail.item_id = 3 # Item ID here
+    detail.tax_code_ref = Quickbooks::Model::BaseReference.new('NON')
+  end
+
+  invoice.line_items << line_item
+
+  created_invoice = service.create(invoice)
+
+end
+
+
+if mode == 7
+  client = OAuth2::Client.new(client_id, client_secret, oauth_params)
+  at = OAuth2::AccessToken.new(client, token, refresh_token: refresh_token)
+  service = Quickbooks::Service::TaxRate.new
+  service.access_token = at
+  service.realm_id = realm_id
+  b = service.query
+
 end
