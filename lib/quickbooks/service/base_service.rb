@@ -244,7 +244,9 @@ module Quickbooks
 
       def add_query_string_to_url(url, params)
         if params.is_a?(Hash) && !params.empty?
-          url + "?" + params.collect { |k| "#{k.first}=#{k.last}" }.join("&")
+          keyvalues = params.collect { |k| "#{k.first}=#{k.last}" }.join("&")
+          delim = url.index("?") != nil ? "&" : "?"
+          url + delim + keyvalues
         else
           url
         end

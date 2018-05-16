@@ -48,6 +48,20 @@ describe "Quickbooks::Service::Item" do
     created_item.id.should == "2"
   end
 
+  it "can create an Item with minorversion and requestid" do
+    xml = fixture("fetch_item_by_id.xml")
+    model = Quickbooks::Model::Item
+
+    url = "#{@service.url_for_resource(model::REST_RESOURCE)}&requestid=123"
+    stub_request(:post, url, ["200", "OK"], xml)
+
+    item = Quickbooks::Model::Item.new
+    item.name = "Comfy Pillow"
+
+    created_item = @service.create(item, query: {requestid: 123})
+    created_item.id.should == "2"
+  end
+
   it "can sparse update an Item" do
     model = Quickbooks::Model::Item
     item = Quickbooks::Model::Item.new
