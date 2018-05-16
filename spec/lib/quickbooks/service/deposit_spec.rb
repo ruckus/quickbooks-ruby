@@ -48,6 +48,7 @@ describe "Quickbooks::Service::Deposit" do
                  @service.url_for_resource(resource),
                  ["200", "OK"],
                  fixture("fetch_deposit_by_id.xml"),
+                 {},
                  true)
 
     deposit.line_items << Quickbooks::Model::DepositLineItem.new

@@ -78,7 +78,7 @@ describe "Quickbooks::Service::Vendor" do
     vendor.sync_token = 4
     vendor.id = 1129
     xml = fixture("deleted_vendor.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
     vendor.valid_for_deletion?.should == true
     response = @service.delete(vendor)
     response.display_name.should == "#{vendor.display_name} (Deleted)"

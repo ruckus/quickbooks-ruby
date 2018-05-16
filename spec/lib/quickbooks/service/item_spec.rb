@@ -73,7 +73,7 @@ describe "Quickbooks::Service::Item" do
     item.description = nil
 
     xml = fixture("fetch_item_by_id.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
 
     update_response = @service.update(item, :sparse => true)
     update_response.name.should == 'Plush Baby Doll'
@@ -88,7 +88,7 @@ describe "Quickbooks::Service::Item" do
     item.id = 1
 
     xml = fixture("item_delete_success_response.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
 
     response = @service.delete(item)
     response.active?.should be_nil

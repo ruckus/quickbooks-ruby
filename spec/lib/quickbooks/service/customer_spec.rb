@@ -79,7 +79,7 @@ describe "Quickbooks::Service::Customer" do
     customer.id = 1
 
     xml = fixture("fetch_customer_by_id.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
 
     customer.valid_for_update?.should == true
     update_response = @service.update(customer, :sparse => true)
@@ -94,7 +94,7 @@ describe "Quickbooks::Service::Customer" do
     customer.id = 1
 
     xml = fixture("deleted_customer.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, true)
+    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
 
     customer.valid_for_deletion?.should == true
     response = @service.delete(customer)
