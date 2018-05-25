@@ -289,7 +289,7 @@ module Quickbooks
         when 429
           message = parse_intuit_error[:message]
           raise Quickbooks::TooManyRequests, message
-        when 503, 504
+        when 502, 503, 504
           raise Quickbooks::ServiceUnavailable
         else
           raise "HTTP Error Code: #{status}, Msg: #{response.plain_body}"
