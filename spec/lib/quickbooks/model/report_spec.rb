@@ -7,6 +7,7 @@ describe Quickbooks::Model::Report do
 
   let(:report) { build_report("balancesheet.xml") }
   let(:report_with_years) { build_report("balance_sheet_with_year_summary.xml") }
+  let(:age_payable_report) { build_report("age_payable_detail.xml") }
 
   describe "#xml" do
     it 'exposes the full xml response' do
@@ -44,6 +45,14 @@ describe Quickbooks::Model::Report do
     it 'works with multiple columns' do
       report_with_years.all_rows[3].should == ['Checking', nil, nil, BigDecimal("1201.00")]
       report_with_years.all_rows[4].should == ['Savings', BigDecimal("19.99"), BigDecimal("19.99"), BigDecimal("819.99")]
+    end
+
+    it 'works with text columns' do
+      age_payable_report.all_rows[0].should == ['Text replacment', nil, nil, nil, nil, nil, nil, nil]
+      age_payable_report.all_rows[1].should == ['2018-05-18', 'Journal Entry', BigDecimal('1'), 'Robot', '2012-04-18', BigDecimal('99999'), BigDecimal('-12345678.00'), BigDecimal('-12345678.00')]
+      age_payable_report.all_rows[2].should == ['2018-05-18', 'Bill', nil, 'Robot Parts', '2016-05-28', BigDecimal('100'), BigDecimal('100'), BigDecimal('100')]
+      age_payable_report.all_rows[3].should == ['Total', nil, nil, nil, nil, nil, BigDecimal('.00'), BigDecimal('.00')]
+      age_payable_report.all_rows[4].should == ['TOTAL', nil, nil, nil, nil, nil, BigDecimal('.00'), BigDecimal('.00')]
     end
   end
 
