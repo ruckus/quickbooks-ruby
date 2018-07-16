@@ -1,0 +1,142 @@
+<Report xmlns="http://schema.intuit.com/finance/v3">
+  <Header>
+    <Time>2018-07-13T09:58:36-07:00</Time>
+    <ReportName>AgedPayableDetail</ReportName>
+    <DateMacro>today</DateMacro>
+    <StartPeriod>2018-07-13</StartPeriod>
+    <EndPeriod>2018-07-13</EndPeriod>
+    <Currency>USD</Currency>
+    <Option>
+      <Name>report_date</Name>
+      <Value>2018-07-13</Value>
+    </Option>
+    <Option>
+      <Name>NoReportData</Name>
+      <Value>false</Value>
+    </Option>
+  </Header>
+  <Columns>
+    <Column>
+      <ColTitle>Date</ColTitle>
+      <ColType>Date</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>tx_date</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Transaction Type</ColTitle>
+      <ColType>String</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>txn_type</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Num</ColTitle>
+      <ColType>String</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>doc_num</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Vendor</ColTitle>
+      <ColType>String</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>vend_name</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Due Date</ColTitle>
+      <ColType>Date</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>due_date</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Past Due</ColTitle>
+      <ColType>String</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>past_due</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Amount</ColTitle>
+      <ColType>Money</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>subt_neg_amount</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Open Balance</ColTitle>
+      <ColType>Money</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>subt_neg_open_bal</Value>
+      </MetaData>
+    </Column>
+  </Columns>
+  <Rows>
+    <Row type="Section">
+      <Header>
+        <ColData value="Text replacment" />
+        <ColData value="" />
+        <ColData value="" />
+        <ColData value="" />
+        <ColData value="" />
+        <ColData value="" />
+        <ColData value="" />
+        <ColData value="" />
+      </Header>
+      <Rows>
+        <Row type="Data">
+          <ColData value="2018-05-18" />
+          <ColData value="Journal Entry" id="963" />
+          <ColData value="1" />
+          <ColData value="Robot" id="85" />
+          <ColData value="2012-04-18" />
+          <ColData value="99999" />
+          <ColData value="-12345678.00" />
+          <ColData value="-12345678.00" />
+        </Row>
+        <Row type="Data">
+          <ColData value="2018-05-18" />
+          <ColData value="Bill" id="962" />
+          <ColData value="" />
+          <ColData value="Robot Parts" id="85" />
+          <ColData value="2016-05-28" />
+          <ColData value="100" />
+          <ColData value="100.00" />
+          <ColData value="100.00" />
+        </Row>
+      </Rows>
+      <Summary>
+        <ColData value="Total" />
+        <ColData value="" />
+        <ColData value="" />
+        <ColData value="" />
+        <ColData value="" />
+        <ColData value="" />
+        <ColData value=".00" />
+        <ColData value=".00" />
+      </Summary>
+    </Row>
+    <Row type="Section">
+      <Summary>
+        <ColData value="TOTAL" />
+        <ColData value="" />
+        <ColData value="" />
+        <ColData value="" />
+        <ColData value="" />
+        <ColData value="" />
+        <ColData value=".00" />
+        <ColData value=".00" />
+      </Summary>
+    </Row>
+  </Rows>
+</Report>
