@@ -37,13 +37,9 @@ module Quickbooks
         row_node.elements.map.with_index do |el, i|
           value = el.attr('value')
 
-          if i.zero? # Return the first column as a string, its the label.
-            value
-          elsif value.blank?
-            nil
-          else
-            BigDecimal(value)
-          end
+          next nil if value.blank?
+          next value if value.to_s.match(/^\d+$|^\d+.\d+$|^-\d+|^-\d+.\d+$|^.\d+$/).nil?
+          BigDecimal(value)
         end
       end
 
