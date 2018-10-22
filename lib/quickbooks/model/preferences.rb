@@ -4,6 +4,7 @@ module Quickbooks
       XML_COLLECTION_NODE = "Preferences"
       XML_NODE            = "Preferences"
       REST_RESOURCE       = 'preferences'
+      MINORVERSION        = 4
 
       xml_name XML_NODE
 
@@ -24,7 +25,7 @@ module Quickbooks
                                                 AllowServiceDate? AllowShipping? DefaultShippingAccount? DefaultTerms DefaultCustomerMessage),
         :vendor_and_purchase  => %w(TrackingByCustomer? BillableExpenseTracking? DefaultTerms? DefaultMarkup? POCustomField),
         :time_tracking        => %w(UseServices? BillCustomers? ShowBillRateToAll WorkWeekStartDate MarkTimeEntiresBillable?),
-        :tax                  => %w(UsingSalesTax?),
+        :tax                  => %w(UsingSalesTax? PartnerTaxEnabled?),
         :currency             => %w(MultiCurrencyEnabled? HomeCurrency),
         :report               => %w(ReportBasis)
       }

@@ -106,6 +106,7 @@ Demo Company</Message>
   </TimeTrackingPrefs>
   <TaxPrefs>
     <UsingSalesTax>false</UsingSalesTax>
+    <PartnerTaxEnabled>false</PartnerTaxEnabled>
   </TaxPrefs>
   <CurrencyPrefs>
     <MultiCurrencyEnabled>false</MultiCurrencyEnabled>

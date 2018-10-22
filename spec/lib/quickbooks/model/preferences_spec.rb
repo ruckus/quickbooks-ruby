@@ -7,6 +7,7 @@ describe "Quickbooks::Model::Preferences" do
     preferences.currency.home_currency.should == "USD"
 
     preferences.tax.using_sales_tax?.should be_false
+    preferences.tax.partner_tax_enabled?.should be_false
     preferences.time_tracking.bill_customers?.should be_true
 
     preferences.email_messages.invoice_message.subject.should == "Invoice from Demo Company"
