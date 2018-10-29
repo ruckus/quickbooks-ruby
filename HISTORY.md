@@ -1,3 +1,11 @@
+## 0.6.4 (2018-10-29)
+
+Yanked 0.6.3; built incorrectly. 0.6.4 has no functional differences between 0.6.3
+
+## 0.6.3 (2018-10-21)
+
+Added minorversion=21 support to Preferences
+
 ## 0.6.2 (2018-05-16)
 
 Fixed bug with generating an invalid URL when both requestid and minorversions are specified. Addresses #430
