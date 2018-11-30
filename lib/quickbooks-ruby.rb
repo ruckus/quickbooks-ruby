@@ -217,17 +217,18 @@ module Quickbooks
     end
   end # << self
 
-  class InvalidModelException < StandardError; end
-  class AuthorizationFailure < StandardError; end
-  class Forbidden < StandardError; end
-  class NotFound < StandardError; end
-  class RequestTooLarge < StandardError; end
+  class Error < StandardError; end
+  class InvalidModelException < Error; end
+  class AuthorizationFailure < Error; end
+  class Forbidden < Error; end
+  class NotFound < Error; end
+  class RequestTooLarge < Error; end
   class ThrottleExceeded < Forbidden; end
-  class TooManyRequests < StandardError; end
-  class ServiceUnavailable < StandardError; end
-  class MissingRealmError < StandardError; end
+  class TooManyRequests < Error; end
+  class ServiceUnavailable < Error; end
+  class MissingRealmError < Error; end
 
-  class IntuitRequestException < StandardError
+  class IntuitRequestException < Error
     attr_accessor :message, :code, :detail, :type, :request_xml, :request_json
 
     def initialize(msg)
