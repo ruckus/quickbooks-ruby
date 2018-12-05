@@ -1,4 +1,6 @@
 describe "Quickbooks::Service::CompanyCurrency" do
+  let(:model) { Quickbooks::Model::CompanyCurrency }
+
   before(:all) do
     construct_service :company_currency
   end
@@ -13,9 +15,36 @@ describe "Quickbooks::Service::CompanyCurrency" do
     company_currency.name.should == 'Euro'
   end
 
-  it 'can delete a company_currency' do
+  it 'can fetch a company currency by id' do
+    xml = fixture('fetch_company_currency_by_id.xml')
+    stub_request(:get,
+      "#{@service.url_for_resource(model::REST_RESOURCE)}/1",
+      ["200", "OK"],
+      xml
+    )
+    company_currency = @service.fetch_by_id(1)
+
+    company_currency.id.should == "1"
+    company_currency.name.should == 'Euro'
+  end
+
+  it 'can create a company currency' do
+    xml = fixture('fetch_company_currency_by_id.xml')
+    stub_request(:post,
+      @service.url_for_resource(model::REST_RESOURCE),
+      ["200", "OK"],
+      xml
+    )
+    company_currency = model.new(:id => 1, :sync_token => 2, :code => 'EUR')
+
+    company_currency.should be_valid_for_create
+    created_company_currency = @service.create(company_currency)
+    created_company_currency.id.should == '1'
+    created_company_currency.code.should == 'EUR'
+  end
+
+  it 'can delete a company currency' do
     xml = fixture('deleted_company_currency.xml')
-    model = Quickbooks::Model::CompanyCurrency
     company_currency = model.new(:id => 1, :sync_token => 2, :code => 'EUR')
     stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
 
