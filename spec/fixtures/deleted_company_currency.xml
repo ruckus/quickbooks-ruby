@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2013-07-11T08:30:10.953-07:00">
+  <CompanyCurrency domain="QBO" sparse="false">
+    <Id>1</Id>
+    <SyncToken>3</SyncToken>
+    <MetaData>
+      <CreateTime>2013-04-20T10:32:18-07:00</CreateTime>
+      <LastUpdatedTime>2013-07-11T08:27:06-07:00</LastUpdatedTime>
+    </MetaData>
+    <Name>Euro</Name>
+    <Code>EUR</Code>
+    <Active>false</Active>
+  </CompanyCurrency>
+</IntuitResponse>
