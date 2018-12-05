@@ -1,10 +1,12 @@
 module Quickbooks
   module Model
     class CompanyCurrency < BaseModel
+      include NameEntity::PermitAlterations
+
       XML_COLLECTION_NODE = 'CompanyCurrency'
       XML_NODE = 'CompanyCurrency'
       REST_RESOURCE = 'companycurrency'
-      
+
       xml_name XML_NODE
       xml_accessor :id, :from => 'Id'
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
