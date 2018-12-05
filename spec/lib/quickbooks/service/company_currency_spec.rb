@@ -5,8 +5,6 @@ describe "Quickbooks::Service::CompanyCurrency" do
 
   it "can query for company currency" do
     xml = fixture("company_currency_query.xml")
-    model = Quickbooks::Model::CompanyCurrency
-
     stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
     company_currency_query = @service.query
     company_currency_query.entries.count.should == 1
