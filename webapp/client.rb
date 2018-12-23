@@ -11,7 +11,7 @@ Dotenv.load(File.dirname(__FILE__) + '/.env')
 Quickbooks.sandbox_mode = true
 Quickbooks.log = true
 
-mode = 6
+mode = 0
 
 token = ENV['TOKEN']
 realm_id = ENV['REALM_ID']
