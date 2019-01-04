@@ -628,7 +628,7 @@ service = Quickbooks::Service::ChangeDataCapture.new
 ...
 # define the list of entities to query
 entities = ["Invoice", "Bill", "Payment"] #etc
-changed = service.since(entities, Time.now.utc - 5 days)
+changed = service.since(entities, Time.now.utc - 5.days)
 ...
 # parse the XML to a list of Quickbooks::Models
 changed_as_hash = changed.all_types
@@ -646,25 +646,25 @@ It is possible to request changes up to 30 days ago.
 ```ruby
 service = Quickbooks::Service::InvoiceChange.new
 ...
-changed = service.since(Time.now.utc - 5 days)
+changed = service.since(Time.now.utc - 5.days)
 ```
 
 ```ruby
 customer_service = Quickbooks::Service::CustomerChange.new
 ...
-customer_changed = customer_service.since(Time.now.utc - 5 days)
+customer_changed = customer_service.since(Time.now.utc - 5.days)
 ```
 
 ```ruby
 vendor_service = Quickbooks::Service::VendorChange.new
 ...
-vendor_changed = vendor_service.since(Time.now.utc - 5 days)
+vendor_changed = vendor_service.since(Time.now.utc - 5.days)
 ```
 
 ```ruby
 item_service = Quickbooks::Service::ItemChange.new
 ...
-item_changed = item_service.since(Time.now.utc - 5 days)
+item_changed = item_service.since(Time.now.utc - 5.days)
 ```
 
 
