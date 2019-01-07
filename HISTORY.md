@@ -1,3 +1,10 @@
+## 0.6.5 (2019-01-07)
+
+* adding LinkedTxn collection into Quickbooks::Model::Bill per v3 API spec (#452), thank you @Vitalijs
+* Relax oauth gem dependency (#449) allow anything >= 0.4.5 but < 0.5, thank you @jnraine
+* Updates to the CompanyCurrency model, thank you @chrisgreen1993
+* Add a base class to easily rescue all QBO exceptions (#445) Having all the errors inherit from a single class means you can just rescue `Quickbooks::Error` and handle all of this gem's exceptions. Thank you @drewish
+
 ## 0.6.4 (2018-10-29)
 
 Yanked 0.6.3; built incorrectly. 0.6.4 has no functional differences between 0.6.3
