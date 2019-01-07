@@ -19,6 +19,8 @@ module Quickbooks
 
       xml_accessor :private_note, :from => 'PrivateNote'
 
+      xml_accessor :linked_transactions, :from => 'LinkedTxn', :as => [LinkedTransaction]
+
       xml_accessor :vendor_ref, :from => 'VendorRef', :as => BaseReference
       xml_accessor :payer_ref, :from => 'PayerRef', :as => BaseReference
       xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => BaseReference

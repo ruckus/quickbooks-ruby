@@ -43,6 +43,14 @@ describe "Quickbooks::Model::Bill" do
     line_item1.item_based_expense_item?.should == true
   end
 
+  it "can parse a bill with LinkedTxn from XML" do
+    xml = fixture("bill_linked_transactions.xml")
+    bill = Quickbooks::Model::Bill.from_xml(xml)
+    bill.linked_transactions.size.should == 1
+    linked_txn1 = bill.linked_transactions[0]
+    linked_txn1.bill_payment_check_type?.should == true
+  end
+
   describe "#global_tax_calculation" do
     subject { Quickbooks::Model::Bill.new }
     it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxInclusive"

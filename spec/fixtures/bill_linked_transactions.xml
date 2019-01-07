@@ -1,0 +1,30 @@
+<Bill xmlns="http://schema.intuit.com/finance/v3">
+  <Id>3526</Id>
+  <SyncToken>1</SyncToken>
+  <MetaData>
+    <CreateTime>2019-01-07T10:45:35-08:00</CreateTime>
+    <LastUpdatedTime>2019-01-07T10:47:25-08:00</LastUpdatedTime>
+  </MetaData>
+  <TxnDate>2019-01-07</TxnDate>
+  <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+  <LinkedTxn>
+    <TxnId>3527</TxnId>
+    <TxnType>BillPaymentCheck</TxnType>
+  </LinkedTxn>
+  <Line>
+    <Id>1</Id>
+    <LineNum>1</LineNum>
+    <Amount>500.00</Amount>
+    <DetailType>AccountBasedExpenseLineDetail</DetailType>
+    <AccountBasedExpenseLineDetail>
+      <AccountRef name="Advertising">7</AccountRef>
+      <BillableStatus>NotBillable</BillableStatus>
+      <TaxCodeRef>NON</TaxCodeRef>
+    </AccountBasedExpenseLineDetail>
+  </Line>
+  <VendorRef name="Bob's Burger Joint">56</VendorRef>
+  <APAccountRef name="Accounts Payable (A/P)">33</APAccountRef>
+  <TotalAmt>500.00</TotalAmt>
+  <DueDate>2019-01-07</DueDate>
+  <Balance>0</Balance>
+</Bill>
