@@ -4,6 +4,7 @@ module Quickbooks
       include Definition
       include ActiveModel::AttributeMethods
       include ActiveModel::Validations
+      include ActiveModel::AttributeAssignment
       include Validator
       include ROXML
 

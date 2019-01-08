@@ -70,6 +70,14 @@ describe "Quickbooks::Model::BaseModel" do
     end
   end
 
+  describe "#assign_attributes=" do
+    it "assigns values into attributes" do
+      foo_model.assign_attributes({ baz: "quiz", bar: { foo: 1 }, amount: 30 })
+
+      foo_model.attributes.should eq("baz" => "quiz", "bar" => {"foo" => 1}, "amount" => 30)
+    end
+  end
+
   describe "#[]" do
     it "delegates to the underlying attributes" do
       expect(bar_model[:foo]).to eq(42)
