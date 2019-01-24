@@ -4,8 +4,11 @@ rvm:
   - 2.0.0
   - 2.1.0
   - 2.2.0
+  - 2.3.0
+  - 2.4.0
+  - 2.5.0
 # Bundler 1.13 added support for `ruby RUBY_VERSION` in the Gemfile
-before_install: gem install bundler -v '>= 1.13.0'
+before_install: gem install bundler -v '1.17.3'
 
 sudo: false
 notifications:
