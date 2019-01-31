@@ -10,7 +10,7 @@ module Quickbooks
       XML_COLLECTION_NODE = "Item"
       XML_NODE = "Item"
       REST_RESOURCE = 'item'
-      MINORVERSION = 4
+      MINORVERSION = 33
 
       INVENTORY_TYPE = 'Inventory'
       NON_INVENTORY_TYPE = 'NonInventory'
@@ -29,6 +29,8 @@ module Quickbooks
       xml_accessor :sub_item?, :from => 'SubItem'
       xml_accessor :parent_ref, :from => 'ParentRef', :as => Integer
       xml_accessor :level, :from => 'Level', :as => Integer
+      xml_accessor :pref_vendor_ref, :from => 'PrefVendorRef', :as => BaseReference
+      xml_accessor :tax_classification_ref, :from => 'TaxClassificationRef', :as => BaseReference
 
       # read-only
       xml_accessor :fully_qualified_name, :from => 'FullyQualifiedName'
@@ -55,6 +57,7 @@ module Quickbooks
 
       reference_setters :parent_ref, :income_account_ref, :expense_account_ref
       reference_setters :asset_account_ref, :sales_tax_code_ref, :purchase_tax_code_ref
+      reference_setters :pref_vendor_ref, :tax_classification_ref
 
       #== Validations
       validates_length_of :name, :minimum => 1

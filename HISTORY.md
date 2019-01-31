@@ -1,3 +1,8 @@
+## 0.6.6 (2019-01-30)
+
+* Implemented minorversion support for Customer (at 33)
+* Added PrefVendorRef field support to Item
+
 ## 0.6.5 (2019-01-07)
 
 * adding LinkedTxn collection into Quickbooks::Model::Bill per v3 API spec (#452), thank you @Vitalijs

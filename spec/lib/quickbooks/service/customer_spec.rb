@@ -18,7 +18,8 @@ describe "Quickbooks::Service::Customer" do
   it "can fetch a customer by ID" do
     xml = fixture("fetch_customer_by_id.xml")
     model = Quickbooks::Model::Customer
-    stub_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/1", ["200", "OK"], xml)
+    stub_request(:get, "#{@service.url_for_base}/customer/1?minorversion=#{Quickbooks::Model::Customer::MINORVERSION}", ["200", "OK"], xml)
+
     customer = @service.fetch_by_id(1)
     customer.fully_qualified_name.should == "Thrifty Meats"
   end
