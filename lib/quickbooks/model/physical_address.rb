@@ -20,11 +20,11 @@ module Quickbooks
       end
 
       def lat_to_f
-        BigDecimal.new(lat)
+        BigDecimal(lat)
       end
 
       def lon_to_f
-        BigDecimal.new(lon)
+        BigDecimal(lon)
       end
 
       def have_lat?

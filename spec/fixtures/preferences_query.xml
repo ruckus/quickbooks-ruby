@@ -35,6 +35,13 @@
             <BooleanValue>false</BooleanValue>
           </CustomField>
         </CustomField>
+        <CustomField xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="StringTypeCustomFieldDefinition">
+          <CustomField>
+            <Name>SalesFormsPrefs.SalesCustomName1</Name>
+            <Type>StringType</Type>
+            <StringValue>Reference</StringValue>
+          </CustomField>
+        </CustomField>
         <CustomTxnNumbers>false</CustomTxnNumbers>
         <AllowDeposit>false</AllowDeposit>
         <AllowDiscount>false</AllowDiscount>

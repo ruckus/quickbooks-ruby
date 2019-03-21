@@ -259,7 +259,9 @@ module Quickbooks
 
       def check_response(response, options = {})
         log "------ RESPONSE_HEADERS -----"
-        response.each_header {|h| log "#{h}: #{response[h]}"}        
+        if log?
+          response.each_header {|h| log "#{h}: #{response[h]}"}
+        end
         log "------ QUICKBOOKS-RUBY RESPONSE ------"
         log "RESPONSE CODE = #{response.code}"
         log_response_body(response)

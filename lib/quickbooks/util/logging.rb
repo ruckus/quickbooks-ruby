@@ -5,6 +5,10 @@ module Quickbooks
         ::Quickbooks.log(msg)
       end
 
+      def log?
+        ::Quickbooks.log?
+      end
+
       def log_xml(str)
         if ::Quickbooks.log_xml_pretty_print? && !(str and str.empty?)
           Nokogiri::XML(str).to_xml
