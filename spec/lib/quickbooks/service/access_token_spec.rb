@@ -44,17 +44,17 @@ describe Quickbooks::Service::AccessToken do
     response.error_message.should == "Invalid App Token"
   end
 
-  it "can successfully disconnect" do
+  it "can successfully disconnect [oauth2]" do
     xml = fixture("disconnect_200.xml")
-    stub_http_request(:get, Quickbooks::Service::AccessToken::DISCONNECT_URL, ["200", "OK"], xml, true)
+    stub_http_request(:get, Quickbooks::Service::AccessToken::DISCONNECT_URL_OAUTH2, ["200", "OK"], xml, true)
 
     response = @service.disconnect
     response.error?.should == false
   end
 
-  it "can fail to disconnect if the auth token is invalid" do
+  it "can fail to disconnect if the auth token is invalid [oauth2]" do
     xml = fixture("disconnect_270.xml")
-    stub_http_request(:get, Quickbooks::Service::AccessToken::DISCONNECT_URL, ["200", "OK"], xml, true)
+    stub_http_request(:get, Quickbooks::Service::AccessToken::DISCONNECT_URL_OAUTH2, ["200", "OK"], xml, true)
 
     response = @service.disconnect
     response.error?.should == true
