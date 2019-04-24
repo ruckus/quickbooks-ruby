@@ -23,7 +23,8 @@ module Quickbooks
       # more information @here - https://developer.intuit.com/app/developer/qbo/docs/develop/explore-the-quickbooks-online-api/change-data-capture#using-change-data-capture
       #
       def time
-        xml.root.attribute('time')&.value
+        attribute = xml.root.attribute('time')
+        attribute.value if attribute
       end
 
       private
