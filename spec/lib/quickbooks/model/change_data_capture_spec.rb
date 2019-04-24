@@ -14,6 +14,7 @@ describe "Quickbooks::Model::ChangeDataCapture" do
   it "should produce full models for returned entities" do
     xml = Nokogiri::XML(fixture("change_data_capture_response.xml"))
     response = Quickbooks::Model::ChangeDataCapture.new(xml: xml)
+    response.time == "2016-04-13T07:52:34.949-07:00"
     invoice = response.all_types["Invoice"].first
 
     invoice.meta_data.should_not be_nil
