@@ -46,7 +46,7 @@ describe Quickbooks::Service::AccessToken do
 
   it "can successfully disconnect [oauth2]" do
     xml = fixture("disconnect_200.xml")
-    stub_http_request(:get, Quickbooks::Service::AccessToken::DISCONNECT_URL_OAUTH2, ["200", "OK"], xml, true)
+    stub_http_request(:post, Quickbooks::Service::AccessToken::DISCONNECT_URL_OAUTH2, ["200", "OK"], xml, true)
 
     response = @service.disconnect
     response.error?.should == false
@@ -54,8 +54,7 @@ describe Quickbooks::Service::AccessToken do
 
   it "can fail to disconnect if the auth token is invalid [oauth2]" do
     xml = fixture("disconnect_270.xml")
-    stub_http_request(:get, Quickbooks::Service::AccessToken::DISCONNECT_URL_OAUTH2, ["200", "OK"], xml, true)
-
+    stub_http_request(:post, Quickbooks::Service::AccessToken::DISCONNECT_URL_OAUTH2, ["200", "OK"], xml, true)
     response = @service.disconnect
     response.error?.should == true
     response.error_code.should    == "270"
