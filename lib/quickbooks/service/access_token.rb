@@ -24,14 +24,14 @@ module Quickbooks
       def disconnect
         result = nil
 
-        disconnect_url = nil
-
         if oauth_v1?
-          disconnect_url = DISCONNECT_URL_OAUTH1
+          response = do_http_get(DISCONNECT_URL_OAUTH1)
         elsif oauth_v2?
-          disconnect_url = DISCONNECT_URL_OAUTH2
+          conn = Faraday.new
+          conn.basic_auth oauth.client.id, oauth.client.secret
+          raw_response = conn.post(DISCONNECT_URL_OAUTH2, { token: oauth.refresh_token || oauth.token })
+          response = Quickbooks::Service::Responses::OAuth2HttpResponse.new(raw_response)
         end
-        response = do_http_get(disconnect_url)
 
         if response
           code = response.code.to_i
