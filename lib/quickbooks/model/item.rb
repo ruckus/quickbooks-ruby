@@ -50,8 +50,9 @@ module Quickbooks
       xml_accessor :sales_tax_code_ref, :from => 'SalesTaxCodeRef', :as => BaseReference
       xml_accessor :purchase_tax_code_ref, :from => 'PurchaseTaxCodeRef', :as => BaseReference
       xml_accessor :inv_start_date, :from => 'InvStartDate', :as => Date
-
+      xml_accessor :custom_fields, :from => "CustomField", as: [CustomField]
       xml_accessor :print_grouped_items?, :from => 'PrintGroupedItems'
+
 
       xml_accessor :item_group_details, :from => 'ItemGroupDetail', :as => ItemGroupDetail
 

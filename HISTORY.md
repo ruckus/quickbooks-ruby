@@ -1,3 +1,14 @@
+## 0.6.7 (2019-07-24)
+
+* Preferences sales_forms_prefs CustomField support
+* Fix test failures due to logging call on Stubbed object
+* Add CustomField#value accessor suitable for all CustomField types
+* Add support for custom fields config in Preferences
+* Change deprecated use of BigDecimal.new
+
+Thank you @armstrjare
+
+
 ## 0.6.6 (2019-01-30)
 
 * Implemented minorversion support for Customer (at 33)
