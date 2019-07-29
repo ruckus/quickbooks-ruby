@@ -4,6 +4,7 @@ module Quickbooks
       XML_COLLECTION_NODE = "Preferences"
       XML_NODE            = "Preferences"
       REST_RESOURCE       = 'preferences'
+      MINORVERSION = 21
 
       xml_name XML_NODE
 
@@ -17,10 +18,10 @@ module Quickbooks
       end
 
       PREFERENCE_SECTIONS = {
-        :accounting_info      => %w(TrackDepartments DepartmentTerminology ClassTrackingPerTxnLine? ClassTrackingPerTxn? CustomerTerminology),
+        :accounting_info      => %w(TrackDepartments DepartmentTerminology ClassTrackingPerTxnLine? ClassTrackingPerTxn? CustomerTerminology BookCloseDate),
         :product_and_services => %w(ForSales? ForPurchase? QuantityWithPriceAndRate? QuantityOnHand?),
-        :sales_forms          => %w(CustomTxnNumbers? AllowDeposit? AllowDiscount? DefaultDiscountAccount? AllowEstimates? EstimateMessage? 
-                                                ETransactionEnabledStatus? ETransactionAttachPDF? ETransactionPaymentEnabled? IPNSupportEnabled? 
+        :sales_forms          => %w(CustomTxnNumbers? AllowDeposit? AllowDiscount? DefaultDiscountAccount? AllowEstimates? EstimateMessage?
+                                                ETransactionEnabledStatus? ETransactionAttachPDF? ETransactionPaymentEnabled? IPNSupportEnabled?
                                                 AllowServiceDate? AllowShipping? DefaultShippingAccount? DefaultTerms DefaultCustomerMessage),
         :vendor_and_purchase  => %w(TrackingByCustomer? BillableExpenseTracking? DefaultTerms? DefaultMarkup? POCustomField),
         :time_tracking        => %w(UseServices? BillCustomers? ShowBillRateToAll WorkWeekStartDate MarkTimeEntiresBillable?),
