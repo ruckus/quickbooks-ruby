@@ -14,6 +14,7 @@ module Quickbooks
 
       #== Constants
       REST_RESOURCE = 'invoice'
+      MINORVERSION = 1
       XML_COLLECTION_NODE = "Invoice"
       XML_NODE = "Invoice"
       EMAIL_STATUS_NEED_TO_SEND = 'NeedToSend'
