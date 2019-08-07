@@ -16,6 +16,16 @@ module Quickbooks
         line
       end
 
+      let(:second_line) do
+        line = Model::Line.new
+        line.group_line! do |group_line|
+          group_line.quantity = 15
+          group_line.line_items = [ Model::Line.new ]
+        end
+
+        line
+      end
+
       before do
         subject.company_id = "9991111222"
         subject.access_token = construct_oauth
@@ -51,7 +61,7 @@ module Quickbooks
         shipping_reference = Quickbooks::Model::BaseReference.new('FedEx', name: 'FedEx')
         receipt.ship_method_ref = shipping_reference
         receipt.txn_date = Time.now
-        receipt.line_items = [line]
+        receipt.line_items = [line, second_line]
 
         receipt = subject.create(receipt)
         expect(receipt.line_items.first.description).to eq line.description
