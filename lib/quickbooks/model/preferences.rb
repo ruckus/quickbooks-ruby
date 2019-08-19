@@ -4,7 +4,7 @@ module Quickbooks
       XML_COLLECTION_NODE = "Preferences"
       XML_NODE            = "Preferences"
       REST_RESOURCE       = 'preferences'
-      MINORVERSION = 21
+      MINORVERSION = 37
 
       xml_name XML_NODE
 
