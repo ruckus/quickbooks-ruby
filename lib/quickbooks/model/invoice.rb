@@ -17,6 +17,7 @@ module Quickbooks
       XML_COLLECTION_NODE = "Invoice"
       XML_NODE = "Invoice"
       EMAIL_STATUS_NEED_TO_SEND = 'NeedToSend'
+      MINORVERSION = 37
 
       xml_accessor :id, :from => 'Id'
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
