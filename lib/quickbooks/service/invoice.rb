@@ -8,7 +8,6 @@ module Quickbooks
 
       def url_for_resource(resource)
         url = super(resource)
-        "#{url}?minorversion=#{Quickbooks::Model::Invoice::MINORVERSION}"
       end
 
       def fetch_by_id(id, params = {})
