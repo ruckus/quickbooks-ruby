@@ -6,7 +6,7 @@ describe "Quickbooks::Service::Term" do
   let(:term) { model.new :id => 11, :name => "Sample Term" }
 
   it "can query for terms" do
-    stub_request(:get, @service.url_for_query, ["200", "OK"], fixture("terms.xml"))
+    stub_http_request(:get, @service.url_for_query, ["200", "OK"], fixture("terms.xml"))
 
     terms = @service.query
 
@@ -16,7 +16,7 @@ describe "Quickbooks::Service::Term" do
   end
 
   it "can fetch a term by ID" do
-    stub_request(:get,
+    stub_http_request(:get,
                  "#{@service.url_for_resource(resource)}/11",
                  ["200", "OK"],
                  fixture("term_by_id.xml"))
@@ -27,7 +27,7 @@ describe "Quickbooks::Service::Term" do
   end
 
   it "can create a term" do
-    stub_request(:post,
+    stub_http_request(:post,
                  @service.url_for_resource(resource),
                  ["200", "OK"],
                  fixture("fetch_term_by_id.xml"))
@@ -38,7 +38,7 @@ describe "Quickbooks::Service::Term" do
   end
 
   it "can sparse update a term" do
-    stub_request(:post,
+    stub_http_request(:post,
                  @service.url_for_resource(resource),
                  ["200", "OK"],
                  fixture("fetch_term_by_id.xml"),
@@ -51,7 +51,7 @@ describe "Quickbooks::Service::Term" do
   end
 
   it "can delete a term" do
-    stub_request(:post,
+    stub_http_request(:post,
                  "#{@service.url_for_resource(resource)}",
                  ["200", "OK"],
                  fixture("term_delete_success_response.xml"))

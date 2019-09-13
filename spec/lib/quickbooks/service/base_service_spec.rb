@@ -9,7 +9,7 @@ describe Quickbooks::Service::BaseService do
 
   describe "#url_for_query" do
     shared_examples "encoding the query correctly" do |domain|
-      let(:correct_url) { "https://#{domain}/v3/company/1234/query?query=SELECT+*+FROM+Customer+where+Name+%3D+%27John%27" }
+      let(:correct_url) { "https://#{domain}/v3/company/1234/query?query=SELECT+%2A+FROM+Customer+where+Name+%3D+%27John%27" }
 
       it "correctly encodes the query" do
         subject.realm_id = 1234
@@ -43,112 +43,7 @@ describe Quickbooks::Service::BaseService do
 
     it "correctly initializes with an access_token and realm" do
       @service.company_id.should == "9991111222"
-      @service.oauth.is_a?(OAuth::AccessToken).should == true
-    end
-  end
-
-  describe 'do_http' do
-    let(:base_url) { 'http://example.com/'}
-
-    [:get, :post, :upload].each do |request_method|
-      context 'when no access_token exists' do
-        before do
-          construct_service :base_service, nil
-        end
-
-        it "should raise RunTimeError" do
-          expect { @service.send(:do_http, request_method, base_url, nil, {}) }.to raise_error
-        end
-      end
-    end
-
-    context 'when an access token exists' do
-      [:get, :post].each do |request_method|
-        context "when the method is #{request_method}" do
-          before do
-            construct_service :base_service
-            @service.stub(:do_http).and_call_original
-          end
-
-          context 'when a non-302 response is received' do
-            before do
-              stub_request(request_method, base_url, ["200", "OK"], fixture("items.xml"))
-            end
-
-            it "calls do_http only once" do
-              @service.send(:do_http, request_method, base_url, nil, {})
-              @service.should have_received(:do_http).once
-            end
-          end
-
-          context 'when a 302 response is received' do
-            let(:headers) do
-              {
-                "Content-Type" => "application/xml",
-                "Accept" => "application/xml",
-                "Accept-Encoding" => "gzip, deflate"
-              }
-            end
-            let(:redirect_location) { "#{base_url}elsewhere" }
-
-            before do
-              stub_request(request_method, base_url, ["302", "Found"], fixture("items.xml"), :location => redirect_location)
-              stub_request(request_method, redirect_location, ["200", "OK"], fixture("items.xml"))
-            end
-
-            it "calls do_http twice" do
-              @service.send(:do_http, request_method, base_url, nil, headers)
-              @service.should have_received(:do_http).with(request_method, base_url, nil, headers).once
-              @service.should have_received(:do_http).with(request_method, redirect_location, nil, headers).once
-            end
-          end
-        end
-      end
-
-      context 'when the method is upload' do
-        before do
-          construct_service :base_service
-          @service.stub(:do_http).and_call_original
-        end
-
-        context 'when a non-302 response is received' do
-          before do
-            stub_request(:post, base_url, ["200", "OK"], fixture("items.xml"))
-          end
-
-          it "calls do_http only once" do
-            @service.send(:do_http, :upload, base_url, nil, {})
-            @service.should have_received(:do_http).once
-          end
-        end
-
-        context 'when a 302 response is received' do
-          let(:headers) do
-            {
-              "Content-Type" => "application/xml",
-              "Accept" => "application/xml",
-              "Accept-Encoding" => "gzip, deflate"
-            }
-          end
-          let(:redirect_location) { "#{base_url}elsewhere" }
-
-          before do
-            stub_request(:post, base_url, ["302", "Found"], fixture("items.xml"), :location => redirect_location)
-          end
-
-          it "calls do_http only once" do
-            begin
-              @service.send(:do_http, :upload, base_url, nil, {})
-            rescue
-              @service.should have_received(:do_http).once
-            end
-          end
-
-          it 'raises an error' do
-            expect { @service.send(:do_http, :upload, base_url, nil, headers) }.to raise_error(RuntimeError)
-          end
-        end
-      end
+      @service.oauth.should_not be_nil
     end
   end
 
@@ -244,39 +139,14 @@ describe Quickbooks::Service::BaseService do
       expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::TooManyRequests, message)
     end
 
-    it "should raise ServiceUnavailable on HTTP 502, 503 and 504" do
+    it "should raise ServiceUnavailable on HTTP 503 and 504" do
       xml = fixture('generic_error.xml')
-
-      response = Struct.new(:code, :plain_body).new(502, xml)
-      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ServiceUnavailable)
 
       response = Struct.new(:code, :plain_body).new(503, xml)
       expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ServiceUnavailable)
 
       response = Struct.new(:code, :plain_body).new(504, xml)
       expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ServiceUnavailable)
-    end
-
-    it "handles error XML with a missing namespace" do
-      xml = <<-XML
-<?xml version=\"1.0\"?>
-<IntuitResponse time="2013-11-15T13:16:49.528-08:00">
-  <Fault type="SystemFault">
-    <Error code="10000">
-      <Message>An application error has occurred while processing your request</Message>
-      <Detail>System Failure Error: Could not find resource for relative : some more info here</Detail>
-    </Error>
-  </Fault>
-</IntuitResponse>
-      XML
-      response = Struct.new(:code, :plain_body).new(200, xml)
-
-      begin
-        @service.send :check_response, response
-        fail "Exception expected"
-      rescue Quickbooks::IntuitRequestException => exception
-        expect(exception.detail).to eq(xml)
-      end
     end
   end
 
@@ -292,7 +162,7 @@ describe Quickbooks::Service::BaseService do
 
     before do
       construct_service :vendor
-      stub_request(:get, @service.url_for_query, ["200", "OK"], fixture("vendors.xml"))
+      stub_http_request(:get, @service.url_for_query, ["200", "OK"], fixture("vendors.xml"))
     end
 
     it "should not log by default" do

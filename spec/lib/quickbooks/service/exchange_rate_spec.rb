@@ -2,7 +2,7 @@ describe "Quickbooks::Service::ExchangeRate" do
   before(:all) { construct_service :exchange_rate }
 
   it "can query exchange rates" do
-    stub_request(:get,
+    stub_http_request(:get,
                  @service.url_for_query,
                  ["200", "OK"],
                  fixture("exchange_rates.xml"))
@@ -17,7 +17,7 @@ describe "Quickbooks::Service::ExchangeRate" do
 
   it "can query exchange rates by currency" do
     model = Quickbooks::Model::ExchangeRate
-    stub_request(:get,
+    stub_http_request(:get,
                  "#{@service.url_for_resource(model::REST_RESOURCE)}?sourcecurrencycode=EUR",
                  ["200", "OK"],
                  fixture("exchange_rate_by_currency.xml"))

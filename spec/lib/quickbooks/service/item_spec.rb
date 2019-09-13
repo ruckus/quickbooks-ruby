@@ -7,7 +7,7 @@ describe "Quickbooks::Service::Item" do
     xml = fixture("items.xml")
     model = Quickbooks::Model::Item
 
-    stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     items = @service.query
     items.entries.count.should == 2
 
@@ -18,7 +18,7 @@ describe "Quickbooks::Service::Item" do
   it "can fetch an Item by ID" do
     xml = fixture("fetch_item_by_id.xml")
     model = Quickbooks::Model::Item
-    stub_request(:get, "#{@service.url_for_base}/item/2?minorversion=#{Quickbooks::Model::Item::MINORVERSION}", ["200", "OK"], xml)
+    stub_http_request(:get, "#{@service.url_for_base}/item/2?minorversion=#{Quickbooks::Model::Item::MINORVERSION}", ["200", "OK"], xml)
     item = @service.fetch_by_id(2)
     item.name.should == "Plush Baby Doll"
   end
@@ -39,7 +39,7 @@ describe "Quickbooks::Service::Item" do
     xml = fixture("fetch_item_by_id.xml")
     model = Quickbooks::Model::Item
 
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
+    stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
 
     item = Quickbooks::Model::Item.new
     item.name = "Comfy Pillow"
@@ -53,7 +53,7 @@ describe "Quickbooks::Service::Item" do
     model = Quickbooks::Model::Item
 
     url = "#{@service.url_for_resource(model::REST_RESOURCE)}&requestid=123"
-    stub_request(:post, url, ["200", "OK"], xml)
+    stub_http_request(:post, url, ["200", "OK"], xml)
 
     item = Quickbooks::Model::Item.new
     item.name = "Comfy Pillow"
@@ -73,7 +73,7 @@ describe "Quickbooks::Service::Item" do
     item.description = nil
 
     xml = fixture("fetch_item_by_id.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
+    stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
 
     update_response = @service.update(item, :sparse => true)
     update_response.name.should == 'Plush Baby Doll'
@@ -88,7 +88,7 @@ describe "Quickbooks::Service::Item" do
     item.id = 1
 
     xml = fixture("item_delete_success_response.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
+    stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
 
     response = @service.delete(item)
     response.active?.should be_nil

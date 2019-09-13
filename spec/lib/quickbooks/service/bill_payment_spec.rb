@@ -12,7 +12,7 @@ describe "Quickbooks::Service::BillPayment" do
   let(:resource) { model::REST_RESOURCE }
 
   it "can query for bill payments" do
-    stub_request(:get,
+    stub_http_request(:get,
                  @service.url_for_query,
                  ["200", "OK"],
                  fixture("bill_payments.xml"))
@@ -25,7 +25,7 @@ describe "Quickbooks::Service::BillPayment" do
   end
 
   it "can fetch a bill_payment by ID" do
-    stub_request(:get,
+    stub_http_request(:get,
                  "#{@service.url_for_resource(resource)}/623",
                  ["200", "OK"],
                  fixture("fetch_bill_payment_by_id.xml"))
@@ -36,7 +36,7 @@ describe "Quickbooks::Service::BillPayment" do
   end
 
   it "can create a bill_payment" do
-    stub_request(:post,
+    stub_http_request(:post,
                  @service.url_for_resource(resource),
                  ["200", "OK"],
                  fixture("fetch_bill_payment_by_id.xml"))
@@ -48,7 +48,7 @@ describe "Quickbooks::Service::BillPayment" do
 
   it "can sparse update a bill_payment" do
     bill_payment.total = 50.0
-    stub_request(:post,
+    stub_http_request(:post,
                  @service.url_for_resource(resource),
                  ["200", "OK"],
                  fixture("fetch_bill_payment_by_id.xml"),
@@ -61,7 +61,7 @@ describe "Quickbooks::Service::BillPayment" do
   end
 
   it "can delete a bill_payment" do
-    stub_request(:post,
+    stub_http_request(:post,
                  "#{@service.url_for_resource(resource)}?operation=delete",
                  ["200", "OK"],
                  fixture("bill_payment_delete_success_response.xml"))

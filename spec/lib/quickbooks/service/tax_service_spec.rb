@@ -26,14 +26,14 @@ describe Quickbooks::Service::TaxService do
   }
 
   it "can create tax code" do
-    stub_request(:post, url, ["200", "OK"], params.to_json)
+    stub_http_request(:post, url, ["200", "OK"], params.to_json)
     tax_service.tax_rate_details = tax_rate_details
     result = subject.create(tax_service)
     expect(result['TaxCodeId']).to eq "5"
   end
 
   it "catch exception if create tax code failed" do
-    stub_request(:post, url, ["200", "OK"], params.to_json)
+    stub_http_request(:post, url, ["200", "OK"], params.to_json)
     expect {
       subject.create(tax_service)
     }.to raise_error(Quickbooks::InvalidModelException)
@@ -41,7 +41,7 @@ describe Quickbooks::Service::TaxService do
   end
 
   it "catch exception if create tax code failed" do
-    stub_request(:post, url, ["200", "OK"], json_fixture(:tax_service_error_dup))
+    stub_http_request(:post, url, ["200", "OK"], json_fixture(:tax_service_error_dup))
     tax_service.tax_rate_details = tax_rate_details
     expect {
       subject.create(tax_service)

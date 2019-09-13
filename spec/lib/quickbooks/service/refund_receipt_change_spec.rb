@@ -5,7 +5,7 @@ describe "Quickbooks::Service::RefundReceiptChange" do
     xml = fixture("refund_receipt_changes.xml")
     model = Quickbooks::Model::RefundReceiptChange
 
-    stub_request(:get, service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, service.url_for_query, ["200", "OK"], xml)
     refund_receipts = service.query
     refund_receipts.entries.count.should == 1
 
