@@ -74,7 +74,13 @@ OAUTH_CONSUMER_SECRET = "OAUTH_CONSUMER_SECRET"
     :authorize_url        => "https://appcenter.intuit.com/Connect/Begin",
     :access_token_path    => "/oauth/v1/get_access_token"
 })
+
+Quickbooks::Configuration.set_oauth_consumer(QB_OAUTH_CONSUMER)
+
+Quickbooks::Configuration.set_tokens_and_realm_id(token, secret, realm_id, :scope => :application)
 ```
+
+You can pass an optional key value pair as last argument to `set_tokens_and_realm_id` method. The key value pair can be `:scope => :application` or `:scope => :thread`. If you want to set the tokens, secret and realm_id on application then you need to pass `:scope => :application`. The default value for `:scope` is `:thread`.
 
 To start the authentication flow with Intuit you include the Intuit Javascript and on a page of your choosing you present the "Connect to Quickbooks" button by including this XHTML:
 
@@ -196,7 +202,41 @@ handle the actual encryption and decryption.
 
 ## Getting Started - Retrieving a list of Customers
 
-The general approach is you first instantiate a `Service` object based on the entity you would like to retrieve. Lets retrieve a list of Customers:
+There are two approaches to retrieve results from Quickbooks. However, you're encouraged to use the first approach as we'll be removing the second approach in the long run.
+
+###### Approach 1
+
+Make sure that you've followed the steps mentioned in [Getting Started & Initiating Authentication Flow with Intuit](#getting-started--initiating-authentication-flow-with-intuit) before you proceed to use Approach 1.
+
+Then you can simply call `Quickbooks::Model::Customer.all` to retrieve a list of all customers. However, there is a default pagination applied and only 20 records are fetched per request. If you want to skip pagination and just want to fetch all the records then you can pass `skip_pagination: true` argument to `Quickbooks::Model::Customer.all`:
+```ruby
+Quickbooks::Model::Customer.all #=> Returns array of first 20 customers
+Quickbooks::Model::Customer.all(nil, skip_pagination: true) #=> Returns array of all customers
+```
+The first argument in the method is query and if you don't pass any query then the default query will be executed which is, in this case, `SELECT * FROM Customer`
+
+Quickbooks models behave exactly the same like ActiveRecord for querying purposes. That means that these models have other methods e.g: `where` `count` `find_by` `find` etc. Following are some examples:
+```ruby
+
+# where
+Quickbooks::Model::Customer.where('') #=> runs default query and returns first 20 customers
+Quickbooks::Model::Customer.where(id: 170) #=> runs a conditional query and returns first 20 customers having id equal to 170
+Quickbooks::Model::Customer.where(id: 170, skip_pagination: true) #=> runs the conditional query and returns all customers having id equal to 170 without pagination
+
+# find_by
+Quickbooks::Model::Customer.find_by('') #=> runs default query and returns first customer
+Quickbooks::Model::Customer.find_by(id: 170) #=> runs a conditional query and returns first customer having id equal to 170
+
+# find
+Quickbooks::Model::Customer.find('') #=> runs default query and returns first customer
+Quickbooks::Model::Customer.find(170) #=> runs a conditional query and returns first customer having id equal to 170
+
+# count
+Quickbooks::Model::Customer.count #=> returns total number of customers in your quickbooks account
+```
+
+###### Approach 2
+The second approach is you first instantiate a `Service` object based on the entity you would like to retrieve. Lets retrieve a list of Customers:
 
 ```ruby
 
@@ -239,8 +279,21 @@ customers.query(query, :page => 2, :per_page => 25)
 ```
 ### Querying in Batches
 
-Often one needs to retrieve multiple pages of records of an Entity type
-and loop over them all. Fortunately there is the `query_in_batches` collection method:
+Often one needs to retrieve multiple pages of records of an Entity type and loop over them all. Again there are two approaches currently supported and first approach is encouraged to be used.
+
+###### Approach 1
+
+Make sure that you've followed the steps mentioned in [Getting Started & Initiating Authentication Flow with Intuit](#getting-started--initiating-authentication-flow-with-intuit) before you proceed to use Approach 1.
+
+```ruby
+Quickbooks::Model::Customer.query_in_batches(query, per_page: 1000) do |batch|
+  batch.each do |customer|
+    # ...
+  end
+end
+```
+###### Approach 2
+As of second approach, there is the `query_in_batches` collection method in each service:
 
 ```ruby
 query = nil

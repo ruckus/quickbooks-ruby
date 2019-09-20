@@ -5,6 +5,7 @@ module Quickbooks
       include ActiveModel::Validations
       include Validator
       include ROXML
+      include ActiveRecordScaffold
 
       xml_convention :camelcase
 
