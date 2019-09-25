@@ -142,7 +142,7 @@ For more information on access token expiration and refresh token expiration, pl
 ### Credentials Encryption
 For simplicity, this example does not encrypt the access credentials. If you are developing an app and
 plan on publishing it to Intuit's marketplace you will need to encrypt the credentials to comply with
-their [security requirements](https://developer.intuit.com/docs/0100_quickbooks_online/0100_essentials/0085_develop_quickbooks_apps/0006_publish_and_market_your_app_with_quickbooks/0005_security_requirements).
+their [security requirements](https://developer.intuit.com/app/developer/qbo/docs/list-on-the-app-store/security-requirements).
 We'd suggest looking at the [attr_encrypted gem](https://github.com/attr-encrypted/attr_encrypted) to
 handle the actual encryption and decryption.
 
