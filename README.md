@@ -53,8 +53,9 @@ you need to config the gem to run in sandbox mode:
 ```ruby
 Quickbooks.sandbox_mode = true
 ```
+
 ## Authorization through OAuth 2.0
-This section is only for newer developer accounts that uses OAuth 2.0 for the apps. For apps that are authorized by OAuth 1, please refer to the next section.
+This section is only for developer accounts that uses OAuth 2.0 for the apps. For apps that are authorized by OAuth 1, please refer to the next section.
 
 ### Getting Started & Initiating Authentication Flow with Intuit
 
@@ -120,7 +121,7 @@ Once you have your user's OAuth token, you can re-use the `OAuth Consumer` and c
 qb_access_token = quickbooks_credentials.access_token
 qb_refresh_token = quickbooks_credentials.refresh_token
 
-access_token = OAuth2::AccessToken.new(::QB_OAUTH2_CONSUMER, qb_access_token, { refresh_token: qb_refresh_token })
+access_token = OAuth2::AccessToken.new(::QB_OAUTH2_CONSUMER, qb_access_token, { :refresh_token => qb_refresh_token })
 ```
 
 ### Access Token Validity and Token Refresh
@@ -128,7 +129,9 @@ access_token = OAuth2::AccessToken.new(::QB_OAUTH2_CONSUMER, qb_access_token, { 
 Each access token is only valid for one hour. The access token and refresh token can be refreshed directly by using OAuth Client:
 
 ```ruby
-new_access_token = access_token.refresh!
+redirect_uri = oauth_callback_quickbooks_url
+
+new_access_token = access_token.refresh!(:redirect_uri => redirect_uri)
 ```
 
 The token must be assigned to a variable to prevent the loss of your new access token, which will void your credentials and a new set of credentials have to be acquired by authorizing the application again.
