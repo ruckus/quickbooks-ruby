@@ -38,6 +38,7 @@ Ruby 1.8.7 and 1.9.2 are not supported.
 Gems:
 
 * `oauth`
+* `oauth2`
 * `roxml` : Workhorse for (de)serializing objects between Ruby & XML
 * `nokogiri` : XML parsing
 * `active_model` : For validations
