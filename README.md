@@ -1,8 +1,3 @@
-# Migrate to OAuth 2.0
-
-https://developer.intuit.com/hub/blog/2018/12/20/oauth-1-0-deprecation-migrate-oauth-2-0-december-17-2019
-
-
 # Quickbooks-Ruby
 
 [![Join the chat at https://gitter.im/ruckus/quickbooks-ruby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ruckus/quickbooks-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
