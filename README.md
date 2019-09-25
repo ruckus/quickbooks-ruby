@@ -282,6 +282,20 @@ their [security requirements](https://developer.intuit.com/docs/0100_quickbooks_
 We'd suggest looking at the [attr_encrypted gem](https://github.com/attr-encrypted/attr_encrypted) to
 handle the actual encryption and decryption.
 
+### Revoke token/disconnect
+
+It is possible to revoke access given to it by a specific user using the `Quickbooks::Service::AccessToken#disconnect` method.
+For more information on how to revoke an access token, please refer to the [official documentation](https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0#revoke-token-disconnect).
+
+```ruby
+qb_access_token = quickbooks_credentials.access_token
+qb_refresh_token = quickbooks_credentials.refresh_token
+
+access_token = OAuth2::AccessToken.new(::QB_OAUTH2_CONSUMER, qb_access_token, { :refresh_token => qb_refresh_token })
+qb_access_token = Quickbooks::Service::AccessToken.new(access_token: access_token)
+disconnect_response = qb_access_token.disconnect
+puts disconnect_response.error?
+```
 
 ## Getting Started - Retrieving a list of Customers
 
@@ -570,6 +584,7 @@ service.delete(customer)
 ```
 
 ## Email Addresses
+
 Email attributes are not just strings, they are top-level objects, e.g. `EmailAddress` on a `Customer` for instance.
 
 A `Customer` has a setter method to make assigning an email address easier.
@@ -580,6 +595,7 @@ customer.email_address = "foo@example.com"
 ```
 
 ## Telephone Numbers
+
 Like Email Addresses, telephone numbers are not just basic strings but are top-level objects.
 
 ```ruby
@@ -755,9 +771,6 @@ item_service = Quickbooks::Service::ItemChange.new
 ...
 item_changed = item_service.since(Time.now.utc - 5.days)
 ```
-
-
-
 see: https://developer.intuit.com/docs/0100_quickbooks_online/0200_dev_guides/accounting/change_data_capture for more information.
 
 ## Reports API
