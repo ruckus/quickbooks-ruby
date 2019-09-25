@@ -90,7 +90,7 @@ def authenticate
 end
 ```
 
-Where `quickbooks_oauth_callback_url` is the absolute URL of your application that Intuit should send the user when authentication succeeds. 
+Where `quickbooks_oauth_callback_url` is the absolute URL of your application that Intuit should send the user when authentication succeeds.
 
 That action should look like:
 
@@ -99,7 +99,6 @@ def oauth_callback
   if params[:state]
     redirect_uri = oauth_callback_quickbooks_url
     if resp = ::QB_OAUTH2_CONSUMER.auth_code.get_token(params[:code], :redirect_uri => redirect_uri)
-
       # save your tokens here. For example:
       # quickbooks_credentials.update_attributes(access_token: resp.token, refresh_token: resp.refresh_token, realm_id: params[:realmId])
     end
@@ -125,7 +124,7 @@ Once you have your user's OAuth token, you can re-use the `OAuth Consumer` and c
 qb_access_token = quickbooks_credentials.access_token
 qb_refresh_token = quickbooks_credentials.refresh_token
 
-access_token = OAuth2::AccessToken.new(::QB_OAUTH2_CONSUMER, qb_access_token, {refresh_token: qb_refresh_token})
+access_token = OAuth2::AccessToken.new(::QB_OAUTH2_CONSUMER, qb_access_token, { refresh_token: qb_refresh_token })
 ```
 
 ### Access Token Validity and Token Refresh
@@ -137,7 +136,7 @@ new_access_token = access_token.refresh!
 ```
 
 The token must be assigned to a variable to prevent the loss of your new access token, which will void your credentials and a new set of credentials have to be acquired by authorizing the application again.
-Unauthorized (expired) access to the API will raise a `Quickbooks::AuthorizationFailure` error.
+Unauthorized (expired) access to the API will raise a `OAuth2::Error` error.
 
 For more information on access token expiration and refresh token expiration, please refer to the [official documentation](https://developer.intuit.com/docs/0100_quickbooks_online/0100_essentials/000500_authentication_and_authorization/connect_from_within_your_app#/Refreshing_the_access_token).
 
@@ -522,7 +521,7 @@ puts sent_invoice.delivery_info.delivery_time
 It is possible to email the invoice to an altermate email address by including the email as a second parameter in the `invoice.send` method.  When a new email address is provided the invoice model that is returned will have the `bill_email` set to the new email address as show below:
 
 ```ruby
-invoice = invoice_service.fetch_by_id("1") 
+invoice = invoice_service.fetch_by_id("1")
 sent_invoice = invoice_service.send(invoice, "name@domain.com")
 
 puts send_invoice.bill_email.address
