@@ -137,7 +137,7 @@ new_access_token = access_token.refresh!(:redirect_uri => redirect_uri)
 The token must be assigned to a variable to prevent the loss of your new access token, which will void your credentials and a new set of credentials have to be acquired by authorizing the application again.
 Unauthorized (expired) access to the API will raise a `OAuth2::Error` error.
 
-For more information on access token expiration and refresh token expiration, please refer to the [official documentation](https://developer.intuit.com/docs/0100_quickbooks_online/0100_essentials/000500_authentication_and_authorization/connect_from_within_your_app#/Refreshing_the_access_token).
+For more information on access token expiration and refresh token expiration, please refer to the [official documentation](https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0#/Refreshing_the_access_token).
 
 ### Credentials Encryption
 For simplicity, this example does not encrypt the access credentials. If you are developing an app and
