@@ -50,7 +50,6 @@
     <AllowServiceDate>false</AllowServiceDate>
     <AllowShipping>false</AllowShipping>
     <DefaultTerms>3</DefaultTerms>
-    <AutoApplyCredit>false</AutoApplyCredit>
   </SalesFormsPrefs>
   <EmailMessagesPrefs>
     <InvoiceMessage>
