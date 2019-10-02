@@ -16,6 +16,7 @@ describe "Quickbooks::Model::Preferences" do
     preferences.sales_forms.custom_fields.should_not be_empty
     preferences.sales_forms.custom_fields[0].name.should == "SalesFormsPrefs.UseSalesCustom1"
     preferences.sales_forms.custom_fields[3].name.should == "SalesFormsPrefs.SalesCustomName1"
+    preferences.sales_forms.auto_apply_credit.should be_false
 
     preferences.other_prefs["SalesFormsPrefs.DefaultItem"].should == "1"
   end

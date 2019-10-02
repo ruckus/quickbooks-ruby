@@ -30,7 +30,7 @@ module Quickbooks
       xml_reader :sales_forms, :from => "SalesFormsPrefs", :as => create_preference_class(*%w(
         CustomTxnNumbers? AllowDeposit? AllowDiscount? DefaultDiscountAccount? AllowEstimates? EstimateMessage?
         ETransactionEnabledStatus? ETransactionAttachPDF? ETransactionPaymentEnabled? IPNSupportEnabled?
-        AllowServiceDate? AllowShipping? DefaultShippingAccount? DefaultTerms DefaultCustomerMessage
+        AllowServiceDate? AllowShipping? DefaultShippingAccount? DefaultTerms DefaultCustomerMessage AutoApplyCredit?
       )) {
         xml_reader :custom_fields, :as => [CustomField], :from => 'CustomField', in: 'CustomField'
       }
