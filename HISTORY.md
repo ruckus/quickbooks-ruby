@@ -1,3 +1,9 @@
+## 1.0.0 (2019-10-14)
+
+* OAuth2. With support for OAuth1 in mixed-mode.
+
+Thank you to everyone who has contributed!
+
 ## 0.6.7 (2019-07-24)
 
 * Preferences sales_forms_prefs CustomField support
