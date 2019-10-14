@@ -7,7 +7,7 @@ describe "Quickbooks::Service::Budget" do
     xml = fixture("budgets.xml")
     model = Quickbooks::Model::Invoice
 
-    stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     budgets = @service.query
     budgets.entries.count.should == 2
     first_budget = budgets.entries[0]
@@ -17,7 +17,7 @@ describe "Quickbooks::Service::Budget" do
   it "can fetch a Budget by ID" do
     xml = fixture("fetch_budget_by_id.xml")
     model = Quickbooks::Model::Budget
-    stub_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/1", ["200", "OK"], xml)
+    stub_http_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/1", ["200", "OK"], xml)
     budget = @service.fetch_by_id(1)
     budget.name.should == "TestBudgie"
   end

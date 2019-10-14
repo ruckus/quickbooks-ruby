@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <title>Connect with Quickbooks Online</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script type="text/javascript" src="https://appcenter.intuit.com/Content/IA/intuit.ipp.anywhere.js"></script>
+  <script>
+      intuit.ipp.anywhere.setup({
+        grantUrl: "<%= @grant_url %>",
+        datasources: {
+          quickbooks : true,
+          payments : false
+        }
+      });
+    </script>
+</head>
+
+<body>
+  <%= yield %>
+</body>
+</html>

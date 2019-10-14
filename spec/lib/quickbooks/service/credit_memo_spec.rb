@@ -24,7 +24,7 @@ module Quickbooks
       it "can fetch and read a CreditMemo" do
         xml = fixture("fetch_credit_memo.xml")
         model = Quickbooks::Model::CreditMemo
-        stub_request(:get, "#{subject.url_for_resource(model::REST_RESOURCE)}/52", ["200", "OK"], xml)
+        stub_http_request(:get, "#{subject.url_for_resource(model::REST_RESOURCE)}/52", ["200", "OK"], xml)
         credit_memo = subject.fetch_by_id(52)
         credit_memo.id.should == "52"
         credit_memo.doc_number.should == "R3454653464"
@@ -33,7 +33,7 @@ module Quickbooks
       it "creates a credit memo" do
         xml = fixture("fetch_credit_memo.xml")
         model = Model::CreditMemo
-        stub_request(:post, subject.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
+        stub_http_request(:post, subject.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
 
         credit_memo = model.new
         credit_memo.doc_number = "R3454653464"

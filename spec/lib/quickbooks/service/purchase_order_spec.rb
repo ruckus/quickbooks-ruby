@@ -8,7 +8,7 @@ describe "Quickbooks::Service::PurchaseOrder" do
     model = Quickbooks::Model::PurchaseOrder
     purchase_order = model.new
     xml = fixture("deleted_purchase_order.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, false)
+    stub_http_request(:post, %r{#{@service.url_for_resource(model::REST_RESOURCE)}}, ["200", "OK"], xml, {}, false)
     expect(@service.delete(purchase_order)).to eq true
 
   end

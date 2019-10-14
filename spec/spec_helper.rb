@@ -8,11 +8,11 @@ end
 
 require 'rubygems'
 require 'rspec'
-require 'fakeweb'
 require 'oauth'
 require 'quickbooks-ruby'
 require 'json'
 require 'pry'
+require 'webmock/rspec'
 
 Dir[File.expand_path('../support/**/*.rb', __FILE__)].each { |f| require f }
 

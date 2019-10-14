@@ -17,6 +17,7 @@ module Quickbooks
       XML_COLLECTION_NODE = "Invoice"
       XML_NODE = "Invoice"
       EMAIL_STATUS_NEED_TO_SEND = 'NeedToSend'
+      MINORVERSION = 37
 
       xml_accessor :id, :from => 'Id'
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
@@ -24,6 +25,7 @@ module Quickbooks
       xml_accessor :custom_fields, :from => 'CustomField', :as => [CustomField]
       xml_accessor :auto_doc_number, :from => 'AutoDocNumber' # See auto_doc_number! method below for usage
       xml_accessor :doc_number, :from => 'DocNumber'
+      xml_accessor :invoice_link, :from => 'InvoiceLink'
       xml_accessor :txn_date, :from => 'TxnDate', :as => Date
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
       xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal

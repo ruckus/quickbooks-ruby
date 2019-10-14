@@ -5,7 +5,7 @@ describe "Quickbooks::Service::CustomerChange" do
     xml = fixture("customer_changes.xml")
     model = Quickbooks::Model::CustomerChange
 
-    stub_request(:get, service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, service.url_for_query, ["200", "OK"], xml)
     customers = service.query
     customers.entries.count.should == 1
 

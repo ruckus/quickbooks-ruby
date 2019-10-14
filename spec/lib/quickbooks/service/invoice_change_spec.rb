@@ -5,7 +5,7 @@ describe "Quickbooks::Service::InvoiceChange" do
     xml = fixture("invoice_changes.xml")
     model = Quickbooks::Model::InvoiceChange
 
-    stub_request(:get, service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, service.url_for_query, ["200", "OK"], xml)
     invoices = service.query
     invoices.entries.count.should == 1
 

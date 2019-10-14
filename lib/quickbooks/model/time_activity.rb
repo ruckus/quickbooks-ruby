@@ -43,6 +43,7 @@ module Quickbooks
       validates_inclusion_of :name_of, :in => NAMEOF_OPTIONS
       validate :existence_of_employee_ref, :if => Proc.new { |ta| ta.name_of == "Employee" }
       validate :existence_of_vendor_ref, :if => Proc.new { |ta| ta.name_of == "Vendor" }
+      validates :description, length: { maximum: 4000 }
 
       def existence_of_employee_ref
         if employee_ref.nil? || (employee_ref && employee_ref.value == 0)

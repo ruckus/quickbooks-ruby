@@ -34,7 +34,7 @@ module Quickbooks
       it "queries for sales receipts" do
         xml = fixture("sales_receipts.xml")
         model = Model::SalesReceipt
-        stub_request(:get, subject.url_for_query, ["200", "OK"], xml)
+        stub_http_request(:get, subject.url_for_query, ["200", "OK"], xml)
 
         receipts = subject.query
         expect(receipts.entries.count).to eq 2
@@ -53,7 +53,7 @@ module Quickbooks
       it "creates a sales receipt" do
         xml = fixture("fetch_sales_receipt_by_id.xml")
         model = Model::SalesReceipt
-        stub_request(:post, subject.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
+        stub_http_request(:post, subject.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
 
         receipt = model.new
         receipt.customer_id = 2
@@ -72,7 +72,7 @@ module Quickbooks
       it "fetches sales receipt by ID" do
         xml = fixture("fetch_sales_receipt_by_id.xml")
         model = Model::SalesReceipt
-        stub_request(:get, "#{subject.url_for_resource(model::REST_RESOURCE)}/1", ["200", "OK"], xml)
+        stub_http_request(:get, "#{subject.url_for_resource(model::REST_RESOURCE)}/1", ["200", "OK"], xml)
 
         receipt = subject.fetch_by_id(1)
         expect(receipt.doc_number).to eq "1001"
@@ -97,7 +97,7 @@ module Quickbooks
         receipt.line_items << line_item
 
         xml = fixture("sales_receipt_void_success_response.xml")
-        stub_request(:post, "#{subject.url_for_resource(model::REST_RESOURCE)}?include=void", ["200", "OK"], xml)
+        stub_http_request(:post, "#{subject.url_for_resource(model::REST_RESOURCE)}?include=void", ["200", "OK"], xml)
 
         response = subject.void(receipt)
         response.private_note.should == 'Voided'
@@ -106,7 +106,7 @@ module Quickbooks
       it "can send a sales receipt using bill_email" do
         xml = fixture("sales_receipt_send.xml")
         model = Quickbooks::Model::SalesReceipt
-        stub_request(:post, "#{subject.url_for_resource(model::REST_RESOURCE)}/1/send", ["200", "OK"], xml)
+        stub_http_request(:post, "#{subject.url_for_resource(model::REST_RESOURCE)}/1/send", ["200", "OK"], xml)
 
         sales_receipt = Quickbooks::Model::SalesReceipt.new
         sales_receipt.doc_number = "1001"
@@ -121,7 +121,7 @@ module Quickbooks
       it "can send an sales receipt with new email_address" do
         xml = fixture("sales_receipt_send.xml")
         model = Quickbooks::Model::SalesReceipt
-        stub_request(:post, "#{subject.url_for_resource(model::REST_RESOURCE)}/1/send?sendTo=test@intuit.com", ["200", "OK"], xml)
+        stub_http_request(:post, "#{subject.url_for_resource(model::REST_RESOURCE)}/1/send?sendTo=test@intuit.com", ["200", "OK"], xml)
 
         sales_receipt = Quickbooks::Model::SalesReceipt.new
         sales_receipt.doc_number = "1001"

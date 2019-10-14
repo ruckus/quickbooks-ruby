@@ -7,7 +7,7 @@ describe "Quickbooks::Service::Customer" do
     xml = fixture("customers.xml")
     model = Quickbooks::Model::Customer
 
-    stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     customers = @service.query
     customers.entries.count.should == 5
 
@@ -18,7 +18,7 @@ describe "Quickbooks::Service::Customer" do
   it "can fetch a customer by ID" do
     xml = fixture("fetch_customer_by_id.xml")
     model = Quickbooks::Model::Customer
-    stub_request(:get, "#{@service.url_for_base}/customer/1?minorversion=#{Quickbooks::Model::Customer::MINORVERSION}", ["200", "OK"], xml)
+    stub_http_request(:get, "#{@service.url_for_base}/customer/1?minorversion=#{Quickbooks::Model::Customer::MINORVERSION}", ["200", "OK"], xml)
 
     customer = @service.fetch_by_id(1)
     customer.fully_qualified_name.should == "Thrifty Meats"
@@ -53,7 +53,7 @@ describe "Quickbooks::Service::Customer" do
     xml = fixture("fetch_customer_by_id.xml")
     model = Quickbooks::Model::Customer
 
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
+    stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
 
     customer = Quickbooks::Model::Customer.new
     customer.company_name = "Thrifty Meats"
@@ -80,7 +80,7 @@ describe "Quickbooks::Service::Customer" do
     customer.id = 1
 
     xml = fixture("fetch_customer_by_id.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
+    stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
 
     customer.valid_for_update?.should == true
     update_response = @service.update(customer, :sparse => true)
@@ -95,7 +95,7 @@ describe "Quickbooks::Service::Customer" do
     customer.id = 1
 
     xml = fixture("deleted_customer.xml")
-    stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
+    stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
 
     customer.valid_for_deletion?.should == true
     response = @service.delete(customer)

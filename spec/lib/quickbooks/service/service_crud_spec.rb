@@ -46,6 +46,12 @@ module Quickbooks
         ServicedClass.find_by(:name, "test")
       end
 
+      it "checks for existence" do
+        results = double(Quickbooks::Collection, count: 1)
+        ServicedClass.should_receive(:find_by).with(:name, "test", {}).and_return(results)
+        expect(ServicedClass.exists?(:name, "test")).to be
+      end
+
       it "finds all" do
         results = double(Quickbooks::Collection, count: 1)
         results.should_receive(:entries).and_return []

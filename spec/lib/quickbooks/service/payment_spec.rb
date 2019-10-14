@@ -7,7 +7,7 @@ describe "Quickbooks::Service::Payment" do
   let(:resource) { model::REST_RESOURCE }
 
   it "can query for payments" do
-    stub_request(:get,
+    stub_http_request(:get,
                  @service.url_for_query,
                  ["200", "OK"],
                  fixture("payments.xml"))
@@ -20,7 +20,7 @@ describe "Quickbooks::Service::Payment" do
   end
 
   it "can fetch a payment by ID" do
-    stub_request(:get,
+    stub_http_request(:get,
                  "#{@service.url_for_resource(resource)}/1",
                  ["200", "OK"],
                  fixture("payment_by_id.xml"))
@@ -31,7 +31,7 @@ describe "Quickbooks::Service::Payment" do
   end
 
   it "can create a payment" do
-    stub_request(:post,
+    stub_http_request(:post,
                  @service.url_for_resource(resource),
                  ["200", "OK"],
                  fixture("fetch_payment_by_id.xml"))
@@ -43,7 +43,7 @@ describe "Quickbooks::Service::Payment" do
 
   it "can sparse update a payment" do
     payment.total = 20.0
-    stub_request(:post,
+    stub_http_request(:post,
                  @service.url_for_resource(resource),
                  ["200", "OK"],
                  fixture("fetch_payment_by_id.xml"),
@@ -56,7 +56,7 @@ describe "Quickbooks::Service::Payment" do
   end
 
   it "can delete a payment" do
-    stub_request(:post,
+    stub_http_request(:post,
                  "#{@service.url_for_resource(resource)}?operation=delete",
                  ["200", "OK"],
                  fixture("payment_delete_success_response.xml"))
@@ -67,14 +67,14 @@ describe "Quickbooks::Service::Payment" do
   end
 
   it 'can void a payment' do
-    stub_request(:post,
+    stub_http_request(:post,
                  "#{@service.url_for_resource(resource)}?include=void",
                  ["200", "OK"],
                  fixture("payment_void_response_success.xml"))
 
     response = @service.void(payment)
 
-    response.should be_true    
+    response.should be_true
     response.total.should == 0
   end
 
