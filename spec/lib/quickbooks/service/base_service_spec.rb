@@ -139,8 +139,11 @@ describe Quickbooks::Service::BaseService do
       expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::TooManyRequests, message)
     end
 
-    it "should raise ServiceUnavailable on HTTP 503 and 504" do
+    it "should raise ServiceUnavailable on HTTP 502, 503 and 504" do
       xml = fixture('generic_error.xml')
+
+      response = Struct.new(:code, :plain_body).new(502, xml)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ServiceUnavailable)
 
       response = Struct.new(:code, :plain_body).new(503, xml)
       expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ServiceUnavailable)
