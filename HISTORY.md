@@ -1,3 +1,8 @@
+## 1.0.1 (2019-11-05)
+
+* Add minorversion to account service and update query url (#488). Thank you @colmheaney
+* Use pessimistic version constraint on oauth dependency (#485). Thank you @austinmckinley
+
 ## 1.0.0 (2019-10-14)
 
 * OAuth2. With support for OAuth1 in mixed-mode.
