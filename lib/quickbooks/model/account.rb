@@ -4,6 +4,7 @@ module Quickbooks
       XML_COLLECTION_NODE = "Account"
       XML_NODE = "Account"
       REST_RESOURCE = 'account'
+      MINORVERSION = 13
 
       ASSET = 'Asset'
       EQUITY = 'Equity'
