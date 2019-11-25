@@ -7,8 +7,8 @@ module Quickbooks
       attr_accessor :company_id
       attr_accessor :oauth
       attr_reader :base_uri
-      attr_reader :last_response_body
       attr_reader :last_response_xml
+      attr_reader :last_response_intuit_tid
 
       XML_NS = %{xmlns="http://schema.intuit.com/finance/v3"}
       HTTP_CONTENT_TYPE = 'application/xml'
@@ -320,6 +320,12 @@ module Quickbooks
           parse_xml(response.plain_body)
         end
 
+        @last_response_intuit_tid = if response.respond_to?(:headers) && response.headers
+          response.headers['intuit_tid']
+        else
+          nil
+        end
+
         status = response.code.to_i
         case status
         when 200
@@ -404,6 +410,7 @@ module Quickbooks
         else
           ex.request_xml = options[:request]
         end
+        ex.intuit_tid = err[:intuit_tid]
         raise ex
       end
 
@@ -418,7 +425,7 @@ module Quickbooks
       end
 
       def parse_intuit_error
-        error = {:message => "", :detail => "", :type => nil, :code => 0}
+        error = {:message => "", :detail => "", :type => nil, :code => 0, :intuit_tid => @last_response_intuit_tid}
         fault = @last_response_xml.xpath("//xmlns:IntuitResponse/xmlns:Fault")[0]
         if fault
           error[:type] = fault.attributes['type'].value
