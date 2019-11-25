@@ -326,7 +326,7 @@ module Quickbooks
         when 302
           raise "Unhandled HTTP Redirect"
         when 401
-          raise Quickbooks::AuthorizationFailure
+          raise Quickbooks::AuthorizationFailure, parse_intuit_error
         when 403
           message = parse_intuit_error[:message]
           if message.include?('ThrottleExceeded')
@@ -426,7 +426,7 @@ module Quickbooks
               error[:code] = code_attr.value
             end
             element_attr = error_element.attributes['element']
-            if code_attr
+            if element_attr
               error[:element] = code_attr.value
             end
             error[:message] = error_element.xpath("//xmlns:Message").text
