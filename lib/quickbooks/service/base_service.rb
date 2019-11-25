@@ -264,6 +264,12 @@ module Quickbooks
         end
 
         response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
+        log "------ QUICKBOOKS-RUBY RESPONSE ------"
+        log "RESPONSE CODE = #{response.code}"
+        log_response_body(response)
+        if response.respond_to?(:headers)
+          log "RESPONSE HEADERS = #{response.headers}"
+        end
         check_response(response, request: body)
       end
 
@@ -308,12 +314,12 @@ module Quickbooks
       end
 
       def check_response(response, options = {})
-        log "------ QUICKBOOKS-RUBY RESPONSE ------"
-        log "RESPONSE CODE = #{response.code}"
-        if response.respond_to?(:headers)
-          log "RESPONSE HEADERS = #{response.headers}"
+        if is_json?
+          parse_json(response.plain_body)
+        elsif !is_pdf?
+          parse_xml(response.plain_body)
         end
-        log_response_body(response)
+
         status = response.code.to_i
         case status
         when 200
@@ -353,12 +359,10 @@ module Quickbooks
         log "RESPONSE BODY:"
         if is_json?
           log ">>>>#{response.plain_body.inspect}"
-          parse_json(response.plain_body)
         elsif is_pdf?
           log("BODY is a PDF : not dumping")
         else
           log(log_xml(response.plain_body))
-          parse_xml(response.plain_body)
         end
       end
 
