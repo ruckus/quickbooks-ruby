@@ -231,7 +231,16 @@ module Quickbooks
 
   class Error < StandardError; end
   class InvalidModelException < Error; end
-  class AuthorizationFailure < Error; end
+  class AuthorizationFailure < Error
+    attr_accessor :code, :detail, :type
+
+    def initialize(error_hash = {})
+      @code = error_hash[:code]
+      @detail = error_hash[:detail]
+      @type = error_hash[:type]
+      super(error_hash[:message])
+    end
+  end
   class Forbidden < Error; end
   class NotFound < Error; end
   class RequestTooLarge < Error; end
@@ -241,7 +250,7 @@ module Quickbooks
   class MissingRealmError < Error; end
 
   class IntuitRequestException < Error
-    attr_accessor :message, :code, :detail, :type, :request_xml, :request_json
+    attr_accessor :message, :code, :detail, :type, :intuit_tid, :request_xml, :request_json
 
     def initialize(msg)
       self.message = msg
