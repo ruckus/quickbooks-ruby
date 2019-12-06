@@ -9,10 +9,10 @@ describe "Quickbooks::Service::Invoice" do
 
     stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     invoices = @service.query
-    invoices.entries.count.should == 1
+    expect(invoices.entries.count).to eq 1
 
     first_invoice = invoices.entries.first
-    first_invoice.doc_number.should == '1001'
+    expect(first_invoice.doc_number).to eq '1001'
   end
 
   it "can fetch an Invoice by ID" do
@@ -20,53 +20,53 @@ describe "Quickbooks::Service::Invoice" do
     model = Quickbooks::Model::Invoice
     stub_http_request(:get, %r{#{@service.url_for_resource(model::REST_RESOURCE)}/1}, ["200", "OK"], xml)
     invoice = @service.fetch_by_id(1)
-    invoice.doc_number.should == "1001"
+    expect(invoice.doc_number).to eq "1001"
   end
 
   it "cannot create an Invoice without any line items" do
     invoice = Quickbooks::Model::Invoice.new
 
-    lambda do
+    expect {
       @service.create(invoice)
-    end.should raise_error(Quickbooks::InvalidModelException, /At least 1 line item is required/)
+    }.to raise_error(Quickbooks::InvalidModelException, /At least 1 line item is required/)
 
-    invoice.valid?.should == false
-    invoice.errors.keys.include?(:line_items).should == true
+    expect(invoice.valid?).to eq false
+    expect(invoice.errors.keys.include?(:line_items)).to be true
   end
 
   it "is valid when it has 1 or more line items" do
     invoice = Quickbooks::Model::Invoice.new
     invoice.line_items << Quickbooks::Model::InvoiceLineItem.new
 
-    lambda do
+    expect {
       @service.create(invoice)
-    end.should raise_error(Quickbooks::InvalidModelException)
+    }.to raise_error(Quickbooks::InvalidModelException)
 
-    invoice.valid?.should == false
-    invoice.errors.keys.include?(:line_items).should_not == true
+    expect(invoice.valid?).to eq false
+    expect(invoice.errors.keys.include?(:line_items)).to_not be true
   end
 
   it "cannot create an Invoice without a CustomerRef" do
     invoice = Quickbooks::Model::Invoice.new
 
-    lambda do
+    expect {
       @service.create(invoice)
-    end.should raise_error(Quickbooks::InvalidModelException)
+    }.to raise_error(Quickbooks::InvalidModelException)
 
-    invoice.valid?.should == false
-    invoice.errors.keys.include?(:customer_ref).should == true
+    expect(invoice.valid?).to eq false
+    expect(invoice.errors.keys.include?(:customer_ref)).to be true
   end
 
   it "is valid when a CustomerRef is specified" do
     invoice = Quickbooks::Model::Invoice.new
     invoice.customer_id = 2
 
-    lambda do
+    expect {
       @service.create(invoice)
-    end.should raise_error(Quickbooks::InvalidModelException)
+    }.to raise_error(Quickbooks::InvalidModelException)
 
-    invoice.valid?.should == false
-    invoice.errors.keys.include?(:customer_ref).should_not == true
+    expect(invoice.valid?).to eq false
+    expect(invoice.errors.keys.include?(:customer_ref)).to_not be true
   end
 
   it "can create an Invoice" do
@@ -91,7 +91,7 @@ describe "Quickbooks::Service::Invoice" do
     invoice.line_items << line_item
 
     created_invoice = @service.create(invoice)
-    created_invoice.id.should == "1"
+    expect(created_invoice.id).to eq "1"
   end
 
   it "can sparse update an Invoice" do
@@ -117,7 +117,7 @@ describe "Quickbooks::Service::Invoice" do
     stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
 
     update_response = @service.update(invoice, :sparse => true)
-    update_response.doc_number.should == '1001'
+    expect(update_response.doc_number).to eq '1001'
   end
 
   it "can delete an Invoice" do
@@ -131,7 +131,7 @@ describe "Quickbooks::Service::Invoice" do
     stub_http_request(:post, "#{@service.url_for_resource(model::REST_RESOURCE)}?operation=delete", ["200", "OK"], xml)
 
     response = @service.delete(invoice)
-    response.should == true
+    expect(response).to be true
   end
 
   it "can void an Invoice" do
@@ -144,7 +144,7 @@ describe "Quickbooks::Service::Invoice" do
     stub_http_request(:post, "#{@service.url_for_resource(model::REST_RESOURCE)}?operation=void", ["200", "OK"], xml)
 
     response = @service.void(invoice)
-    response.private_note.should == 'Voided'
+    expect(response.private_note).to eq 'Voided'
   end
 
   it "can generate an invoice with a discount line item" do
@@ -178,7 +178,7 @@ describe "Quickbooks::Service::Invoice" do
     invoice.line_items << discount_line_item
 
     created_invoice = @service.create(invoice)
-    created_invoice.id.should == "4"
+    expect(created_invoice.id).to eq "4"
   end
 
   it "can send an invoice using bill_email" do
@@ -191,9 +191,9 @@ describe "Quickbooks::Service::Invoice" do
     invoice.sync_token = 2
     invoice.id = 1
     sent_invoice = @service.send(invoice)
-    sent_invoice.email_status.should == "EmailSent"
-    sent_invoice.delivery_info.delivery_type.should == "Email"
-    sent_invoice.delivery_info.delivery_time.should eq(Time.new(2015, 2, 24, 18, 26, 03, "-08:00"))
+    expect(sent_invoice.email_status).to eq "EmailSent"
+    expect(sent_invoice.delivery_info.delivery_type).to eq "Email"
+    expect(sent_invoice.delivery_info.delivery_time).to eq(Time.new(2015, 2, 24, 18, 26, 03, "-08:00"))
   end
 
   it "can send an invoice with new email_address" do
@@ -206,7 +206,7 @@ describe "Quickbooks::Service::Invoice" do
     invoice.sync_token = 2
     invoice.id = 1
     sent_invoice = @service.send(invoice, "test@intuit.com")
-    sent_invoice.bill_email.address.should == "test@intuit.com"
+    expect(sent_invoice.bill_email.address).to eq "test@intuit.com"
   end
 
   it "allows user to specify a RequestId in a create call" do
@@ -242,50 +242,50 @@ describe "Quickbooks::Service::Invoice" do
     invoice.line_items << discount_line_item
 
     created_invoice = @service.create(invoice, :query => {:requestid => requestid})
-    created_invoice.id.should == "4"
+    expect(created_invoice.id).to eq "4"
   end
 
   it "can read line items from a bundle" do
     xml = fixture("invoice_with_bundle_line_item.xml")
     stub_http_request(:get, %r{#{@service.url_for_resource(Quickbooks::Model::Invoice::REST_RESOURCE)}/186}, ["200", "OK"], xml)
     invoice = @service.fetch_by_id(186)
-    invoice.valid?.should == true
+    expect(invoice.valid?).to be true
 
-    invoice.doc_number.should == "1020"
+    expect(invoice.doc_number).to eq "1020"
 
-    invoice.line_items.size.should == 3
+    expect(invoice.line_items.size).to eq 3
     bundles = invoice.line_items.select { |line| line.group_line_detail? }
-    bundles.should_not == nil
+    expect(bundles).to_not be nil
     bundle = bundles.first
 
-    bundle.description.should == 'chocolate covered cookies and other sweets'
-    bundle.amount.should == 0
-    bundle.group_line_detail.group_item_ref.name.should == 'Assorted sweets'
-    bundle.group_line_detail.group_item_ref.value.should == '24'
-    bundle.group_line_detail.quantity.to_i.should == 3
+    expect(bundle.description).to eq 'chocolate covered cookies and other sweets'
+    expect(bundle.amount).to eq 0
+    expect(bundle.group_line_detail.group_item_ref.name).to eq 'Assorted sweets'
+    expect(bundle.group_line_detail.group_item_ref.value).to eq '24'
+    expect(bundle.group_line_detail.quantity.to_i).to eq 3
 
-    bundle.group_line_detail.line_items.size.should == 2
+    expect(bundle.group_line_detail.line_items.size).to eq 2
 
     bundle_line = bundle.group_line_detail.line_items[0]
-    bundle_line.sales_item?.should == true
-    bundle_line.id.should == '2'
-    bundle_line.amount.should == 7.96
-    bundle_line.sales_line_item_detail.item_ref["name"].should == "Chocolate Covered Strawberries"
-    bundle_line.sales_line_item_detail.quantity.should == 15
-    bundle_line.sales_line_item_detail.unit_price.should == 0.5306667
-    bundle_line.sales_line_item_detail.tax_code_ref.value.should == '5'
+    expect(bundle_line.sales_item?).to be true
+    expect(bundle_line.id).to eq '2'
+    expect(bundle_line.amount).to eq 7.96
+    expect(bundle_line.sales_line_item_detail.item_ref["name"]).to eq "Chocolate Covered Strawberries"
+    expect(bundle_line.sales_line_item_detail.quantity).to eq 15
+    expect(bundle_line.sales_line_item_detail.unit_price).to eq 0.5306667
+    expect(bundle_line.sales_line_item_detail.tax_code_ref.value).to eq '5'
 
     bundle_line = bundle.group_line_detail.line_items[1]
-    bundle_line.sales_item?.should == true
-    bundle_line.id.should == '3'
-    bundle_line.amount.should == 2.65
-    bundle_line.sales_line_item_detail.item_ref["name"].should == "Snow Cookie"
-    bundle_line.sales_line_item_detail.quantity.should == 24
-    bundle_line.sales_line_item_detail.unit_price.should == 0.1104167
-    bundle_line.sales_line_item_detail.tax_code_ref.value.should == '5'
+    expect(bundle_line.sales_item?).to be true
+    expect(bundle_line.id).to eq '3'
+    expect(bundle_line.amount).to eq 2.65
+    expect(bundle_line.sales_line_item_detail.item_ref["name"]).to eq "Snow Cookie"
+    expect(bundle_line.sales_line_item_detail.quantity).to eq 24
+    expect(bundle_line.sales_line_item_detail.unit_price).to eq 0.1104167
+    expect(bundle_line.sales_line_item_detail.tax_code_ref.value).to eq '5'
 
     bundle_total = bundle.group_line_detail.line_items.inject(0) { |acc, l| acc + (l.sales_line_item_detail.quantity * l.sales_line_item_detail.unit_price) }
-    bundle_total.round(2).should == 10.61
+    expect(bundle_total.round(2)).to eq 10.61
   end
 
   it "can sparse update an Invoice containing a bundle" do
@@ -296,7 +296,7 @@ describe "Quickbooks::Service::Invoice" do
     invoice.line_items.each do |l|
       if l.group_line_detail?
         l.description << " - updated"
-        l.description.should == 'chocolate covered cookies and other sweets - updated'
+        expect(l.description).to eq 'chocolate covered cookies and other sweets - updated'
         l.group_line_detail.line_items.each do |group_line_item|
           if group_line_item.sales_item?
             group_line_item.description << " - updated"
@@ -307,6 +307,6 @@ describe "Quickbooks::Service::Invoice" do
 
     stub_http_request(:post, @service.url_for_resource(Quickbooks::Model::Invoice::REST_RESOURCE), ["200", "OK"], xml)
     update_response = @service.update(invoice, :sparse => true)
-    update_response.doc_number.should == '1020'
+    expect(update_response.doc_number).to eq '1020'
   end
 end

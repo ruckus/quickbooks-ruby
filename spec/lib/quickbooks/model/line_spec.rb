@@ -9,18 +9,18 @@ describe Quickbooks::Model::Line do
       end
 
       it 'sets up a linked transaction with the right ID' do
-        subject.linked_transactions[0].txn_id.should eq(id)
-        subject.linked_transactions[0].txn_type.should eq(type)
+        expect(subject.linked_transactions[0].txn_id).to eq(id)
+        expect(subject.linked_transactions[0].txn_type).to eq(type)
       end
 
       it 'updates a linked transaction with a new ID' do
         subject.send(:"#{type.underscore}_id=", new_id)
-        subject.linked_transactions[0].txn_id.should eq(new_id)
+        expect(subject.linked_transactions[0].txn_id).to eq(new_id)
       end
 
       it 'can be cleared' do
         subject.send(:"#{type.underscore}_id=", nil)
-        subject.linked_transactions.should be_blank
+        expect(subject.linked_transactions).to be_blank
       end
     end
 
@@ -33,17 +33,17 @@ describe Quickbooks::Model::Line do
       end
 
       it 'sets up a linked transaction with the right IDs' do
-        subject.linked_transactions.map(&:txn_id).should eq(ids)
+        expect(subject.linked_transactions.map(&:txn_id)).to eq(ids)
       end
 
       it 'updates a linked transaction with a new IDs' do
         subject.send(:"#{type.underscore}_ids=", new_ids)
-        subject.linked_transactions.map(&:txn_id).should eq(new_ids)
+        expect(subject.linked_transactions.map(&:txn_id)).to eq(new_ids)
       end
 
       it 'can be cleared' do
         subject.send(:"#{type.underscore}_ids=", nil)
-        subject.linked_transactions.should be_blank
+        expect(subject.linked_transactions).to be_blank
       end
     end
 
@@ -71,19 +71,19 @@ describe Quickbooks::Model::Line do
       end
 
       it 'sets up all the linked transactions' do
-        subject.linked_transactions.size.should eq(4)
+        expect(subject.linked_transactions.size).to eq(4)
       end
 
       it 'can clear invoices only' do
         subject.invoice_ids = nil
-        subject.linked_transactions.size.should eq(2)
-        subject.linked_transactions.count { |lt| lt.txn_type == 'CreditMemo' }.should eq(2)
+        expect(subject.linked_transactions.size).to eq(2)
+        expect(subject.linked_transactions.count { |lt| lt.txn_type == 'CreditMemo' }).to eq(2)
       end
 
       it 'can clear credit memos only' do
         subject.credit_memo_ids = nil
-        subject.linked_transactions.size.should eq(2)
-        subject.linked_transactions.count { |lt| lt.txn_type == 'Invoice' }.should eq(2)
+        expect(subject.linked_transactions.size).to eq(2)
+        expect(subject.linked_transactions.count { |lt| lt.txn_type == 'Invoice' }).to eq(2)
       end
     end
 
