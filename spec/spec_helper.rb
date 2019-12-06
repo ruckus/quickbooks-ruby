@@ -13,6 +13,7 @@ require 'quickbooks-ruby'
 require 'json'
 require 'pry'
 require 'webmock/rspec'
+require 'rspec/its'
 
 Dir[File.expand_path('../support/**/*.rb', __FILE__)].each { |f| require f }
 
