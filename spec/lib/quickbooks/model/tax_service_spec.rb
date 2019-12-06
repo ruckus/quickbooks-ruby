@@ -3,7 +3,7 @@ describe "Quickbooks::Model::TaxService" do
   it "must include at least one TaxRateDetails item" do
     item = Quickbooks::Model::TaxService.new(tax_code: '123456')
     item.should_not be_valid
-    item.errors.keys.include?(:tax_rate_details).should be_true
+    item.errors.keys.include?(:tax_rate_details).should be true
     item.errors.values.should include(["must have at least one item"])
   end
 
@@ -24,7 +24,7 @@ describe "Quickbooks::Model::TaxService" do
     item.tax_rate_details << Quickbooks::Model::TaxRateDetailLine.new(tax_rate_name: item.tax_code, rate_value: '12.3', tax_agency_id: '2', tax_applicable_on: 'Sales')
     item.tax_rate_details << Quickbooks::Model::TaxRateDetailLine.new(tax_rate_name: item.tax_code, rate_value: '12.3', tax_agency_id: '2', tax_applicable_on: 'Sales')
     item.should_not be_valid
-    item.errors.keys.include?(:tax_rate_name).should be_true
+    item.errors.keys.include?(:tax_rate_name).should be true
     item.errors.values.should include(["Duplicate Tax Rate Name"])
   end
 

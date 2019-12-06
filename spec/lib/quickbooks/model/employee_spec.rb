@@ -4,7 +4,7 @@ describe "Quickbooks::Model::Employee" do
     xml = fixture("employee.xml")
     employee = Quickbooks::Model::Employee.from_xml(xml)
     employee.sync_token.should == 0
-    employee.organization?.should be_false
+    employee.organization?.should be false
     employee.title.should be_nil
     employee.given_name.should == 'Jenny'
     employee.middle_name.should be_nil
@@ -23,7 +23,7 @@ describe "Quickbooks::Model::Employee" do
     employee.address.country.should be_nil
     employee.address.country_sub_division_code.should == "CA"
     employee.address.postal_code.should == "93242"
-    employee.billable?.should be_true
+    employee.billable?.should be true
     employee.billable_rate.should == 115.00
     employee.birth_date.should == Date.civil(1995, 06, 01)
     employee.gender.should == 'female'
@@ -43,7 +43,7 @@ describe "Quickbooks::Model::Employee" do
     employee = Quickbooks::Model::Employee.new
     employee.organization?.should be_nil
     employee.organization = true
-    employee.organization?.should be_true
+    employee.organization?.should be true
   end
 
   it "can't assign a bad email address" do

@@ -68,6 +68,6 @@ describe "Quickbooks::Service::BillPayment" do
 
     response = @service.delete(bill_payment)
 
-    response.should be_true
+    response.should be true
   end
 end

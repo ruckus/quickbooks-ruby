@@ -63,7 +63,7 @@ describe "Quickbooks::Service::Payment" do
 
     response = @service.delete(payment)
 
-    response.should be_true
+    response.should be true
   end
 
   it 'can void a payment' do
@@ -74,7 +74,7 @@ describe "Quickbooks::Service::Payment" do
 
     response = @service.void(payment)
 
-    response.should be_true
+    response.should be true
     response.total.should == 0
   end
 

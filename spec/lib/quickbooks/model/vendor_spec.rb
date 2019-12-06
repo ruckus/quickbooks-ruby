@@ -33,7 +33,7 @@ describe "Quickbooks::Model::Vendor" do
     vendor.other_contact_info.telephone.free_form_number.should == '(214) 387-2008'
     vendor.tax_identifier.should == '12-3456789'
     vendor.balance.should == 0
-    vendor.is_1099?.should be_true
+    vendor.is_1099?.should be true
   end
 
   it "can assign an email address" do

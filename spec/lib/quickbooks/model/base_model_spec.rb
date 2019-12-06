@@ -22,8 +22,8 @@ describe "Quickbooks::Model::BaseModel" do
     subject { Quickbooks::Model::FooModel.new }
 
     context "For a non-transaction entity" do
-      its(:is_transaction_entity?) { should be_false }
-      its(:is_name_list_entity?) { should be_true }
+      its(:is_transaction_entity?) { should be false }
+      its(:is_name_list_entity?) { should be true }
     end
 
     context "For a transaction entity" do
@@ -31,8 +31,8 @@ describe "Quickbooks::Model::BaseModel" do
         Quickbooks::Model::Definition::ClassMethods::TRANSACTION_ENTITIES.stub(include?: true)
       end
 
-      its(:is_transaction_entity?) { should be_true }
-      its(:is_name_list_entity?) { should be_false }
+      its(:is_transaction_entity?) { should be true }
+      its(:is_name_list_entity?) { should be false }
     end
   end
 

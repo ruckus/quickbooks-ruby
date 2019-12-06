@@ -2,9 +2,9 @@ describe Quickbooks::Service::BaseService do
 
   it ".is_json" do
     construct_service :invoice
-    expect(@service.is_json?).to be_false
+    expect(@service.is_json?).to be false
     construct_service :tax_service
-    expect(@service.is_json?).to be_true
+    expect(@service.is_json?).to be true
   end
 
   describe "#url_for_query" do

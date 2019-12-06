@@ -23,7 +23,7 @@ describe "Quickbooks::Model::Payment" do
   it "should require customer_ref for create / update" do
     invoice = Quickbooks::Model::Payment.new
     invoice.should_not be_valid
-    invoice.errors.keys.include?(:customer_ref).should be_true
+    invoice.errors.keys.include?(:customer_ref).should be true
   end
 
   it "is valid with customer_ref" do

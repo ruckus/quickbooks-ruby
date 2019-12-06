@@ -6,8 +6,8 @@ describe "Quickbooks::Service::Purchase" do
 
   it "cannot create a Purchase without any line items" do
     purchase = Quickbooks::Model::Purchase.new
-    expect(purchase.valid?).to be_false
-    expect(purchase.errors.keys.include?(:line_items)).to be_true
+    expect(purchase.valid?).to be false
+    expect(purchase.errors.keys.include?(:line_items)).to be true
   end
 
   it "created for account based expense" do

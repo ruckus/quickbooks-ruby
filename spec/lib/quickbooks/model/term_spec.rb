@@ -8,7 +8,7 @@ describe "Quickbooks::Model::Term" do
     term.meta_data.create_time.should == Time.new(2013, 7, 11, 17, 46, 39, "-07:00")
     term.meta_data.last_updated_time.should == Time.new(2013, 7, 11, 17, 46, 42, "-07:00")
     term.name.should == "TermForV3Testing-1373590184130"
-    term.active?.should be_true
+    term.active?.should be true
     term.type.should == "DATE_DRIVEN"
     term.discount_percent.should == 4.0
     term.due_days.should be_nil

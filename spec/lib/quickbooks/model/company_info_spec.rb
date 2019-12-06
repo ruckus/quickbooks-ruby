@@ -63,9 +63,9 @@ describe "Quickbooks::Model::CompanyInfo" do
     company_info.company_type.should == "SCorporation"
     company_info.subscription_status.should == "TRIAL"
     company_info.offering_sku.should == "QuickBooks Online Essentials"
-    company_info.neo_enabled.should be_false
-    company_info.payroll_feature.should be_false
-    company_info.accountant_feature.should be_false
+    company_info.neo_enabled.should be false
+    company_info.payroll_feature.should be false
+    company_info.accountant_feature.should be false
 
     company_info.find_name_value('Missing').should be_nil
   end
