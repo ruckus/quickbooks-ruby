@@ -55,7 +55,7 @@ describe Quickbooks::Service::BaseService do
     it "should throw request exception with no options" do
       xml = fixture('generic_error.xml')
       response = Struct.new(:code, :plain_body).new(400, xml)
-      expect { @service.send(:check_response, response) }.to raise_error
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::IntuitRequestException)
     end
 
     it "should add request xml to request exception" do
