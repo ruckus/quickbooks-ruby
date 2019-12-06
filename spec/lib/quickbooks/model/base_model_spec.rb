@@ -74,7 +74,7 @@ describe "Quickbooks::Model::BaseModel" do
     it "assigns values into attributes" do
       foo_model.assign_attributes({ baz: "quiz", bar: { foo: 1 }, amount: 30 })
 
-      foo_model.attributes.should eq("baz" => "quiz", "bar" => {"foo" => 1}, "amount" => 30)
+      expect(foo_model.attributes).to eq("baz" => "quiz", "bar" => {"foo" => 1}, "amount" => 30)
     end
   end
 
