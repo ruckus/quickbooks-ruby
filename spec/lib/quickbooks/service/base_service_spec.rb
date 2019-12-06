@@ -2,9 +2,9 @@ describe Quickbooks::Service::BaseService do
 
   it ".is_json" do
     construct_service :invoice
-    expect(@service.is_json?).to be_false
+    expect(@service.is_json?).to be false
     construct_service :tax_service
-    expect(@service.is_json?).to be_true
+    expect(@service.is_json?).to be true
   end
 
   describe "#url_for_query" do
@@ -55,7 +55,7 @@ describe Quickbooks::Service::BaseService do
     it "should throw request exception with no options" do
       xml = fixture('generic_error.xml')
       response = Struct.new(:code, :plain_body).new(400, xml)
-      expect { @service.send(:check_response, response) }.to raise_error
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::IntuitRequestException)
     end
 
     it "should add request xml to request exception" do
@@ -169,16 +169,16 @@ describe Quickbooks::Service::BaseService do
     end
 
     it "should not log by default" do
-      Quickbooks.logger.should_receive(:info).never
+      expect(Quickbooks.logger).not_to receive(:info)
       @service.query
     end
 
     it "should log if Quickbooks.log = true" do
       Quickbooks.log = true
       obj = double('obj', :to_xml => '<test/>')
-      Nokogiri::XML::Document.any_instance.stub(:to_xml) { |arg| obj.to_xml }
-      obj.should_receive(:to_xml).once # will only called once on a get request, twice on a post
-      Quickbooks.logger.should_receive(:info).at_least(1)
+      expect_any_instance_of(Nokogiri::XML::Document).to receive(:to_xml) { |arg| obj.to_xml }
+      expect(obj).to receive(:to_xml).once # will only called once on a get request, twice on a post
+      expect(Quickbooks.logger).to receive(:info).at_least(1)
       @service.query
       Quickbooks.log = false
     end
@@ -186,8 +186,8 @@ describe Quickbooks::Service::BaseService do
     it "should log if Quickbooks.log = true but not prettyprint the xml" do
       Quickbooks.log = true
       Quickbooks.log_xml_pretty_print = false
-      Nokogiri::XML::Document.any_instance.should_not_receive(:to_xml)
-      Quickbooks.logger.should_receive(:info).at_least(1)
+      expect_any_instance_of(Nokogiri::XML::Document).not_to receive(:to_xml)
+      expect(Quickbooks.logger).to receive(:info).at_least(1)
       @service.query
       Quickbooks.log = false
       Quickbooks.log_xml_pretty_print = true

@@ -5,80 +5,80 @@ describe "Quickbooks::Model::Estimate" do
   it "parse from XML" do
     xml = fixture("estimate.xml")
     estimate = Quickbooks::Model::Estimate.from_xml(xml)
-    estimate.sync_token.should == 0
-    estimate.id.should == "12"
+    expect(estimate.sync_token).to eq 0
+    expect(estimate.id).to eq "12"
 
-    estimate.meta_data.should_not be_nil
-    estimate.doc_number.should == "3BcMMoa4YQBuUbJucPeR"
-    estimate.txn_date.to_date.should == Date.civil(2012,4,20)
-    estimate.custom_fields.length.should == 3
+    expect(estimate.meta_data).to_not be_nil
+    expect(estimate.doc_number).to eq "3BcMMoa4YQBuUbJucPeR"
+    expect(estimate.txn_date.to_date).to eq Date.civil(2012,4,20)
+    expect(estimate.custom_fields.length).to eq 3
 
-    estimate.line_items.should_not be_nil
-    estimate.line_items.length.should == 3
+    expect(estimate.line_items).to_not be_nil
+    expect(estimate.line_items.length).to eq 3
 
     line_item1 = estimate.line_items[0]
-    line_item1.id.should == "1"
-    line_item1.line_num.should == 1
-    line_item1.description.should == 'dsfafdfasdfdsfasdfadsfasdfsad'
-    line_item1.amount.should == 20.0
-    line_item1.sales_item?.should == true
-    line_item1.sales_line_item_detail.should_not be_nil
-    line_item1.sales_line_item_detail.item_ref.to_i.should == 1
-    line_item1.sales_line_item_detail.unit_price.should == 20.0
-    line_item1.sales_line_item_detail.quantity.should == 1
-    line_item1.sales_line_item_detail.tax_code_ref.to_s.should == 'NON'
-    line_item1.sales_line_item_detail.service_date.to_date.should == Date.civil(2012,4,17)
+    expect(line_item1.id).to eq "1"
+    expect(line_item1.line_num).to eq 1
+    expect(line_item1.description).to eq 'dsfafdfasdfdsfasdfadsfasdfsad'
+    expect(line_item1.amount).to eq 20.0
+    expect(line_item1.sales_item?).to be true
+    expect(line_item1.sales_line_item_detail).to_not be_nil
+    expect(line_item1.sales_line_item_detail.item_ref.to_i).to eq 1
+    expect(line_item1.sales_line_item_detail.unit_price).to eq 20.0
+    expect(line_item1.sales_line_item_detail.quantity).to eq 1
+    expect(line_item1.sales_line_item_detail.tax_code_ref.to_s).to eq 'NON'
+    expect(line_item1.sales_line_item_detail.service_date.to_date).to eq Date.civil(2012,4,17)
 
     line_item3 = estimate.line_items[2]
-    line_item3.sub_total_item?.should == true
-    #line_item3.sub_total_line_detail.amount.should == 60.0
+    expect(line_item3.sub_total_item?).to be true
+    #expect(line_item3.sub_total_line_detail.amount).to eq 60.0
 
-    estimate.customer_ref.value.should == "32"
-    estimate.customer_ref.name.should == "400a vnAPSdnwcAnjXiAjuduR"
-    estimate.customer_memo.should == "This Estimate is a guestimate"
+    expect(estimate.customer_ref.value).to eq "32"
+    expect(estimate.customer_ref.name).to eq "400a vnAPSdnwcAnjXiAjuduR"
+    expect(estimate.customer_memo).to eq "This Estimate is a guestimate"
 
     billing_address = estimate.billing_address
-    billing_address.should_not be_nil
-    billing_address.id.should == "7"
-    billing_address.line1.should == "bill line1"
-    billing_address.city.should == "Billville"
-    billing_address.country.should == "USA"
-    billing_address.country_sub_division_code.should == "CA"
-    billing_address.postal_code.should == "12345"
-    billing_address.lat.should == "42.8142432"
-    billing_address.lon.should == "-73.9395687"
+    expect(billing_address).to_not be_nil
+    expect(billing_address.id).to eq "7"
+    expect(billing_address.line1).to eq "bill line1"
+    expect(billing_address.city).to eq "Billville"
+    expect(billing_address.country).to eq "USA"
+    expect(billing_address.country_sub_division_code).to eq "CA"
+    expect(billing_address.postal_code).to eq "12345"
+    expect(billing_address.lat).to eq "42.8142432"
+    expect(billing_address.lon).to eq "-73.9395687"
 
     shipping_address = estimate.shipping_address
-    shipping_address.should_not be_nil
-    shipping_address.id.should == "8"
-    shipping_address.line1.should == "ship line1"
-    shipping_address.city.should == "Shipville"
-    shipping_address.country.should == "USA"
-    shipping_address.country_sub_division_code.should == "CA"
-    shipping_address.postal_code.should == "12345"
-    shipping_address.lat.should == "42.8142432"
-    shipping_address.lon.should == "-73.9395687"
+    expect(shipping_address).to_not be_nil
+    expect(shipping_address.id).to eq "8"
+    expect(shipping_address.line1).to eq "ship line1"
+    expect(shipping_address.city).to eq "Shipville"
+    expect(shipping_address.country).to eq "USA"
+    expect(shipping_address.country_sub_division_code).to eq "CA"
+    expect(shipping_address.postal_code).to eq "12345"
+    expect(shipping_address.lat).to eq "42.8142432"
+    expect(shipping_address.lon).to eq "-73.9395687"
 
-    estimate.total_amount.should == 60.00
-    estimate.apply_tax_after_discount?.should == false
-    estimate.print_status.should == 'NotSet'
-    estimate.email_status.should == 'NeedToSend'
-    estimate.bill_email.address.should == 'sam@abc.com'
-    estimate.expiration_date.to_date.should == Date.civil(2012,4,27)
-    estimate.accepted_by.should == "AcceptedBySpiderman"
-    estimate.accepted_date.to_date.should == Date.civil(2012,4,20)
+    expect(estimate.total_amount).to eq 60.00
+    expect(estimate.apply_tax_after_discount?).to be false
+    expect(estimate.print_status).to eq 'NotSet'
+    expect(estimate.email_status).to eq 'NeedToSend'
+    expect(estimate.bill_email.address).to eq 'sam@abc.com'
+    expect(estimate.expiration_date.to_date).to eq Date.civil(2012,4,27)
+    expect(estimate.accepted_by).to eq "AcceptedBySpiderman"
+    expect(estimate.accepted_date.to_date).to eq Date.civil(2012,4,20)
   end
 
   it "should require line items for create / update" do
     estimate = Quickbooks::Model::Estimate.new
-    estimate.valid?.should == false
-    estimate.errors.keys.include?(:line_items).should == true
+    expect(estimate.valid?).to be false
+    expect(estimate.errors.keys.include?(:line_items)).to be true
   end
 
   it "should require customer_ref for create / update" do
     estimate = Quickbooks::Model::Estimate.new
-    estimate.valid?.should == false
-    estimate.errors.keys.include?(:customer_ref).should == true
+    expect(estimate.valid?).to be false
+    expect(estimate.errors.keys.include?(:customer_ref)).to be true
   end
 
   it "is valid with line_items and customer_ref" do
@@ -86,21 +86,21 @@ describe "Quickbooks::Model::Estimate" do
     estimate.customer_id = 2
     estimate.line_items << Quickbooks::Model::InvoiceLineItem.new
 
-    estimate.valid?.should == true
+    expect(estimate.valid?).to be true
   end
 
   it "can properly convert to/from BigDecimal" do
     input_xml = fixture("estimate.xml")
     estimate = Quickbooks::Model::Estimate.from_xml(input_xml)
     line1 = estimate.line_items.first
-    line1.should_not be_nil
-    line1.amount.should == 20.0
-    line1.amount.class.should == BigDecimal
+    expect(line1).to_not be_nil
+    expect(line1.amount).to eq 20.0
+    expect(line1.amount.class).to eq BigDecimal
 
     xml = Nokogiri(estimate.to_xml.to_s)
     node = xml.xpath("//Estimate/Line/Amount")[0]
-    node.should_not be_nil
-    node.content.should == "20.0"
+    expect(node).to_not be_nil
+    expect(node.content).to eq "20.0"
   end
 
   describe "#global_tax_calculation" do

@@ -47,7 +47,7 @@ describe "Quickbooks::Model::RefundReceipt" do
     tax_line.detail_type.should == "TaxLineDetail"
     tax_line.amount.should == 22.43
     tax_line.tax_line_detail.tax_rate_ref.value.should == "1"
-    tax_line.tax_line_detail.percent_based?.should be_true
+    tax_line.tax_line_detail.percent_based?.should be true
     tax_line.tax_line_detail.tax_percent.should == 6.5
     tax_line.tax_line_detail.net_amount_taxable.should == 345.00
 
@@ -121,14 +121,14 @@ describe "Quickbooks::Model::RefundReceipt" do
       refund_receipt.auto_doc_number!
       refund_receipt.valid?
       refund_receipt.valid?.should == false
-      refund_receipt.errors.keys.include?(:doc_number).should be_true
+      refund_receipt.errors.keys.include?(:doc_number).should be true
     end
 
     it "turned off then doc_number can be specified" do
       refund_receipt = Quickbooks::Model::RefundReceipt.new
       refund_receipt.doc_number = 'AUTO'
       refund_receipt.valid?
-      refund_receipt.errors.keys.include?(:doc_number).should be_false
+      refund_receipt.errors.keys.include?(:doc_number).should be false
     end
   end
 

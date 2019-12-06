@@ -4,9 +4,9 @@ describe "Quickbooks::Model::CreditMemo" do
 
   it "should have line items" do
     credit_memo = Quickbooks::Model::CreditMemo.new
-    credit_memo.line_items.should be_kind_of(Array)
-    credit_memo.valid?.should == false
-    credit_memo.errors.keys.include?(:line_items).should == true
+    expect(credit_memo.line_items).to be_kind_of(Array)
+    expect(credit_memo.valid?).to be false
+    expect(credit_memo.errors.keys.include?(:line_items)).to be true
   end
 
   it "should not be valid if empty line item" do
@@ -19,7 +19,7 @@ describe "Quickbooks::Model::CreditMemo" do
     credit_memo = Quickbooks::Model::CreditMemo.new
     current = Time.now
     credit_memo.txn_date = current
-    credit_memo.to_xml.to_s.should =~ /TxnDate.*#{current.to_s[0..-6]}/ # shave off utc offset as Travis doesn't like
+    expect(credit_memo.to_xml.to_s).to match /TxnDate.*#{current.to_s[0..-6]}/ # shave off utc offset as Travis doesn't like
   end
 
   describe "#auto_doc_number" do
@@ -31,7 +31,7 @@ describe "Quickbooks::Model::CreditMemo" do
     tax_detail = Quickbooks::Model::TransactionTaxDetail.new
     tax_detail.txn_tax_code_id = 5
     credit_memo.txn_tax_detail = tax_detail
-    credit_memo.to_xml.to_s.should =~ /TxnTaxCodeRef\>5\</
+    expect(credit_memo.to_xml.to_s).to match /TxnTaxCodeRef\>5\</
   end
 
   describe "#global_tax_calculation" do

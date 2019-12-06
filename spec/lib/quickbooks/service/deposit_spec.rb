@@ -65,7 +65,7 @@ describe "Quickbooks::Service::Deposit" do
 
     response = @service.delete(deposit)
 
-    response.should be_true
+    response.should be true
   end
 
   it "properly outputs BigDecimal fields" do

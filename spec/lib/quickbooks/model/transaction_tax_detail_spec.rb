@@ -14,6 +14,6 @@ describe "Quickbooks::Model::TransactionTaxDetail" do
 
   it "total tax should not be included if not set" do
     transaction_tax_detail = Quickbooks::Model::TransactionTaxDetail.new
-    transaction_tax_detail.to_xml.should_not =~ /TotalTax/
+    expect(transaction_tax_detail.to_xml).not_to match(/TotalTax/)
   end
 end

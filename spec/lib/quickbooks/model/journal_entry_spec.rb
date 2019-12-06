@@ -18,7 +18,7 @@ describe "Quickbooks::Model::JournalEntry" do
     n = Nokogiri::XML(je.to_xml.to_s)
     n.at('JournalEntry > Line > Description').content.should == 'Received Payment'
     n.at('Line > JournalEntryLineDetail > TaxCodeRef').content.should == '2'
-    je.valid?.should be_true
+    je.valid?.should be true
   end
 
   it 'creates an entity reference' do
