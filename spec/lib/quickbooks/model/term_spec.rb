@@ -33,13 +33,13 @@ describe "Quickbooks::Model::Term" do
     it "returns true when active == 'true'" do
       term = Quickbooks::Model::Term.new
       term.active = "true"
-      term.should be_true
+      term.should be_truthy
     end
 
     it "returns false when active == 'false'" do
       term = Quickbooks::Model::Term.new
       term.active = "false"
-      term.should_not be_false
+      term.should_not be_falsy
     end
   end
 end
