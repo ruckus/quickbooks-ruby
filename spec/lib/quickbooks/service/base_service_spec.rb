@@ -169,16 +169,16 @@ describe Quickbooks::Service::BaseService do
     end
 
     it "should not log by default" do
-      Quickbooks.logger.should_receive(:info).never
+      expect(Quickbooks.logger).not_to receive(:info)
       @service.query
     end
 
     it "should log if Quickbooks.log = true" do
       Quickbooks.log = true
       obj = double('obj', :to_xml => '<test/>')
-      Nokogiri::XML::Document.any_instance.stub(:to_xml) { |arg| obj.to_xml }
-      obj.should_receive(:to_xml).once # will only called once on a get request, twice on a post
-      Quickbooks.logger.should_receive(:info).at_least(1)
+      expect_any_instance_of(Nokogiri::XML::Document).to receive(:to_xml) { |arg| obj.to_xml }
+      expect(obj).to receive(:to_xml).once # will only called once on a get request, twice on a post
+      expect(Quickbooks.logger).to receive(:info).at_least(1)
       @service.query
       Quickbooks.log = false
     end
@@ -186,8 +186,8 @@ describe Quickbooks::Service::BaseService do
     it "should log if Quickbooks.log = true but not prettyprint the xml" do
       Quickbooks.log = true
       Quickbooks.log_xml_pretty_print = false
-      Nokogiri::XML::Document.any_instance.should_not_receive(:to_xml)
-      Quickbooks.logger.should_receive(:info).at_least(1)
+      expect_any_instance_of(Nokogiri::XML::Document).not_to receive(:to_xml)
+      expect(Quickbooks.logger).to receive(:info).at_least(1)
       @service.query
       Quickbooks.log = false
       Quickbooks.log_xml_pretty_print = true
