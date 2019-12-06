@@ -8,6 +8,6 @@ describe "Quickbooks::Model::SalesItemLineDetail" do
 
   it "rate percent should not be included if not set" do
     detail = Quickbooks::Model::SalesItemLineDetail.new
-    detail.to_xml.should_not =~ /RatePercent/
+    expect(detail.to_xml).not_to match(/RatePercent/)
   end
 end
