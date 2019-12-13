@@ -64,8 +64,8 @@ What follows is an example using Rails but the principles can be adapted to any 
 Create a Rails initializer with:
 
 ```ruby
-OAUTH_CONSUMER_KEY = ENV["OAUTH_CONSUMER_KEY"]
-OAUTH_CONSUMER_SECRET = ENV["OAUTH_CONSUMER_SECRET"]
+OAUTH_CLIENT_ID = ENV["OAUTH_CLIENT_ID"]
+OAUTH_CLIENT_SECRET = ENV["OAUTH_CLIENT_SECRET"]
 
 oauth_params = {
   :site => "https://appcenter.intuit.com/connect/oauth2",
@@ -73,7 +73,7 @@ oauth_params = {
   :token_url => "https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer"
 }
 
-::QB_OAUTH2_CONSUMER = OAuth2::Client.new(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET, oauth_params)
+::QB_OAUTH2_CONSUMER = OAuth2::Client.new(OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, oauth_params)
 
 ```
 
