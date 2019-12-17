@@ -10,7 +10,7 @@ module Quickbooks
       xml_accessor :tax_rate_ref, :from => 'TaxRateRef', :as => BaseReference
 
       reference_setters :tax_rate_ref
-      
+
     end
   end
 end

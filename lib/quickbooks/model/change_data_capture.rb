@@ -6,7 +6,7 @@ module Quickbooks
 
       TYPES = ["Bill", "BillPayment", "CreditMemo", "Deposit", "Invoice", "JournalEntry", "Payment",
         "Purchase", "RefundReceipt", "SalesReceipt", "PurchaseOrder", "VendorCredit", "Transfer",
-        "Estimate", "Account", "Budget", "Class", "Customer", "Department", "Employee", "Item", 
+        "Estimate", "Account", "Budget", "Class", "Customer", "Department", "Employee", "Item",
         "PaymentMethod", "Term", "Vendor"]
 
       def all_types

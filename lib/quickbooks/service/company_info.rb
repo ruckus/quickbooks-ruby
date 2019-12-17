@@ -3,7 +3,7 @@ module Quickbooks
     class CompanyInfo < BaseService
 
       private
-      
+
       def model
         Quickbooks::Model::CompanyInfo
       end

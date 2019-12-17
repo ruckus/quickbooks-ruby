@@ -34,7 +34,7 @@ OAuth::Consumer.class_eval do
     when :multipart_post
       request = Net::HTTP::Post::Multipart.new(path, headers)
     else
-      raise ArgumentError, "Don't know how to handle http_method: :#{http_method.to_s}"
+      raise ArgumentError, "Don't know how to handle http_method: :#{http_method}"
     end
 
     if data.is_a?(Hash)

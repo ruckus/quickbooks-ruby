@@ -7,7 +7,7 @@ module Quickbooks
       end
 
       private
-      
+
       def model
         Quickbooks::Model::VendorCredit
       end

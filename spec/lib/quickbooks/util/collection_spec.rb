@@ -2,7 +2,7 @@ describe Quickbooks::Collection do
   it "is has an #each" do
     collection = Quickbooks::Collection.new()
     collection.entries = [:foo]
-    expect{ |b| collection.each &b}.to yield_with_args(:foo) 
+    expect{ |b| collection.each &b}.to yield_with_args(:foo)
   end
   it "has a method from enumerable" do
     collection = Quickbooks::Collection.new()

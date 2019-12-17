@@ -8,7 +8,7 @@ module FixtureHelpers
   end
 
   def json_fixture(file)
-    File.new("#{fixture_path}/json/#{file.to_s}.json").read
+    File.new("#{fixture_path}/json/#{file}.json").read
   end
 
 end

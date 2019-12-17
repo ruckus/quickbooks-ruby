@@ -9,7 +9,7 @@ shared_examples_for "a model that has auto_doc_number support" do |entity|
   end
 
   it "turned on then doc_number should not be specified" do
-    invoice = model 
+    invoice = model
     invoice.doc_number = 'AUTO'
     invoice.auto_doc_number!
     invoice.valid?

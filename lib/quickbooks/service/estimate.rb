@@ -5,7 +5,7 @@ module Quickbooks
       def delete(estimate)
         delete_by_query_string(estimate)
       end
-      
+
       def pdf(estimate)
         url = "#{url_for_resource(model::REST_RESOURCE)}/#{estimate.id}/pdf"
         response = do_http_raw_get(url, {}, {'Accept' => 'application/pdf'})

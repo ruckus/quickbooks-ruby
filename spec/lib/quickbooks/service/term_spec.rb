@@ -52,7 +52,7 @@ describe "Quickbooks::Service::Term" do
 
   it "can delete a term" do
     stub_request(:post,
-                 "#{@service.url_for_resource(resource)}",
+                 (@service.url_for_resource(resource)).to_s,
                  ["200", "OK"],
                  fixture("term_delete_success_response.xml"))
 

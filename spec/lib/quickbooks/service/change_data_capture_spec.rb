@@ -4,7 +4,7 @@ describe "Quickbooks::Service::ChangeDataCapture" do
    "JournalEntry", "Payment", "Purchase", "RefundReceipt",
    "SalesReceipt", "PurchaseOrder", "VendorCredit", "Transfer",
    "Estimate", "Account", "Budget", "Class",
-   "Customer", "Department", "Employee", "Item", 
+   "Customer", "Department", "Employee", "Item",
    "PaymentMethod", "Term", "Vendor"] }
 
   it "can query for a range of entities at once" do
@@ -27,7 +27,7 @@ describe "Quickbooks::Service::ChangeDataCapture" do
     it "builds a query from a list of invoices and a 'since' date" do
       date = Date.today
       since = "changedSince=#{URI.encode_www_form_component(date)}"
-      service.url_for_query(entities, since).should == "https://quickbooks.api.intuit.com/v3/company/9991111222/cdc?entities=Bill,BillPayment,CreditMemo,Deposit,Invoice,JournalEntry,Payment,Purchase,RefundReceipt,SalesReceipt,PurchaseOrder,VendorCredit,Transfer,Estimate,Account,Budget,Class,Customer,Department,Employee,Item,PaymentMethod,Term,Vendor&changedSince=#{date.to_s}"
+      service.url_for_query(entities, since).should == "https://quickbooks.api.intuit.com/v3/company/9991111222/cdc?entities=Bill,BillPayment,CreditMemo,Deposit,Invoice,JournalEntry,Payment,Purchase,RefundReceipt,SalesReceipt,PurchaseOrder,VendorCredit,Transfer,Estimate,Account,Budget,Class,Customer,Department,Employee,Item,PaymentMethod,Term,Vendor&changedSince=#{date}"
     end
   end
 

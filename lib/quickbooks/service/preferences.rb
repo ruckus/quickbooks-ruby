@@ -3,7 +3,7 @@ module Quickbooks
     class Preferences < BaseService
 
       private
-      
+
       def model
         Quickbooks::Model::Preferences
       end

@@ -74,7 +74,7 @@ describe "Quickbooks::Service::Payment" do
 
     response = @service.void(payment)
 
-    response.should be_true    
+    response.should be_true
     response.total.should == 0
   end
 

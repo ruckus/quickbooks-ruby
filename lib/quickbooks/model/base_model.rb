@@ -54,7 +54,7 @@ module Quickbooks
       def inspect
         # it would be nice if we could inspect all the children,
         # but it's likely to blow the stack in some cases
-        "#<#{self.class} " + 
+        "#<#{self.class} " +
         "#{attributes.map{|k,v| "#{k}: #{v.nil? ? 'nil' : v.to_s }"}.join ", "}>"
       end
       class << self

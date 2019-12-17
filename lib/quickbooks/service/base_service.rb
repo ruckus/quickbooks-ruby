@@ -201,7 +201,7 @@ module Quickbooks
 
         if metadata
           standalone_prefix = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-          meta_data_xml = "#{standalone_prefix}\n#{metadata.to_xml_ns.to_s}"
+          meta_data_xml = "#{standalone_prefix}\n#{metadata.to_xml_ns}"
           param_part = UploadIO.new(StringIO.new(meta_data_xml), "application/xml")
           body['file_metadata_0'] = param_part
         end
