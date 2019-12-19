@@ -1,3 +1,10 @@
+## 1.0.2 (2019-12-19)
+
+* Dropped OAuth1 support
+* rspec updates. Thank you @drewish
+* Update SalesFormsPref fields on Preferences model (#492). Thank you @drewish
+* Better errors: Add more detail to AuthorizationFailures, Unwind logging and parsing code, Track last response's intuitTid. Thank you @drewish
+
 ## 1.0.1 (2019-11-05)
 
 * Add minorversion to account service and update query url (#488). Thank you @colmheaney

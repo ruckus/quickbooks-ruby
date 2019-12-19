@@ -20,20 +20,18 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'nokogiri'  # promiscuous mode
   gem.add_dependency 'multipart-post' # promiscuous mode
 
-<<<<<<< HEAD
-  gem.add_development_dependency 'rake', '10.1.0'
+  # gem.add_development_dependency 'rake', '> 10.0'
+  # gem.add_development_dependency 'simplecov', '>= 0.7.1'
+  # gem.add_development_dependency 'rr', '~>1.0.2'
+  # gem.add_development_dependency 'rspec',  '>= 2.0'
+  # gem.add_development_dependency 'webmock'
+  # gem.add_development_dependency 'dotenv', '>= 2.0'
+
+  gem.add_development_dependency 'rake'
   gem.add_development_dependency 'simplecov', '0.7.1'
   gem.add_development_dependency 'rr',     '~> 1.0.2'
   gem.add_development_dependency 'rspec',  '~> 3.9'
   gem.add_development_dependency 'rspec-its'
   gem.add_development_dependency "webmock"
   gem.add_development_dependency 'dotenv', '2.2.1'
-=======
-  gem.add_development_dependency 'rake', '> 10.0'
-  gem.add_development_dependency 'simplecov', '>= 0.7.1'
-  gem.add_development_dependency 'rr', '>= 1.0.2'
-  gem.add_development_dependency 'rspec',  '>= 2.0'
-  gem.add_development_dependency 'webmock'
-  gem.add_development_dependency 'dotenv', '>= 2.0'
->>>>>>> Removing OAuth1 support
 end

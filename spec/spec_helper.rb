@@ -18,6 +18,7 @@ Dir[File.expand_path('../support/**/*.rb', __FILE__)].each { |f| require f }
 
 RSpec.configure do |config|
   config.color = true
+  #config.expect_with(:rspec) { |c| c.syntax = :should }
 end
 
 I18n.enforce_available_locales = false

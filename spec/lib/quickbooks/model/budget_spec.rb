@@ -4,21 +4,22 @@ describe "Quickbooks::Model::Budget" do
     xml = fixture("budget.xml")
     budget = Quickbooks::Model::Budget.from_xml(xml)
 
-    budget.sync_token.should == 1
-    budget.active?.should == true
-    budget.line_items.count.should == 192
+    expect(budget.sync_token).to eq(1)
+    expect(budget.active?).to be true
+    expect(budget.line_items.count).to eq 192
+
 
     line1 = budget.line_items[0]
-    line1.date.should == Date.parse("2015-01-01")
-    line1.amount.should == '0'
-    line1.account_ref.value.should == '14'
-    line1.account_ref.name.should == 'Miscellaneous'
+    expect(line1.date).to eq Date.parse("2015-01-01")
+    expect(line1.amount).to eq '0'
+    expect(line1.account_ref.value).to eq '14'
+    expect(line1.account_ref.name).to eq 'Miscellaneous'
 
     line2 = budget.line_items[23]
-    line2.date.should == Date.parse("2015-12-01")
-    line2.amount.should == '475.00'
-    line2.account_ref.value.should == '45'
-    line2.account_ref.name.should == 'Landscaping Services'
+    expect(line2.date).to eq Date.parse("2015-12-01")
+    expect(line2.amount).to eq '475.00'
+    expect(line2.account_ref.value).to eq '45'
+    expect(line2.account_ref.name).to eq 'Landscaping Services'
   end
 
 end

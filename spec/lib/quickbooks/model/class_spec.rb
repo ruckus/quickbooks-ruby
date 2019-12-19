@@ -3,25 +3,25 @@ describe "Quickbooks::Model::Class" do
   it "parse from XML" do
     xml = fixture("class.xml")
     classs = Quickbooks::Model::Class.from_xml(xml)
-    classs.sync_token.should == 1
-    classs.name.should == 'Design'
-    classs.sub_class?.should == false
-    classs.fully_qualified_name.should == 'Design'
-    classs.active?.should == true
+    expect(classs.sync_token).to eq 1
+    expect(classs.name).to eq 'Design'
+    expect(classs.sub_class?).to eq false
+    expect(classs.fully_qualified_name).to eq 'Design'
+    expect(classs.active?).to eq true
   end
 
   it "can't assign a bad name" do
     classs = Quickbooks::Model::Class.new
     classs.name = "My:Class"
-    classs.valid?
-    classs.errors.keys.should include(:name)
+    expect(classs.valid?).to eq false
+    expect(classs.errors.keys).to include(:name)
   end
 
   it "cannot update an invalid model" do
     classs = Quickbooks::Model::Class.new
-    classs.valid_for_update?.should == false
-    classs.to_xml_ns.should match('Class')
-    classs.errors.keys.should include(:sync_token)
+    expect(classs.valid_for_update?).to eq false
+    expect(classs.to_xml_ns).to match('Class')
+    expect(classs.errors.keys).to include(:sync_token)
   end
 
 end
