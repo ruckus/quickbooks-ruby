@@ -8,7 +8,6 @@ end
 
 require 'rubygems'
 require 'rspec'
-require 'oauth'
 require 'quickbooks-ruby'
 require 'json'
 require 'pry'

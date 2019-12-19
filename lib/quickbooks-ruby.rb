@@ -6,7 +6,6 @@ require 'cgi'
 require 'uri'
 require 'date'
 require 'forwardable'
-require 'oauth'
 require 'oauth2'
 require 'net/http/post/multipart'
 require 'quickbooks/util/collection'
@@ -19,7 +18,6 @@ require 'quickbooks/faraday/middleware/gzip'
 #== OAuth Responses
 require 'quickbooks/service/responses/oauth_http_response'
 require 'quickbooks/service/responses/methods'
-require 'quickbooks/service/responses/oauth1_http_response'
 require 'quickbooks/service/responses/oauth2_http_response'
 
 #== Models
@@ -255,12 +253,6 @@ module Quickbooks
     def initialize(msg)
       self.message = msg
       super(msg)
-    end
-  end
-
-  class InvalidOauthAccessTokenObject < StandardError
-    def initialize(access_token)
-      super("Expected access token to be an instance of OAuth::AccessToken or OAuth2::AccessToken, got #{access_token.class}.")
     end
   end
 

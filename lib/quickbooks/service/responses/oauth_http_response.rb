@@ -7,11 +7,7 @@ module Quickbooks
       class OAuthHttpResponse
 
         def self.wrap(response)
-          if response.is_a?(OAuth2::Response)
-            Quickbooks::Service::Responses::OAuth2HttpResponse.new(response)
-          else
-            Quickbooks::Service::Responses::OAuth1HttpResponse.new(response)
-          end
+          Quickbooks::Service::Responses::OAuth2HttpResponse.new(response)
         end
 
       end
