@@ -1,3 +1,11 @@
+## 1.0.3 (2020-01-08)
+
+* Added customer.tax_exemption_reason_id (#495) . Thanks @bcackerman
+* mxchan (thanks!)
+    - fix Content-Type in send sales receipt (#498)
+    - Fixes the `undefined method 'bytesize' for #<Hash...` error triggered when sending a sales receipt.
+    - Searched around and found #412 which already implemented the fix for sending invoices, but hadn't been implemented for sales receipt yet.
+
 ## 1.0.2 (2019-12-19)
 
 * Dropped OAuth1 support
