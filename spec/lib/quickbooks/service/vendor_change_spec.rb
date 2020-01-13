@@ -19,7 +19,7 @@ describe "Quickbooks::Service::VendorChange" do
 
   describe "#url_for_query" do
     subject { service.url_for_query }
-    it { should eq "#{service.url_for_base}/cdc?entities=Vendor" }
+    it { is_expected.to eq "#{service.url_for_base}/cdc?entities=Vendor" }
   end
 
 end

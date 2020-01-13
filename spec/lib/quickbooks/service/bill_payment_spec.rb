@@ -19,9 +19,9 @@ describe "Quickbooks::Service::BillPayment" do
 
     bill_payments = @service.query
 
-    bill_payments.entries.count.should == 1
+    expect(bill_payments.entries.count).to eq(1)
     first_bill_payment = bill_payments.entries.first
-    first_bill_payment.private_note.should == "Acct. 1JK90"
+    expect(first_bill_payment.private_note).to eq("Acct. 1JK90")
   end
 
   it "can fetch a bill_payment by ID" do
@@ -32,7 +32,7 @@ describe "Quickbooks::Service::BillPayment" do
 
     bill_payment = @service.fetch_by_id(623)
 
-    bill_payment.private_note.should == "Acct. 1JK90"
+    expect(bill_payment.private_note).to eq("Acct. 1JK90")
   end
 
   it "can create a bill_payment" do
@@ -43,7 +43,7 @@ describe "Quickbooks::Service::BillPayment" do
 
     created_bill_payment = @service.create(bill_payment)
 
-    created_bill_payment.id.should == "623"
+    expect(created_bill_payment.id).to eq("623")
   end
 
   it "can sparse update a bill_payment" do
@@ -57,7 +57,7 @@ describe "Quickbooks::Service::BillPayment" do
 
     update_response = @service.update(bill_payment, :sparse => true)
 
-    update_response.total.should == 110.0
+    expect(update_response.total).to eq(110.0)
   end
 
   it "can delete a bill_payment" do
@@ -68,6 +68,6 @@ describe "Quickbooks::Service::BillPayment" do
 
     response = @service.delete(bill_payment)
 
-    response.should be true
+    expect(response).to be true
   end
 end

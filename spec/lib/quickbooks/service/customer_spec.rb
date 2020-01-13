@@ -9,10 +9,10 @@ describe "Quickbooks::Service::Customer" do
 
     stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     customers = @service.query
-    customers.entries.count.should == 5
+    expect(customers.entries.count).to eq(5)
 
     acme = customers.entries.first
-    acme.fully_qualified_name.should == 'Acme Enterprises'
+    expect(acme.fully_qualified_name).to eq('Acme Enterprises')
   end
 
   it "can fetch a customer by ID" do
@@ -21,7 +21,7 @@ describe "Quickbooks::Service::Customer" do
     stub_http_request(:get, "#{@service.url_for_base}/customer/1?minorversion=#{Quickbooks::Model::Customer::MINORVERSION}", ["200", "OK"], xml)
 
     customer = @service.fetch_by_id(1)
-    customer.fully_qualified_name.should == "Thrifty Meats"
+    expect(customer.fully_qualified_name).to eq("Thrifty Meats")
   end
 
   it "cannot create a customer with an invalid display_name" do
@@ -29,24 +29,24 @@ describe "Quickbooks::Service::Customer" do
 
     # invalid because the name contains a colon
     customer.display_name = 'Tractor:Trailer'
-    lambda do
+    expect do
       @service.create(customer)
-    end.should raise_error(Quickbooks::InvalidModelException)
+    end.to raise_error(Quickbooks::InvalidModelException)
 
-    customer.valid?.should == false
-    customer.valid_for_create?.should == false
-    customer.errors.keys.include?(:display_name).should == true
+    expect(customer.valid?).to eq(false)
+    expect(customer.valid_for_create?).to eq(false)
+    expect(customer.errors.keys.include?(:display_name)).to eq(true)
   end
 
   it "cannot create a customer with an invalid email" do
     customer = Quickbooks::Model::Customer.new
     customer.email_address = "foobar.com"
-    lambda do
+    expect do
       @service.create(customer)
-    end.should raise_error(Quickbooks::InvalidModelException)
+    end.to raise_error(Quickbooks::InvalidModelException)
 
-    customer.valid?.should == false
-    customer.errors.keys.include?(:primary_email_address).should == true
+    expect(customer.valid?).to eq(false)
+    expect(customer.errors.keys.include?(:primary_email_address)).to eq(true)
   end
 
   it "can create a customer" do
@@ -67,9 +67,9 @@ describe "Quickbooks::Service::Customer" do
     billing_address.country = "USA"
     customer.billing_address = billing_address
 
-    customer.valid_for_create?.should == true
+    expect(customer.valid_for_create?).to eq(true)
     created_customer = @service.create(customer)
-    created_customer.id.should == "1"
+    expect(created_customer.id).to eq("1")
   end
 
   it "can sparse update a customer" do
@@ -82,9 +82,9 @@ describe "Quickbooks::Service::Customer" do
     xml = fixture("fetch_customer_by_id.xml")
     stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
 
-    customer.valid_for_update?.should == true
+    expect(customer.valid_for_update?).to eq(true)
     update_response = @service.update(customer, :sparse => true)
-    update_response.display_name.should == 'Thrifty Meats'
+    expect(update_response.display_name).to eq('Thrifty Meats')
   end
 
   it "can delete a customer" do
@@ -97,10 +97,10 @@ describe "Quickbooks::Service::Customer" do
     xml = fixture("deleted_customer.xml")
     stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
 
-    customer.valid_for_deletion?.should == true
+    expect(customer.valid_for_deletion?).to eq(true)
     response = @service.delete(customer)
-    response.fully_qualified_name.should == 'Thrifty Meats (deleted)'
-    response.active?.should == false
+    expect(response.fully_qualified_name).to eq('Thrifty Meats (deleted)')
+    expect(response.active?).to eq(false)
   end
 
 end

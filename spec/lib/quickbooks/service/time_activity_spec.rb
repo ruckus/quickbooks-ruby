@@ -7,11 +7,11 @@ describe "Quickbooks::Service::TimeActivity" do
     xml = fixture("time_activities.xml")
     stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     time_activities = @service.query
-    time_activities.entries.count.should == 2
+    expect(time_activities.entries.count).to eq(2)
     ta1 = time_activities.entries.first
-    ta1.description.should == 'Description 1'
+    expect(ta1.description).to eq('Description 1')
     ta2 = time_activities.entries.last
-    ta2.description.should == 'Description 2'
+    expect(ta2.description).to eq('Description 2')
   end
 
   it "can fetch a time_activity by ID" do
@@ -19,39 +19,39 @@ describe "Quickbooks::Service::TimeActivity" do
     model = Quickbooks::Model::TimeActivity
     stub_http_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/1", ["200", "OK"], xml)
     time_activity = @service.fetch_by_id(1)
-    time_activity.description.should == "Description 1"
+    expect(time_activity.description).to eq("Description 1")
   end
 
   it "cannot create a time_activity with an invalid name_of" do
     time_activity = Quickbooks::Model::TimeActivity.new
-    lambda do
+    expect do
       @service.create(time_activity)
-    end.should raise_error(Quickbooks::InvalidModelException)
+    end.to raise_error(Quickbooks::InvalidModelException)
 
-    time_activity.valid?.should == false
-    time_activity.errors.keys.include?(:name_of).should == true
+    expect(time_activity.valid?).to eq(false)
+    expect(time_activity.errors.keys.include?(:name_of)).to eq(true)
   end
 
   it "cannot create a time_activity with an empty employee_ref" do
     time_activity = Quickbooks::Model::TimeActivity.new
     time_activity.name_of = "Employee"
-    lambda do
+    expect do
       @service.create(time_activity)
-    end.should raise_error(Quickbooks::InvalidModelException)
+    end.to raise_error(Quickbooks::InvalidModelException)
 
-    time_activity.valid?.should == false
-    time_activity.errors.keys.include?(:employee_ref).should == true
+    expect(time_activity.valid?).to eq(false)
+    expect(time_activity.errors.keys.include?(:employee_ref)).to eq(true)
   end
 
   it "cannot create a time_activity with an empty vendor_ref" do
     time_activity = Quickbooks::Model::TimeActivity.new
     time_activity.name_of = "Vendor"
-    lambda do
+    expect do
       @service.create(time_activity)
-    end.should raise_error(Quickbooks::InvalidModelException)
+    end.to raise_error(Quickbooks::InvalidModelException)
 
-    time_activity.valid?.should == false
-    time_activity.errors.keys.include?(:vendor_ref).should == true
+    expect(time_activity.valid?).to eq(false)
+    expect(time_activity.errors.keys.include?(:vendor_ref)).to eq(true)
   end
 
   it "can create a time_activity" do
@@ -79,9 +79,9 @@ describe "Quickbooks::Service::TimeActivity" do
     time_activity.hours = 1
     time_activity.minutes = 30
 
-    time_activity.valid_for_create?.should == true
+    expect(time_activity.valid_for_create?).to eq(true)
     created_time_activity = @service.create(time_activity)
-    created_time_activity.id.should == "1"
+    expect(created_time_activity.id).to eq("1")
   end
 
   it "can delete a time_activity" do
@@ -94,7 +94,7 @@ describe "Quickbooks::Service::TimeActivity" do
     stub_http_request(:post, "#{@service.url_for_resource(model::REST_RESOURCE)}?operation=delete", ["200", "OK"], xml)
 
     response = @service.delete(time_activity)
-    response.should == true
+    expect(response).to eq(true)
 
   end
 end

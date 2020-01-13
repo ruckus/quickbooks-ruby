@@ -14,9 +14,9 @@ describe "Quickbooks::Service::Batch" do
     xml = fixture("batch_response.xml")
     Quickbooks.logger = $stdout
     stub_http_request(:post, @service.url_for_resource('batch'), ["400", ""], xml)
-    Proc.new {
+    expect {
       @service.make_request(Quickbooks::Model::BatchRequest.new)
-    }.should raise_error(Quickbooks::IntuitRequestException)
+    }.to raise_error(Quickbooks::IntuitRequestException)
   end
 
   it "allows user to specify a RequestId in a create call" do

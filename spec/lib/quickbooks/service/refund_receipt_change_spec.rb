@@ -7,19 +7,19 @@ describe "Quickbooks::Service::RefundReceiptChange" do
 
     stub_http_request(:get, service.url_for_query, ["200", "OK"], xml)
     refund_receipts = service.query
-    refund_receipts.entries.count.should == 1
+    expect(refund_receipts.entries.count).to eq(1)
 
     first_refund_receipt = refund_receipts.entries.first
-    first_refund_receipt.status.should == 'Deleted'
-    first_refund_receipt.id.should == "40"
+    expect(first_refund_receipt.status).to eq('Deleted')
+    expect(first_refund_receipt.id).to eq("40")
 
-    first_refund_receipt.meta_data.should_not be_nil
-    first_refund_receipt.meta_data.last_updated_time.should == DateTime.parse("2014-12-09T19:30:24-08:00")
+    expect(first_refund_receipt.meta_data).not_to be_nil
+    expect(first_refund_receipt.meta_data.last_updated_time).to eq(DateTime.parse("2014-12-09T19:30:24-08:00"))
   end
 
   describe "#url_for_query" do
     subject { service.url_for_query }
-    it { should eq "#{service.url_for_base}/cdc?entities=RefundReceipt" }
+    it { is_expected.to eq "#{service.url_for_base}/cdc?entities=RefundReceipt" }
   end
 
 end

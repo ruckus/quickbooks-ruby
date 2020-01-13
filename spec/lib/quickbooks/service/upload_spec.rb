@@ -20,7 +20,7 @@ describe Quickbooks::Service::Upload do
 
     response = @service.upload(path, mime, attachable)
 
-    response.note.should == attachable.note
+    expect(response.note).to eq(attachable.note)
   end
 
 end

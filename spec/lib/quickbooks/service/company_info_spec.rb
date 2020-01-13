@@ -9,10 +9,10 @@ describe "Quickbooks::Service::CompanyInfo" do
 
     stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     company_info_query = @service.query
-    company_info_query.entries.count.should == 1
+    expect(company_info_query.entries.count).to eq(1)
 
     company_info = company_info_query.entries.first
-    company_info.company_name.should == 'Acme Corp.'
+    expect(company_info.company_name).to eq('Acme Corp.')
   end
 
   it "can fetch company info by ID" do
@@ -20,6 +20,6 @@ describe "Quickbooks::Service::CompanyInfo" do
     model = Quickbooks::Model::CompanyInfo
     stub_http_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/1", ["200", "OK"], xml)
     company_info = @service.fetch_by_id(1)
-    company_info.company_name.should == "Acme Corp."
+    expect(company_info.company_name).to eq("Acme Corp.")
   end
 end

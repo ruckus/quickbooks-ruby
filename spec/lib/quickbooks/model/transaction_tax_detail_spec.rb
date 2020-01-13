@@ -3,13 +3,13 @@ describe "Quickbooks::Model::TransactionTaxDetail" do
     transaction_tax_detail = Quickbooks::Model::TransactionTaxDetail.new
     transaction_tax_detail.total_tax = 42
     transaction_tax_detail.txn_tax_code_id = 42
-    transaction_tax_detail.txn_tax_code_ref.value.should == 42
+    expect(transaction_tax_detail.txn_tax_code_ref.value).to eq(42)
   end
 
   it "total tax should be a decimal/float" do
     transaction_tax_detail = Quickbooks::Model::TransactionTaxDetail.new
     transaction_tax_detail.total_tax = 42
-    transaction_tax_detail.to_xml.at_css('TotalTax').content.should == '42.0'
+    expect(transaction_tax_detail.to_xml.at_css('TotalTax').content).to eq('42.0')
   end
 
   it "total tax should not be included if not set" do

@@ -16,8 +16,8 @@ describe Quickbooks::Service::TaxAgency do
                  ["200", "OK"],
                  fixture("tax_agencies.xml"))
     tax_agencies = @service.query
-    tax_agencies.entries.count.should eq(1)
-    tax_agencies.entries.first.display_name.should eq("First TaxAgency")
+    expect(tax_agencies.entries.count).to eq(1)
+    expect(tax_agencies.entries.first.display_name).to eq("First TaxAgency")
   end
 
   it "can create tax agency" do

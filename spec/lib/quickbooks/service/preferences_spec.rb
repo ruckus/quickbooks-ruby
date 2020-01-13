@@ -9,10 +9,10 @@ describe "Quickbooks::Service::Preferences" do
 
     stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     preferences_query = @service.query
-    preferences_query.entries.count.should == 1
+    expect(preferences_query.entries.count).to eq(1)
 
     preferences = preferences_query.entries.first
-    preferences.accounting_info.customer_terminology.should == "Customers"
+    expect(preferences.accounting_info.customer_terminology).to eq("Customers")
   end
 
 end

@@ -9,10 +9,10 @@ describe "Quickbooks::Service::ExchangeRate" do
 
     exchange_rates = @service.query
 
-    exchange_rates.entries.count.should eq(1)
-    exchange_rates.entries.first.source_currency_code.should eq("EUR")
-    exchange_rates.entries.first.target_currency_code.should eq("USD")
-    exchange_rates.entries.first.rate.should eq(2.5)
+    expect(exchange_rates.entries.count).to eq(1)
+    expect(exchange_rates.entries.first.source_currency_code).to eq("EUR")
+    expect(exchange_rates.entries.first.target_currency_code).to eq("USD")
+    expect(exchange_rates.entries.first.rate).to eq(2.5)
   end
 
   it "can query exchange rates by currency" do
@@ -24,8 +24,8 @@ describe "Quickbooks::Service::ExchangeRate" do
 
     exchange_rate = @service.fetch_by_currency('EUR')
 
-    exchange_rate.source_currency_code.should eq("EUR")
-    exchange_rate.target_currency_code.should eq("USD")
-    exchange_rate.rate.should eq(2.5)
+    expect(exchange_rate.source_currency_code).to eq("EUR")
+    expect(exchange_rate.target_currency_code).to eq("USD")
+    expect(exchange_rate.rate).to eq(2.5)
   end
 end
