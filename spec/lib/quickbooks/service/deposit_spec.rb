@@ -14,9 +14,9 @@ describe "Quickbooks::Service::Deposit" do
 
     deposits = @service.query
 
-    deposits.entries.count.should eq(5)
+    expect(deposits.entries.count).to eq(5)
     deposit = deposits.entries.first
-    deposit.private_note.should eq("Test Deposit")
+    expect(deposit.private_note).to eq("Test Deposit")
   end
 
   it "can fetch a deposit by ID" do
@@ -27,7 +27,7 @@ describe "Quickbooks::Service::Deposit" do
 
     payment = @service.fetch_by_id(1)
 
-    payment.private_note.should eq("Deposit Note")
+    expect(payment.private_note).to eq("Deposit Note")
   end
 
   it "can create a deposit" do
@@ -39,7 +39,7 @@ describe "Quickbooks::Service::Deposit" do
     deposit.line_items << Quickbooks::Model::DepositLineItem.new
     created_deposit = @service.create(deposit)
 
-    created_deposit.id.should eq(62)
+    expect(created_deposit.id).to eq(62)
   end
 
   it "can sparse update a deposit" do
@@ -54,7 +54,7 @@ describe "Quickbooks::Service::Deposit" do
     deposit.line_items << Quickbooks::Model::DepositLineItem.new
     update_response = @service.update(deposit, :sparse => true)
 
-    update_response.total.should eq(218.75)
+    expect(update_response.total).to eq(218.75)
   end
 
   it "can delete a deposit" do
@@ -65,7 +65,7 @@ describe "Quickbooks::Service::Deposit" do
 
     response = @service.delete(deposit)
 
-    response.should be true
+    expect(response).to be true
   end
 
   it "properly outputs BigDecimal fields" do
@@ -73,6 +73,6 @@ describe "Quickbooks::Service::Deposit" do
 
     xml = deposit.to_xml
 
-    xml.at("TotalAmt").text.should eq("42.0")
+    expect(xml.at("TotalAmt").text).to eq("42.0")
   end
 end

@@ -8,10 +8,10 @@ describe Quickbooks::Service::Account do
     stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml, {}, true)
 
     attachables = @service.query
-    attachables.entries.count.should == 1
+    expect(attachables.entries.count).to eq(1)
 
     monkey = attachables.entries.first
-    monkey.file_name.should == 'monkey.jpg'
+    expect(monkey.file_name).to eq('monkey.jpg')
   end
 
   it "can create an attachble" do
@@ -24,10 +24,10 @@ describe Quickbooks::Service::Account do
     entity = Quickbooks::Model::BaseReference.new(3, type: 'Customer')
     attachable.attachable_ref = Quickbooks::Model::AttachableRef.new(entity)
     n = Nokogiri::XML(attachable.to_xml.to_s)
-    n.at('AttachableRef > EntityRef').content.should == '3'
-    n.at('AttachableRef > EntityRef')[:type].should == 'Customer'
+    expect(n.at('AttachableRef > EntityRef').content).to eq('3')
+    expect(n.at('AttachableRef > EntityRef')[:type]).to eq('Customer')
     response = @service.create(attachable)
-    response.note.should == attachable.note
+    expect(response.note).to eq(attachable.note)
   end
 
 end

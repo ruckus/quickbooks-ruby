@@ -10,9 +10,9 @@ describe "Quickbooks::Service::Term" do
 
     terms = @service.query
 
-    terms.entries.count.should == 1
+    expect(terms.entries.count).to eq(1)
     term = terms.entries.first
-    term.name.should == "TermForV3Testing-1373590184130"
+    expect(term.name).to eq("TermForV3Testing-1373590184130")
   end
 
   it "can fetch a term by ID" do
@@ -23,7 +23,7 @@ describe "Quickbooks::Service::Term" do
 
     term = @service.fetch_by_id(11)
 
-    term.name.should == "null-1373590184786"
+    expect(term.name).to eq("null-1373590184786")
   end
 
   it "can create a term" do
@@ -34,7 +34,7 @@ describe "Quickbooks::Service::Term" do
 
     created_term = @service.create(term)
 
-    created_term.id.should == "11"
+    expect(created_term.id).to eq("11")
   end
 
   it "can sparse update a term" do
@@ -47,7 +47,7 @@ describe "Quickbooks::Service::Term" do
 
     updated_term = @service.update(term, :sparse => true)
 
-    updated_term.name.should == "TermForV3Testing-1373590184130"
+    expect(updated_term.name).to eq("TermForV3Testing-1373590184130")
   end
 
   it "can delete a term" do
@@ -58,6 +58,6 @@ describe "Quickbooks::Service::Term" do
 
     updated_term = @service.delete(term)
 
-    updated_term.should_not be_active
+    expect(updated_term).not_to be_active
   end
 end

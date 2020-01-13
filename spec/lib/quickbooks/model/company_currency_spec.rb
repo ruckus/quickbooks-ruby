@@ -3,12 +3,12 @@ describe "Quickbooks::Model::CompanyCurrency" do
     xml = fixture('company_currency.xml')
     company_currency = Quickbooks::Model::CompanyCurrency.from_xml(xml)
     
-    company_currency.id.should == "1"
-    company_currency.sync_token.should == 3
+    expect(company_currency.id).to eq("1")
+    expect(company_currency.sync_token).to eq(3)
     
-    company_currency.meta_data.should_not be_nil
-    company_currency.name.should == "Euro"
-    company_currency.code.should == "EUR"
-    company_currency.active?.should == true
+    expect(company_currency.meta_data).not_to be_nil
+    expect(company_currency.name).to eq("Euro")
+    expect(company_currency.code).to eq("EUR")
+    expect(company_currency.active?).to eq(true)
   end
 end

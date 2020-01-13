@@ -3,61 +3,61 @@ describe "Quickbooks::Model::Customer" do
   it "parse from XML" do
     xml = fixture("customer.xml")
     customer = Quickbooks::Model::Customer.from_xml(xml)
-    customer.sync_token.should == 1
-    customer.company_name.should == "Thrifty Meats"
-    customer.given_name.should == "John"
-    customer.family_name.should == "Doe"
-    customer.fully_qualified_name.should == "Thrifty Meats"
-    customer.print_on_check_name.should == "Thrifty Meats"
-    customer.active?.should == true
-    customer.primary_phone.should_not be_nil
-    customer.primary_phone.free_form_number.should == "(415) 555-1212"
-    customer.primary_email_address.should_not be_nil
-    customer.primary_email_address.address.should == "info@thriftymeats.com"
-    customer.taxable?.should == false
-    customer.default_tax_code_ref.to_s.should == 'NON'
+    expect(customer.sync_token).to eq(1)
+    expect(customer.company_name).to eq("Thrifty Meats")
+    expect(customer.given_name).to eq("John")
+    expect(customer.family_name).to eq("Doe")
+    expect(customer.fully_qualified_name).to eq("Thrifty Meats")
+    expect(customer.print_on_check_name).to eq("Thrifty Meats")
+    expect(customer.active?).to eq(true)
+    expect(customer.primary_phone).not_to be_nil
+    expect(customer.primary_phone.free_form_number).to eq("(415) 555-1212")
+    expect(customer.primary_email_address).not_to be_nil
+    expect(customer.primary_email_address.address).to eq("info@thriftymeats.com")
+    expect(customer.taxable?).to eq(false)
+    expect(customer.default_tax_code_ref.to_s).to eq('NON')
 
-    customer.billing_address.should_not be_nil
-    customer.billing_address.id.should == "2"
-    customer.billing_address.line1.should == "123 Swift St."
-    customer.billing_address.city.should == "Santa Cruz"
-    customer.billing_address.country.should == "USA"
-    customer.billing_address.country_sub_division_code.should == "CA"
-    customer.billing_address.lat.should == "36.9507991"
-    customer.billing_address.lon.should == "-122.0477003"
+    expect(customer.billing_address).not_to be_nil
+    expect(customer.billing_address.id).to eq("2")
+    expect(customer.billing_address.line1).to eq("123 Swift St.")
+    expect(customer.billing_address.city).to eq("Santa Cruz")
+    expect(customer.billing_address.country).to eq("USA")
+    expect(customer.billing_address.country_sub_division_code).to eq("CA")
+    expect(customer.billing_address.lat).to eq("36.9507991")
+    expect(customer.billing_address.lon).to eq("-122.0477003")
 
-    customer.shipping_address.should_not be_nil
-    customer.shipping_address.id.should == "2"
-    customer.shipping_address.line1.should == "123 Swift St."
-    customer.shipping_address.city.should == "Santa Cruz"
-    customer.shipping_address.country.should == "USA"
-    customer.shipping_address.country_sub_division_code.should == "CA"
-    customer.shipping_address.lat.should == "36.9507991"
-    customer.shipping_address.lon.should == "-122.0477003"
+    expect(customer.shipping_address).not_to be_nil
+    expect(customer.shipping_address.id).to eq("2")
+    expect(customer.shipping_address.line1).to eq("123 Swift St.")
+    expect(customer.shipping_address.city).to eq("Santa Cruz")
+    expect(customer.shipping_address.country).to eq("USA")
+    expect(customer.shipping_address.country_sub_division_code).to eq("CA")
+    expect(customer.shipping_address.lat).to eq("36.9507991")
+    expect(customer.shipping_address.lon).to eq("-122.0477003")
 
-    customer.job?.should == false
-    customer.bill_with_parent?.should == false
-    customer.balance.should == 0
-    customer.balance_with_jobs.should == 0
-    customer.preferred_delivery_method.should == "Email"
+    expect(customer.job?).to eq(false)
+    expect(customer.bill_with_parent?).to eq(false)
+    expect(customer.balance).to eq(0)
+    expect(customer.balance_with_jobs).to eq(0)
+    expect(customer.preferred_delivery_method).to eq("Email")
 
-    customer.currency_ref.name.should == "British Pound Sterling"
-    customer.currency_ref.value.should == "GBP"
+    expect(customer.currency_ref.name).to eq("British Pound Sterling")
+    expect(customer.currency_ref.value).to eq("GBP")
   end
 
   it "can assign an email address" do
     customer = Quickbooks::Model::Customer.new
     the_email = "foo@example.org"
     customer.email_address = the_email
-    customer.email_address.is_a?(Quickbooks::Model::EmailAddress).should == true
-    customer.email_address.address.should == the_email
+    expect(customer.email_address.is_a?(Quickbooks::Model::EmailAddress)).to eq(true)
+    expect(customer.email_address.address).to eq(the_email)
   end
 
   it "cannot update an invalid model" do
     customer = Quickbooks::Model::Customer.new
-    customer.valid_for_update?.should == false
-    customer.to_xml_ns.should match('Customer')
-    customer.errors.keys.include?(:sync_token).should == true
+    expect(customer.valid_for_update?).to eq(false)
+    expect(customer.to_xml_ns).to match('Customer')
+    expect(customer.errors.keys.include?(:sync_token)).to eq(true)
   end
 
   it "should handle a nil/blank email address" do
@@ -65,7 +65,7 @@ describe "Quickbooks::Model::Customer" do
     email = Quickbooks::Model::EmailAddress.new
     email.address = nil
     customer.email_address = email
-    customer.valid?.should == false
+    expect(customer.valid?).to eq(false)
   end
 
 end

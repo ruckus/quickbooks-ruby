@@ -9,9 +9,9 @@ describe "Quickbooks::Service::Budget" do
 
     stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     budgets = @service.query
-    budgets.entries.count.should == 2
+    expect(budgets.entries.count).to eq(2)
     first_budget = budgets.entries[0]
-    first_budget.id.should == "1"
+    expect(first_budget.id).to eq("1")
   end
 
   it "can fetch a Budget by ID" do
@@ -19,7 +19,7 @@ describe "Quickbooks::Service::Budget" do
     model = Quickbooks::Model::Budget
     stub_http_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/1", ["200", "OK"], xml)
     budget = @service.fetch_by_id(1)
-    budget.name.should == "TestBudgie"
+    expect(budget.name).to eq("TestBudgie")
   end
 
 end

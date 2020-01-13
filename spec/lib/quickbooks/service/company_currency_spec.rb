@@ -9,10 +9,10 @@ describe "Quickbooks::Service::CompanyCurrency" do
     xml = fixture("company_currency_query.xml")
     stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     company_currency_query = @service.query
-    company_currency_query.entries.count.should == 1
+    expect(company_currency_query.entries.count).to eq(1)
 
     company_currency = company_currency_query.entries.first
-    company_currency.name.should == 'Euro'
+    expect(company_currency.name).to eq('Euro')
   end
 
   it 'can fetch a company currency by id' do
@@ -24,8 +24,8 @@ describe "Quickbooks::Service::CompanyCurrency" do
     )
     company_currency = @service.fetch_by_id(1)
 
-    company_currency.id.should == "1"
-    company_currency.name.should == 'Euro'
+    expect(company_currency.id).to eq("1")
+    expect(company_currency.name).to eq('Euro')
   end
 
   it 'can create a company currency' do
@@ -37,10 +37,10 @@ describe "Quickbooks::Service::CompanyCurrency" do
     )
     company_currency = model.new(:id => 1, :sync_token => 2, :code => 'EUR')
 
-    company_currency.should be_valid_for_create
+    expect(company_currency).to be_valid_for_create
     created_company_currency = @service.create(company_currency)
-    created_company_currency.id.should == '1'
-    created_company_currency.code.should == 'EUR'
+    expect(created_company_currency.id).to eq('1')
+    expect(created_company_currency.code).to eq('EUR')
   end
 
   it 'can delete a company currency' do
@@ -48,8 +48,8 @@ describe "Quickbooks::Service::CompanyCurrency" do
     company_currency = model.new(:id => 1, :sync_token => 2, :code => 'EUR')
     stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
 
-    company_currency.should be_valid_for_deletion
+    expect(company_currency).to be_valid_for_deletion
     deleted_company_currency = @service.delete(company_currency)
-    deleted_company_currency.should_not be_active
+    expect(deleted_company_currency).not_to be_active
   end
 end

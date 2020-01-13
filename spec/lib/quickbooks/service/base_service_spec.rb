@@ -14,7 +14,7 @@ describe Quickbooks::Service::BaseService do
       it "correctly encodes the query" do
         subject.realm_id = 1234
         query = "SELECT * FROM Customer where Name = 'John'"
-        subject.url_for_query(query).should include(correct_url)
+        expect(subject.url_for_query(query)).to include(correct_url)
       end
     end
 
@@ -42,8 +42,8 @@ describe Quickbooks::Service::BaseService do
     end
 
     it "correctly initializes with an access_token and realm" do
-      @service.company_id.should == "9991111222"
-      @service.oauth.should_not be_nil
+      expect(@service.company_id).to eq("9991111222")
+      expect(@service.oauth).not_to be_nil
     end
   end
 
@@ -65,7 +65,7 @@ describe Quickbooks::Service::BaseService do
       begin
         @service.send(:check_response, response, :request => xml2)
       rescue Quickbooks::IntuitRequestException => ex
-        ex.request_xml.should == xml2
+        expect(ex.request_xml).to eq(xml2)
       end
     end
 

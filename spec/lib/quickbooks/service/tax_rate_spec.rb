@@ -9,7 +9,7 @@ describe "Quickbooks::Service::TaxRate" do
 
     tax_rates = @service.query
 
-    tax_rates.entries.count.should eq(1)
-    tax_rates.entries.first.name.should eq("Mountain View")
+    expect(tax_rates.entries.count).to eq(1)
+    expect(tax_rates.entries.first.name).to eq("Mountain View")
   end
 end

@@ -9,7 +9,7 @@ describe "Quickbooks::Service::TaxCode" do
 
     tax_codes = @service.query
 
-    tax_codes.entries.count.should eq(11)
-    tax_codes.entries.first.name.should eq("TAX")
+    expect(tax_codes.entries.count).to eq(11)
+    expect(tax_codes.entries.first.name).to eq("TAX")
   end
 end

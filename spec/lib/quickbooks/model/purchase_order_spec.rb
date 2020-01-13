@@ -3,44 +3,44 @@ describe "Quickbooks::Model::PurchaseOrder" do
   it "parse from XML" do
     xml = fixture("purchase_order.xml")
     purchase_order = Quickbooks::Model::PurchaseOrder.from_xml(xml)
-    purchase_order.sync_token.should == 0
-    purchase_order.id.should == "813"
-    purchase_order.txn_date.to_date.should == Date.civil(2013,7,19)
-    purchase_order.total_amount.should == 72.0
+    expect(purchase_order.sync_token).to eq(0)
+    expect(purchase_order.id).to eq("813")
+    expect(purchase_order.txn_date.to_date).to eq(Date.civil(2013,7,19))
+    expect(purchase_order.total_amount).to eq(72.0)
 
-    purchase_order.vendor_ref.value.should == "24"
-    purchase_order.vendor_ref.name.should == "Brown Equipment Rental"
-    purchase_order.ap_account_ref.value.should == "38"
-    purchase_order.ap_account_ref.name.should == "Accounts Payable"
+    expect(purchase_order.vendor_ref.value).to eq("24")
+    expect(purchase_order.vendor_ref.name).to eq("Brown Equipment Rental")
+    expect(purchase_order.ap_account_ref.value).to eq("38")
+    expect(purchase_order.ap_account_ref.name).to eq("Accounts Payable")
 
-    purchase_order.vendor_address.id.should == "339"
-    purchase_order.vendor_address.line1.should == "Sylvester Brown"
-    purchase_order.vendor_address.line2.should == "33 Old Bayshore Rd"
-    purchase_order.vendor_address.line3.should == "Bayshore, CA  94326"
+    expect(purchase_order.vendor_address.id).to eq("339")
+    expect(purchase_order.vendor_address.line1).to eq("Sylvester Brown")
+    expect(purchase_order.vendor_address.line2).to eq("33 Old Bayshore Rd")
+    expect(purchase_order.vendor_address.line3).to eq("Bayshore, CA  94326")
 
-    purchase_order.ship_address.id.should == "340"
-    purchase_order.ship_address.line1.should == "Larry's Landscaping & Garden Supply"
-    purchase_order.ship_address.line2.should == "1045 Main Street"
-    purchase_order.ship_address.line3.should == "Bayshore, CA 94326"
-    purchase_order.ship_address.line4.should == "(415)  555-4567"
+    expect(purchase_order.ship_address.id).to eq("340")
+    expect(purchase_order.ship_address.line1).to eq("Larry's Landscaping & Garden Supply")
+    expect(purchase_order.ship_address.line2).to eq("1045 Main Street")
+    expect(purchase_order.ship_address.line3).to eq("Bayshore, CA 94326")
+    expect(purchase_order.ship_address.line4).to eq("(415)  555-4567")
 
-    purchase_order.line_items.size.should == 1
+    expect(purchase_order.line_items.size).to eq(1)
 
     line1 = purchase_order.line_items[0]
-    line1.detail_type.should == "ItemBasedExpenseLineDetail"
-    line1.id.should == "1"
-    line1.amount.should == 72.0
-    line1.description.should == "hose"
-    line1.item_based_expense_line_detail.item_ref.value.should == "31"
-    line1.item_based_expense_line_detail.item_ref.name.should == "Irrigation Hose"
-    line1.item_based_expense_line_detail.class_ref.value.should == "100000000000128319"
-    line1.item_based_expense_line_detail.class_ref.name.should == "Landscaping"
-    line1.item_based_expense_line_detail.unit_price.should == 72
-    line1.item_based_expense_line_detail.quantity.should == 1
-    line1.item_based_expense_line_detail.billable_status.should == "NotBillable"
-    line1.item_based_expense_line_detail.tax_code_ref.value.should == "NON"
-    line1.account_based_expense_line_detail.account_ref.value.should == "139"
-    line1.account_based_expense_line_detail.account_ref.name.should == "Inventory Asset-1"
+    expect(line1.detail_type).to eq("ItemBasedExpenseLineDetail")
+    expect(line1.id).to eq("1")
+    expect(line1.amount).to eq(72.0)
+    expect(line1.description).to eq("hose")
+    expect(line1.item_based_expense_line_detail.item_ref.value).to eq("31")
+    expect(line1.item_based_expense_line_detail.item_ref.name).to eq("Irrigation Hose")
+    expect(line1.item_based_expense_line_detail.class_ref.value).to eq("100000000000128319")
+    expect(line1.item_based_expense_line_detail.class_ref.name).to eq("Landscaping")
+    expect(line1.item_based_expense_line_detail.unit_price).to eq(72)
+    expect(line1.item_based_expense_line_detail.quantity).to eq(1)
+    expect(line1.item_based_expense_line_detail.billable_status).to eq("NotBillable")
+    expect(line1.item_based_expense_line_detail.tax_code_ref.value).to eq("NON")
+    expect(line1.account_based_expense_line_detail.account_ref.value).to eq("139")
+    expect(line1.account_based_expense_line_detail.account_ref.name).to eq("Inventory Asset-1")
   end
 
   describe "#global_tax_calculation" do

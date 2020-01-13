@@ -22,8 +22,15 @@ describe "Quickbooks::Model::BaseModel" do
     subject { Quickbooks::Model::FooModel.new }
 
     context "For a non-transaction entity" do
-      its(:is_transaction_entity?) { should be false }
-      its(:is_name_list_entity?) { should be true }
+      describe '#is_transaction_entity?' do
+        subject { super().is_transaction_entity? }
+        it { is_expected.to be false }
+      end
+
+      describe '#is_name_list_entity?' do
+        subject { super().is_name_list_entity? }
+        it { is_expected.to be true }
+      end
     end
 
     context "For a transaction entity" do
@@ -31,8 +38,15 @@ describe "Quickbooks::Model::BaseModel" do
         expect(Quickbooks::Model::Definition::ClassMethods::TRANSACTION_ENTITIES).to receive(:include?).and_return(true)
       end
 
-      its(:is_transaction_entity?) { should be true }
-      its(:is_name_list_entity?) { should be false }
+      describe '#is_transaction_entity?' do
+        subject { super().is_transaction_entity? }
+        it { is_expected.to be true }
+      end
+
+      describe '#is_name_list_entity?' do
+        subject { super().is_name_list_entity? }
+        it { is_expected.to be false }
+      end
     end
   end
 
