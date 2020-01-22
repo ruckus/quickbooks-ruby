@@ -12,6 +12,7 @@ module Quickbooks
       xml_accessor :description, :from => 'Description'
       xml_accessor :amount, :from => 'Amount', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :detail_type, :from => 'DetailType'
+      xml_accessor :received, :from => 'Received', :as => BigDecimal, :to_xml => to_xml_big_decimal
 
       #== Various detail types
       xml_accessor :account_based_expense_line_detail, :from => ACCOUNT_BASED_EXPENSE_LINE_DETAIL, :as => AccountBasedExpenseLineDetail
