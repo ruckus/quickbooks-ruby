@@ -1,3 +1,9 @@
+## 1.0.4 (2020-01-22)
+
+* Purchase Order: added MINORVERSION support. Also added Received property
+* Add ability to download credit memo as pdf (#500) - Thanks @frenkel
+* Finish update to rspec 3 (#499); Remove rspec-its; Convert specs to RSpec 3.9.0 syntax with Transpec. Thanks @drewish
+
 ## 1.0.3 (2020-01-08)
 
 * Added customer.tax_exemption_reason_id (#495) . Thanks @bcackerman
