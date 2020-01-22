@@ -8,6 +8,7 @@ module Quickbooks
       REST_RESOURCE = 'purchaseorder'
       XML_COLLECTION_NODE = "PurchaseOrder"
       XML_NODE = "PurchaseOrder"
+      MINORVERSION = 45
 
       xml_accessor :id, :from => 'Id'
       xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
