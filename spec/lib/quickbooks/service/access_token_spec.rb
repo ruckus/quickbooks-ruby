@@ -44,23 +44,20 @@ describe Quickbooks::Service::AccessToken do
     expect(response.error_message).to eq("Invalid App Token")
   end
 
-  if ENV["OAUTH2"] == "1"
-    it "can successfully disconnect [oauth2]" do
-      xml = fixture("disconnect_200.xml")
-      stub_http_request(:get, Quickbooks::Service::AccessToken::DISCONNECT_URL_OAUTH2, ["200", "OK"], xml, {}, true)
+  it "can successfully disconnect [oauth2]" do
+    xml = fixture("disconnect_200.xml")
+    stub_http_request(:post, Quickbooks::Service::AccessToken::DISCONNECT_URL, ["200", "OK"], xml, {}, true)
 
-      response = @service.disconnect
-      expect(response.error?).to eq(false)
-    end
-
-    it "can fail to disconnect if the auth token is invalid [oauth2]" do
-      stub_http_request(:get, Quickbooks::Service::AccessToken::DISCONNECT_URL_OAUTH2, ["400", "Bad Request"], "", {}, true)
-
-      response = @service.disconnect
-      expect(response.error?).to eq(true)
-      expect(response.error_code).to    eq("400")
-      expect(response.error_message).to eq("Bad Request")
-    end
+    response = @service.disconnect
+    expect(response.error?).to eq(false)
   end
 
+  it "can fail to disconnect if the auth token is invalid [oauth2]" do
+    stub_http_request(:post, Quickbooks::Service::AccessToken::DISCONNECT_URL, ["400", "Bad Request"], "", {}, true)
+
+    response = @service.disconnect
+    expect(response.error?).to eq(true)
+    expect(response.error_code).to    eq("400")
+    expect(response.error_message).to eq("Bad Request")
+  end
 end
