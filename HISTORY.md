@@ -1,3 +1,16 @@
+## 1.0.5 (2020-01-28)
+
+* Fixed Disconnect (dependency on oauth_v1? which was removed in 1.0.2)
+
+## 1.0.4 (2020-01-22)
+
+* Add ability to download credit memo as pdf
+
+## 1.0.3 (2020-01-08)
+
+* Added customer.tax_exemption_reason_id
+* fix Content-Type in send sales receipt
+
 ## 1.0.2 (2019-12-19)
 
 * Dropped OAuth1 support
