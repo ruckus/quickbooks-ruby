@@ -7,7 +7,7 @@ module Quickbooks
       end
 
       def fetch_by_id(id, params = {})
-        url = "#{url_for_base}/invoice/#{id}?minorversion=#{Quickbooks::Model::PurchaseOrder::MINORVERSION}"
+        url = "#{url_for_base}/purchaseorder/#{id}?minorversion=#{Quickbooks::Model::PurchaseOrder::MINORVERSION}"
         fetch_object(model, url, params)
       end
 
