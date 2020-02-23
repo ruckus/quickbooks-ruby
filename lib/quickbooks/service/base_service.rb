@@ -253,7 +253,7 @@ module Quickbooks
         log "REQUEST HEADERS = #{headers.inspect}"
 
         request_info = RequestInfo.new(url, headers, body, method)
-        before_request&.call(request_info)
+        before_request.call(request_info) if before_request
 
         raw_response = with_around_request(request_info) do
           case method
@@ -268,7 +268,7 @@ module Quickbooks
           end
         end
 
-        after_request&.call(request_info, raw_response.body)
+        after_request.call(request_info, raw_response.body) if after_request
 
         response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
         log "------ QUICKBOOKS-RUBY RESPONSE ------"
