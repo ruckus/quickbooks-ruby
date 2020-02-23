@@ -208,4 +208,123 @@ describe Quickbooks::Service::BaseService do
     end
   end
 
+  describe "request hooks" do
+    context "with before_request" do
+      before do
+        construct_service :vendor
+        @service.before_request = proc do |request_info|
+          puts("BEFORE REQUEST:")
+          puts("url: #{request_info.url}")
+          puts("headers: #{request_info.headers}")
+          puts("body: #{request_info.body}")
+          puts("method: #{request_info.method}")
+        end
+        stub_http_request(:get, @service.url_for_query, %w[200 OK], fixture("vendors.xml"))
+      end
+
+      it "calls before_request" do
+        output_string = "BEFORE REQUEST:\nurl: https://quickbooks.api.intuit.com/v3/company/9991111222/query?query=SE"\
+                        "LECT+%2A+FROM+Vendor+STARTPOSITION+1+MAXRESULTS+20\nheaders: {\"Content-Type\"=>\"applicatio"\
+                        "n/xml\", \"Accept\"=>\"application/xml\", \"Accept-Encoding\"=>\"gzip, deflate\"}\nbody: {}"\
+                        "\nmethod: get\n"
+
+        expect { @service.query }.to output(output_string).to_stdout
+      end
+    end
+
+    context "with after_request" do
+      before do
+        construct_service :vendor
+        @service.after_request = proc do |request_info, response|
+          puts("AFTER REQUEST:")
+          puts("url: #{request_info.url}")
+          puts("headers: #{request_info.headers}")
+          puts("body: #{request_info.body}")
+          puts("method: #{request_info.method}")
+          puts("response: #{response}")
+        end
+        stub_http_request(:get, @service.url_for_query, %w[200 OK], fixture("vendors.xml"))
+      end
+
+      it "calls after_request" do
+        output_string = "AFTER REQUEST:\nurl: https://quickbooks.api.intuit.com/v3/company/9991111222/query?query=SEL"\
+                        "ECT+%2A+FROM+Vendor+STARTPOSITION+1+MAXRESULTS+20\nheaders: {\"Content-Type\"=>\"application"\
+                        "/xml\", \"Accept\"=>\"application/xml\", \"Accept-Encoding\"=>\"gzip, deflate\", \"Authoriza"\
+                        "tion\"=>\"Bearer token\"}\nbody: {}\nmethod: get\nresponse: <IntuitResponse xmlns=\"http://s"\
+                        "chema.intuit.com/finance/v3\" time=\"2013-04-23T08:55:53.298-07:00\">\n<QueryResponse startP"\
+                        "osition=\"1\" maxResults=\"2\">\n  <Vendor domain=\"QBO\" sparse=\"false\">\n    <Id>1128</I"\
+                        "d>\n    <SyncToken>2</SyncToken>\n    <MetaData>\n      <CreateTime>2013-04-22T08:55:33-07:0"\
+                        "0</CreateTime>\n      <LastUpdatedTime>2013-04-22T08:55:33-07:00</LastUpdatedTime>\n    </Me"\
+                        "taData>\n    <Title>Mr.</Title>\n    <GivenName>Sparse-lhhp</GivenName>\n    <MiddleName>T.<"\
+                        "/MiddleName>\n    <FamilyName>Vendorton</FamilyName>\n    <Suffix>III.</Suffix>\n    <Compan"\
+                        "yName>Vendor Company</CompanyName>\n    <DisplayName>Vendor-gqqh</DisplayName>\n    <PrintOn"\
+                        "CheckName>U Vendor Company on Check</PrintOnCheckName>\n    <Active>true</Active>\n    <Othe"\
+                        "rContactInfo>\n      <Type>TelephoneNumber</Type>\n      <Telephone>\n        <FreeFormNumbe"\
+                        "r>(214) 387-2007</FreeFormNumber>\n      </Telephone>\n    </OtherContactInfo>\n    <TaxIden"\
+                        "tifier>12-3456789</TaxIdentifier>\n    <Balance>534.55</Balance>\n    <Vendor1099>false</Ven"\
+                        "dor1099>\n  </Vendor>\n  <Vendor domain=\"QBO\" sparse=\"false\">\n    <Id>1129</Id>\n    <S"\
+                        "yncToken>2</SyncToken>\n    <MetaData>\n      <CreateTime>2013-04-23T08:55:33-07:00</CreateT"\
+                        "ime>\n      <LastUpdatedTime>2013-04-23T08:55:33-07:00</LastUpdatedTime>\n    </MetaData>\n "\
+                        "   <Title>Ms.</Title>\n    <GivenName>Sparse-lhpW82tFa5</GivenName>\n    <MiddleName>U.</Mid"\
+                        "dleName>\n    <FamilyName>Vendor</FamilyName>\n    <Suffix>II.</Suffix>\n    <CompanyName>Sp"\
+                        "arse Vendor Company</CompanyName>\n    <DisplayName>Vendor-gqgcMz92ue</DisplayName>\n    <Pr"\
+                        "intOnCheckName>U Vendor on Check</PrintOnCheckName>\n    <Active>true</Active>\n    <OtherCo"\
+                        "ntactInfo>\n      <Type>TelephoneNumber</Type>\n      <Telephone>\n        <FreeFormNumber>("\
+                        "214) 387-2008</FreeFormNumber>\n      </Telephone>\n    </OtherContactInfo>\n    <TaxIdentif"\
+                        "ier>12-3456788</TaxIdentifier>\n    <Balance>0</Balance>\n    <Vendor1099>true</Vendor1099>"\
+                        "\n  </Vendor>\n</QueryResponse>\n</IntuitResponse>\n"
+
+        expect { @service.query }.to output(output_string).to_stdout
+      end
+    end
+
+    context "with around_request" do
+      before do
+        construct_service :vendor
+        @service.around_request = proc do |request_info, &block|
+          puts("AROUND REQUEST (BEFORE CALL):")
+          puts("url: #{request_info.url}")
+          puts("headers: #{request_info.headers}")
+          puts("body: #{request_info.body}")
+          puts("method: #{request_info.method}")
+          response = block.call # call block
+          puts("AROUND REQUEST (AFTER CALL):")
+          puts("response: #{response.body}")
+          response # make sure to return response
+        end
+        stub_http_request(:get, @service.url_for_query, %w[200 OK], fixture("vendors.xml"))
+      end
+
+      it "calls around_request" do
+        output_string = "AROUND REQUEST (BEFORE CALL):\nurl: https://quickbooks.api.intuit.com/v3/company/9991111222/"\
+                        "query?query=SELECT+%2A+FROM+Vendor+STARTPOSITION+1+MAXRESULTS+20\nheaders: {\"Content-Type\""\
+                        "=>\"application/xml\", \"Accept\"=>\"application/xml\", \"Accept-Encoding\"=>\"gzip, deflate"\
+                        "\"}\nbody: {}\nmethod: get\nAROUND REQUEST (AFTER CALL):\nresponse: <IntuitResponse xmlns=\""\
+                        "http://schema.intuit.com/finance/v3\" time=\"2013-04-23T08:55:53.298-07:00\">\n<QueryRespons"\
+                        "e startPosition=\"1\" maxResults=\"2\">\n  <Vendor domain=\"QBO\" sparse=\"false\">\n    <Id"\
+                        ">1128</Id>\n    <SyncToken>2</SyncToken>\n    <MetaData>\n      <CreateTime>2013-04-22T08:55"\
+                        ":33-07:00</CreateTime>\n      <LastUpdatedTime>2013-04-22T08:55:33-07:00</LastUpdatedTime>\n"\
+                        "    </MetaData>\n    <Title>Mr.</Title>\n    <GivenName>Sparse-lhhp</GivenName>\n    <Middle"\
+                        "Name>T.</MiddleName>\n    <FamilyName>Vendorton</FamilyName>\n    <Suffix>III.</Suffix>\n   "\
+                        " <CompanyName>Vendor Company</CompanyName>\n    <DisplayName>Vendor-gqqh</DisplayName>\n    "\
+                        "<PrintOnCheckName>U Vendor Company on Check</PrintOnCheckName>\n    <Active>true</Active>\n "\
+                        "   <OtherContactInfo>\n      <Type>TelephoneNumber</Type>\n      <Telephone>\n        <FreeF"\
+                        "ormNumber>(214) 387-2007</FreeFormNumber>\n      </Telephone>\n    </OtherContactInfo>\n    "\
+                        "<TaxIdentifier>12-3456789</TaxIdentifier>\n    <Balance>534.55</Balance>\n    <Vendor1099>fa"\
+                        "lse</Vendor1099>\n  </Vendor>\n  <Vendor domain=\"QBO\" sparse=\"false\">\n    <Id>1129</Id>"\
+                        "\n    <SyncToken>2</SyncToken>\n    <MetaData>\n      <CreateTime>2013-04-23T08:55:33-07:00<"\
+                        "/CreateTime>\n      <LastUpdatedTime>2013-04-23T08:55:33-07:00</LastUpdatedTime>\n    </Meta"\
+                        "Data>\n    <Title>Ms.</Title>\n    <GivenName>Sparse-lhpW82tFa5</GivenName>\n    <MiddleName"\
+                        ">U.</MiddleName>\n    <FamilyName>Vendor</FamilyName>\n    <Suffix>II.</Suffix>\n    <Compan"\
+                        "yName>Sparse Vendor Company</CompanyName>\n    <DisplayName>Vendor-gqgcMz92ue</DisplayName>"\
+                        "\n    <PrintOnCheckName>U Vendor on Check</PrintOnCheckName>\n    <Active>true</Active>\n   "\
+                        " <OtherContactInfo>\n      <Type>TelephoneNumber</Type>\n      <Telephone>\n        <FreeFor"\
+                        "mNumber>(214) 387-2008</FreeFormNumber>\n      </Telephone>\n    </OtherContactInfo>\n    <T"\
+                        "axIdentifier>12-3456788</TaxIdentifier>\n    <Balance>0</Balance>\n    <Vendor1099>true</Ven"\
+                        "dor1099>\n  </Vendor>\n</QueryResponse>\n</IntuitResponse>\n"
+
+        expect { @service.query }.to output(output_string).to_stdout
+      end
+    end
+  end
 end
