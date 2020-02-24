@@ -56,6 +56,7 @@ module Quickbooks
       xml_accessor :notes, :from => 'Notes'
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
       xml_accessor :tax_exemption_reason_id, :from => 'TaxExemptionReasonId'
+      xml_accessor :primary_tax_identifier, :from => 'PrimaryTaxIdentifier'
 
       #== Validations
       validate :names_cannot_contain_invalid_characters
