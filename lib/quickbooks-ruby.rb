@@ -75,6 +75,7 @@ require 'quickbooks/model/invoice_line_item'
 require 'quickbooks/model/invoice_group_line_detail'
 require 'quickbooks/model/company_info'
 require 'quickbooks/model/company_currency'
+require 'quickbooks/model/customer_type'
 require 'quickbooks/model/customer'
 require 'quickbooks/model/delivery_info'
 require 'quickbooks/model/sales_receipt'
@@ -137,6 +138,7 @@ require 'quickbooks/service/class'
 require 'quickbooks/service/attachable'
 require 'quickbooks/service/company_info'
 require 'quickbooks/service/company_currency'
+require 'quickbooks/service/customer_type'
 require 'quickbooks/service/customer'
 require 'quickbooks/service/department'
 require 'quickbooks/service/invoice'
@@ -246,6 +248,7 @@ module Quickbooks
   class TooManyRequests < Error; end
   class ServiceUnavailable < Error; end
   class MissingRealmError < Error; end
+  class UnsupportedOperation < Error; end
 
   class IntuitRequestException < Error
     attr_accessor :message, :code, :detail, :type, :intuit_tid, :request_xml, :request_json

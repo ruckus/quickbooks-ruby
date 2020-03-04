@@ -43,6 +43,7 @@ describe "Quickbooks::Model::Customer" do
 
     expect(customer.currency_ref.name).to eq("British Pound Sterling")
     expect(customer.currency_ref.value).to eq("GBP")
+    expect(customer.customer_type_ref.value).to eq("5000000000000000185")
   end
 
   it "can assign an email address" do

@@ -1,0 +1,44 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2020-02-27T12:04:53.709-07:00">
+  <QueryResponse startPosition="1" maxResults="4" totalCount="4">
+    <CustomerType domain="QBO" sparse="false">
+      <Id>1</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2020-02-26T05:40:25-07:00</CreateTime>
+        <LastUpdatedTime>2020-02-26T05:40:25-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Retail</Name>
+      <Active>true</Active>
+    </CustomerType>
+    <CustomerType domain="QBO" sparse="false">
+      <Id>2</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2020-02-26T05:40:47-07:00</CreateTime>
+        <LastUpdatedTime>2020-02-26T05:40:47-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Drop Ship</Name>
+      <Active>true</Active>
+    </CustomerType>
+    <CustomerType domain="QBO" sparse="false">
+      <Id>3</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2020-02-26T05:40:34-07:00</CreateTime>
+        <LastUpdatedTime>2020-02-26T05:40:34-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Distributor</Name>
+      <Active>true</Active>
+    </CustomerType>
+    <CustomerType domain="QBO" sparse="false">
+      <Id>4</Id>
+      <SyncToken>0</SyncToken>
+      <MetaData>
+        <CreateTime>2020-02-26T05:40:50-07:00</CreateTime>
+        <LastUpdatedTime>2020-02-26T05:40:50-07:00</LastUpdatedTime>
+      </MetaData>
+      <Name>Wholesale</Name>
+      <Active>true</Active>
+    </CustomerType>
+  </QueryResponse>
+</IntuitResponse>
