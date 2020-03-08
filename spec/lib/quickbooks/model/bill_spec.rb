@@ -51,6 +51,21 @@ describe "Quickbooks::Model::Bill" do
     expect(linked_txn1.bill_payment_check_type?).to eq true
   end
 
+  it "can parse a bill with TxnTaxDetail from XML" do
+    xml = fixture("bill_txn_tax_detail.xml")
+    bill = Quickbooks::Model::Bill.from_xml(xml)
+    txn_tax_detail = bill.txn_tax_detail
+    expect(txn_tax_detail.total_tax).to eq(20)
+
+    tax_line = txn_tax_detail.lines.first
+    expect(tax_line.amount).to eq(20)
+    expect(tax_line.detail_type).to eq("TaxLineDetail")
+    expect(tax_line.tax_line_detail.tax_rate_ref.value).to eq("17")
+    expect(tax_line.tax_line_detail.percent_based?).to be true
+    expect(tax_line.tax_line_detail.tax_percent).to eq(5)
+    expect(tax_line.tax_line_detail.net_amount_taxable).to eq(400)
+  end
+
   describe "#global_tax_calculation" do
     subject { Quickbooks::Model::Bill.new }
     it_should_behave_like "a model with a valid GlobalTaxCalculation", "TaxInclusive"
