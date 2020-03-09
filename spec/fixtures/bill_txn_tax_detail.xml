@@ -1,0 +1,46 @@
+<Bill domain="QBO" sparse="false">
+  <Id>292</Id>
+  <SyncToken>0</SyncToken>
+  <MetaData>
+    <CreateTime>2020-03-07T23:08:50-08:00</CreateTime>
+    <LastUpdatedTime>2020-03-07T23:08:50-08:00</LastUpdatedTime>
+  </MetaData>
+  <DocNumber>PO000H1</DocNumber>
+  <TxnDate>2020-03-08</TxnDate>
+  <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+  <ExchangeRate>1</ExchangeRate>
+  <PrivateNote>This is a private note</PrivateNote>
+  <Line>
+    <Id>1</Id>
+    <LineNum>1</LineNum>
+    <Description>Large Mens Silver Watch</Description>
+    <Amount>400.00</Amount>
+    <DetailType>ItemBasedExpenseLineDetail</DetailType>
+    <ItemBasedExpenseLineDetail>
+      <ItemRef name="MW-001 - Mens Silver Watch">28</ItemRef>
+      <UnitPrice>400</UnitPrice>
+      <Qty>1</Qty>
+      <TaxCodeRef>9</TaxCodeRef>
+      <BillableStatus>NotBillable</BillableStatus>
+    </ItemBasedExpenseLineDetail>
+  </Line>
+  <TxnTaxDetail>
+    <TotalTax>20.00</TotalTax>
+    <TaxLine>
+      <Amount>20.00</Amount>
+      <DetailType>TaxLineDetail</DetailType>
+      <TaxLineDetail>
+        <TaxRateRef>17</TaxRateRef>
+        <PercentBased>true</PercentBased>
+        <TaxPercent>5</TaxPercent>
+        <NetAmountTaxable>400.00</NetAmountTaxable>
+      </TaxLineDetail>
+    </TaxLine>
+  </TxnTaxDetail>
+  <VendorRef name="John Doe">87</VendorRef>
+  <APAccountRef name="Accounts Payable (A/P) - USD">112</APAccountRef>
+  <TotalAmt>420.00</TotalAmt>
+  <GlobalTaxCalculation>TaxExcluded</GlobalTaxCalculation>
+  <DueDate>2020-03-22</DueDate>
+  <Balance>420.00</Balance>
+</Bill>
