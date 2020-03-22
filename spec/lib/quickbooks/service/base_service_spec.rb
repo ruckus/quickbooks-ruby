@@ -151,6 +151,13 @@ describe Quickbooks::Service::BaseService do
       response = Struct.new(:code, :plain_body).new(504, xml)
       expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::ServiceUnavailable)
     end
+
+    it "should raise IntuitRequestException on unhandled status code" do
+      xml = fixture('generic_error.xml')
+
+      response = Struct.new(:code, :plain_body).new(1000, xml)
+      expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::IntuitRequestException)
+    end
   end
 
   it "Correctly handled an IntuitRequestException" do

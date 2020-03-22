@@ -346,7 +346,7 @@ module Quickbooks
         when 502, 503, 504
           raise Quickbooks::ServiceUnavailable
         else
-          raise "HTTP Error Code: #{status}, Msg: #{response.plain_body}"
+          raise Quickbooks::IntuitRequestException.new("HTTP Error Code: #{status}, Msg: #{response.plain_body}")
         end
       end
 
