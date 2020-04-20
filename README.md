@@ -33,6 +33,8 @@ This has been tested on 2.x
 
 Ruby 1.9.x is not supported.
 
+Ruby 2.7.0 is not supported due to roxml dependancy issue
+
 ## Dependencies
 
 Gems:
