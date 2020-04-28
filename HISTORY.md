@@ -1,3 +1,10 @@
+## 1.0.7 (2020-04-28)
+
+* Add customer type #509. Thank you @gbkane
+* Fix NoMethodError when response headers are nil (#514). Thank you @anaprimawaty
+* Update Readme about roxml BigDecimal deprecation (#516). Thank you @anaprimawaty
+* Escape regex matching numbers in report parsing (#511). Thank you @mehwoot
+
 ## 1.0.6 (2020-02-10)
 
 * Fix fetch_by_id in purchase order service (#505), thank you @atemena
