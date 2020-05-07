@@ -10,7 +10,6 @@ module Quickbooks
       XML_COLLECTION_NODE = "Item"
       XML_NODE = "Item"
       REST_RESOURCE = 'item'
-      MINORVERSION = 33
 
       INVENTORY_TYPE = 'Inventory'
       NON_INVENTORY_TYPE = 'NonInventory'
