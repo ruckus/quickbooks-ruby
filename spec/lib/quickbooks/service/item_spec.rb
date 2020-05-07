@@ -18,7 +18,7 @@ describe "Quickbooks::Service::Item" do
   it "can fetch an Item by ID" do
     xml = fixture("fetch_item_by_id.xml")
     model = Quickbooks::Model::Item
-    stub_http_request(:get, "#{@service.url_for_base}/item/2?minorversion=#{Quickbooks::Model::Item::MINORVERSION}", ["200", "OK"], xml)
+    stub_http_request(:get, "#{@service.url_for_base}/item/2", ["200", "OK"], xml)
     item = @service.fetch_by_id(2)
     expect(item.name).to eq("Plush Baby Doll")
   end
@@ -52,7 +52,7 @@ describe "Quickbooks::Service::Item" do
     xml = fixture("fetch_item_by_id.xml")
     model = Quickbooks::Model::Item
 
-    url = "#{@service.url_for_resource(model::REST_RESOURCE)}&requestid=123"
+    url = "#{@service.url_for_resource(model::REST_RESOURCE)}?requestid=123"
     stub_http_request(:post, url, ["200", "OK"], xml)
 
     item = Quickbooks::Model::Item.new

@@ -83,7 +83,7 @@ module Quickbooks
         query ||= default_model_query
         query = "#{query} STARTPOSITION #{start_position} MAXRESULTS #{max_results}"
 
-        "#{url_for_base}/query?query=#{CGI.escape(query)}"
+        "#{url_for_base}/query?query=#{CGI.escape(query)}&minorversion=#{Quickbooks.minorversion}"
       end
 
       private
@@ -196,7 +196,6 @@ module Quickbooks
       end
 
       def do_http_get(url, params = {}, headers = {}) # throws IntuitRequestException
-        params['minorversion'] = Quickbooks.minorversion
         url = add_query_string_to_url(url, params)
         do_http(:get, url, {}, headers)
       end

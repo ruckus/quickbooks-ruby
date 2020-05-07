@@ -3,8 +3,7 @@ module Quickbooks
     class Preferences < BaseService
 
       def url_for_query(query = nil, start_position = 1, max_results = 20, options = {})
-        url = super(query, start_position, max_results, options)
-        "#{url}&minorversion=#{Quickbooks::Model::Preferences::MINORVERSION}"
+        super(query, start_position, max_results, options)
       end
 
       private
