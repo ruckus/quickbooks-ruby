@@ -6,17 +6,9 @@ module Quickbooks
         delete_by_query_string(invoice)
       end
 
-      def url_for_resource(resource)
-        super(resource)
-      end
-
       def fetch_by_id(id, params = {})
         url = "#{url_for_base}/invoice/#{id}"
         fetch_object(model, url, params)
-      end
-
-      def url_for_query(query = nil, start_position = 1, max_results = 20, options = {})
-        super(query, start_position, max_results, options)
       end
 
       def send(invoice, email_address=nil)
