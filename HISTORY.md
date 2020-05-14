@@ -1,3 +1,7 @@
+## 1.0.8 (2020-05-14)
+
+* Added ClassRef attribute to Item model; bumped minorversion to 47 (required for Item#ClassRef)
+
 ## 1.0.7 (2020-04-28)
 
 * Add customer type #509. Thank you @gbkane
