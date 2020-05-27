@@ -25,4 +25,10 @@ describe Quickbooks::Util::QueryBuilder do
     generated = subject.clause("DocNumber", "IN", values)
     expect(expected).to eq generated
   end
+
+  it "converts values that aren't dates or arrays into strings" do
+    expected = "Id = '42'"
+    generated = subject.clause("Id", "=", 42)
+    expect(expected).to eq generated
+  end
 end
