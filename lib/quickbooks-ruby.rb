@@ -191,6 +191,7 @@ Faraday::Middleware.register_middleware :gzip => lambda { Gzip }
 module Quickbooks
   @@sandbox_mode = false
   @@logger = nil
+  @@minorversion = 47
 
   class << self
     def sandbox_mode
@@ -199,6 +200,14 @@ module Quickbooks
 
     def sandbox_mode=(sandbox_mode)
       @@sandbox_mode = sandbox_mode
+    end
+
+    def minorversion=(v)
+      @@minorversion = v
+    end
+
+    def minorversion
+      @@minorversion
     end
 
     def logger

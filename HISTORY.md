@@ -1,3 +1,8 @@
+## 1.0.9 (2020-05-27)
+
+* Implemented a global MINORVERSION; see https://github.com/ruckus/quickbooks-ruby/issues/517
+* QueryBuilder refactor for handling argument values of all types (not just strings). Thank you @jethrodaniel
+
 ## 1.0.8 (2020-05-14)
 
 * Added ClassRef attribute to Item model; bumped minorversion to 47 (required for Item#ClassRef)

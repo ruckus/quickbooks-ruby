@@ -7,7 +7,8 @@ describe "Quickbooks::Service::Invoice" do
     xml = fixture("invoices.xml")
     model = Quickbooks::Model::Invoice
 
-    stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
+    url = "#{@service.url_for_query}&minorversion=#{Quickbooks.minorversion}"
+    stub_http_request(:get, url, ["200", "OK"], xml)
     invoices = @service.query
     expect(invoices.entries.count).to eq 1
 

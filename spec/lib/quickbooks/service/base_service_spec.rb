@@ -223,8 +223,9 @@ describe Quickbooks::Service::BaseService do
       end
 
       it "calls before_request" do
+        v = Quickbooks.minorversion
         output_string = "BEFORE REQUEST:\nurl: https://quickbooks.api.intuit.com/v3/company/9991111222/query?query=SE"\
-                        "LECT+%2A+FROM+Vendor+STARTPOSITION+1+MAXRESULTS+20\nheaders: {\"Content-Type\"=>\"applicatio"\
+                        "LECT+%2A+FROM+Vendor+STARTPOSITION+1+MAXRESULTS+20&minorversion=#{v}\nheaders: {\"Content-Type\"=>\"applicatio"\
                         "n/xml\", \"Accept\"=>\"application/xml\", \"Accept-Encoding\"=>\"gzip, deflate\"}\nbody: {}"\
                         "\nmethod: get\n"
 
@@ -247,8 +248,9 @@ describe Quickbooks::Service::BaseService do
       end
 
       it "calls after_request" do
+        v = Quickbooks.minorversion
         output_string = "AFTER REQUEST:\nurl: https://quickbooks.api.intuit.com/v3/company/9991111222/query?query=SEL"\
-                        "ECT+%2A+FROM+Vendor+STARTPOSITION+1+MAXRESULTS+20\nheaders: {\"Content-Type\"=>\"application"\
+                        "ECT+%2A+FROM+Vendor+STARTPOSITION+1+MAXRESULTS+20&minorversion=#{v}\nheaders: {\"Content-Type\"=>\"application"\
                         "/xml\", \"Accept\"=>\"application/xml\", \"Accept-Encoding\"=>\"gzip, deflate\", \"Authoriza"\
                         "tion\"=>\"Bearer token\"}\nbody: {}\nmethod: get\nresponse: <IntuitResponse xmlns=\"http://s"\
                         "chema.intuit.com/finance/v3\" time=\"2013-04-23T08:55:53.298-07:00\">\n<QueryResponse startP"\
@@ -296,8 +298,9 @@ describe Quickbooks::Service::BaseService do
       end
 
       it "calls around_request" do
+        v = Quickbooks.minorversion
         output_string = "AROUND REQUEST (BEFORE CALL):\nurl: https://quickbooks.api.intuit.com/v3/company/9991111222/"\
-                        "query?query=SELECT+%2A+FROM+Vendor+STARTPOSITION+1+MAXRESULTS+20\nheaders: {\"Content-Type\""\
+                        "query?query=SELECT+%2A+FROM+Vendor+STARTPOSITION+1+MAXRESULTS+20&minorversion=#{v}\nheaders: {\"Content-Type\""\
                         "=>\"application/xml\", \"Accept\"=>\"application/xml\", \"Accept-Encoding\"=>\"gzip, deflate"\
                         "\"}\nbody: {}\nmethod: get\nAROUND REQUEST (AFTER CALL):\nresponse: <IntuitResponse xmlns=\""\
                         "http://schema.intuit.com/finance/v3\" time=\"2013-04-23T08:55:53.298-07:00\">\n<QueryRespons"\
