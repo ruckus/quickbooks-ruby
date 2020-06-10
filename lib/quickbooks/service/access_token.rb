@@ -23,7 +23,8 @@ module Quickbooks
       def disconnect
         conn = Faraday.new
         conn.basic_auth oauth.client.id, oauth.client.secret
-        response = conn.post(DISCONNECT_URL, token: oauth.refresh_token || oauth.token)
+        url = "#{DISCONNECT_URL}?minorversion=#{Quickbooks.minorversion}"
+        response = conn.post(url, token: oauth.refresh_token || oauth.token)
 
         if response.success?
           Quickbooks::Model::AccessTokenResponse.new(error_code: "0")

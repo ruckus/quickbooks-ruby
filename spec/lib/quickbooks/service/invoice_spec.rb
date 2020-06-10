@@ -7,7 +7,7 @@ describe "Quickbooks::Service::Invoice" do
     xml = fixture("invoices.xml")
     model = Quickbooks::Model::Invoice
 
-    url = "#{@service.url_for_query}&minorversion=#{Quickbooks.minorversion}"
+    url = @service.url_for_query
     stub_http_request(:get, url, ["200", "OK"], xml)
     invoices = @service.query
     expect(invoices.entries.count).to eq 1
@@ -19,7 +19,10 @@ describe "Quickbooks::Service::Invoice" do
   it "can fetch an Invoice by ID" do
     xml = fixture("fetch_invoice_by_id.xml")
     model = Quickbooks::Model::Invoice
-    stub_http_request(:get, %r{#{@service.url_for_resource(model::REST_RESOURCE)}/1}, ["200", "OK"], xml)
+
+    url = "#{@service.url_for_base}/invoice/1"
+    stub_http_request(:get, url, ["200", "OK"], xml)
+
     invoice = @service.fetch_by_id(1)
     expect(invoice.doc_number).to eq "1001"
   end
@@ -248,7 +251,9 @@ describe "Quickbooks::Service::Invoice" do
 
   it "can read line items from a bundle" do
     xml = fixture("invoice_with_bundle_line_item.xml")
-    stub_http_request(:get, %r{#{@service.url_for_resource(Quickbooks::Model::Invoice::REST_RESOURCE)}/186}, ["200", "OK"], xml)
+    url = "#{@service.url_for_base}/invoice/186"
+
+    stub_http_request(:get, url, ["200", "OK"], xml)
     invoice = @service.fetch_by_id(186)
     expect(invoice.valid?).to be true
 
@@ -291,7 +296,8 @@ describe "Quickbooks::Service::Invoice" do
 
   it "can sparse update an Invoice containing a bundle" do
     xml = fixture("invoice_with_bundle_line_item.xml")
-    stub_http_request(:get, %r{#{@service.url_for_resource(Quickbooks::Model::Invoice::REST_RESOURCE)}/186}, ["200", "OK"], xml)
+    url = "#{@service.url_for_base}/invoice/186"
+    stub_http_request(:get, url, ["200", "OK"], xml)
     invoice = @service.fetch_by_id(186)
 
     invoice.line_items.each do |l|
