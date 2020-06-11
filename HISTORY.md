@@ -1,3 +1,7 @@
+## 1.0.10 (2020-06-11)
+
+* Loosened ROXML dependency version to `~> 4.0` - thank you @rmacklin
+
 ## 1.0.9 (2020-05-27)
 
 * Implemented a global MINORVERSION; see https://github.com/ruckus/quickbooks-ruby/issues/517
