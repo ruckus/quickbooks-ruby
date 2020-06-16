@@ -83,7 +83,7 @@ module Quickbooks
         query ||= default_model_query
         query = "#{query} STARTPOSITION #{start_position} MAXRESULTS #{max_results}"
 
-        "#{url_for_base}/query?query=#{CGI.escape(query)}&minorversion=#{Quickbooks.minorversion}"
+        "#{url_for_base}/query?query=#{CGI.escape(query)}"
       end
 
       private
@@ -229,6 +229,8 @@ module Quickbooks
           body['file_metadata_0'] = param_part
         end
 
+        url = add_query_string_to_url(url, {})
+
         do_http(:upload, url, body, headers)
       end
 
@@ -292,7 +294,9 @@ module Quickbooks
         @oauth.post_with_multipart(url, headers: headers, body: body, raise_errors: false)
       end
 
-      def add_query_string_to_url(url, params)
+      def add_query_string_to_url(url, params = {})
+        params ||= {}
+        params['minorversion'] = Quickbooks.minorversion
         if params.is_a?(Hash) && !params.empty?
           keyvalues = params.collect { |k| "#{k.first}=#{k.last}" }.join("&")
           delim = url.index("?") != nil ? "&" : "?"

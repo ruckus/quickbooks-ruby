@@ -4,11 +4,14 @@ describe "Quickbooks::Service::PurchaseOrder" do
     construct_service :purchase_order
   end
 
-  it "can delete a vendor" do
+  it "can delete a purchase order" do
     model = Quickbooks::Model::PurchaseOrder
     purchase_order = model.new
     xml = fixture("deleted_purchase_order.xml")
-    stub_http_request(:post, %r{#{@service.url_for_resource(model::REST_RESOURCE)}}, ["200", "OK"], xml, {}, false)
+
+    url = "#{@service.url_for_resource(model::REST_RESOURCE)}?operation=delete"
+
+    stub_http_request(:post, url, ["200", "OK"], xml, {}, false)
     expect(@service.delete(purchase_order)).to eq true
 
   end

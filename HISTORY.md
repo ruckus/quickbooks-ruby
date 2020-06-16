@@ -1,3 +1,7 @@
+## 1.0.11 (2020-06-16)
+
+* Ensure minorversion query string parameter is passed in the URL of all requests, not just GETs
+
 ## 1.0.10 (2020-06-11)
 
 * Loosened ROXML dependency version to `~> 4.0` - thank you @rmacklin
