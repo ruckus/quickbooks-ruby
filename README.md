@@ -42,6 +42,20 @@ Gems:
 * `nokogiri` : XML parsing
 * `active_model` : For validations
 
+## Installation
+
+Add this line to your application's Gemfile:
+
+`gem 'quickbooks-ruby'`
+
+And then execute:
+
+`$ bundle`
+
+Or install it yourself as:
+
+`$ gem install quickbooks-ruby`
+
 ## Sandbox Mode
 An API app provides two sets of OAuth key for production and development. Since October 22, 2014, only [Sandbox Companies](https://developer.intuit.com/docs/api/accounting)
 are allowed to connected to the QBO via the development key. The end-point for sandbox mode is https://sandbox-quickbooks.api.intuit.com.
@@ -57,7 +71,7 @@ Quickbooks.sandbox_mode = true
 
 What follows is an example using Rails but the principles can be adapted to any other framework / pure Ruby.
 
-Create a Rails initializer with:
+Create a Rails initializer (`config/initializers/quickbooks-ruby.rb`) with:
 
 ```ruby
 oauth_params = {
