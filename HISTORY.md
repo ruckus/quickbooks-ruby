@@ -1,3 +1,8 @@
+## 1.0.12 (2020-07-10)
+
+* PurchaseOrder was referencing a class level const that has been removed. Thanks @vanboom
+* Update README.md (#525). Provide some clarity for newer rails developers on using gems. Thanks @thehashrocket
+
 ## 1.0.11 (2020-06-16)
 
 * Ensure minorversion query string parameter is passed in the URL of all requests, not just GETs
