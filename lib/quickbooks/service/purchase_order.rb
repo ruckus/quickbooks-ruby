@@ -7,13 +7,13 @@ module Quickbooks
       end
 
       def fetch_by_id(id, params = {})
-        url = "#{url_for_base}/purchaseorder/#{id}?minorversion=#{Quickbooks::Model::PurchaseOrder::MINORVERSION}"
+        url = "#{url_for_base}/purchaseorder/#{id}?minorversion=#{Quickbooks.minorversion}"
         fetch_object(model, url, params)
       end
 
       def url_for_query(query = nil, start_position = 1, max_results = 20, options = {})
         url = super(query, start_position, max_results, options)
-        "#{url}&minorversion=#{Quickbooks::Model::PurchaseOrder::MINORVERSION}"
+        "#{url}&minorversion=#{Quickbooks.minorversion}"
       end
 
     private
