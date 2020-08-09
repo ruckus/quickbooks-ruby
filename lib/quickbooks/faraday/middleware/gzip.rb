@@ -23,6 +23,8 @@ class Gzip < Faraday::Middleware
   def call(env)
     env[:request_headers][ACCEPT_ENCODING] ||= SUPPORTED_ENCODINGS
     @app.call(env).on_complete do |response_env|
+      break if response_env[:response_headers].nil?
+
       case response_env[:response_headers][CONTENT_ENCODING]
       when 'gzip'
         reset_body(response_env, &method(:uncompress_gzip))

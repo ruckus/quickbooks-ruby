@@ -1,3 +1,36 @@
+## 1.0.12 (2020-07-10)
+
+* PurchaseOrder was referencing a class level const that has been removed. Thanks @vanboom
+* Update README.md (#525). Provide some clarity for newer rails developers on using gems. Thanks @thehashrocket
+
+## 1.0.11 (2020-06-16)
+
+* Ensure minorversion query string parameter is passed in the URL of all requests, not just GETs
+
+## 1.0.10 (2020-06-11)
+
+* Loosened ROXML dependency version to `~> 4.0` - thank you @rmacklin
+
+## 1.0.9 (2020-05-27)
+
+* Implemented a global MINORVERSION; see https://github.com/ruckus/quickbooks-ruby/issues/517
+* QueryBuilder refactor for handling argument values of all types (not just strings). Thank you @jethrodaniel
+
+## 1.0.8 (2020-05-14)
+
+* Added ClassRef attribute to Item model; bumped minorversion to 47 (required for Item#ClassRef)
+
+## 1.0.7 (2020-04-28)
+
+* Add customer type #509. Thank you @gbkane
+* Fix NoMethodError when response headers are nil (#514). Thank you @anaprimawaty
+* Update Readme about roxml BigDecimal deprecation (#516). Thank you @anaprimawaty
+* Escape regex matching numbers in report parsing (#511). Thank you @mehwoot
+
+## 1.0.6 (2020-02-10)
+
+* Fix fetch_by_id in purchase order service (#505), thank you @atemena
+
 ## 1.0.5 (2020-01-28)
 
 * Fixed Disconnect (dependency on oauth_v1? which was removed in 1.0.2)

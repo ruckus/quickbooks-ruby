@@ -9,6 +9,9 @@ module Quickbooks
       attr_reader :base_uri
       attr_reader :last_response_xml
       attr_reader :last_response_intuit_tid
+      attr_accessor :before_request
+      attr_accessor :around_request
+      attr_accessor :after_request
 
       XML_NS = %{xmlns="http://schema.intuit.com/finance/v3"}
       HTTP_CONTENT_TYPE = 'application/xml'
@@ -16,6 +19,8 @@ module Quickbooks
       HTTP_ACCEPT_ENCODING = 'gzip, deflate'
       BASE_DOMAIN = 'quickbooks.api.intuit.com'
       SANDBOX_DOMAIN = 'sandbox-quickbooks.api.intuit.com'
+
+      RequestInfo = Struct.new(:url, :headers, :body, :method)
 
       def initialize(attributes = {})
         domain = Quickbooks.sandbox_mode ? SANDBOX_DOMAIN : BASE_DOMAIN
@@ -224,6 +229,8 @@ module Quickbooks
           body['file_metadata_0'] = param_part
         end
 
+        url = add_query_string_to_url(url, {})
+
         do_http(:upload, url, body, headers)
       end
 
@@ -247,16 +254,23 @@ module Quickbooks
         log_request_body(body)
         log "REQUEST HEADERS = #{headers.inspect}"
 
-        raw_response = case method
-        when :get
-          oauth_get(url, headers)
-        when :post
-          oauth_post(url, body, headers)
-        when :upload
-          oauth_post_with_multipart(url, body, headers)
-        else
-          raise "Do not know how to perform that HTTP operation"
+        request_info = RequestInfo.new(url, headers, body, method)
+        before_request.call(request_info) if before_request
+
+        raw_response = with_around_request(request_info) do
+          case method
+          when :get
+            oauth_get(url, headers)
+          when :post
+            oauth_post(url, body, headers)
+          when :upload
+            oauth_post_with_multipart(url, body, headers)
+          else
+            raise "Do not know how to perform that HTTP operation"
+          end
         end
+
+        after_request.call(request_info, raw_response.body) if after_request
 
         response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
         log "------ QUICKBOOKS-RUBY RESPONSE ------"
@@ -280,7 +294,9 @@ module Quickbooks
         @oauth.post_with_multipart(url, headers: headers, body: body, raise_errors: false)
       end
 
-      def add_query_string_to_url(url, params)
+      def add_query_string_to_url(url, params = {})
+        params ||= {}
+        params['minorversion'] = Quickbooks.minorversion
         if params.is_a?(Hash) && !params.empty?
           keyvalues = params.collect { |k| "#{k.first}=#{k.last}" }.join("&")
           delim = url.index("?") != nil ? "&" : "?"
@@ -429,6 +445,13 @@ module Quickbooks
         error
       end
 
+      def with_around_request(request_info, &block)
+        if around_request
+          around_request.call(request_info, &block)
+        else
+          block.call
+        end
+      end
     end
   end
 end
