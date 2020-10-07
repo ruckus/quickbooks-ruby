@@ -1,3 +1,7 @@
+## 1.0.13 (2020-10-05)
+
+Added `BillEmailCc` to Invoice
+
 ## 1.0.12 (2020-07-10)
 
 * PurchaseOrder was referencing a class level const that has been removed. Thanks @vanboom

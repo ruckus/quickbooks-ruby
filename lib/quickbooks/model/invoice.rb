@@ -59,6 +59,7 @@ module Quickbooks
       xml_accessor :allow_online_credit_card_payment?, :from => 'AllowOnlineCreditCardPayment'
       xml_accessor :allow_online_ach_payment?, :from => 'AllowOnlineACHPayment'
       xml_accessor :deposit_to_account_ref, :from => 'DepositToAccountRef', :as => BaseReference
+      xml_accessor :bill_email_cc, :from => 'BillEmailCc', :as => EmailAddress
 
 
       reference_setters
@@ -87,6 +88,9 @@ module Quickbooks
         self.bill_email = EmailAddress.new(email_address_string)
       end
 
+      def billing_email_cc_address=(email_address_string)
+        self.bill_email_cc = EmailAddress.new(email_address_string)
+      end
 
       def wants_billing_email_sent!
         self.email_status = EMAIL_STATUS_NEED_TO_SEND
@@ -95,7 +99,6 @@ module Quickbooks
       def email_status_for_delivery?
         email_status == EMAIL_STATUS_NEED_TO_SEND
       end
-
 
       def existence_of_customer_ref
         if customer_ref.nil? || (customer_ref && customer_ref.value == 0)
