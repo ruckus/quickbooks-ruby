@@ -6,6 +6,11 @@ module Quickbooks
         delete_by_query_string(payment)
       end
 
+      def fetch_by_id(id, params = {})
+        url = "#{url_for_base}/payment/#{id}"
+        fetch_object(model, url, params)
+      end
+
       def void(entity, options = {})
         raise Quickbooks::InvalidModelException.new(entity.errors.full_messages.join(',')) unless entity.valid?
         xml = entity.to_xml_ns(options)
