@@ -1,3 +1,8 @@
+## 1.0.14 (2020-12-01)
+
+* Added PurchaseOrder#POEmail attribute support. Addresses #460
+* Added Vendor#BillRate attribute support. Addresses #535
+
 ## 1.0.13 (2020-10-05)
 
 Added `BillEmailCc` to Invoice
