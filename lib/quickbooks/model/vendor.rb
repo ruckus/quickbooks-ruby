@@ -41,6 +41,7 @@ module Quickbooks
       xml_accessor :account_number, :from => 'AcctNum'
       xml_accessor :is_1099?, :from => 'Vendor1099'
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
+      xml_accessor :bill_rate, from: "BillRate", as: BigDecimal, to_xml: to_xml_big_decimal
 
       #== Validations
       validate :names_cannot_contain_invalid_characters
