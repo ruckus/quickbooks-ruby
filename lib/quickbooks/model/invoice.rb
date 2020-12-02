@@ -36,6 +36,7 @@ module Quickbooks
       xml_accessor :customer_memo, :from => 'CustomerMemo'
       xml_accessor :billing_address, :from => 'BillAddr', :as => PhysicalAddress
       xml_accessor :shipping_address, :from => 'ShipAddr', :as => PhysicalAddress
+      xml_accessor :ship_from_address, :from => 'ShipFromAddr', :as => PhysicalAddress
       xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
       xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => BaseReference
       xml_accessor :due_date, :from => 'DueDate', :as => Date
