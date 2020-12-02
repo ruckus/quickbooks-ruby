@@ -56,6 +56,17 @@ describe "Quickbooks::Model::Invoice" do
     expect(shipping_address.postal_code).to eq "91123"
     expect(shipping_address.lat).to eq "33.739466"
     expect(shipping_address.lon).to eq "-118.0395574"
+    
+    ship_from_address = invoice.ship_from_address
+    expect(ship_from_address).to_not be_nil
+    expect(ship_from_address.id).to eq "5"
+    expect(ship_from_address.line1).to eq "1040 East Tasman Drive."
+    expect(ship_from_address.city).to eq "Los Angeles"
+    expect(ship_from_address.country).to eq "USA"
+    expect(ship_from_address.country_sub_division_code).to eq "CA"
+    expect(ship_from_address.postal_code).to eq "91123"
+    expect(ship_from_address.lat).to eq "33.739466"
+    expect(ship_from_address.lon).to eq "-118.0395574"
 
     tax_detail = invoice.txn_tax_detail
     expect(tax_detail.total_tax).to eq(2.85)
