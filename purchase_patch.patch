@@ -1,0 +1,134 @@
+diff --git a/lib/quickbooks-ruby.rb b/lib/quickbooks-ruby.rb
+index 9a705fa..983665b 100644
+--- a/lib/quickbooks-ruby.rb
++++ b/lib/quickbooks-ruby.rb
+@@ -124,6 +124,7 @@ require 'quickbooks/model/item_change'
+ require 'quickbooks/model/report'
+ require 'quickbooks/model/credit_memo_change'
+ require 'quickbooks/model/payment_change'
++require 'quickbooks/model/purchase_change'
+ require 'quickbooks/model/transfer'
+ require 'quickbooks/model/change_data_capture'
+ require 'quickbooks/model/refund_receipt_change'
+@@ -181,6 +182,7 @@ require 'quickbooks/service/item_change'
+ require 'quickbooks/service/reports'
+ require 'quickbooks/service/credit_memo_change'
+ require 'quickbooks/service/payment_change'
++require 'quickbooks/service/purchase_change'
+ require 'quickbooks/service/transfer'
+ require 'quickbooks/service/change_data_capture'
+ require 'quickbooks/service/refund_receipt_change'
+diff --git a/lib/quickbooks/model/purchase_change.rb b/lib/quickbooks/model/purchase_change.rb
+new file mode 100644
+index 0000000..605f9d8
+--- /dev/null
++++ b/lib/quickbooks/model/purchase_change.rb
+@@ -0,0 +1,7 @@
++module Quickbooks
++  module Model
++    class PurchaseChange < ChangeModel
++      XML_NODE = "Purchase"
++    end
++  end
++end
+diff --git a/lib/quickbooks/service/purchase_change.rb b/lib/quickbooks/service/purchase_change.rb
+new file mode 100644
+index 0000000..6ccd341
+--- /dev/null
++++ b/lib/quickbooks/service/purchase_change.rb
+@@ -0,0 +1,16 @@
++module Quickbooks
++  module Service
++    class PurchaseChange < ChangeService
++
++      private
++
++      def entity
++        "Purchase"
++      end
++
++      def model
++        Quickbooks::Model::PurchaseChange
++      end
++    end
++  end
++end
+diff --git a/spec/fixtures/purchase_change.xml b/spec/fixtures/purchase_change.xml
+new file mode 100644
+index 0000000..0224ff4
+--- /dev/null
++++ b/spec/fixtures/purchase_change.xml
+@@ -0,0 +1,6 @@
++<Purchase domain="QBO" status="Deleted">
++  <Id>39</Id>
++  <MetaData>
++    <LastUpdatedTime>2014-12-08T19:36:24-08:00</LastUpdatedTime>
++  </MetaData>
++</Purchase>
+diff --git a/spec/fixtures/purchase_changes.xml b/spec/fixtures/purchase_changes.xml
+new file mode 100644
+index 0000000..e55afd3
+--- /dev/null
++++ b/spec/fixtures/purchase_changes.xml
+@@ -0,0 +1,12 @@
++<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2014-12-08T19:36:36.977-08:00">
++  <CDCResponse>
++    <QueryResponse maxResults="1" totalCount="1">
++      <Purchase domain="QBO" status="Deleted">
++        <Id>39</Id>
++        <MetaData>
++          <LastUpdatedTime>2014-12-08T19:36:24-08:00</LastUpdatedTime>
++        </MetaData>
++      </Purchase>
++    </QueryResponse>
++  </CDCResponse>
++</IntuitResponse>
+diff --git a/spec/lib/quickbooks/model/purchase_change_spec.rb b/spec/lib/quickbooks/model/purchase_change_spec.rb
+new file mode 100644
+index 0000000..e29224f
+--- /dev/null
++++ b/spec/lib/quickbooks/model/purchase_change_spec.rb
+@@ -0,0 +1,13 @@
++require 'nokogiri'
++
++describe "Quickbooks::Model::PurchaseChange" do
++  it "parse from XML" do
++    xml = fixture("purchase_change.xml")
++    purchase = Quickbooks::Model::PurchaseChange.from_xml(xml)
++    expect(purchase.status).to eq('Deleted')
++    expect(purchase.id).to eq("39")
++
++    expect(purchase.meta_data).not_to be_nil
++    expect(purchase.meta_data.last_updated_time).to eq(DateTime.parse("2014-12-08T19:36:24-08:00"))
++  end
++end
+diff --git a/spec/lib/quickbooks/service/purchase_change_spec.rb b/spec/lib/quickbooks/service/purchase_change_spec.rb
+new file mode 100644
+index 0000000..d5c5531
+--- /dev/null
++++ b/spec/lib/quickbooks/service/purchase_change_spec.rb
+@@ -0,0 +1,24 @@
++describe "Quickbooks::Service::PurchaseChange" do
++  let(:service) { construct_service :purchase_change }
++
++  it "can query for payments" do
++    xml = fixture("purchase_changes.xml")
++    model = Quickbooks::Model::PurchaseChange
++    stub_http_request(:get, service.url_for_query, ["200", "OK"], xml)
++    purchases = service.query
++    expect(purchases.entries.count).to eq(1)
++
++    purchase = purchases.entries.first
++    expect(purchase.status).to eq('Deleted')
++    expect(purchase.id).to eq("39")
++
++    expect(purchase.meta_data).not_to be_nil
++    expect(purchase.meta_data.last_updated_time).to eq(DateTime.parse("2014-12-08T19:36:24-08:00"))
++  end
++
++  describe "#url_for_query" do
++    subject { service.url_for_query }
++    it { is_expected.to eq "#{service.url_for_base}/cdc?entities=Purchase" }
++  end
++
++end
