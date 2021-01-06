@@ -592,9 +592,9 @@ Deleted entities can be found in the XML by checking their @status is "Deleted".
 
 see: https://developer.intuit.com/docs/0100_quickbooks_online/0200_dev_guides/accounting/change_data_capture for more information.
 
-## ChangeModel alternative Change Data Capture For Invoices, Customers, Vendors, Items, Payments and Credit Memos
+## ChangeModel alternative Change Data Capture For Invoices, Customers, Vendors, Items, Payments, Purchases and Credit Memos
 
-It is possible to get a sparse summary of which Invoice, Customer, Vendor, Item, Payment or Credit Memo Entries have recently changed.
+It is possible to get a sparse summary of which Invoice, Customer, Vendor, Item, Payment, Purchase or Credit Memo Entries have recently changed.
 It is possible to request changes up to 30 days ago.
 
 ```ruby
