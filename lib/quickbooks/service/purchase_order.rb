@@ -16,6 +16,12 @@ module Quickbooks
         "#{url}&minorversion=#{Quickbooks.minorversion}"
       end
 
+      def pdf(purchase_order)
+        url = "#{url_for_resource(model::REST_RESOURCE)}/#{purchase_order.id}/pdf"
+        response = do_http_raw_get(url, {}, {'Accept' => 'application/pdf'})
+        response.plain_body
+      end
+
     private
 
       def model
