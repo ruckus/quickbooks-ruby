@@ -1,3 +1,8 @@
+## 1.0.15 (2021-01-11)
+
+* Added Purchase CDC endpoint. Addresses #537
+* Added ship from address reference to invoice. Addresses #536
+
 ## 1.0.14 (2020-12-01)
 
 * Added PurchaseOrder#POEmail attribute support. Addresses #460
