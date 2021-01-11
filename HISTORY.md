@@ -1,6 +1,7 @@
 ## 1.0.15 (2021-01-11)
 
-* Added Purchase CDC endpoint. Addresses #537
+* Added Purchase CDC endpoint. Addresses #537. Thanks @nathan-mots
+* Purchase Order PDF Download. Addresses #539. Thanks @vanboom
 * Added ship from address reference to invoice. Addresses #536
 
 ## 1.0.14 (2020-12-01)
