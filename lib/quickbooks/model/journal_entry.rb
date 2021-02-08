@@ -16,6 +16,7 @@ module Quickbooks
       xml_accessor :private_note, :from => 'PrivateNote'
       xml_accessor :line_items, :from => 'Line', :as => [Line]
       xml_accessor :txn_tax_detail, :from => 'TxnTaxDetail', :as => TransactionTaxDetail
+      xml_accessor :txn_source, :from => 'TxnSource'
 
       # Readonly
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference

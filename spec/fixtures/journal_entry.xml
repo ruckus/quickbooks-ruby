@@ -9,6 +9,7 @@
   <TxnDate>2014-11-28</TxnDate>
   <CurrencyRef name="Canadian Dollar">CAD</CurrencyRef>
   <ExchangeRate>1</ExchangeRate>
+  <TxnSource>SOURCENAME</TxnSource>
   <Line>
     <Id>0</Id>
     <Description>Monthly fee</Description>

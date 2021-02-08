@@ -42,5 +42,6 @@ describe "Quickbooks::Model::JournalEntry" do
     xml = fixture("journal_entry.xml")
     item = Quickbooks::Model::JournalEntry.from_xml(xml)
     expect(item.id).to eq("450")
+    expect(item.txn_source).to eq 'SOURCENAME'
   end
 end
