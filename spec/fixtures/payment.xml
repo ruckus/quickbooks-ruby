@@ -12,4 +12,5 @@
     <TotalAmt>40.00</TotalAmt>
     <UnappliedAmt>40.00</UnappliedAmt>
     <ProcessPayment>false</ProcessPayment>
+    <TxnSource>SOURCENAME</TxnSource>
  </Payment>

@@ -18,6 +18,7 @@ describe "Quickbooks::Model::Payment" do
     expect(payment.process_payment).to eq("false")
     expect(payment.currency_ref).to be_nil
     expect(payment.exchange_rate).to be_nil
+    expect(payment.txn_source).to eq 'SOURCENAME'
   end
 
   it "should require customer_ref for create / update" do

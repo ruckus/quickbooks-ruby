@@ -25,6 +25,7 @@ module Quickbooks
       xml_accessor :process_payment, :from => 'ProcessPayment'
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
       xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :txn_source, :from => 'TxnSource'
 
       reference_setters :customer_ref, :ar_account_ref
       reference_setters :payment_method_ref, :deposit_to_account_ref, :currency_ref
