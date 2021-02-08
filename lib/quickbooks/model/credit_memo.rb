@@ -39,6 +39,7 @@ module Quickbooks
       xml_accessor :email_status, :from => 'EmailStatus'
       xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :remaining_credit, :from => 'RemainingCredit', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :txn_source, :from => 'TxnSource'
 
       # readonly
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal

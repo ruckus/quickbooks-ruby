@@ -22,6 +22,13 @@ describe "Quickbooks::Model::CreditMemo" do
     expect(credit_memo.to_xml.to_s).to match /TxnDate.*#{current.to_s[0..-6]}/ # shave off utc offset as Travis doesn't like
   end
 
+  it "parse from XML" do
+    xml = fixture("credit_memo.xml")
+    credit_memo = Quickbooks::Model::CreditMemo.from_xml(xml)
+    expect(credit_memo.id).to eq "52"
+    expect(credit_memo.txn_source).to eq 'SOURCENAME'
+  end
+
   describe "#auto_doc_number" do
     it_should_behave_like "a model that has auto_doc_number support", 'CreditMemo'
   end
