@@ -8,6 +8,7 @@ describe Quickbooks::Model::Report do
   let(:report) { build_report("balancesheet.xml") }
   let(:report_with_years) { build_report("balance_sheet_with_year_summary.xml") }
   let(:age_payable_report) { build_report("age_payable_detail.xml") }
+  let(:transaction_list_report) { build_report("transaction_list_report.xml") }
 
   describe "#xml" do
     it 'exposes the full xml response' do
@@ -53,6 +54,10 @@ describe Quickbooks::Model::Report do
       expect(age_payable_report.all_rows[2]).to eq(['2018-05-18', 'Bill', nil, 'Robot Parts', '2016-05-28', BigDecimal('100'), BigDecimal('100'), BigDecimal('100')])
       expect(age_payable_report.all_rows[3]).to eq(['Total', nil, nil, nil, nil, nil, BigDecimal('.00'), BigDecimal('.00')])
       expect(age_payable_report.all_rows[4]).to eq(['TOTAL', nil, nil, nil, nil, nil, BigDecimal('.00'), BigDecimal('.00')])
+    end
+
+    it 'works with columns that have newlines' do
+      expect(transaction_list_report.all_rows[0]).to eq(["2020-01-01", "Invoice", "10\nID#112233", "Yes", "Vendor", nil, "0100 Accounts Receivable (A/R)", "-Split-", 0.3e3])
     end
   end
 
