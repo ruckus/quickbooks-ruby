@@ -61,6 +61,7 @@ module Quickbooks
       xml_accessor :allow_online_ach_payment?, :from => 'AllowOnlineACHPayment'
       xml_accessor :deposit_to_account_ref, :from => 'DepositToAccountRef', :as => BaseReference
       xml_accessor :bill_email_cc, :from => 'BillEmailCc', :as => EmailAddress
+      xml_accessor :txn_source, :from => 'TxnSource'
 
 
       reference_setters

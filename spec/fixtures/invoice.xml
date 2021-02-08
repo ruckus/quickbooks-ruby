@@ -51,6 +51,7 @@
 					</TaxLineDetail>
 			</TaxLine>
 	</TxnTaxDetail>
+  <TxnSource>SOURCENAME</TxnSource>
 	<CustomerRef name="Sunset Bakery">2</CustomerRef>
 	<CustomerMemo>Message to Customer</CustomerMemo>
 	<BillAddr>

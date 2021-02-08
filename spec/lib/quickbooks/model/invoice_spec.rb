@@ -100,6 +100,7 @@ describe "Quickbooks::Model::Invoice" do
     expect(invoice.allow_online_payment?).to be false
     expect(invoice.allow_online_credit_card_payment?).to be true
     expect(invoice.allow_online_ach_payment?).to be false
+    expect(invoice.txn_source).to eq 'SOURCENAME'
   end
 
   it "should require line items for create / update" do
