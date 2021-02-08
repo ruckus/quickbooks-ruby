@@ -38,13 +38,15 @@ module Quickbooks
           value = el.attr('value')
 
           next nil if value.blank?
-          next value unless numeric?(value)
-          BigDecimal(value)
+
+          parse_row_value(value)
         end
       end
 
-      def numeric?(value)
-        BigDecimal(value) != nil rescue false
+      def parse_row_value(value)
+        BigDecimal(value)
+      rescue ArgumentError
+        value
       end
 
     end
