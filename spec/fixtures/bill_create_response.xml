@@ -6,6 +6,7 @@
         <LastUpdatedTime>2013-07-19T08:42:46-07:00</LastUpdatedTime>
     </MetaData>
     <DocNumber>17</DocNumber>
+    <TxnSource>SOURCENAME</TxnSource>
     <TxnDate>2017-12-16</TxnDate>
     <Line>
         <Id>1</Id>

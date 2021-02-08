@@ -12,6 +12,7 @@ describe "Quickbooks::Model::Bill" do
     expect(bill.vendor_ref.name).to eq "Great Statewide Bank"
 
     expect(bill.line_items.size).to eq 2
+    expect(bill.txn_source).to eq 'SOURCENAME'
 
     line_item1 = bill.line_items[0]
     expect(line_item1.id).to eq "1"

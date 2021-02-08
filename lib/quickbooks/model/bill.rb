@@ -33,6 +33,7 @@ module Quickbooks
       xml_accessor :ship_address, :from => 'ShipAddr', :as => PhysicalAddress
       xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      xml_accessor :txn_source, :from => 'TxnSource'
 
       # readonly
       xml_accessor :bill_email, :from => 'BillEmail', :as => EmailAddress
