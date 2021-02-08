@@ -1,0 +1,100 @@
+<Report xmlns="http://schema.intuit.com/finance/v3">
+  <Header>
+    <Time>2021-02-08T03:41:24-08:00</Time>
+    <ReportName>TransactionList</ReportName>
+    <StartPeriod>2021-01-01</StartPeriod>
+    <EndPeriod>2021-12-31</EndPeriod>
+    <Currency>CAD</Currency>
+    <Option>
+      <Name>NoReportData</Name>
+      <Value>false</Value>
+    </Option>
+  </Header>
+  <Columns>
+    <Column>
+      <ColTitle>Date</ColTitle>
+      <ColType>Date</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>tx_date</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Transaction Type</ColTitle>
+      <ColType>String</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>txn_type</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>#</ColTitle>
+      <ColType>String</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>doc_num</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Posting</ColTitle>
+      <ColType>Boolean</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>is_no_post</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Name</ColTitle>
+      <ColType>String</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>name</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Memo/Description</ColTitle>
+      <ColType>String</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>memo</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Account</ColTitle>
+      <ColType>String</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>account_name</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Split</ColTitle>
+      <ColType>String</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>other_account</Value>
+      </MetaData>
+    </Column>
+    <Column>
+      <ColTitle>Amount</ColTitle>
+      <ColType>Money</ColType>
+      <MetaData>
+        <Name>ColKey</Name>
+        <Value>subt_nat_amount</Value>
+      </MetaData>
+    </Column>
+  </Columns>
+  <Rows>
+    <Row type="Data">
+      <ColData value="2020-01-01"/>
+      <ColData value="Invoice" id="100"/>
+      <ColData value="10&#10;ID#112233"/>
+      <ColData value="Yes"/>
+      <ColData value="Vendor" id="12"/>
+      <ColData value=""/>
+      <ColData value="0100 Accounts Receivable (A/R)" id="67"/>
+      <ColData value="-Split-" id=""/>
+      <ColData value="300.00"/>
+    </Row>
+  </Rows>
+</Report>

@@ -38,9 +38,13 @@ module Quickbooks
           value = el.attr('value')
 
           next nil if value.blank?
-          next value if value.to_s.match(/^\d+$|^\d+\.\d+$|^-\d+$|^-\d+\.\d+$|^\.\d+$/).nil?
+          next value unless numeric?(value)
           BigDecimal(value)
         end
+      end
+
+      def numeric?(value)
+        BigDecimal(value) != nil rescue false
       end
 
     end
