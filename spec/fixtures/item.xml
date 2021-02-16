@@ -12,6 +12,7 @@
 	<Taxable>false</Taxable>
 	<UnitPrice>50</UnitPrice>
 	<Type>Service</Type>
+  <Source>SOURCENAME</Source>
 	<IncomeAccountRef name="Sales">1</IncomeAccountRef>
 	<PurchaseCost>0</PurchaseCost>
 	<TrackQtyOnHand>false</TrackQtyOnHand>

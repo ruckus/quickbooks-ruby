@@ -31,6 +31,7 @@ module Quickbooks
       xml_accessor :pref_vendor_ref, :from => 'PrefVendorRef', :as => BaseReference
       xml_accessor :tax_classification_ref, :from => 'TaxClassificationRef', :as => BaseReference
       xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
+      xml_accessor :source, :from => 'Source'
 
       # read-only
       xml_accessor :fully_qualified_name, :from => 'FullyQualifiedName'

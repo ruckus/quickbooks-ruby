@@ -16,6 +16,7 @@ describe "Quickbooks::Model::Item" do
     expect(item.income_account_ref.to_i).to eq(1)
     expect(item.purchase_cost).to eq(0)
     expect(item.track_quantity_on_hand?).to eq(false)
+    expect(item.source).to eq 'SOURCENAME'
   end
 
   it "must have a name for create / update" do
