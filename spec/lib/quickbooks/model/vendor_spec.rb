@@ -34,6 +34,7 @@ describe "Quickbooks::Model::Vendor" do
     expect(vendor.tax_identifier).to eq('12-3456789')
     expect(vendor.balance).to eq(0)
     expect(vendor.is_1099?).to be true
+    expect(vendor.source).to eq 'SOURCENAME'
   end
 
   it "can assign an email address" do

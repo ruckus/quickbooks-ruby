@@ -14,6 +14,7 @@
   <DisplayName>John Vendor-UudRGTA2p7</DisplayName>
   <PrintOnCheckName>John Vendor on Check</PrintOnCheckName>
   <Active>true</Active>
+  <Source>SOURCENAME</Source>
   <PrimaryPhone>
     <FreeFormNumber>(214) 387-2000</FreeFormNumber>
   </PrimaryPhone>
