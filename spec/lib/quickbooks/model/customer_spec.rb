@@ -15,6 +15,7 @@ describe "Quickbooks::Model::Customer" do
     expect(customer.primary_email_address).not_to be_nil
     expect(customer.primary_email_address.address).to eq("info@thriftymeats.com")
     expect(customer.taxable?).to eq(false)
+    expect(customer.isproject?).to eq(true)
     expect(customer.default_tax_code_ref.to_s).to eq('NON')
 
     expect(customer.billing_address).not_to be_nil

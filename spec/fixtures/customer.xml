@@ -12,6 +12,7 @@
   <DisplayName>Thrifty Meats</DisplayName>
   <PrintOnCheckName>Thrifty Meats</PrintOnCheckName>
   <Active>true</Active>
+  <IsProject>true</IsProject>
   <PrimaryPhone>
     <FreeFormNumber>(415) 555-1212</FreeFormNumber>
   </PrimaryPhone>
