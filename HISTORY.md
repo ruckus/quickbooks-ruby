@@ -1,3 +1,7 @@
+## 1.0.16 (2021-03-17)
+
+* Added support for `Customer.IsProject` attribute. Closes #546
+
 ## 1.0.15 (2021-01-11)
 
 * Added Purchase CDC endpoint. Addresses #537. Thanks @nathan-mots
