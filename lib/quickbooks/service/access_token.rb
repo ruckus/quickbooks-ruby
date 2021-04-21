@@ -22,7 +22,6 @@ module Quickbooks
       def disconnect
         connection = Faraday.new do |f|
           f.adapter ::Quickbooks.http_adapter
-          f.request :url_encoded
           f.basic_auth(oauth.client.id, oauth.client.secret)
         end
 
