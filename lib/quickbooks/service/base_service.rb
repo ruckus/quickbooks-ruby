@@ -54,7 +54,7 @@ module Quickbooks
           builder.use :gzip
           builder.request :multipart
           builder.request :url_encoded
-          builder.adapter :net_http_persistent
+          builder.adapter ::Quickbooks.http_adapter
         end
       end
 
