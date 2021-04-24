@@ -20,7 +20,7 @@ module Quickbooks
 
       # https://developer.intuit.com/docs/0025_quickbooksapi/0053_auth_auth/oauth_management_api#Disconnect
       def disconnect
-        connection = Faraday.new do |f|
+        connection = Faraday.new(headers: { 'Content-Type' => 'application/json' }) do |f|
           f.adapter(::Quickbooks.http_adapter)
           f.basic_auth(oauth.client.id, oauth.client.secret)
         end
