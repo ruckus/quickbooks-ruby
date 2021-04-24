@@ -21,12 +21,14 @@ module Quickbooks
       # https://developer.intuit.com/docs/0025_quickbooksapi/0053_auth_auth/oauth_management_api#Disconnect
       def disconnect
         connection = Faraday.new do |f|
-          f.adapter ::Quickbooks.http_adapter
+          f.adapter(::Quickbooks.http_adapter)
           f.basic_auth(oauth.client.id, oauth.client.secret)
         end
 
         url = "#{DISCONNECT_URL}?minorversion=#{Quickbooks.minorversion}"
-        response = connection.post(url, token: oauth.refresh_token || oauth.token)
+        response = connection.post(url) do |request|
+          request.body = JSON.generate({ token: oauth.refresh_token || oauth.token })
+        end
 
         if response.success?
           Quickbooks::Model::AccessTokenResponse.new(error_code: "0")
