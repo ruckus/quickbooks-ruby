@@ -17,6 +17,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'oauth2', '~>1.4'
   gem.add_dependency 'roxml', '~> 4.0'
   gem.add_dependency 'activemodel', '> 4.0'
+  gem.add_dependency 'net-http-persistent'
   gem.add_dependency 'nokogiri'  # promiscuous mode
   gem.add_dependency 'multipart-post' # promiscuous mode
 
