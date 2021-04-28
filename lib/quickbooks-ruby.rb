@@ -194,7 +194,7 @@ module Quickbooks
   @@sandbox_mode = false
   @@logger = nil
   @@minorversion = 47
-  @@http_adapter = :net_http
+  @@http_adapter = :net_http_persistent
 
   class << self
     def sandbox_mode
