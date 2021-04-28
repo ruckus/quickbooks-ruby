@@ -6,8 +6,8 @@ describe Quickbooks do
   end
 
   describe '.http_version=' do
-    subject { Quickbooks.http_adapter = :net_http_persistent }
+    subject { Quickbooks.http_adapter = :net_http }
 
-    it { expect { subject }.to change { Quickbooks.http_adapter }.from(:net_http).to(:net_http_persistent) }
+    it { expect { subject }.to change { Quickbooks.http_adapter }.from(:net_http_persistent).to(:net_http) }
   end
 end
