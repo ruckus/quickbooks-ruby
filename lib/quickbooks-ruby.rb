@@ -194,6 +194,7 @@ module Quickbooks
   @@sandbox_mode = false
   @@logger = nil
   @@minorversion = 47
+  @@http_adapter = :net_http_persistent
 
   class << self
     def sandbox_mode
@@ -218,6 +219,14 @@ module Quickbooks
 
     def logger=(logger)
       @@logger = logger
+    end
+
+    def http_adapter
+      @@http_adapter
+    end
+
+    def http_adapter=(adapter)
+      @@http_adapter = adapter
     end
 
     # set logging on or off

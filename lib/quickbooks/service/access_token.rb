@@ -1,7 +1,6 @@
 module Quickbooks
   module Service
     class AccessToken < BaseService
-
       RENEW_URL = "https://appcenter.intuit.com/api/v1/connection/reconnect"
       DISCONNECT_URL = "https://developer.api.intuit.com/v2/oauth2/tokens/revoke"
 
@@ -21,10 +20,15 @@ module Quickbooks
 
       # https://developer.intuit.com/docs/0025_quickbooksapi/0053_auth_auth/oauth_management_api#Disconnect
       def disconnect
-        conn = Faraday.new
-        conn.basic_auth oauth.client.id, oauth.client.secret
+        connection = Faraday.new(headers: { 'Content-Type' => 'application/json' }) do |f|
+          f.adapter(::Quickbooks.http_adapter)
+          f.basic_auth(oauth.client.id, oauth.client.secret)
+        end
+
         url = "#{DISCONNECT_URL}?minorversion=#{Quickbooks.minorversion}"
-        response = conn.post(url, token: oauth.refresh_token || oauth.token)
+        response = connection.post(url) do |request|
+          request.body = JSON.generate({ token: oauth.refresh_token || oauth.token })
+        end
 
         if response.success?
           Quickbooks::Model::AccessTokenResponse.new(error_code: "0")
