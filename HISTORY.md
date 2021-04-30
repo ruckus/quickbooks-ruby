@@ -1,3 +1,15 @@
+## 1.0.17 (2021-04-28)
+
+* Allow Faraday adapter used in quickbooks-ruby to be configurable.
+
+To use the thread-safe Net::HTTP::Persistent adapter:
+
+```ruby
+Quickbooks.http_adapter = :net_http_persistent # defaults to :net_http
+```
+
+Thank you @danielnho22
+
 ## 1.0.16 (2021-03-17)
 
 * Added support for `Customer.IsProject` attribute. Closes #546

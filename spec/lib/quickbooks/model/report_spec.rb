@@ -57,7 +57,7 @@ describe Quickbooks::Model::Report do
     end
 
     it 'works with columns that have newlines' do
-      expect(transaction_list_report.all_rows[0]).to eq(["2020-01-01", "Invoice", "10\nID#112233", "Yes", "Vendor", nil, "0100 Accounts Receivable (A/R)", "-Split-", 0.3e3])
+      expect(transaction_list_report.all_rows[0]).to eq(["2020-01-01", "Invoice", "10\nID#112233", "Yes", "Vendor", nil, "0100 Accounts Receivable (A/R)", "-Split-", BigDecimal("300")])
     end
   end
 

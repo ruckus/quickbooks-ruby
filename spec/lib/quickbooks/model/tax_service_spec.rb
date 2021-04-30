@@ -4,28 +4,53 @@ describe "Quickbooks::Model::TaxService" do
     item = Quickbooks::Model::TaxService.new(tax_code: '123456')
     expect(item).not_to be_valid
     expect(item.errors.keys.include?(:tax_rate_details)).to be true
-    expect(item.errors.values).to include(["must have at least one item"])
+
+    messages = item.errors.map { |e| e.message }
+    expect(messages).to include("must have at least one item")
   end
 
   it "TaxRateDetails item must be valid" do
     item = Quickbooks::Model::TaxService.new(tax_code: '123456')
-    item.tax_rate_details << Quickbooks::Model::TaxRateDetailLine.new(tax_rate_name: item.tax_code, rate_value: '12.3', tax_agency_id: '2', tax_applicable_on: 'Sales')
+
+    tax_line = Quickbooks::Model::TaxRateDetailLine.new(
+      tax_rate_name: item.tax_code,
+      rate_value: '12.3',
+      tax_agency_id: '2',
+      tax_applicable_on: 'Sales'
+    )
+    item.tax_rate_details << tax_line
     expect(item).to be_valid
   end
 
   it "must be raise TaxRateDetails item validation errors" do
     item = Quickbooks::Model::TaxService.new(tax_code: '123456')
-    item.tax_rate_details << Quickbooks::Model::TaxRateDetailLine.new(tax_rate_name: item.tax_code)
+    tax_line = Quickbooks::Model::TaxRateDetailLine.new(tax_rate_name: item.tax_code)
+    item.tax_rate_details << tax_line
     expect(item).not_to be_valid
   end
 
   it "must be raise duplicates TaxRateName errors" do
     item = Quickbooks::Model::TaxService.new(tax_code: '123456')
-    item.tax_rate_details << Quickbooks::Model::TaxRateDetailLine.new(tax_rate_name: item.tax_code, rate_value: '12.3', tax_agency_id: '2', tax_applicable_on: 'Sales')
-    item.tax_rate_details << Quickbooks::Model::TaxRateDetailLine.new(tax_rate_name: item.tax_code, rate_value: '12.3', tax_agency_id: '2', tax_applicable_on: 'Sales')
+    tax_line1 = Quickbooks::Model::TaxRateDetailLine.new(
+      tax_rate_name: item.tax_code,
+      rate_value: '12.3',
+      tax_agency_id: '2',
+      tax_applicable_on: 'Sales'
+    )
+    item.tax_rate_details << tax_line1
+
+    tax_line2 = Quickbooks::Model::TaxRateDetailLine.new(
+      tax_rate_name: item.tax_code,
+      rate_value: '12.3',
+      tax_agency_id: '2',
+      tax_applicable_on: 'Sales'
+    )
+    item.tax_rate_details << tax_line2
     expect(item).not_to be_valid
     expect(item.errors.keys.include?(:tax_rate_name)).to be true
-    expect(item.errors.values).to include(["Duplicate Tax Rate Name"])
+
+    messages = item.errors.map { |e| e.message }
+    expect(messages).to include("Duplicate Tax Rate Name")
   end
 
   describe "#from_json" do

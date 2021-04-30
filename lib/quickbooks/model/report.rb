@@ -44,7 +44,12 @@ module Quickbooks
       end
 
       def parse_row_value(value)
-        BigDecimal(value)
+        # does it look like a number?
+        if value =~ /\A\-?[0-9\.]+\Z/
+          BigDecimal(value)
+        else
+          value
+        end
       rescue ArgumentError
         value
       end
