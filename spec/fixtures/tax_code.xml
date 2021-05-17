@@ -24,4 +24,5 @@
       <TaxOrder>0</TaxOrder>
     </TaxRateDetail>
   </PurchaseTaxRateList>
+  <TaxCodeConfigType>USER_DEFINED</TaxCodeConfigType>
 </TaxCode>

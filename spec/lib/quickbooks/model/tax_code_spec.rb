@@ -10,6 +10,7 @@ describe "Quickbooks::Model::TaxCode" do
     expect(item).to be_active
     expect(item).to be_taxable
     expect(item).to be_tax_group
+    expect(item.tax_code_config_type).to eq("USER_DEFINED")
 
     sales_tax_rate_detail = item.sales_tax_rate_list.tax_rate_detail.first
     expect(sales_tax_rate_detail.tax_rate_ref.value).to eq("1")
