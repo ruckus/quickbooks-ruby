@@ -62,6 +62,7 @@ module Quickbooks
       xml_accessor :deposit_to_account_ref, :from => 'DepositToAccountRef', :as => BaseReference
       xml_accessor :bill_email_cc, :from => 'BillEmailCc', :as => EmailAddress
       xml_accessor :txn_source, :from => 'TxnSource'
+      xml_accessor :shipping_tax_inc_included_in_total_tax?, :from => 'ShippingTaxIncludedInTotalTax'
 
 
       reference_setters

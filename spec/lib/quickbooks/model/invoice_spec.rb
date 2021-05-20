@@ -56,7 +56,7 @@ describe "Quickbooks::Model::Invoice" do
     expect(shipping_address.postal_code).to eq "91123"
     expect(shipping_address.lat).to eq "33.739466"
     expect(shipping_address.lon).to eq "-118.0395574"
-    
+
     ship_from_address = invoice.ship_from_address
     expect(ship_from_address).to_not be_nil
     expect(ship_from_address.id).to eq "5"
@@ -101,6 +101,7 @@ describe "Quickbooks::Model::Invoice" do
     expect(invoice.allow_online_credit_card_payment?).to be true
     expect(invoice.allow_online_ach_payment?).to be false
     expect(invoice.txn_source).to eq 'SOURCENAME'
+    expect(invoice.shipping_tax_inc_included_in_total_tax?).to be true
   end
 
   it "should require line items for create / update" do
