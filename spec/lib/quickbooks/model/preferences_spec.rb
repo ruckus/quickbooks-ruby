@@ -14,10 +14,19 @@ describe "Quickbooks::Model::Preferences" do
     expect(preferences.email_messages.estimate_message.message).to include("We look forward to working with you.")
 
     expect(preferences.sales_forms.auto_apply_credit?).to be true
-    expect(preferences.sales_forms.custom_fields).not_to be_empty
-    expect(preferences.sales_forms.custom_fields[0].name).to eq("SalesFormsPrefs.UseSalesCustom1")
-    expect(preferences.sales_forms.custom_fields[3].name).to eq("SalesFormsPrefs.SalesCustomName1")
+    # expect(preferences.sales_forms.custom_fields).not_to be_empty
+    # expect(preferences.sales_forms.custom_fields[0].name).to eq("SalesFormsPrefs.UseSalesCustom1")
+    # expect(preferences.sales_forms.custom_fields[3].name).to eq("SalesFormsPrefs.SalesCustomName1")
+    
+    expect(preferences.other_prefs.name_values["SalesFormsPrefs.DefaultItem"]).to eq("1")
+  end
 
-    expect(preferences.other_prefs["SalesFormsPrefs.DefaultItem"]).to eq("1")
+  it "is valid pref" do
+    xml = fixture("preferences.xml")
+    pref = Quickbooks::Model::Preferences.from_xml(xml)
+    pref.sales_forms.allow_shipping=true
+
+    expect(pref.valid?).to be true
+    expect(pref.sales_forms.allow_shipping?).to be true
   end
 end
