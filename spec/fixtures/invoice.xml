@@ -52,6 +52,7 @@
 			</TaxLine>
 	</TxnTaxDetail>
   <TxnSource>SOURCENAME</TxnSource>
+	<ShippingTaxIncludedInTotalTax>true</ShippingTaxIncludedInTotalTax>
 	<CustomerRef name="Sunset Bakery">2</CustomerRef>
 	<CustomerMemo>Message to Customer</CustomerMemo>
 	<BillAddr>
