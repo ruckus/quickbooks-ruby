@@ -33,7 +33,10 @@ module Quickbooks
         if field.class == Symbol
           field = field.to_s.camelcase
         end
-        q = "select * from %s where %s = '%s'" % [model.resource_for_singular, field, selector]
+
+        clause = Quickbooks::Util::QueryBuilder.new.clause(field, '=', selector)
+        q = "select * from %s where %s" % [model.resource_for_singular, clause]
+
         self.query(q, options)
       end
 

@@ -20,6 +20,8 @@ module Quickbooks
                   value.strftime('%Y-%m-%d')
                 when Array
                   value = value.map(&escape_single_quotes)
+                when true, false
+                  value
                 else
                   value = escape_single_quotes.call(value)
                 end
@@ -27,6 +29,8 @@ module Quickbooks
         if operator.downcase == 'in' && value.is_a?(Array)
           value = value.map { |v| "#{VALUE_QUOTE}#{v}#{VALUE_QUOTE}" }
           "#{field} #{operator} (#{value.join(', ')})"
+        elsif value == true || value == false
+          "#{field} #{operator} #{value}"
         else
           "#{field} #{operator} #{VALUE_QUOTE}#{value}#{VALUE_QUOTE}"
         end
