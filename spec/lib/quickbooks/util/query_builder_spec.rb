@@ -26,9 +26,15 @@ describe Quickbooks::Util::QueryBuilder do
     expect(expected).to eq generated
   end
 
-  it "converts values that aren't dates or arrays into strings" do
+  it "converts values that aren't dates or arrays or booleans into strings" do
     expected = "Id = '42'"
     generated = subject.clause("Id", "=", 42)
+    expect(expected).to eq generated
+  end
+
+  it "does not quote boolean values" do
+    expected = "active = true"
+    generated = subject.clause("active", "=", true)
     expect(expected).to eq generated
   end
 end
