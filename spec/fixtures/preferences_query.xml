@@ -18,8 +18,6 @@
         <CustomerTerminology>Customers</CustomerTerminology>
       </AccountingInfoPrefs>
       <ProductAndServicesPrefs>
-        <ForSales>true</ForSales>
-        <ForPurchase>true</ForPurchase>
         <QuantityWithPriceAndRate>true</QuantityWithPriceAndRate>
         <QuantityOnHand>true</QuantityOnHand>
       </ProductAndServicesPrefs>

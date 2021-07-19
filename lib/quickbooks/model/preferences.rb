@@ -20,7 +20,7 @@ module Quickbooks
 
       PREFERENCE_SECTIONS = {
         :accounting_info      => %w(TrackDepartments DepartmentTerminology ClassTrackingPerTxnLine? ClassTrackingPerTxn? CustomerTerminology),
-        :product_and_services => %w(ForSales? ForPurchase? QuantityWithPriceAndRate? QuantityOnHand?),
+        :product_and_services => %w(QuantityWithPriceAndRate? QuantityOnHand?),
         :time_tracking        => %w(UseServices? BillCustomers? ShowBillRateToAll WorkWeekStartDate MarkTimeEntiresBillable?),
         :tax                  => %w(UsingSalesTax? PartnerTaxEnabled?),
         :currency             => %w(MultiCurrencyEnabled? HomeCurrency),
