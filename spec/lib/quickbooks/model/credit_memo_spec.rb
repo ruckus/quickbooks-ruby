@@ -27,6 +27,7 @@ describe "Quickbooks::Model::CreditMemo" do
     credit_memo = Quickbooks::Model::CreditMemo.from_xml(xml)
     expect(credit_memo.id).to eq "52"
     expect(credit_memo.txn_source).to eq 'SOURCENAME'
+    expect(credit_memo.shipping_tax_included_in_total_tax?).to be true
   end
 
   describe "#auto_doc_number" do

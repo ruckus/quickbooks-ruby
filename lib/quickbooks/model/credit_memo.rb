@@ -40,6 +40,7 @@ module Quickbooks
       xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :remaining_credit, :from => 'RemainingCredit', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :txn_source, :from => 'TxnSource'
+      xml_accessor :shipping_tax_included_in_total_tax?, :from => 'ShippingTaxIncludedInTotalTax'
 
       # readonly
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal
