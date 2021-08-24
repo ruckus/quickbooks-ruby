@@ -1,0 +1,49 @@
+<InventoryAdjustment domain="QBO" sparse="false">
+  <Id>450</Id>
+  <SyncToken>0</SyncToken>
+  <MetaData>
+    <CreateTime>2014-12-02T06:53:16-08:00</CreateTime>
+    <LastUpdatedTime>2014-12-02T06:53:16-08:00</LastUpdatedTime>
+  </MetaData>
+  <DocNumber>49</DocNumber>
+  <TxnDate>2014-11-28</TxnDate>
+  <AdjustAccountRef>
+    <value>27</value>
+    <name>Cost of goods sold</name>
+  </AdjustAccountRef>
+  <DepartmentRef>
+    <value>1</value>
+    <name>Department1</name>
+  </DepartmentRef>
+  <PrivateNote>Adjustment for XYZ</PrivateNote>
+  <Line>
+    <Id>0</Id>
+    <DetailType>ItemAdjustmentLineDetail</DetailType>
+    <ItemAdjustmentLineDetail>
+      <ItemRef>
+        <value>21</value>
+        <name>item17</name>
+      </ItemRef>
+      <QtyDiff>-2</QtyDiff>
+      <ClassRef>
+        <value>100100000000000000022</value>
+        <name>Class2</name>
+      </ClassRef>
+    </ItemAdjustmentLineDetail>
+  </Line>
+  <Line>
+    <Id>1</Id>
+    <DetailType>ItemAdjustmentLineDetail</DetailType>
+    <ItemAdjustmentLineDetail>
+      <ItemRef>
+        <value>22</value>
+        <name>item22</name>
+      </ItemRef>
+      <QtyDiff>-8</QtyDiff>
+      <ClassRef>
+        <value>100100000000000000022</value>
+        <name>Class2</name>
+      </ClassRef>
+    </ItemAdjustmentLineDetail>
+  </Line>
+</InventoryAdjustment>

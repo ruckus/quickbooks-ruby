@@ -2,6 +2,7 @@ module Quickbooks
   module Model
     class Line < BaseModel
       require 'quickbooks/model/group_line_detail'
+      require 'quickbooks/model/item_adjustment_line_detail'
 
       #== Constants
       SALES_ITEM_LINE_DETAIL = 'SalesItemLineDetail'
@@ -10,6 +11,7 @@ module Quickbooks
       DISCOUNT_LINE_DETAIL = 'DiscountLineDetail'
       JOURNAL_ENTRY_LINE_DETAIL = 'JournalEntryLineDetail'
       GROUP_LINE_DETAIL = 'GroupLineDetail'
+      ITEM_ADJUSTMENT_LINE_DETAIL = 'ItemAdjustmentLineDetail'
 
       xml_accessor :id, :from => 'Id'
       xml_accessor :line_num, :from => 'LineNum', :as => Integer
@@ -26,6 +28,7 @@ module Quickbooks
       xml_accessor :discount_line_detail, :from => 'DiscountLineDetail', :as => DiscountOverride
       xml_accessor :journal_entry_line_detail, :from => 'JournalEntryLineDetail', :as => JournalEntryLineDetail
       xml_accessor :group_line_detail, :from => 'GroupLineDetail', :as => GroupLineDetail
+      xml_accessor :item_adjustment_line_detail, :from => 'ItemAdjustmentLineDetail', :as => ItemAdjustmentLineDetail
 
       def initialize(*args)
         self.linked_transactions ||= []
@@ -75,6 +78,13 @@ module Quickbooks
         self.journal_entry_line_detail = JournalEntryLineDetail.new
 
         yield self.journal_entry_line_detail if block_given?
+      end
+
+      def inventory_adjustment!
+        self.detail_type = ITEM_ADJUSTMENT_LINE_DETAIL
+        self.item_adjustment_line_detail = ItemAdjustmentLineDetail.new
+
+        yield self.item_adjustment_line_detail if block_given?
       end
 
       def group_line!
