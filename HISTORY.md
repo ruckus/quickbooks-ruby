@@ -1,3 +1,7 @@
+## 1.0.18 (2021-09-09)
+
+* bump roxml version to `~ 4.2` to resolve URI deprecation issues
+
 ## 1.0.17 (2021-04-28)
 
 * Allow Faraday adapter used in quickbooks-ruby to be configurable.
