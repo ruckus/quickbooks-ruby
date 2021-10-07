@@ -6,6 +6,7 @@ module Quickbooks
       xml_accessor :qty_diff, from: 'QtyDiff'
       xml_accessor :item_ref, from: 'ItemRef', as: BaseReference
       xml_accessor :class_ref, from: 'ClassRef', as: BaseReference
+      xml_accessor :sales_price, from: 'SalesPrice', as: BigDecimal, to_xml: proc { |val| val.to_f }
 
       reference_setters :item_ref, :class_ref
     end
