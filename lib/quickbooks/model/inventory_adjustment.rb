@@ -22,6 +22,8 @@ module Quickbooks
       xml_accessor :customer_ref, from: 'CustomerRef', as: BaseReference
 
       xml_accessor :line_items, from: 'Line', as: [Line]
+      xml_accessor :shipping_adjustment?, from: 'ShippingAdjustment'
+      xml_accessor :txn_source, from: 'TxnSource'
 
       reference_setters :adjust_account_ref
 
