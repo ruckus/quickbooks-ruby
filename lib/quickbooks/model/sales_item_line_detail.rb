@@ -9,6 +9,7 @@ module Quickbooks
       xml_accessor :quantity, :from => 'Qty', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
       xml_accessor :tax_code_ref, :from => 'TaxCodeRef', :as => BaseReference
       xml_accessor :service_date, :from => 'ServiceDate', :as => Date
+      xml_accessor :deferred_revenue?, :from => 'DeferredRevenue'
 
       reference_setters :item_ref, :class_ref, :price_level_ref, :tax_code_ref
     end

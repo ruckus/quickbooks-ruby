@@ -10,4 +10,10 @@ describe "Quickbooks::Model::SalesItemLineDetail" do
     detail = Quickbooks::Model::SalesItemLineDetail.new
     expect(detail.to_xml).not_to match(/RatePercent/)
   end
+
+  it "deferred_revenue column should be present" do
+    detail = Quickbooks::Model::SalesItemLineDetail.new
+    detail.deferred_revenue = true
+    expect(detail.to_xml.at_css('DeferredRevenue').content).to eq('true')
+  end
 end
