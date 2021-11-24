@@ -245,6 +245,7 @@ end
 Pulled together usage is:
 
 ```ruby
+intuit_account = IntuitAccount.find(x)
 intuit_account.perform_authenticated_request do |access_token|
   # do something here, like
   service = Quickbooks::Service::Customer.new
