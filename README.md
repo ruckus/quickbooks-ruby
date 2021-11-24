@@ -146,6 +146,115 @@ Unauthorized (expired) access to the API will raise a `OAuth2::Error` error.
 
 For more information on access token expiration and refresh token expiration, please refer to the [official documentation](https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0#understand-token-expiration).
 
+### Refreshing Tokens
+
+You will need to continuously refresh access tokens and ensure token validity. Access Tokens expire after 1 hour.
+
+My personal architecture in a Rails application is similar to this:
+
+```ruby
+# app/models/concerns/quickbooks_oauth.rb
+module QuickbooksOauth
+  extend ActiveSupport::Concern
+
+  #== Instance Methods
+
+  def perform_authenticated_request(&block)
+    attempts = 0
+    begin
+      yield oauth_access_token
+    rescue OAuth2::Error, Quickbooks::AuthorizationFailure => ex
+      Rails.logger.info("QuickbooksOauth.perform: #{ex.message}")
+
+      # to prevent an infinite loop here keep a counter and bail out after N times...
+      attempts += 1
+
+      raise "QuickbooksOauth:ExceededAuthAttempts" if attempts >= 3
+
+      # check if its an invalid_grant first, but assume it is for now
+      refresh_token!
+
+      retry
+    end
+  end
+
+  def refresh_token!
+    t = oauth_access_token
+    refreshed = t.refresh!
+
+    if refreshed.params['x_refresh_token_expires_in'].to_i > 0
+      oauth2_refresh_token_expires_at = Time.now + refreshed.params['x_refresh_token_expires_in'].to_i.seconds
+    else
+      oauth2_refresh_token_expires_at = 100.days.from_now
+    end
+
+    update!(
+      oauth2_access_token: refreshed.token,
+      oauth2_access_token_expires_at: Time.at(refreshed.expires_at),
+      oauth2_refresh_token: refreshed.refresh_token,
+      oauth2_refresh_token_expires_at: oauth2_refresh_token_expires_at
+    )
+  end
+
+  def oauth_client
+    self.class.construct_oauth2_client
+  end
+
+  def oauth_access_token
+    OAuth2::AccessToken.new(oauth_client, oauth2_access_token, refresh_token: oauth2_refresh_token)
+  end
+
+  def consumer
+    oauth_access_token
+  end
+
+  module ClassMethods
+
+    def construct_oauth2_client
+      options = {
+        site: "https://appcenter.intuit.com/connect/oauth2",
+        authorize_url: "https://appcenter.intuit.com/connect/oauth2",
+        token_url: "https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer"
+      }
+      OAuth2::Client.new(ENV['INTUIT_OAUTH2_CLIENT_ID'], ENV['INTUIT_OAUTH2_CLIENT_SECRET'], options)
+    end
+
+  end
+end
+```
+
+And then I have an `IntuitAccount` model with attributes:
+
+```
+ oauth2_access_token             | text                        |           |          |
+ oauth2_access_token_expires_at  | timestamp without time zone |           |          |
+ oauth2_refresh_token            | text                        |           |          |
+ oauth2_refresh_token_expires_at | timestamp without time zone |           |          |
+ track_purchase_order_quantity   | boolean                     |           | not null | false
+```
+
+And then finally include this concern in the model:
+
+
+```ruby
+class IntuitAccount < ActiveRecord::Base
+  include QuickbooksOauth
+end
+```
+
+Pulled together usage is:
+
+```ruby
+intuit_account.perform_authenticated_request do |access_token|
+  # do something here, like
+  service = Quickbooks::Service::Customer.new
+  service.company_id = "123" # also known as RealmID
+  service.access_token = access_token # the OAuth Access Token you have from above
+  customers = service.query()
+end
+
+```
+
 ## Getting Started - Retrieving a list of Customers
 
 The general approach is you first instantiate a `Service` object based on the entity you would like to retrieve. Lets retrieve a list of Customers:
