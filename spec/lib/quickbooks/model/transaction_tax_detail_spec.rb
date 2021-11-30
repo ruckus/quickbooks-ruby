@@ -11,7 +11,7 @@ describe Quickbooks::Model::TransactionTaxDetail do
 
   describe 'total tax specified' do
     context 'when it is set' do
-      before { transaction_tax_detail.total_tax_specified = false; binding.pry }
+      before { transaction_tax_detail.total_tax_specified = false }
 
       it { expect(transaction_tax_detail.to_xml.at_css('TotalTaxSpecified').content).to match('false') }
     end
