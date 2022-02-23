@@ -248,11 +248,7 @@ module Quickbooks
           headers['Accept-Encoding'] = HTTP_ACCEPT_ENCODING
         end
 
-        log "------ QUICKBOOKS-RUBY REQUEST ------"
-        log "METHOD = #{method}"
-        log "RESOURCE = #{url}"
-        log_request_body(body)
-        log "REQUEST HEADERS = #{headers.inspect}"
+        log_request(method, url, body, headers)
 
         request_info = RequestInfo.new(url, headers, body, method)
         before_request.call(request_info) if before_request
@@ -273,12 +269,8 @@ module Quickbooks
         after_request.call(request_info, raw_response.body) if after_request
 
         response = Quickbooks::Service::Responses::OAuthHttpResponse.wrap(raw_response)
-        log "------ QUICKBOOKS-RUBY RESPONSE ------"
-        log "RESPONSE CODE = #{response.code}"
-        log_response_body(response)
-        if response.respond_to?(:headers)
-          log "RESPONSE HEADERS = #{response.headers}"
-        end
+        log_response(response)
+
         check_response(response, request: body)
       end
 
@@ -354,28 +346,33 @@ module Quickbooks
         end
       end
 
-      def log_response_body(response)
-        log "RESPONSE BODY:"
-        if is_json?
-          log ">>>>#{response.plain_body.inspect}"
-        elsif is_pdf?
-          log("BODY is a PDF : not dumping")
+      def log_request(method, url, body, headers)
+        log_lines = []
+        log_lines << "------ QUICKBOOKS-RUBY REQUEST ------"
+        log_lines << "METHOD = #{method}"
+        log_lines << "RESOURCE = #{url}"
+        log_lines.concat(request_body_log_lines(body))
+        log_lines << "REQUEST HEADERS = #{headers.inspect}"
+
+        if condense_logs?
+          log(log_lines.join("\n"))
         else
-          log(log_xml(response.plain_body))
+          log_lines.map(&method(:log))
         end
       end
 
-      def log_request_body(body)
-        log "REQUEST BODY:"
+      def request_body_log_lines(body)
+        log_lines = []
+        log_lines <<  "REQUEST BODY:"
         if is_json?
-          log(body.inspect)
+          log_lines <<  body.inspect
         elsif is_pdf?
-          log("BODY is a PDF : not dumping")
+          log_lines <<  "BODY is a PDF : not dumping"
         else
           #multipart request for uploads arrive here in a Hash with UploadIO vals
           if body.is_a?(Hash)
             body.each do |k,v|
-              log('BODY PART:')
+              log_lines << 'BODY PART:'
               val_content = v.inspect
               if v.is_a?(UploadIO)
                 if v.content_type == 'application/xml'
@@ -384,12 +381,41 @@ module Quickbooks
                   end
                 end
               end
-              log("#{k}: #{val_content}")
+              log_lines << "#{k}: #{val_content}"
             end
           else
-            log(log_xml(body))
+            log_lines << log_xml(body)
           end
         end
+        log_lines
+      end
+
+      def log_response(response)
+        log_lines = []
+        log_lines << "------ QUICKBOOKS-RUBY RESPONSE ------"
+        log_lines << "RESPONSE CODE = #{response.code}"
+        log_lines.concat(response_body_log_lines(response))
+        log_lines << "RESPONSE HEADERS = #{response.headers}" if response.respond_to?(:headers)
+
+        if condense_logs?
+          log(log_lines.join("\n"))
+        else
+          log_lines.map(&method(:log))
+        end
+      end
+
+      def response_body_log_lines(response)
+        log_lines = []
+        log_lines << "RESPONSE BODY:"
+        if is_json?
+          log_lines << ">>>>#{response.plain_body.inspect}"
+        elsif is_pdf?
+          log_lines << "BODY is a PDF : not dumping"
+        else
+          log_lines << log_xml(response.plain_body)
+        end
+
+        log_lines
       end
 
       def parse_and_raise_exception(options = {})

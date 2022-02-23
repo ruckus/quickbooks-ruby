@@ -9,6 +9,10 @@ module Quickbooks
         ::Quickbooks.log?
       end
 
+      def condense_logs?
+        ::Quickbooks.condense_logs?
+      end
+
       def log_xml(str)
         if ::Quickbooks.log_xml_pretty_print? && !(str and str.empty?)
           Nokogiri::XML(str).to_xml
