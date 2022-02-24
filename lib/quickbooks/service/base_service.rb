@@ -347,32 +347,28 @@ module Quickbooks
       end
 
       def log_request(method, url, body, headers)
-        log_lines = []
-        log_lines << "------ QUICKBOOKS-RUBY REQUEST ------"
-        log_lines << "METHOD = #{method}"
-        log_lines << "RESOURCE = #{url}"
-        log_lines.concat(request_body_log_lines(body))
-        log_lines << "REQUEST HEADERS = #{headers.inspect}"
+        messages = []
+        messages << "------ QUICKBOOKS-RUBY REQUEST ------"
+        messages << "METHOD = #{method}"
+        messages << "RESOURCE = #{url}"
+        messages.concat(request_body_messages(body))
+        messages << "REQUEST HEADERS = #{headers.inspect}"
 
-        if condense_logs?
-          log(log_lines.join("\n"))
-        else
-          log_lines.map(&method(:log))
-        end
+        log_multiple(messages)
       end
 
-      def request_body_log_lines(body)
-        log_lines = []
-        log_lines <<  "REQUEST BODY:"
+      def request_body_messages(body)
+        messages = []
+        messages <<  "REQUEST BODY:"
         if is_json?
-          log_lines <<  body.inspect
+          messages <<  body.inspect
         elsif is_pdf?
-          log_lines <<  "BODY is a PDF : not dumping"
+          messages <<  "BODY is a PDF : not dumping"
         else
           #multipart request for uploads arrive here in a Hash with UploadIO vals
           if body.is_a?(Hash)
             body.each do |k,v|
-              log_lines << 'BODY PART:'
+              messages << 'BODY PART:'
               val_content = v.inspect
               if v.is_a?(UploadIO)
                 if v.content_type == 'application/xml'
@@ -381,41 +377,37 @@ module Quickbooks
                   end
                 end
               end
-              log_lines << "#{k}: #{val_content}"
+              messages << "#{k}: #{val_content}"
             end
           else
-            log_lines << log_xml(body)
+            messages << log_xml(body)
           end
         end
-        log_lines
+        messages
       end
 
       def log_response(response)
-        log_lines = []
-        log_lines << "------ QUICKBOOKS-RUBY RESPONSE ------"
-        log_lines << "RESPONSE CODE = #{response.code}"
-        log_lines.concat(response_body_log_lines(response))
-        log_lines << "RESPONSE HEADERS = #{response.headers}" if response.respond_to?(:headers)
+        messages = []
+        messages << "------ QUICKBOOKS-RUBY RESPONSE ------"
+        messages << "RESPONSE CODE = #{response.code}"
+        messages.concat(response_body_messages(response))
+        messages << "RESPONSE HEADERS = #{response.headers}" if response.respond_to?(:headers)
 
-        if condense_logs?
-          log(log_lines.join("\n"))
-        else
-          log_lines.map(&method(:log))
-        end
+        log_multiple(messages)
       end
 
-      def response_body_log_lines(response)
-        log_lines = []
-        log_lines << "RESPONSE BODY:"
+      def response_body_messages(response)
+        messages = []
+        messages << "RESPONSE BODY:"
         if is_json?
-          log_lines << ">>>>#{response.plain_body.inspect}"
+          messages << ">>>>#{response.plain_body.inspect}"
         elsif is_pdf?
-          log_lines << "BODY is a PDF : not dumping"
+          messages << "BODY is a PDF : not dumping"
         else
-          log_lines << log_xml(response.plain_body)
+          messages << log_xml(response.plain_body)
         end
 
-        log_lines
+        messages
       end
 
       def parse_and_raise_exception(options = {})

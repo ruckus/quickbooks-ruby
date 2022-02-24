@@ -5,6 +5,14 @@ module Quickbooks
         ::Quickbooks.log(msg)
       end
 
+      def log_multiple(messages)
+        if condense_logs?
+          log(messages.join("\n"))
+        else
+          messages.each(&method(:log))
+        end
+      end
+
       def log?
         ::Quickbooks.log?
       end
