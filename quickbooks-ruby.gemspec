@@ -20,6 +20,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'net-http-persistent'
   gem.add_dependency 'nokogiri'  # promiscuous mode
   gem.add_dependency 'multipart-post' # promiscuous mode
+  gem.add_dependency 'faraday', '< 2.0'
 
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'simplecov'
