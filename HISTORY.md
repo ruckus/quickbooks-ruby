@@ -1,3 +1,9 @@
+## 1.0.20 (2022-03-17)
+
+* Add explicit dependency on Faraday < 2.0 (#571). Faraday made some fairly significant changes in the 2.0 update. `quickbooks-ruby` currently uses a Faraday middlware, which [was deprecated][1] in the 2.0 update. This adds an explicit dependency on Faraday < 2.0 rather than using whatever Faraday version the oauth-2 gem installs.
+
+* Return Mailing Address for Bill (#572). Thanks @sampatbadhe
+
 ## 1.0.19 (2021-12-08)
 
 * Addition of `TaxInclusiveAmt` attribute `Line.SalesItemLineDetail`, `Line.ItemBasedExpenseLineDetail`, and `Line.AccountBasedExpenseLineDetail` line types.
