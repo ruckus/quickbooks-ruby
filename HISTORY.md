@@ -1,3 +1,7 @@
+## 1.0.19 (2021-12-08)
+
+* Addition of `TaxInclusiveAmt` attribute `Line.SalesItemLineDetail`, `Line.ItemBasedExpenseLineDetail`, and `Line.AccountBasedExpenseLineDetail` line types.
+
 ## 1.0.18 (2021-09-09)
 
 * bump roxml version to `~ 4.2` to resolve URI deprecation issues
