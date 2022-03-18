@@ -173,12 +173,16 @@ describe Quickbooks::Service::BaseService do
       @service.query
     end
 
+    it "should not condense logs by default" do
+      expect(Quickbooks.condense_logs?).to be false
+    end
+
     it "should log if Quickbooks.log = true" do
       Quickbooks.log = true
       obj = double('obj', :to_xml => '<test/>')
-      expect_any_instance_of(Nokogiri::XML::Document).to receive(:to_xml) { |arg| obj.to_xml }
+      expect_any_instance_of(Nokogiri::XML::Document).to receive(:to_xml) { |_| obj.to_xml }
       expect(obj).to receive(:to_xml).once # will only called once on a get request, twice on a post
-      expect(Quickbooks.logger).to receive(:info).at_least(1)
+      expect(Quickbooks.logger).to receive(:info).exactly(10)
       @service.query
       Quickbooks.log = false
     end
@@ -187,10 +191,22 @@ describe Quickbooks::Service::BaseService do
       Quickbooks.log = true
       Quickbooks.log_xml_pretty_print = false
       expect_any_instance_of(Nokogiri::XML::Document).not_to receive(:to_xml)
-      expect(Quickbooks.logger).to receive(:info).at_least(1)
+      expect(Quickbooks.logger).to receive(:info).exactly(10)
       @service.query
       Quickbooks.log = false
       Quickbooks.log_xml_pretty_print = true
+    end
+
+    it 'should log once for request and once for response if Quickbooks.condense_logs = true' do
+      Quickbooks.log = true
+      Quickbooks.condense_logs = true
+      obj = double('obj', :to_xml => '<test/>')
+      expect_any_instance_of(Nokogiri::XML::Document).to receive(:to_xml) { |_| obj.to_xml }
+      expect(obj).to receive(:to_xml).once # will only called once on a get request, twice on a post
+      expect(Quickbooks.logger).to receive(:info).exactly(2)
+      @service.query
+      Quickbooks.log = false
+      Quickbooks.condense_logs = false
     end
 
     it "log_xml should handle a non-xml string" do

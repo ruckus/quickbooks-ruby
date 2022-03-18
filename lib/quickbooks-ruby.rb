@@ -230,11 +230,16 @@ module Quickbooks
     end
 
     # set logging on or off
-    attr_writer :log, :log_xml_pretty_print
+    attr_writer :log, :log_xml_pretty_print, :condense_logs
 
     # Returns whether to log. Defaults to 'false'.
     def log?
       @log ||= false
+    end
+
+    # Returns whether to limit log lines
+    def condense_logs?
+      @condense_logs ||= false
     end
 
     # pretty printing the xml in the logs is "on" by default
