@@ -14,7 +14,7 @@ describe "Quickbooks::Model::TaxAgency" do
   it "should require display_name for create / update" do
     invoice = Quickbooks::Model::TaxAgency.new
     expect(invoice).not_to be_valid
-    expect(invoice.errors.keys.include?(:display_name)).to be true
+    expect(invoice.errors.map(&:attribute).include?(:display_name)).to be true
   end
 
 end

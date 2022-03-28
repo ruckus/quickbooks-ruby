@@ -48,14 +48,14 @@ describe "Quickbooks::Model::Vendor" do
     vendor = Quickbooks::Model::Vendor.new
     vendor.email_address = "foo+example.org"
     vendor.valid?
-    expect(vendor.errors.keys).to include(:primary_email_address)
+    expect(vendor.errors.map(&:attribute)).to include(:primary_email_address)
   end
 
   it "cannot update an invalid model" do
     vendor = Quickbooks::Model::Vendor.new
     expect(vendor.valid_for_update?).to eq(false)
     expect(vendor.to_xml_ns).to match('Vendor')
-    expect(vendor.errors.keys).to include(:sync_token)
+    expect(vendor.errors.map(&:attribute)).to include(:sync_token)
   end
 
 end

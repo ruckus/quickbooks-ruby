@@ -72,13 +72,13 @@ describe "Quickbooks::Model::Estimate" do
   it "should require line items for create / update" do
     estimate = Quickbooks::Model::Estimate.new
     expect(estimate.valid?).to be false
-    expect(estimate.errors.keys.include?(:line_items)).to be true
+    expect(estimate.errors.map(&:attribute).include?(:line_items)).to be true
   end
 
   it "should require customer_ref for create / update" do
     estimate = Quickbooks::Model::Estimate.new
     expect(estimate.valid?).to be false
-    expect(estimate.errors.keys.include?(:customer_ref)).to be true
+    expect(estimate.errors.map(&:attribute).include?(:customer_ref)).to be true
   end
 
   it "is valid with line_items and customer_ref" do

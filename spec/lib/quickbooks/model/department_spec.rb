@@ -14,14 +14,14 @@ describe "Quickbooks::Model::Department" do
     department = Quickbooks::Model::Department.new
     department.name = "This:Department"
     department.valid?
-    expect(department.errors.keys).to include(:name)
+    expect(department.errors.map(&:attribute)).to include(:name)
   end
 
   it "cannot update an invalid model" do
     department = Quickbooks::Model::Department.new
     expect(department.valid_for_update?).to eq(false)
     expect(department.to_xml_ns).to match('Department')
-    expect(department.errors.keys).to include(:sync_token)
+    expect(department.errors.map(&:attribute)).to include(:sync_token)
   end
 
 end

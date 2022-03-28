@@ -3,7 +3,7 @@ describe "Quickbooks::Model::TaxService" do
   it "must include at least one TaxRateDetails item" do
     item = Quickbooks::Model::TaxService.new(tax_code: '123456')
     expect(item).not_to be_valid
-    expect(item.errors.keys.include?(:tax_rate_details)).to be true
+    expect(item.errors.map(&:attribute).include?(:tax_rate_details)).to be true
 
     messages = item.errors.map { |e| e.message }
     expect(messages).to include("must have at least one item")
@@ -47,7 +47,7 @@ describe "Quickbooks::Model::TaxService" do
     )
     item.tax_rate_details << tax_line2
     expect(item).not_to be_valid
-    expect(item.errors.keys.include?(:tax_rate_name)).to be true
+    expect(item.errors.map(&:attribute).include?(:tax_rate_name)).to be true
 
     messages = item.errors.map { |e| e.message }
     expect(messages).to include("Duplicate Tax Rate Name")
