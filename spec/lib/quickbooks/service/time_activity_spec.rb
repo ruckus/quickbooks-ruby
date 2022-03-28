@@ -29,7 +29,7 @@ describe "Quickbooks::Service::TimeActivity" do
     end.to raise_error(Quickbooks::InvalidModelException)
 
     expect(time_activity.valid?).to eq(false)
-    expect(time_activity.errors.keys.include?(:name_of)).to eq(true)
+    expect(time_activity.errors.map(&:attribute).include?(:name_of)).to eq(true)
   end
 
   it "cannot create a time_activity with an empty employee_ref" do
@@ -40,7 +40,7 @@ describe "Quickbooks::Service::TimeActivity" do
     end.to raise_error(Quickbooks::InvalidModelException)
 
     expect(time_activity.valid?).to eq(false)
-    expect(time_activity.errors.keys.include?(:employee_ref)).to eq(true)
+    expect(time_activity.errors.map(&:attribute).include?(:employee_ref)).to eq(true)
   end
 
   it "cannot create a time_activity with an empty vendor_ref" do
@@ -51,7 +51,7 @@ describe "Quickbooks::Service::TimeActivity" do
     end.to raise_error(Quickbooks::InvalidModelException)
 
     expect(time_activity.valid?).to eq(false)
-    expect(time_activity.errors.keys.include?(:vendor_ref)).to eq(true)
+    expect(time_activity.errors.map(&:attribute).include?(:vendor_ref)).to eq(true)
   end
 
   it "can create a time_activity" do

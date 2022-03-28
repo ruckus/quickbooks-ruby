@@ -105,13 +105,13 @@ describe "Quickbooks::Model::Invoice" do
   it "should require line items for create / update" do
     invoice = Quickbooks::Model::Invoice.new
     expect(invoice.valid?).to be false
-    expect(invoice.errors.keys.include?(:line_items)).to be true
+    expect(invoice.errors.map(&:attribute).include?(:line_items)).to be true
   end
 
   it "should require customer_ref for create / update" do
     invoice = Quickbooks::Model::Invoice.new
     expect(invoice.valid?).to be false
-    expect(invoice.errors.keys.include?(:customer_ref)).to be true
+    expect(invoice.errors.map(&:attribute).include?(:customer_ref)).to be true
   end
 
   it "is valid with line_items and customer_ref" do
@@ -126,12 +126,12 @@ describe "Quickbooks::Model::Invoice" do
     invoice = Quickbooks::Model::Invoice.new
     invoice.wants_billing_email_sent!
     expect(invoice.valid?).to be false
-    expect(invoice.errors.keys.include?(:bill_email)).to be true
+    expect(invoice.errors.map(&:attribute).include?(:bill_email)).to be true
 
     # now specify an email address it will be valid for this attribute
     invoice.billing_email_address = "foo@example.com"
     expect(invoice.valid?).to be false
-    expect(invoice.errors.keys.include?(:bill_email)).to be false
+    expect(invoice.errors.map(&:attribute).include?(:bill_email)).to be false
   end
 
   it "can load a description-only line item detail from XML" do

@@ -50,14 +50,14 @@ describe "Quickbooks::Model::Employee" do
     employee = Quickbooks::Model::Employee.new
     employee.email_address = "foo+example.org"
     employee.valid?
-    expect(employee.errors.keys).to include(:primary_email_address)
+    expect(employee.errors.map(&:attribute)).to include(:primary_email_address)
   end
 
   it "cannot update an invalid model" do
     employee = Quickbooks::Model::Employee.new
     expect(employee.valid_for_update?).to eq(false)
     expect(employee.to_xml_ns).to match('Employee')
-    expect(employee.errors.keys).to include(:sync_token)
+    expect(employee.errors.map(&:attribute)).to include(:sync_token)
   end
 
 end

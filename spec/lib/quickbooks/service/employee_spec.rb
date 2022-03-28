@@ -29,7 +29,7 @@ describe "Quickbooks::Service::Employee" do
     expect(employee.valid?).to eq(false)
     expect(employee.valid_for_create?).to eq(false)
     expect{ @service.create(employee) }.to raise_error(Quickbooks::InvalidModelException, /cannot contain a colon/)
-    expect(employee.errors.keys.include?(:display_name)).to eq(true)
+    expect(employee.errors.map(&:attribute).include?(:display_name)).to eq(true)
   end
 
   it "cannot create an employee with an invalid email" do
@@ -38,7 +38,7 @@ describe "Quickbooks::Service::Employee" do
     expect(employee.valid_for_create?).to eq(false)
     expect(employee.valid?).to eq(false)
     expect{ @service.create(employee) }.to raise_error(Quickbooks::InvalidModelException, /Email address must contain/)
-    expect(employee.errors.keys.include?(:primary_email_address)).to eq(true)
+    expect(employee.errors.map(&:attribute).include?(:primary_email_address)).to eq(true)
   end
 
   it "can create a employee" do

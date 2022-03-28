@@ -59,7 +59,7 @@ describe "Quickbooks::Model::Customer" do
     customer = Quickbooks::Model::Customer.new
     expect(customer.valid_for_update?).to eq(false)
     expect(customer.to_xml_ns).to match('Customer')
-    expect(customer.errors.keys.include?(:sync_token)).to eq(true)
+    expect(customer.errors.map(&:attribute).include?(:sync_token)).to eq(true)
   end
 
   it "should handle a nil/blank email address" do

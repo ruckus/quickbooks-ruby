@@ -21,12 +21,12 @@ describe "Quickbooks::Model::Item" do
   it "must have a name for create / update" do
     item = Quickbooks::Model::Item.new
     expect(item.valid?).to eq(false)
-    expect(item.errors.keys.include?(:name)).to eq(true)
+    expect(item.errors.map(&:attribute).include?(:name)).to eq(true)
 
     # now give it a name
     item.name = "Water Slide"
     item.valid?
-    expect(item.errors.keys.include?(:name)).not_to eq(true)
+    expect(item.errors.map(&:attribute).include?(:name)).not_to eq(true)
   end
 
   it "doesn't set rate_percent unless user explicitly does it" do
@@ -45,11 +45,11 @@ describe "Quickbooks::Model::Item" do
     # an invalid type ...
     item.type = 'Unknown'
     expect(item.valid?).to eq(false)
-    expect(item.errors.keys.include?(:type)).to eq(true)
+    expect(item.errors.map(&:attribute).include?(:type)).to eq(true)
 
     # an valid type ...
     item.type = Quickbooks::Model::Item::INVENTORY_TYPE
     item.valid?
-    expect(item.errors.keys.include?(:type)).not_to eq(true)
+    expect(item.errors.map(&:attribute).include?(:type)).not_to eq(true)
   end
 end
