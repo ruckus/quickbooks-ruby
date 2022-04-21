@@ -663,7 +663,7 @@ puts attach.temp_download_uri
 => "https://intuit-qbo-prod-29.s3.amazonaws.com/12345%2Fattachments%2Fmonkey-1423760870606.jpg?Expires=1423761772&AWSAcc ... snip ..."
 ```
 
-### Download PDF of an Invoice or SalesReceipt
+### Download PDF of an Invoice, SalesReceipt or Payment
 
 To download a PDF of an Invoice:
 
