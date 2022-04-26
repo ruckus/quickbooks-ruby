@@ -1,3 +1,9 @@
+## 1.0.21 (2022-04-26)
+
+* Add ability to download PDF of a Payment. (#577). Thanks @anaulin
+* Add Linked Transactions Array to VendorCredit (#576). Thanks @veronicaday
+* Adds ability to access linked transactions on the vendor credit object. For example, if the credit was applied to a bill as payment. Thanks @veronicaday
+
 ## 1.0.20 (2022-03-17)
 
 * Add explicit dependency on Faraday < 2.0 (#571). Faraday made some fairly significant changes in the 2.0 update. `quickbooks-ruby` currently uses a Faraday middlware, which [was deprecated][1] in the 2.0 update. This adds an explicit dependency on Faraday < 2.0 rather than using whatever Faraday version the oauth-2 gem installs.
