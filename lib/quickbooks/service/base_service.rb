@@ -51,7 +51,6 @@ module Quickbooks
       def rebuild_connection!
         @oauth.client.connection = nil
         @oauth.client.connection.build do |builder|
-          builder.use :gzip
           builder.request :multipart
           builder.request :url_encoded
           builder.adapter ::Quickbooks.http_adapter
