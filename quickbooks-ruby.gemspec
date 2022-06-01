@@ -22,6 +22,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'multipart-post' # promiscuous mode
   gem.add_dependency 'faraday', '~> 2.3.0'
   gem.add_dependency 'faraday-multipart', '~> 1.0.3'
+  gem.add_dependency 'faraday-gzip', '~> 0.1.0'
 
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'simplecov'

@@ -50,6 +50,7 @@ module Quickbooks
       # We need to reset the existing connection and build a new one.
       def rebuild_connection!
         @oauth.client.connection = Faraday.new do |f|
+          f.request :gzip
           f.request :multipart
           f.request :url_encoded
           f.adapter ::Quickbooks.http_adapter
