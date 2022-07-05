@@ -24,6 +24,7 @@ module Quickbooks
       xml_accessor :custom_fields, :from => 'CustomField', :as => [CustomField]
       xml_accessor :auto_doc_number, :from => 'AutoDocNumber' # See auto_doc_number! method below for usage
       xml_accessor :doc_number, :from => 'DocNumber'
+      xml_accessor :invoice_link, :from => 'InvoiceLink'
       xml_accessor :txn_date, :from => 'TxnDate', :as => Date
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
       xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
@@ -35,6 +36,7 @@ module Quickbooks
       xml_accessor :customer_memo, :from => 'CustomerMemo'
       xml_accessor :billing_address, :from => 'BillAddr', :as => PhysicalAddress
       xml_accessor :shipping_address, :from => 'ShipAddr', :as => PhysicalAddress
+      xml_accessor :ship_from_address, :from => 'ShipFromAddr', :as => PhysicalAddress
       xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
       xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => BaseReference
       xml_accessor :due_date, :from => 'DueDate', :as => Date
@@ -58,6 +60,7 @@ module Quickbooks
       xml_accessor :allow_online_credit_card_payment?, :from => 'AllowOnlineCreditCardPayment'
       xml_accessor :allow_online_ach_payment?, :from => 'AllowOnlineACHPayment'
       xml_accessor :deposit_to_account_ref, :from => 'DepositToAccountRef', :as => BaseReference
+      xml_accessor :bill_email_cc, :from => 'BillEmailCc', :as => EmailAddress
 
 
       reference_setters
@@ -86,6 +89,9 @@ module Quickbooks
         self.bill_email = EmailAddress.new(email_address_string)
       end
 
+      def billing_email_cc_address=(email_address_string)
+        self.bill_email_cc = EmailAddress.new(email_address_string)
+      end
 
       def wants_billing_email_sent!
         self.email_status = EMAIL_STATUS_NEED_TO_SEND
@@ -94,7 +100,6 @@ module Quickbooks
       def email_status_for_delivery?
         email_status == EMAIL_STATUS_NEED_TO_SEND
       end
-
 
       def existence_of_customer_ref
         if customer_ref.nil? || (customer_ref && customer_ref.value == 0)

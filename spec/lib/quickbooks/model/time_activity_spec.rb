@@ -3,23 +3,23 @@ describe "Quickbooks::Model::TimeActivity" do
   it "parse from XML" do
     xml = fixture("time_activity.xml")
     time_activity = Quickbooks::Model::TimeActivity.from_xml(xml)
-    time_activity.sync_token.should == 0
-    time_activity.txn_date.should == "2014-02-05"
-    time_activity.name_of.should == "Employee"
-    time_activity.employee_ref.value.should == "66"
-    time_activity.employee_ref.name.should == "John Smith"
-    time_activity.customer_ref.value.should == "123"
-    time_activity.customer_ref.name.should == "Test Customer"
-    time_activity.item_ref.value.should == "49"
-    time_activity.item_ref.name.should == "General Consulting"
-    time_activity.class_ref.value.should == "100100000000000321233"
-    time_activity.class_ref.name.should == "Training"
-    time_activity.billable_status.should == "Billable"
-    time_activity.taxable.should == "false"
-    time_activity.hourly_rate.should == "115"
-    time_activity.hours.should == 1
-    time_activity.minutes.should == 0
-    time_activity.description.should == "Description 1"
+    expect(time_activity.sync_token).to eq(0)
+    expect(time_activity.txn_date).to eq("2014-02-05")
+    expect(time_activity.name_of).to eq("Employee")
+    expect(time_activity.employee_ref.value).to eq("66")
+    expect(time_activity.employee_ref.name).to eq("John Smith")
+    expect(time_activity.customer_ref.value).to eq("123")
+    expect(time_activity.customer_ref.name).to eq("Test Customer")
+    expect(time_activity.item_ref.value).to eq("49")
+    expect(time_activity.item_ref.name).to eq("General Consulting")
+    expect(time_activity.class_ref.value).to eq("100100000000000321233")
+    expect(time_activity.class_ref.name).to eq("Training")
+    expect(time_activity.billable_status).to eq("Billable")
+    expect(time_activity.taxable).to eq("false")
+    expect(time_activity.hourly_rate).to eq("115")
+    expect(time_activity.hours).to eq(1)
+    expect(time_activity.minutes).to eq(0)
+    expect(time_activity.description).to eq("Description 1")
   end
 
 end

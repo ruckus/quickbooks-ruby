@@ -38,9 +38,20 @@ module Quickbooks
           value = el.attr('value')
 
           next nil if value.blank?
-          next value if value.to_s.match(/^\d+$|^\d+.\d+$|^-\d+|^-\d+.\d+$|^.\d+$/).nil?
-          BigDecimal(value)
+
+          parse_row_value(value)
         end
+      end
+
+      def parse_row_value(value)
+        # does it look like a number?
+        if value =~ /\A\-?[0-9\.]+\Z/
+          BigDecimal(value)
+        else
+          value
+        end
+      rescue ArgumentError
+        value
       end
 
     end

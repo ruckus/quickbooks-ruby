@@ -53,12 +53,17 @@ module Quickbooks
       xml_accessor :default_tax_code_ref, :from => 'DefaultTaxCodeRef', :as => BaseReference
       xml_accessor :notes, :from => 'Notes'
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
+      xml_accessor :tax_exemption_reason_id, :from => 'TaxExemptionReasonId'
+      xml_accessor :primary_tax_identifier, :from => 'PrimaryTaxIdentifier'
+      xml_accessor :customer_type_ref, :from => 'CustomerTypeRef', :as => BaseReference
+      xml_accessor :isproject?, :from => 'IsProject'
 
       #== Validations
       validate :names_cannot_contain_invalid_characters
       validate :email_address_is_valid
 
-      reference_setters :parent_ref, :sales_term_ref, :payment_method_ref, :default_tax_code_ref, :currency_ref
+      reference_setters :parent_ref, :sales_term_ref, :payment_method_ref, :default_tax_code_ref, :currency_ref,
+                        :customer_type_ref
 
       def job?
         job.to_s == 'true'

@@ -24,10 +24,11 @@ module Quickbooks
       xml_accessor :attachable_ref, :from => 'AttachableRef', :as => BaseReference
       xml_accessor :vendor_ref, :from => 'VendorRef', :as => BaseReference
       xml_accessor :ap_account_ref, :from => 'APAccountRef', :as => BaseReference
+      xml_accessor :po_email, from: "POEmail", as: EmailAddress
       xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
       xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => BaseReference
 
-      xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
+      xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :due_date, :from => 'DueDate', :as => Date
       xml_accessor :vendor_address, :from => 'VendorAddr', :as => PhysicalAddress
       xml_accessor :ship_address, :from => 'ShipAddr', :as => PhysicalAddress

@@ -25,11 +25,18 @@ module Quickbooks
         end until results.count < per_page
       end
 
+      def exists?(field, selector, options={})
+        find_by(field, selector, options).count > 0
+      end
+
       def find_by(field, selector, options={})
         if field.class == Symbol
           field = field.to_s.camelcase
         end
-        q = "select * from %s where %s = '%s'" % [model.resource_for_singular, field, selector]
+
+        clause = Quickbooks::Util::QueryBuilder.new.clause(field, '=', selector)
+        q = "select * from %s where %s" % [model.resource_for_singular, clause]
+
         self.query(q, options)
       end
 

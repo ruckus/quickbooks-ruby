@@ -12,6 +12,7 @@
   <DisplayName>Thrifty Meats</DisplayName>
   <PrintOnCheckName>Thrifty Meats</PrintOnCheckName>
   <Active>true</Active>
+  <IsProject>true</IsProject>
   <PrimaryPhone>
     <FreeFormNumber>(415) 555-1212</FreeFormNumber>
   </PrimaryPhone>
@@ -46,4 +47,5 @@
   <BalanceWithJobs>0</BalanceWithJobs>
   <PreferredDeliveryMethod>Email</PreferredDeliveryMethod>
   <CurrencyRef name="British Pound Sterling">GBP</CurrencyRef>
+  <CustomerTypeRef>5000000000000000185</CustomerTypeRef>
 </Customer>

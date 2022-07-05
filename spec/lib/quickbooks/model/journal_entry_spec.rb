@@ -16,9 +16,9 @@ describe "Quickbooks::Model::JournalEntry" do
     line_item.journal_entry_line_detail = jel
     je.line_items << line_item
     n = Nokogiri::XML(je.to_xml.to_s)
-    n.at('JournalEntry > Line > Description').content.should == 'Received Payment'
-    n.at('Line > JournalEntryLineDetail > TaxCodeRef').content.should == '2'
-    je.valid?.should be_true
+    expect(n.at('JournalEntry > Line > Description').content).to eq('Received Payment')
+    expect(n.at('Line > JournalEntryLineDetail > TaxCodeRef').content).to eq('2')
+    expect(je.valid?).to be true
   end
 
   it 'creates an entity reference' do
@@ -33,14 +33,14 @@ describe "Quickbooks::Model::JournalEntry" do
     line_item.journal_entry_line_detail = jel
     je.line_items << line_item
     n = Nokogiri::XML(je.to_xml.to_s)
-    n.at('Line > JournalEntryLineDetail > Entity > Type').content.should == 'Customer'
-    n.at('JournalEntryLineDetail > Entity > EntityRef').content.should == '1'
-    n.at('JournalEntryLineDetail > Entity > EntityRef')[:name].should == 'James Rockenstall'
+    expect(n.at('Line > JournalEntryLineDetail > Entity > Type').content).to eq('Customer')
+    expect(n.at('JournalEntryLineDetail > Entity > EntityRef').content).to eq('1')
+    expect(n.at('JournalEntryLineDetail > Entity > EntityRef')[:name]).to eq('James Rockenstall')
   end
 
   it "parse from XML" do
     xml = fixture("journal_entry.xml")
     item = Quickbooks::Model::JournalEntry.from_xml(xml)
-    item.id.should == "450"
+    expect(item.id).to eq("450")
   end
 end

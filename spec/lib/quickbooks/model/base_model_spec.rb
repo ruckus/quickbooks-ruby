@@ -22,30 +22,44 @@ describe "Quickbooks::Model::BaseModel" do
     subject { Quickbooks::Model::FooModel.new }
 
     context "For a non-transaction entity" do
-      its(:is_transaction_entity?) { should be_false }
-      its(:is_name_list_entity?) { should be_true }
+      describe '#is_transaction_entity?' do
+        subject { super().is_transaction_entity? }
+        it { is_expected.to be false }
+      end
+
+      describe '#is_name_list_entity?' do
+        subject { super().is_name_list_entity? }
+        it { is_expected.to be true }
+      end
     end
 
     context "For a transaction entity" do
       before do
-        Quickbooks::Model::Definition::ClassMethods::TRANSACTION_ENTITIES.stub(include?: true)
+        expect(Quickbooks::Model::Definition::ClassMethods::TRANSACTION_ENTITIES).to receive(:include?).and_return(true)
       end
 
-      its(:is_transaction_entity?) { should be_true }
-      its(:is_name_list_entity?) { should be_false }
+      describe '#is_transaction_entity?' do
+        subject { super().is_transaction_entity? }
+        it { is_expected.to be true }
+      end
+
+      describe '#is_name_list_entity?' do
+        subject { super().is_name_list_entity? }
+        it { is_expected.to be false }
+      end
     end
   end
 
   describe ".new" do
     it "allows attributes to be passed in" do
-      Quickbooks::Model::FooModel.new(:baz => "value").baz.should eq("value")
+      expect(Quickbooks::Model::FooModel.new(:baz => "value").baz).to eq("value")
     end
   end
 
   describe ".attribute_names" do
     it "returns the list of attribute names" do
-      Quickbooks::Model::FooModel.attribute_names.should eq(%w{baz bar amount})
-      Quickbooks::Model::BarModel.attribute_names.should eq(%w{foo})
+      expect(Quickbooks::Model::FooModel.attribute_names).to eq(%w{baz bar amount})
+      expect(Quickbooks::Model::BarModel.attribute_names).to eq(%w{foo})
     end
   end
 
@@ -62,54 +76,54 @@ describe "Quickbooks::Model::BaseModel" do
 
   describe "#attributes" do
     it "returns a hash of attribute names and values" do
-      bar_model.attributes.should eq("foo" => 42)
+      expect(bar_model.attributes).to eq("foo" => 42)
     end
 
     it "returns a hash even for nested objects" do
-      foo_model.attributes.should eq("baz" => "quux", "bar" => {"foo" => 42}, "amount" => nil)
+      expect(foo_model.attributes).to eq("baz" => "quux", "bar" => {"foo" => 42}, "amount" => nil)
     end
   end
 
   describe "#[]" do
     it "delegates to the underlying attributes" do
-      bar_model[:foo].should eq(42)
+      expect(bar_model[:foo]).to eq(42)
     end
   end
 
   describe "#fetch" do
     it "delegates to the underlying attributes" do
-      bar_model.fetch(:foo).should eq(42)
+      expect(bar_model.fetch(:foo)).to eq(42)
     end
   end
 
 
   describe ".inspect" do
     it "should include the class name" do
-       Quickbooks::Model::FooModel.inspect.should match /\AQuickbooks::Model::FooModel/
+       expect(Quickbooks::Model::FooModel.inspect).to match /\AQuickbooks::Model::FooModel/
     end
     it "should include the attribute keys" do
-      Quickbooks::Model::FooModel.inspect.should match /baz/
+      expect(Quickbooks::Model::FooModel.inspect).to match /baz/
     end
     it "should include the attribute types" do
-      Quickbooks::Model::FooModel.inspect.should match /amount:BigDecimal/
+      expect(Quickbooks::Model::FooModel.inspect).to match /amount:BigDecimal/
     end
     it "should include the association type" do
-      Quickbooks::Model::FooModel.inspect.should match /bar:.+:Quickbooks::Model::BarModel/
+      expect(Quickbooks::Model::FooModel.inspect).to match /bar:.+:Quickbooks::Model::BarModel/
     end
   end
 
   describe "#inspect" do
     it "should include the class name" do
-      foo_model.inspect.should match /\A#<Quickbooks::Model::FooModel.*>/
+      expect(foo_model.inspect).to match /\A#<Quickbooks::Model::FooModel.*>/
     end
     it "should include the attribute keys" do
-      foo_model.inspect.should match /baz/
+      expect(foo_model.inspect).to match /baz/
     end
     it "should have nil values on init" do
-      Quickbooks::Model::FooModel.new.inspect.should match /baz: nil/
+      expect(Quickbooks::Model::FooModel.new.inspect).to match /baz: nil/
     end
     it "should show values if they are there" do
-      foo_model.inspect.should match /baz: quux/
+      expect(foo_model.inspect).to match /baz: quux/
     end
   end
 

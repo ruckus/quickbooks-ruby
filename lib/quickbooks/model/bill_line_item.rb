@@ -12,6 +12,8 @@ module Quickbooks
       xml_accessor :amount, :from => 'Amount', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :detail_type, :from => 'DetailType'
 
+      xml_accessor :linked_transactions, :from => 'LinkedTxn', :as => [LinkedTransaction]
+
       #== Various detail types
       xml_accessor :account_based_expense_line_detail, :from => 'AccountBasedExpenseLineDetail', :as => AccountBasedExpenseLineDetail
       xml_accessor :item_based_expense_line_detail, :from => 'ItemBasedExpenseLineDetail', :as => ItemBasedExpenseLineDetail

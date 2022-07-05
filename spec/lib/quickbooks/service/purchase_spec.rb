@@ -1,18 +1,18 @@
 describe "Quickbooks::Service::Purchase" do
   before(:all) do
     construct_service :purchase
-    @resource_url = @service.url_for_resource(Quickbooks::Model::Purchase::REST_RESOURCE) 
+    @resource_url = @service.url_for_resource(Quickbooks::Model::Purchase::REST_RESOURCE)
   end
 
   it "cannot create a Purchase without any line items" do
     purchase = Quickbooks::Model::Purchase.new
-    expect(purchase.valid?).to be_false
-    expect(purchase.errors.keys.include?(:line_items)).to be_true
+    expect(purchase.valid?).to be false
+    expect(purchase.errors.map(&:attribute).include?(:line_items)).to be true
   end
 
   it "created for account based expense" do
     xml = fixture("purchase_create.xml")
-    stub_request(:post, @resource_url, ["200", "OK"], xml)
+    stub_http_request(:post, @resource_url, ["200", "OK"], xml)
 
     purchase = Quickbooks::Model::Purchase.new
     purchase.payment_type = 'Cash'

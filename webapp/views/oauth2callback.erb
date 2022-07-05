@@ -1,0 +1,52 @@
+<div>
+  <h1>OAuth 2 Callback</h1>
+
+  <h2>Access Token</h2>
+  <hr />
+  <code><%= @data[:token] %></code>
+  <hr />
+
+  <h2>Refresh Token</h2>
+  <hr />
+  <code><%= @data[:refresh_token] %></code>
+  <hr />
+
+
+  <h2>Customer XML -- Fetch Single Entity</h2>
+  <hr />
+  <textarea rows="30" cols="40">
+    <%= @single_xml %>
+  </textarea>
+  <hr />
+
+  <h2>Customer XML -- Query</h2>
+  <hr />
+  <textarea rows="30" cols="40">
+    <%= @query_xml %>
+  </textarea>
+  <hr />
+
+
+  <h2>Handshake Params</h2>
+  <hr />
+  <table>
+    <tr>
+      <th>Key</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td>State</td>
+      <td><%= params[:state] %></td>
+    </tr>
+    <tr>
+      <td>Code</td>
+      <td><%= params[:code] %></td>
+    </tr>
+    <tr>
+      <td>RealmID</td>
+      <td><%= params[:realmId] %></td>
+    </tr>
+  </table>
+  <hr />
+</div>
+

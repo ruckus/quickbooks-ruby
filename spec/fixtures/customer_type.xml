@@ -1,0 +1,10 @@
+<CustomerType domain="QBO" sparse="false">
+  <Id>1</Id>
+  <SyncToken>1</SyncToken>
+  <MetaData>
+    <CreateTime>2020-02-26T05:40:25-07:00</CreateTime>
+    <LastUpdatedTime>2020-02-26T05:40:25-07:00</LastUpdatedTime>
+  </MetaData>
+  <Name>Retail</Name>
+  <Active>true</Active>
+</CustomerType>

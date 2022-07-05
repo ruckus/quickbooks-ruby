@@ -24,6 +24,26 @@
       </SalesItemLineDetail>
     </Line>
     <Line>
+      <Id>2</Id>
+      <GroupLineDetail>
+        <Quantity>1</Quantity>
+        <GroupItemRef name="More Sales">2</GroupItemRef>
+        <Line>
+          <Id>3</Id>
+          <LineNum>1</LineNum>
+          <Amount>15.00</Amount>
+          <DetailType>SalesItemLineDetail</DetailType>
+          <SalesItemLineDetail>
+            <ItemRef name="Sales">2</ItemRef>
+            <UnitPrice>100</UnitPrice>
+            <Qty>1</Qty>
+          </SalesItemLineDetail>
+        </Line>
+      </GroupLineDetail>
+      <DetailType>GroupLineDetail</DetailType>
+      <LineNum>2</LineNum>
+    </Line>
+    <Line>
       <Amount>10.00</Amount>
       <DetailType>SubTotalLineDetail</DetailType>
       <SubTotalLineDetail/>
