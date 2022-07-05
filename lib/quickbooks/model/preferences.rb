@@ -4,7 +4,6 @@ module Quickbooks
       XML_COLLECTION_NODE = "Preferences"
       XML_NODE            = "Preferences"
       REST_RESOURCE       = 'preferences'
-      MINORVERSION = 21
 
       xml_name XML_NODE
 
@@ -20,14 +19,38 @@ module Quickbooks
       PREFERENCE_SECTIONS = {
         :accounting_info      => %w(TrackDepartments DepartmentTerminology ClassTrackingPerTxnLine? ClassTrackingPerTxn? CustomerTerminology),
         :product_and_services => %w(ForSales? ForPurchase? QuantityWithPriceAndRate? QuantityOnHand?),
-        :sales_forms          => %w(CustomTxnNumbers? AllowDeposit? AllowDiscount? DefaultDiscountAccount? AllowEstimates? EstimateMessage?
-                                                ETransactionEnabledStatus? ETransactionAttachPDF? ETransactionPaymentEnabled? IPNSupportEnabled?
-                                                AllowServiceDate? AllowShipping? DefaultShippingAccount? DefaultTerms DefaultCustomerMessage),
         :vendor_and_purchase  => %w(TrackingByCustomer? BillableExpenseTracking? DefaultTerms? DefaultMarkup? POCustomField),
         :time_tracking        => %w(UseServices? BillCustomers? ShowBillRateToAll WorkWeekStartDate MarkTimeEntiresBillable?),
         :tax                  => %w(UsingSalesTax? PartnerTaxEnabled?),
         :currency             => %w(MultiCurrencyEnabled? HomeCurrency),
         :report               => %w(ReportBasis)
+      }
+
+      xml_reader :sales_forms, :from => "SalesFormsPrefs", :as => create_preference_class(*%w(
+        AllowDeposit?
+        AllowDiscount?
+        AllowEstimates?
+        AllowServiceDate?
+        AllowShipping?
+        AutoApplyCredit?
+        CustomField?
+        CustomTxnNumbers?
+        DefaultCustomerMessage
+        DefaultDiscountAccount?
+        DefaultShippingAccount?
+        DefaultTerms
+        EmailCopyToCompany?
+        EstimateMessage
+        ETransactionAttachPDF?
+        ETransactionEnabledStatus
+        ETransactionPaymentEnabled?
+        IPNSupportEnabled?
+        SalesEmailBcc
+        SalesEmailCc
+        UsingPriceLevels?
+        UsingProgressInvoicing?
+      )) {
+        xml_reader :custom_fields, :as => [CustomField], :from => 'CustomField', in: 'CustomField'
       }
 
       PREFERENCE_SECTIONS.each do |section_name, fields|

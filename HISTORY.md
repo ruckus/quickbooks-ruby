@@ -1,6 +1,136 @@
+## 1.0.20 (2022-03-17)
+
+* Add explicit dependency on Faraday < 2.0 (#571). Faraday made some fairly significant changes in the 2.0 update. `quickbooks-ruby` currently uses a Faraday middlware, which [was deprecated][1] in the 2.0 update. This adds an explicit dependency on Faraday < 2.0 rather than using whatever Faraday version the oauth-2 gem installs.
+
+* Return Mailing Address for Bill (#572). Thanks @sampatbadhe
+
+## 1.0.19 (2021-12-08)
+
+* Addition of `TaxInclusiveAmt` attribute `Line.SalesItemLineDetail`, `Line.ItemBasedExpenseLineDetail`, and `Line.AccountBasedExpenseLineDetail` line types.
+
+## 1.0.18 (2021-09-09)
+
+* bump roxml version to `~ 4.2` to resolve URI deprecation issues
+
+## 1.0.17 (2021-04-28)
+
+* Allow Faraday adapter used in quickbooks-ruby to be configurable.
+
+To use the thread-safe Net::HTTP::Persistent adapter:
+
+```ruby
+Quickbooks.http_adapter = :net_http_persistent # defaults to :net_http
+```
+
+Thank you @danielnho22
+
+## 1.0.16 (2021-03-17)
+
+* Added support for `Customer.IsProject` attribute. Closes #546
+
+## 1.0.15 (2021-01-11)
+
+* Added Purchase CDC endpoint. Addresses #537. Thanks @nathan-mots
+* Purchase Order PDF Download. Addresses #539. Thanks @vanboom
+* Added ship from address reference to invoice. Addresses #536
+
+## 1.0.14 (2020-12-01)
+
+* Added PurchaseOrder#POEmail attribute support. Addresses #460
+* Added Vendor#BillRate attribute support. Addresses #535
+
+## 1.0.13 (2020-10-05)
+
+Added `BillEmailCc` to Invoice
+
+## 1.0.12 (2020-07-10)
+
+* PurchaseOrder was referencing a class level const that has been removed. Thanks @vanboom
+* Update README.md (#525). Provide some clarity for newer rails developers on using gems. Thanks @thehashrocket
+
+## 1.0.11 (2020-06-16)
+
+* Ensure minorversion query string parameter is passed in the URL of all requests, not just GETs
+
+## 1.0.10 (2020-06-11)
+
+* Loosened ROXML dependency version to `~> 4.0` - thank you @rmacklin
+
+## 1.0.9 (2020-05-27)
+
+* Implemented a global MINORVERSION; see https://github.com/ruckus/quickbooks-ruby/issues/517
+* QueryBuilder refactor for handling argument values of all types (not just strings). Thank you @jethrodaniel
+
+## 1.0.8 (2020-05-14)
+
+* Added ClassRef attribute to Item model; bumped minorversion to 47 (required for Item#ClassRef)
+
+## 1.0.7 (2020-04-28)
+
+* Add customer type #509. Thank you @gbkane
+* Fix NoMethodError when response headers are nil (#514). Thank you @anaprimawaty
+* Update Readme about roxml BigDecimal deprecation (#516). Thank you @anaprimawaty
+* Escape regex matching numbers in report parsing (#511). Thank you @mehwoot
+
+## 1.0.6 (2020-02-10)
+
+* Fix fetch_by_id in purchase order service (#505), thank you @atemena
+
+## 1.0.5 (2020-01-28)
+
+* Fixed Disconnect (dependency on oauth_v1? which was removed in 1.0.2)
+
+## 1.0.4 (2020-01-22)
+
+* Purchase Order: added MINORVERSION support. Also added Received property
+* Add ability to download credit memo as pdf (#500) - Thanks @frenkel
+* Finish update to rspec 3 (#499); Remove rspec-its; Convert specs to RSpec 3.9.0 syntax with Transpec. Thanks @drewish
+
+## 1.0.3 (2020-01-08)
+
+* Added customer.tax_exemption_reason_id (#495) . Thanks @bcackerman
+* mxchan (thanks!)
+    - fix Content-Type in send sales receipt (#498)
+    - Fixes the `undefined method 'bytesize' for #<Hash...` error triggered when sending a sales receipt.
+    - Searched around and found #412 which already implemented the fix for sending invoices, but hadn't been implemented for sales receipt yet.
+
+## 1.0.2 (2019-12-19)
+
+* Dropped OAuth1 support
+* rspec updates. Thank you @drewish
+* Update SalesFormsPref fields on Preferences model (#492). Thank you @drewish
+* Better errors: Add more detail to AuthorizationFailures, Unwind logging and parsing code, Track last response's intuitTid. Thank you @drewish
+
+## 1.0.1 (2019-11-05)
+
+* Add minorversion to account service and update query url (#488). Thank you @colmheaney
+* Use pessimistic version constraint on oauth dependency (#485). Thank you @austinmckinley
+
+## 1.0.0 (2019-10-14)
+
+* OAuth2. With support for OAuth1 in mixed-mode.
+
+Thank you to everyone who has contributed!
+
+## 0.6.7 (2019-07-24)
+
+* Preferences sales_forms_prefs CustomField support
+* Fix test failures due to logging call on Stubbed object
+* Add CustomField#value accessor suitable for all CustomField types
+* Add support for custom fields config in Preferences
+* Change deprecated use of BigDecimal.new
+
+Thank you @armstrjare
+
+
+## 0.6.6 (2019-01-30)
+
+* Implemented minorversion support for Customer (at 33)
+* Added PrefVendorRef field support to Item
+
 ## 0.6.5 (2019-01-07)
 
-* adding LinkedTxn collection into Quickbooks::Model::Bill per v3 API spec (#452), thank you @Vitalijs
+* adding LinkedTxn collection into Quickbooks::Model::Bill per v3 API spec (#452), thank you @thaiden
 * Relax oauth gem dependency (#449) allow anything >= 0.4.5 but < 0.5, thank you @jnraine
 * Updates to the CompanyCurrency model, thank you @chrisgreen1993
 * Add a base class to easily rescue all QBO exceptions (#445) Having all the errors inherit from a single class means you can just rescue `Quickbooks::Error` and handle all of this gem's exceptions. Thank you @drewish

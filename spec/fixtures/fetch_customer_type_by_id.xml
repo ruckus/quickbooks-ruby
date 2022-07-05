@@ -1,0 +1,12 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2020-02-27T17:38:30.868-07:00">
+  <CustomerType domain="QBO" sparse="false">
+    <Id>2</Id>
+    <SyncToken>2</SyncToken>
+    <MetaData>
+      <CreateTime>2020-02-26T05:40:25-07:00</CreateTime>
+      <LastUpdatedTime>2020-02-26T05:40:25-07:00</LastUpdatedTime>
+    </MetaData>
+    <Name>Drop Ship</Name>
+    <Active>true</Active>
+  </CustomerType>
+</IntuitResponse>

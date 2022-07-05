@@ -16,6 +16,7 @@ module Quickbooks
       xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
 
       xml_accessor :line_items, :from => 'Line', :as => [BillLineItem]
+      xml_accessor :txn_tax_detail, :from => 'TxnTaxDetail', :as => TransactionTaxDetail
 
       xml_accessor :private_note, :from => 'PrivateNote'
 
@@ -30,6 +31,7 @@ module Quickbooks
       xml_accessor :due_date, :from => 'DueDate', :as => Date
       xml_accessor :remit_to_address, :from => 'RemitToAddr', :as => PhysicalAddress
       xml_accessor :ship_address, :from => 'ShipAddr', :as => PhysicalAddress
+      xml_accessor :mailing_address, :from => 'VendorAddr', :as => PhysicalAddress
       xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :balance, :from => 'Balance', :as => BigDecimal, :to_xml => to_xml_big_decimal
 

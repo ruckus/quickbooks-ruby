@@ -7,43 +7,43 @@ describe "Quickbooks::Service::Payment" do
   let(:resource) { model::REST_RESOURCE }
 
   it "can query for payments" do
-    stub_request(:get,
+    stub_http_request(:get,
                  @service.url_for_query,
                  ["200", "OK"],
                  fixture("payments.xml"))
 
     payments = @service.query
 
-    payments.entries.count.should == 1
+    expect(payments.entries.count).to eq(1)
     payment = payments.entries.first
-    payment.private_note.should == "H60jzmw0Uq"
+    expect(payment.private_note).to eq("H60jzmw0Uq")
   end
 
   it "can fetch a payment by ID" do
-    stub_request(:get,
+    stub_http_request(:get,
                  "#{@service.url_for_resource(resource)}/1",
                  ["200", "OK"],
                  fixture("payment_by_id.xml"))
 
     payment = @service.fetch_by_id(1)
 
-    payment.private_note.should == "H60jzmw0Uq"
+    expect(payment.private_note).to eq("H60jzmw0Uq")
   end
 
   it "can create a payment" do
-    stub_request(:post,
+    stub_http_request(:post,
                  @service.url_for_resource(resource),
                  ["200", "OK"],
                  fixture("fetch_payment_by_id.xml"))
 
     created_payment = @service.create(payment)
 
-    created_payment.id.should == "8748"
+    expect(created_payment.id).to eq("8748")
   end
 
   it "can sparse update a payment" do
     payment.total = 20.0
-    stub_request(:post,
+    stub_http_request(:post,
                  @service.url_for_resource(resource),
                  ["200", "OK"],
                  fixture("fetch_payment_by_id.xml"),
@@ -52,30 +52,30 @@ describe "Quickbooks::Service::Payment" do
 
     update_response = @service.update(payment, :sparse => true)
 
-    update_response.total.should == 40.0
+    expect(update_response.total).to eq(40.0)
   end
 
   it "can delete a payment" do
-    stub_request(:post,
+    stub_http_request(:post,
                  "#{@service.url_for_resource(resource)}?operation=delete",
                  ["200", "OK"],
                  fixture("payment_delete_success_response.xml"))
 
     response = @service.delete(payment)
 
-    response.should be_true
+    expect(response).to be true
   end
 
   it 'can void a payment' do
-    stub_request(:post,
+    stub_http_request(:post,
                  "#{@service.url_for_resource(resource)}?include=void",
                  ["200", "OK"],
                  fixture("payment_void_response_success.xml"))
 
     response = @service.void(payment)
 
-    response.should be_true    
-    response.total.should == 0
+    expect(response).to be_truthy
+    expect(response.total).to eq(0)
   end
 
   it "properly outputs BigDecimal fields" do
@@ -83,8 +83,8 @@ describe "Quickbooks::Service::Payment" do
 
     xml = payment.to_xml
 
-    xml.at("TotalAmt").text.should == "42.0"
-    xml.at("UnappliedAmt").text.should == "42.0"
-    xml.at("ExchangeRate").text.should == "42.0"
+    expect(xml.at("TotalAmt").text).to eq("42.0")
+    expect(xml.at("UnappliedAmt").text).to eq("42.0")
+    expect(xml.at("ExchangeRate").text).to eq("42.0")
   end
 end

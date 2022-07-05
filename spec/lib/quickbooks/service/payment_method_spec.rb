@@ -12,7 +12,7 @@ module Quickbooks
       it "queries for payment methods" do
         xml = fixture("payment_methods.xml")
         model = Model::PaymentMethod
-        stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
+        stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
 
         payment_methods = @service.query.entries
         expect(payment_methods.count).to eq(8)
@@ -22,7 +22,7 @@ module Quickbooks
         xml = fixture("fetch_payment_method_by_name.xml")
         model = Model::PaymentMethod
         url = @service.url_for_query(@service.search_name_query("Discover"))
-        stub_request(:get, url, ["200", "OK"], xml)
+        stub_http_request(:get, url, ["200", "OK"], xml)
 
         payment_method = @service.fetch_by_name("Discover")
         expect(payment_method.name).to eq("Discover")
@@ -31,21 +31,21 @@ module Quickbooks
       it "can fetch a payment_method by ID" do
         xml = fixture("fetch_payment_method_by_id.xml")
         model = Quickbooks::Model::PaymentMethod
-        stub_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/7", ["200", "OK"], xml)
+        stub_http_request(:get, "#{@service.url_for_resource(model::REST_RESOURCE)}/7", ["200", "OK"], xml)
         payment_method = @service.fetch_by_id(7)
-        payment_method.name.should eq('Discover')
+        expect(payment_method.name).to eq('Discover')
       end
 
       it "can create a payment_method" do
         xml = fixture("fetch_payment_method_by_id.xml")
         model = Quickbooks::Model::PaymentMethod
-        stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
+        stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml)
         payment_method = Quickbooks::Model::PaymentMethod.new
         payment_method.name = 'Discover'
         payment_method.type = Quickbooks::Model::PaymentMethod::CREDIT_CARD
-        payment_method.valid_for_create?.should == true
+        expect(payment_method.valid_for_create?).to eq(true)
         created_payment_method = @service.create(payment_method)
-        created_payment_method.id.should == "7"
+        expect(created_payment_method.id).to eq("7")
       end
 
       it "cannot sparse update a payment method" do
@@ -55,7 +55,7 @@ module Quickbooks
         payment_method.sync_token = 0
         payment_method.id = 7
         xml = fixture("fetch_payment_method_by_id.xml")
-        payment_method.valid_for_update?.should == true
+        expect(payment_method.valid_for_update?).to eq(true)
         expect{ @service.update(payment_method, :sparse => true) }.to raise_error(Quickbooks::InvalidModelException, /Payment Method sparse update is not supported/)
       end
 
@@ -66,11 +66,11 @@ module Quickbooks
         payment_method.sync_token = 0
         payment_method.id = 7
         xml = fixture("deleted_payment_method.xml")
-        stub_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
-        payment_method.valid_for_deletion?.should == true
+        stub_http_request(:post, @service.url_for_resource(model::REST_RESOURCE), ["200", "OK"], xml, {}, true)
+        expect(payment_method.valid_for_deletion?).to eq(true)
         response = @service.delete(payment_method)
-        response.name.should == "#{payment_method.name} (Deleted)"
-        response.active?.should == false
+        expect(response.name).to eq("#{payment_method.name} (Deleted)")
+        expect(response.active?).to eq(false)
       end
     end
   end

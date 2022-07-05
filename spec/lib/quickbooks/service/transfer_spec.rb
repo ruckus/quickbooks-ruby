@@ -7,12 +7,12 @@ describe "Quickbooks::Service::Transfer" do
     xml = fixture("transfers.xml")
     model = Quickbooks::Model::Transfer
 
-    stub_request(:get, @service.url_for_query, ["200", "OK"], xml)
+    stub_http_request(:get, @service.url_for_query, ["200", "OK"], xml)
     transfers_query = @service.query
-    transfers_query.entries.count.should == 1
+    expect(transfers_query.entries.count).to eq(1)
 
     transfer = transfers_query.entries.first
-    transfer.amount.should == 250.00
+    expect(transfer.amount).to eq(250.00)
   end
 
 end

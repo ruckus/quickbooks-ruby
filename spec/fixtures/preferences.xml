@@ -2,10 +2,17 @@
   <Id>1</Id>
   <SyncToken>0</SyncToken>
   <MetaData>
-    <CreateTime>2014-04-22T01:31:59-07:00</CreateTime>
-    <LastUpdatedTime>2014-05-01T17:44:56-07:00</LastUpdatedTime>
+    <CreateTime>2019-12-03T01:03:32-08:00</CreateTime>
+    <LastUpdatedTime>2019-12-03T16:02:42-08:00</LastUpdatedTime>
   </MetaData>
   <AccountingInfoPrefs>
+    <UseAccountNumbers>false</UseAccountNumbers>
+    <TrackDepartments>false</TrackDepartments>
+    <ClassTrackingPerTxn>false</ClassTrackingPerTxn>
+    <ClassTrackingPerTxnLine>false</ClassTrackingPerTxnLine>
+    <FirstMonthOfFiscalYear>January</FirstMonthOfFiscalYear>
+    <TaxYearMonth>January</TaxYearMonth>
+    <TaxForm>6</TaxForm>
     <CustomerTerminology>Customers</CustomerTerminology>
   </AccountingInfoPrefs>
   <ProductAndServicesPrefs>
@@ -17,9 +24,9 @@
   <SalesFormsPrefs>
     <CustomField xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="BooleanTypeCustomFieldDefinition">
       <CustomField>
-        <Name>SalesFormsPrefs.UseSalesCustom3</Name>
+        <Name>SalesFormsPrefs.UseSalesCustom1</Name>
         <Type>BooleanType</Type>
-        <BooleanValue>false</BooleanValue>
+        <BooleanValue>true</BooleanValue>
       </CustomField>
       <CustomField>
         <Name>SalesFormsPrefs.UseSalesCustom2</Name>
@@ -27,12 +34,20 @@
         <BooleanValue>false</BooleanValue>
       </CustomField>
       <CustomField>
-        <Name>SalesFormsPrefs.UseSalesCustom1</Name>
+        <Name>SalesFormsPrefs.UseSalesCustom3</Name>
         <Type>BooleanType</Type>
         <BooleanValue>false</BooleanValue>
       </CustomField>
     </CustomField>
+    <CustomField xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="StringTypeCustomFieldDefinition">
+      <CustomField>
+        <Name>SalesFormsPrefs.SalesCustomName1</Name>
+        <Type>StringType</Type>
+        <StringValue>Reference</StringValue>
+      </CustomField>
+    </CustomField>
     <CustomTxnNumbers>false</CustomTxnNumbers>
+    <EmailCopyToCompany>false</EmailCopyToCompany>
     <AllowDeposit>false</AllowDeposit>
     <AllowDiscount>false</AllowDiscount>
     <AllowEstimates>true</AllowEstimates>
@@ -42,7 +57,10 @@
     <IPNSupportEnabled>false</IPNSupportEnabled>
     <AllowServiceDate>false</AllowServiceDate>
     <AllowShipping>false</AllowShipping>
-    <DefaultTerms>3</DefaultTerms>
+    <AutoApplyCredit>true</AutoApplyCredit>
+    <AutoApplyPayments>true</AutoApplyPayments>
+    <UsingPriceLevels>false</UsingPriceLevels>
+    <DefaultCustomerMessage>Thank you for your business and have a great day!</DefaultCustomerMessage>
   </SalesFormsPrefs>
   <EmailMessagesPrefs>
     <InvoiceMessage>
@@ -102,6 +120,7 @@ Demo Company</Message>
     <UseServices>false</UseServices>
     <BillCustomers>true</BillCustomers>
     <ShowBillRateToAll>false</ShowBillRateToAll>
+    <WorkWeekStartDate>Monday</WorkWeekStartDate>
     <MarkTimeEntriesBillable>true</MarkTimeEntriesBillable>
   </TimeTrackingPrefs>
   <TaxPrefs>
@@ -119,14 +138,91 @@ Demo Company</Message>
   <OtherPrefs>
     <NameValue>
       <Name>SalesFormsPrefs.DefaultCustomerMessage</Name>
+      <Value>Thank you for your business and have a great day!</Value>
     </NameValue>
     <NameValue>
       <Name>SalesFormsPrefs.DefaultItem</Name>
       <Value>1</Value>
     </NameValue>
     <NameValue>
+      <Name>DTXCopyMemo</Name>
+      <Value>true</Value>
+    </NameValue>
+    <NameValue>
+      <Name>UncategorizedAssetAccountId</Name>
+      <Value>91</Value>
+    </NameValue>
+    <NameValue>
+      <Name>UncategorizedIncomeAccountId</Name>
+      <Value>92</Value>
+    </NameValue>
+    <NameValue>
+      <Name>UncategorizedExpenseAccountId</Name>
+      <Value>93</Value>
+    </NameValue>
+    <NameValue>
       <Name>SFCEnabled</Name>
       <Value>true</Value>
+    </NameValue>
+    <NameValue>
+      <Name>DataPartner</Name>
+      <Value>false</Value>
+    </NameValue>
+    <NameValue>
+      <Name>Vendor1099Enabled</Name>
+      <Value>true</Value>
+    </NameValue>
+    <NameValue>
+      <Name>TimeTrackingFeatureEnabled</Name>
+      <Value>true</Value>
+    </NameValue>
+    <NameValue>
+      <Name>FDPEnabled</Name>
+      <Value>false</Value>
+    </NameValue>
+    <NameValue>
+      <Name>isDTXOnStage</Name>
+      <Value>false</Value>
+    </NameValue>
+    <NameValue>
+      <Name>ProjectsEnabled</Name>
+      <Value>false</Value>
+    </NameValue>
+    <NameValue>
+      <Name>DateFormat</Name>
+      <Value>Month Date Year separated by a slash</Value>
+    </NameValue>
+    <NameValue>
+      <Name>DateFormatMnemonic</Name>
+      <Value>MMDDYYYY_SEP_SLASH</Value>
+    </NameValue>
+    <NameValue>
+      <Name>NumberFormat</Name>
+      <Value>US Number Format</Value>
+    </NameValue>
+    <NameValue>
+      <Name>NumberFormatMnemonic</Name>
+      <Value>US_NB</Value>
+    </NameValue>
+    <NameValue>
+      <Name>WarnDuplicateCheckNumber</Name>
+      <Value>true</Value>
+    </NameValue>
+    <NameValue>
+      <Name>WarnDuplicateBillNumber</Name>
+      <Value>false</Value>
+    </NameValue>
+    <NameValue>
+      <Name>WarnDuplicateJournalNumber</Name>
+      <Value>false</Value>
+    </NameValue>
+    <NameValue>
+      <Name>SignoutInactiveMinutes</Name>
+      <Value>60</Value>
+    </NameValue>
+    <NameValue>
+      <Name>AccountingInfoPrefs.ShowAccountNumbers</Name>
+      <Value>false</Value>
     </NameValue>
   </OtherPrefs>
 </Preferences>

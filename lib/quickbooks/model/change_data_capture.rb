@@ -19,6 +19,14 @@ module Quickbooks
          data
       end
 
+      # time when refresh was requests from cdc/ endpoiint
+      # more information @here - https://developer.intuit.com/app/developer/qbo/docs/develop/explore-the-quickbooks-online-api/change-data-capture#using-change-data-capture
+      #
+      def time
+        attribute = xml.root.attribute('time')
+        attribute.value if attribute
+      end
+
       private
 
       def all_of_type(entity)

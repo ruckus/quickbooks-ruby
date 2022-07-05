@@ -2,48 +2,64 @@ describe "Quickbooks::Model::SalesReceipt" do
   it "parse from XML" do
     xml = fixture("sales_receipt.xml")
     sales_receipt = Quickbooks::Model::SalesReceipt.from_xml(xml)
-    sales_receipt.id.should == "2"
-    sales_receipt.sync_token.should == 0
+    expect(sales_receipt.id).to eq("2")
+    expect(sales_receipt.sync_token).to eq(0)
 
-    sales_receipt.meta_data.should_not be_nil
-    sales_receipt.meta_data.create_time.should == DateTime.parse("2013-12-10T05:35:42-08:00")
-    sales_receipt.meta_data.last_updated_time.should == DateTime.parse("2013-12-10T05:35:42-08:00")
+    expect(sales_receipt.meta_data).not_to be_nil
+    expect(sales_receipt.meta_data.create_time).to eq(DateTime.parse("2013-12-10T05:35:42-08:00"))
+    expect(sales_receipt.meta_data.last_updated_time).to eq(DateTime.parse("2013-12-10T05:35:42-08:00"))
 
-    sales_receipt.doc_number.should == "1002"
-    sales_receipt.txn_date.should == Time.parse("2013-12-10")
+    expect(sales_receipt.doc_number).to eq("1002")
+    expect(sales_receipt.txn_date).to eq(Time.parse("2013-12-10"))
 
-    sales_receipt.line_items.first.should_not be_nil
-    sales_receipt.line_items.first.id.should == "1"
-    sales_receipt.line_items.first.line_num.should == 1
-    sales_receipt.line_items.first.amount.should == 10.00
-    sales_receipt.line_items.first.detail_type.should == "SalesItemLineDetail"
-    sales_receipt.line_items.first.sales_item_line_detail.item_ref.name.should == "Sales"
-    sales_receipt.line_items.first.sales_item_line_detail.item_ref.value.should == "1"
-    sales_receipt.line_items.first.sales_item_line_detail.unit_price.should == 10
-    sales_receipt.line_items.first.sales_item_line_detail.quantity.should == 1
+    expect(sales_receipt.line_items.first).not_to be_nil
+    expect(sales_receipt.line_items.first.id).to eq("1")
+    expect(sales_receipt.line_items.first.line_num).to eq(1)
+    expect(sales_receipt.line_items.first.amount).to eq(10.00)
+    expect(sales_receipt.line_items.first.detail_type).to eq("SalesItemLineDetail")
+    expect(sales_receipt.line_items.first.sales_item_line_detail.item_ref.name).to eq("Sales")
+    expect(sales_receipt.line_items.first.sales_item_line_detail.item_ref.value).to eq("1")
+    expect(sales_receipt.line_items.first.sales_item_line_detail.unit_price).to eq(10)
+    expect(sales_receipt.line_items.first.sales_item_line_detail.quantity).to eq(1)
 
-    sales_receipt.line_items.last.should_not be_nil
-    sales_receipt.line_items.last.amount.should == 10.00
-    sales_receipt.line_items.last.detail_type.should == "SubTotalLineDetail"
+    expect(sales_receipt.line_items[1]).not_to be_nil
+    expect(sales_receipt.line_items[1].amount).to eq(10.00)
+    expect(sales_receipt.line_items[1].detail_type).to eq("SubTotalLineDetail")
 
-    sales_receipt.customer_ref.should_not be_nil
-    sales_receipt.customer_ref.name.should == "Luis Braga"
-    sales_receipt.customer_ref.value.should == "1"
+    expect(sales_receipt.line_items.last).not_to be_nil
+    expect(sales_receipt.line_items.last.id).to eq("2")
+    expect(sales_receipt.line_items.last.line_num).to eq(2)
+    expect(sales_receipt.line_items.last.detail_type).to eq("GroupLineDetail")
+    expect(sales_receipt.line_items.last.group_line_detail.group_item_ref.name).to eq("More Sales")
+    expect(sales_receipt.line_items.last.group_line_detail.group_item_ref.value).to eq("2")
 
-    sales_receipt.deposit_to_account_ref.should_not be_nil
-    sales_receipt.deposit_to_account_ref.name.should == "Cash and cash equivalents"
-    sales_receipt.deposit_to_account_ref.value.should == "28"
+    expect(sales_receipt.line_items.last.group_line_detail.line_items.first).not_to be_nil
+    expect(sales_receipt.line_items.last.group_line_detail.line_items.first.id).to eq("3")
+    expect(sales_receipt.line_items.last.group_line_detail.line_items.first.amount).to eq(15.00)
+    expect(sales_receipt.line_items.last.group_line_detail.line_items.first.detail_type).to eq("SalesItemLineDetail")
+    expect(sales_receipt.line_items.last.group_line_detail.line_items.first.sales_item_line_detail.item_ref.name).to eq("Sales")
+    expect(sales_receipt.line_items.last.group_line_detail.line_items.first.sales_item_line_detail.item_ref.value).to eq("2")
+    expect(sales_receipt.line_items.last.group_line_detail.line_items.first.sales_item_line_detail.unit_price).to eq(100)
+    expect(sales_receipt.line_items.last.group_line_detail.line_items.first.sales_item_line_detail.quantity).to eq(1)
 
-    sales_receipt.customer_memo.should == "memo!"
-    sales_receipt.private_note.should == "private"
+    expect(sales_receipt.customer_ref).not_to be_nil
+    expect(sales_receipt.customer_ref.name).to eq("Luis Braga")
+    expect(sales_receipt.customer_ref.value).to eq("1")
 
-    sales_receipt.total.should == 10.00
+    expect(sales_receipt.deposit_to_account_ref).not_to be_nil
+    expect(sales_receipt.deposit_to_account_ref.name).to eq("Cash and cash equivalents")
+    expect(sales_receipt.deposit_to_account_ref.value).to eq("28")
+
+    expect(sales_receipt.customer_memo).to eq("memo!")
+    expect(sales_receipt.private_note).to eq("private")
+
+    expect(sales_receipt.total).to eq(10.00)
   end
 
   it "should initialize line items as empty array" do
      sales_receipt = Quickbooks::Model::SalesReceipt.new
-     sales_receipt.line_items.should_not be_nil
-     sales_receipt.line_items.length.should == 0
+     expect(sales_receipt.line_items).not_to be_nil
+     expect(sales_receipt.line_items.length).to eq(0)
   end
 
   describe "#bill_email" do

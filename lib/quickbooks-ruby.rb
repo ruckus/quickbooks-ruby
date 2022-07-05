@@ -6,13 +6,19 @@ require 'cgi'
 require 'uri'
 require 'date'
 require 'forwardable'
-require 'oauth'
+require 'oauth2'
 require 'net/http/post/multipart'
 require 'quickbooks/util/collection'
 require 'quickbooks/util/logging'
 require 'quickbooks/util/http_encoding_helper'
 require 'quickbooks/util/name_entity'
 require 'quickbooks/util/query_builder'
+require 'quickbooks/faraday/middleware/gzip'
+
+#== OAuth Responses
+require 'quickbooks/service/responses/oauth_http_response'
+require 'quickbooks/service/responses/methods'
+require 'quickbooks/service/responses/oauth2_http_response'
 
 #== Models
 require 'quickbooks/model/definition'
@@ -69,6 +75,7 @@ require 'quickbooks/model/invoice_line_item'
 require 'quickbooks/model/invoice_group_line_detail'
 require 'quickbooks/model/company_info'
 require 'quickbooks/model/company_currency'
+require 'quickbooks/model/customer_type'
 require 'quickbooks/model/customer'
 require 'quickbooks/model/delivery_info'
 require 'quickbooks/model/sales_receipt'
@@ -117,6 +124,7 @@ require 'quickbooks/model/item_change'
 require 'quickbooks/model/report'
 require 'quickbooks/model/credit_memo_change'
 require 'quickbooks/model/payment_change'
+require 'quickbooks/model/purchase_change'
 require 'quickbooks/model/transfer'
 require 'quickbooks/model/change_data_capture'
 require 'quickbooks/model/refund_receipt_change'
@@ -131,6 +139,8 @@ require 'quickbooks/service/class'
 require 'quickbooks/service/attachable'
 require 'quickbooks/service/company_info'
 require 'quickbooks/service/company_currency'
+require 'quickbooks/service/customer_type'
+require 'quickbooks/service/custom_field'
 require 'quickbooks/service/customer'
 require 'quickbooks/service/department'
 require 'quickbooks/service/invoice'
@@ -172,14 +182,19 @@ require 'quickbooks/service/item_change'
 require 'quickbooks/service/reports'
 require 'quickbooks/service/credit_memo_change'
 require 'quickbooks/service/payment_change'
+require 'quickbooks/service/purchase_change'
 require 'quickbooks/service/transfer'
 require 'quickbooks/service/change_data_capture'
 require 'quickbooks/service/refund_receipt_change'
 
+# Register Faraday Middleware
+Faraday::Middleware.register_middleware :gzip => lambda { Gzip }
+
 module Quickbooks
   @@sandbox_mode = false
-
   @@logger = nil
+  @@minorversion = 47
+  @@http_adapter = :net_http
 
   class << self
     def sandbox_mode
@@ -190,6 +205,14 @@ module Quickbooks
       @@sandbox_mode = sandbox_mode
     end
 
+    def minorversion=(v)
+      @@minorversion = v
+    end
+
+    def minorversion
+      @@minorversion
+    end
+
     def logger
       @@logger ||= ::Logger.new($stdout) # TODO: replace with a real log file
     end
@@ -198,12 +221,25 @@ module Quickbooks
       @@logger = logger
     end
 
+    def http_adapter
+      @@http_adapter
+    end
+
+    def http_adapter=(adapter)
+      @@http_adapter = adapter
+    end
+
     # set logging on or off
-    attr_writer :log, :log_xml_pretty_print
+    attr_writer :log, :log_xml_pretty_print, :condense_logs
 
     # Returns whether to log. Defaults to 'false'.
     def log?
       @log ||= false
+    end
+
+    # Returns whether to limit log lines
+    def condense_logs?
+      @condense_logs ||= false
     end
 
     # pretty printing the xml in the logs is "on" by default
@@ -221,7 +257,16 @@ module Quickbooks
 
   class Error < StandardError; end
   class InvalidModelException < Error; end
-  class AuthorizationFailure < Error; end
+  class AuthorizationFailure < Error
+    attr_accessor :code, :detail, :type
+
+    def initialize(error_hash = {})
+      @code = error_hash[:code]
+      @detail = error_hash[:detail]
+      @type = error_hash[:type]
+      super(error_hash[:message])
+    end
+  end
   class Forbidden < Error; end
   class NotFound < Error; end
   class RequestTooLarge < Error; end
@@ -229,9 +274,10 @@ module Quickbooks
   class TooManyRequests < Error; end
   class ServiceUnavailable < Error; end
   class MissingRealmError < Error; end
+  class UnsupportedOperation < Error; end
 
   class IntuitRequestException < Error
-    attr_accessor :message, :code, :detail, :type, :request_xml, :request_json
+    attr_accessor :message, :code, :detail, :type, :intuit_tid, :request_xml, :request_json
 
     def initialize(msg)
       self.message = msg
