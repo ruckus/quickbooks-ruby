@@ -299,13 +299,6 @@ module Quickbooks
       end
 
       def check_response(response, options = {})
-#
-        # log "------ RESPONSE_HEADERS -----"
-        # response.each_header {|h| log "#{h}: #{response[h]}"}        
-        # log "------ QUICKBOOKS-RUBY RESPONSE ------"
-        # log "RESPONSE CODE = #{response.code}"
-        # log_response_body(response)
-
         if is_json?
           parse_json(response.plain_body)
         elsif !is_pdf?
@@ -317,7 +310,6 @@ module Quickbooks
         else
           nil
         end
-
 
         status = response.code.to_i
         case status
