@@ -29,7 +29,7 @@ describe "Quickbooks::Service::Vendor" do
     expect(vendor.valid?).to eq false
     expect(vendor.valid_for_create?).to eq false
     expect{ @service.create(vendor) }.to raise_error(Quickbooks::InvalidModelException, /cannot contain a colon/)
-    expect(vendor.errors.keys.include?(:display_name)).to eq true
+    expect(vendor.errors.map(&:attribute).include?(:display_name)).to eq true
   end
 
   it "cannot create a vendor with an invalid email" do
@@ -38,7 +38,7 @@ describe "Quickbooks::Service::Vendor" do
     expect(vendor.valid_for_create?).to eq false
     expect(vendor.valid?).to eq false
     expect{ @service.create(vendor) }.to raise_error(Quickbooks::InvalidModelException, /Email address must contain/)
-    expect(vendor.errors.keys.include?(:primary_email_address)).to eq true
+    expect(vendor.errors.map(&:attribute).include?(:primary_email_address)).to eq true
   end
 
   it "can create a vendor" do

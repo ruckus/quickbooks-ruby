@@ -121,14 +121,14 @@ describe "Quickbooks::Model::RefundReceipt" do
       refund_receipt.auto_doc_number!
       refund_receipt.valid?
       expect(refund_receipt.valid?).to eq(false)
-      expect(refund_receipt.errors.keys.include?(:doc_number)).to be true
+      expect(refund_receipt.errors.map(&:attribute).include?(:doc_number)).to be true
     end
 
     it "turned off then doc_number can be specified" do
       refund_receipt = Quickbooks::Model::RefundReceipt.new
       refund_receipt.doc_number = 'AUTO'
       refund_receipt.valid?
-      expect(refund_receipt.errors.keys.include?(:doc_number)).to be false
+      expect(refund_receipt.errors.map(&:attribute).include?(:doc_number)).to be false
     end
   end
 

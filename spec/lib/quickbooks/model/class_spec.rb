@@ -14,14 +14,14 @@ describe "Quickbooks::Model::Class" do
     classs = Quickbooks::Model::Class.new
     classs.name = "My:Class"
     expect(classs.valid?).to eq false
-    expect(classs.errors.keys).to include(:name)
+    expect(classs.errors.map(&:attribute)).to include(:name)
   end
 
   it "cannot update an invalid model" do
     classs = Quickbooks::Model::Class.new
     expect(classs.valid_for_update?).to eq false
     expect(classs.to_xml_ns).to match('Class')
-    expect(classs.errors.keys).to include(:sync_token)
+    expect(classs.errors.map(&:attribute)).to include(:sync_token)
   end
 
 end

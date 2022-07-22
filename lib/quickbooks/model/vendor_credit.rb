@@ -28,6 +28,8 @@ module Quickbooks
 
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
       xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
+      
+      xml_accessor :linked_transactions, :from => 'LinkedTxn', :as => [LinkedTransaction]
 
       reference_setters
 

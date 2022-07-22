@@ -36,7 +36,7 @@ describe "Quickbooks::Service::Invoice" do
     }.to raise_error(Quickbooks::InvalidModelException, /At least 1 line item is required/)
 
     expect(invoice.valid?).to eq false
-    expect(invoice.errors.keys.include?(:line_items)).to be true
+    expect(invoice.errors.map(&:attribute).include?(:line_items)).to be true
   end
 
   it "is valid when it has 1 or more line items" do
@@ -48,7 +48,7 @@ describe "Quickbooks::Service::Invoice" do
     }.to raise_error(Quickbooks::InvalidModelException)
 
     expect(invoice.valid?).to eq false
-    expect(invoice.errors.keys.include?(:line_items)).to_not be true
+    expect(invoice.errors.map(&:attribute).include?(:line_items)).to_not be true
   end
 
   it "cannot create an Invoice without a CustomerRef" do
@@ -59,7 +59,7 @@ describe "Quickbooks::Service::Invoice" do
     }.to raise_error(Quickbooks::InvalidModelException)
 
     expect(invoice.valid?).to eq false
-    expect(invoice.errors.keys.include?(:customer_ref)).to be true
+    expect(invoice.errors.map(&:attribute).include?(:customer_ref)).to be true
   end
 
   it "is valid when a CustomerRef is specified" do
@@ -71,7 +71,7 @@ describe "Quickbooks::Service::Invoice" do
     }.to raise_error(Quickbooks::InvalidModelException)
 
     expect(invoice.valid?).to eq false
-    expect(invoice.errors.keys.include?(:customer_ref)).to_not be true
+    expect(invoice.errors.map(&:attribute).include?(:customer_ref)).to_not be true
   end
 
   it "can create an Invoice" do

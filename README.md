@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/ruckus/quickbooks-ruby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ruckus/quickbooks-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![Build Status](https://travis-ci.org/ruckus/quickbooks-ruby.png?branch=master)](https://travis-ci.org/ruckus/quickbooks-ruby)
+![Build Status](https://github.com/ruckus/quickbooks-ruby/actions/workflows/ci.yml/badge.svg)
 
 Integration with Quickbooks Online via the Intuit Data Services v3 REST API.
 
@@ -663,7 +663,7 @@ puts attach.temp_download_uri
 => "https://intuit-qbo-prod-29.s3.amazonaws.com/12345%2Fattachments%2Fmonkey-1423760870606.jpg?Expires=1423761772&AWSAcc ... snip ..."
 ```
 
-### Download PDF of an Invoice or SalesReceipt
+### Download PDF of an Invoice, SalesReceipt or Payment
 
 To download a PDF of an Invoice:
 
