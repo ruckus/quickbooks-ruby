@@ -761,16 +761,19 @@ Quickbooks.log_xml_pretty_print = false
 
 While logging is helpful the best debugging (in my opinion) is available by using a HTTP proxy such as [Charles Proxy](https://www.charlesproxy.com/).
 
-To enable HTTP proxying you pass in `:http_proxy` when you generate your OAuth Consumer:
+To enable HTTP proxying, add something like the following `connection_opts` when you generate your OAuth Client:
 
 ```ruby
-$qb = OAuth::Consumer.new($consumer_key, $consumer_secret, {
-    :site                 => "https://oauth.intuit.com",
-    :request_token_path   => "/oauth/v1/get_request_token",
-    :authorize_path       => "/oauth/v1/get_access_token",
-    :access_token_path    => "/oauth/v1/get_access_token",
-    :proxy => "http://127.0.0.1:8888"
-})
+oauth_params = {
+  site: "https://appcenter.intuit.com/connect/oauth2",
+  authorize_url: "https://appcenter.intuit.com/connect/oauth2",
+  token_url: "https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer",
+  connection_opts: {
+    proxy: {uri: "http://127.0.0.1:8888"},
+    ssl: {verify: false}  # assuming a self-signed cert is used by your proxy
+  }
+}
+oauth2_client = OAuth2::Client.new(ENV['OAUTH_CLIENT_ID'], ENV['OAUTH_CLIENT_SECRET'], oauth_params)
 ```
 
 ## Entities Implemented
