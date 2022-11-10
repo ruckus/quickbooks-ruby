@@ -14,13 +14,17 @@ Gem::Specification.new do |gem|
 
   gem.files = Dir['lib/**/*']
 
-  gem.add_dependency 'oauth2', '~>1.4'
+  gem.required_ruby_version = '>= 2.6'
+
+  gem.add_dependency 'oauth2', '< 3.0'
   gem.add_dependency 'roxml', '~> 4.2'
   gem.add_dependency 'activemodel', '> 4.0'
   gem.add_dependency 'net-http-persistent'
   gem.add_dependency 'nokogiri'  # promiscuous mode
   gem.add_dependency 'multipart-post' # promiscuous mode
-  gem.add_dependency 'faraday', '< 2.0'
+  gem.add_dependency 'faraday', '< 3.0'
+  gem.add_dependency 'faraday-multipart', '~> 1.0'
+  gem.add_dependency 'faraday-gzip', '~> 0.1'
 
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'simplecov'

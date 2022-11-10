@@ -1,3 +1,9 @@
+## Next
+* Use Faraday 2.0 gem
+* Replace custom Faraday GZip implementation with `faraday-gzip` gem
+* Relax gemspec to allow OAuth2 v2.x gem
+* No longer support Ruby 2.5
+
 ## 1.0.21 (2022-04-26)
 
 * Add ability to download PDF of a Payment. (#577). Thanks @anaulin
