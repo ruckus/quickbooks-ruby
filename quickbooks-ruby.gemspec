@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = '>= 2.6'
 
-  gem.add_dependency 'oauth2', '~>1.4'
+  gem.add_dependency 'oauth2', '< 3.0'
   gem.add_dependency 'roxml', '~> 4.2'
   gem.add_dependency 'activemodel', '> 4.0'
   gem.add_dependency 'net-http-persistent'
