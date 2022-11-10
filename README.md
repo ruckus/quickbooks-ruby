@@ -1,3 +1,13 @@
+# Important: Potential Breaking Changes
+
+On Nov 10, 2022 version 2 was released which no longer supports Ruby 2.5.
+
+
+| quickbooks-ruby | branch     | ruby     |
+|-------------|------------|----------|
+| 1+  | master     | <= 2.5 |
+| 2          | 2-stable  | >= 2.6.0 |
+
 # Quickbooks-Ruby
 
 [![Join the chat at https://gitter.im/ruckus/quickbooks-ruby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ruckus/quickbooks-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

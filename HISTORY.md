@@ -1,4 +1,7 @@
-## Next
+## 2.0 (2022-11-10)
+
+First release of 2.0+ branch:
+
 * Use Faraday 2.0 gem
 * Replace custom Faraday GZip implementation with `faraday-gzip` gem
 * Relax gemspec to allow OAuth2 v2.x gem
