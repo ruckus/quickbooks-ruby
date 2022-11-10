@@ -18,7 +18,6 @@ describe Quickbooks::Model::Account do
 
     account.name = "Regular"
     account.valid?
-    pp account.errors
     expect(account.errors.map(&:attribute).include?(:name)).to be false
   end
 

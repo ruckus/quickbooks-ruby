@@ -22,7 +22,7 @@ module Quickbooks
       def disconnect
         connection = Faraday.new(headers: { 'Content-Type' => 'application/json' }) do |f|
           f.adapter(::Quickbooks.http_adapter)
-          f.basic_auth(oauth.client.id, oauth.client.secret)
+          f.request(:authorization, :basic, oauth.client.id, oauth.client.secret)
         end
 
         url = "#{DISCONNECT_URL}?minorversion=#{Quickbooks.minorversion}"

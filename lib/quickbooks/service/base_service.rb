@@ -49,12 +49,11 @@ module Quickbooks
       # [OAuth2] The default Faraday connection does not have gzip or multipart support.
       # We need to reset the existing connection and build a new one.
       def rebuild_connection!
-        @oauth.client.connection = nil
-        @oauth.client.connection.build do |builder|
-          builder.use :gzip
-          builder.request :multipart
-          builder.request :url_encoded
-          builder.adapter ::Quickbooks.http_adapter
+        @oauth.client.connection = Faraday.new do |f|
+          f.request :multipart
+          f.request :gzip
+          f.request :url_encoded
+          f.adapter ::Quickbooks.http_adapter
         end
       end
 

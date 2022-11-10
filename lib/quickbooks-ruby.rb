@@ -8,12 +8,13 @@ require 'date'
 require 'forwardable'
 require 'oauth2'
 require 'net/http/post/multipart'
+require 'faraday/multipart'
+require 'faraday/gzip'
 require 'quickbooks/util/collection'
 require 'quickbooks/util/logging'
 require 'quickbooks/util/http_encoding_helper'
 require 'quickbooks/util/name_entity'
 require 'quickbooks/util/query_builder'
-require 'quickbooks/faraday/middleware/gzip'
 
 #== OAuth Responses
 require 'quickbooks/service/responses/oauth_http_response'
@@ -186,9 +187,6 @@ require 'quickbooks/service/purchase_change'
 require 'quickbooks/service/transfer'
 require 'quickbooks/service/change_data_capture'
 require 'quickbooks/service/refund_receipt_change'
-
-# Register Faraday Middleware
-Faraday::Middleware.register_middleware :gzip => lambda { Gzip }
 
 module Quickbooks
   @@sandbox_mode = false
