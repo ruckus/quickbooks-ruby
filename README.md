@@ -5,7 +5,7 @@ On Nov 10, 2022 version 2 was released which no longer supports Ruby 2.5.
 
 | quickbooks-ruby | branch     | ruby     |
 |-------------|------------|----------|
-| 1+  | master     | <= 2.5 |
+| 1 | master     | <= 2.5 |
 | 2          | 2-stable  | >= 2.6.0 |
 
 # Quickbooks-Ruby
