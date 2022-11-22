@@ -13,7 +13,7 @@ module Quickbooks
       xml_accessor :tax_code_ref, :from => 'TaxCodeRef', :as => BaseReference
       xml_accessor :customer_ref, :from => 'CustomerRef', :as => BaseReference
       xml_accessor :billable_status, :from => 'BillableStatus'
-      xml_accessor :tax_inclusive_amount, from: 'TaxInclusiveAmt', to_xml: Proc.new { |val| val.to_f }
+      xml_accessor :tax_inclusive_amount, from: 'TaxInclusiveAmt', :as => BigDecimal, to_xml: Proc.new { |val| val.to_f }
 
       reference_setters :item_ref, :class_ref, :price_level_ref, :customer_ref, :tax_code_ref
     end

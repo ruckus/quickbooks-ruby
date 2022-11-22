@@ -23,6 +23,7 @@ describe "Quickbooks::Model::Bill" do
     expect(line_item1.account_based_expense_line_detail.class_ref.value).to eq "100000000000128320"
     expect(line_item1.account_based_expense_line_detail.class_ref.name).to eq "Overhead"
     expect(line_item1.account_based_expense_line_detail.tax_code_ref.to_s).to eq "NON"
+    expect(line_item1.account_based_expense_line_detail.tax_inclusive_amount).to eq 0.0
 
     line_item2 = bill.line_items[1]
     expect(line_item2.id).to eq "2"
@@ -34,6 +35,8 @@ describe "Quickbooks::Model::Bill" do
     expect(line_item2.account_based_expense_line_detail.class_ref.value).to eq "100000000000128320"
     expect(line_item2.account_based_expense_line_detail.class_ref.name).to eq "Overhead"
     expect(line_item2.account_based_expense_line_detail.tax_code_ref.to_s).to eq "NON"
+    expect(line_item2.account_based_expense_line_detail.tax_inclusive_amount).to eq 0.0
+
   end
 
   it "can parse an Item-based bill from XML" do
