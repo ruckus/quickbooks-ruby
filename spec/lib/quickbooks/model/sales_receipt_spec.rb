@@ -21,6 +21,7 @@ describe "Quickbooks::Model::SalesReceipt" do
     expect(sales_receipt.line_items.first.sales_item_line_detail.item_ref.value).to eq("1")
     expect(sales_receipt.line_items.first.sales_item_line_detail.unit_price).to eq(10)
     expect(sales_receipt.line_items.first.sales_item_line_detail.quantity).to eq(1)
+    expect(sales_receipt.line_items.first.sales_item_line_detail.tax_inclusive_amount).to eq(0.0)
 
     expect(sales_receipt.line_items[1]).not_to be_nil
     expect(sales_receipt.line_items[1].amount).to eq(10.00)

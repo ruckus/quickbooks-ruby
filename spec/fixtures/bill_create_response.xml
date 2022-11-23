@@ -16,6 +16,7 @@
             <AccountRef name="Bank Loan">42</AccountRef>
             <BillableStatus>NotBillable</BillableStatus>
             <TaxCodeRef>NON</TaxCodeRef>
+            <TaxInclusiveAmt>0.0</TaxInclusiveAmt>
         </AccountBasedExpenseLineDetail>
     </Line>
     <Line>
@@ -27,6 +28,7 @@
             <AccountRef name="Interest Expense">77</AccountRef>
             <BillableStatus>NotBillable</BillableStatus>
             <TaxCodeRef>NON</TaxCodeRef>
+            <TaxInclusiveAmt>0.0</TaxInclusiveAmt>
         </AccountBasedExpenseLineDetail>
     </Line>
     <VendorRef name="Great Statewide Bank">4</VendorRef>
