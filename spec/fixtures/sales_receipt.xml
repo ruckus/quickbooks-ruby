@@ -19,6 +19,8 @@
       <ItemRef name="Sales">1</ItemRef>
       <UnitPrice>10</UnitPrice>
       <Qty>1</Qty>
+      <TaxCodeRef>NON</TaxCodeRef>
+      <TaxInclusiveAmt>0.0</TaxInclusiveAmt>
     </SalesItemLineDetail>
   </Line>
   <Line>
