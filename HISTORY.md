@@ -1,11 +1,14 @@
+## 2.0.2 (2022-12-28)
+
+* Update dependency on `faraday-gzip` to support JRuby (#594)
+
 ## 2.0.1 (2022-12-27)
 
 Faraday Versions (#593)
 * Test against Faraday 1.x and 2.x
 * Faraday 1.x support for Quickbooks::Service::AccessToken#disconnect
 
-Thanks @jaredmoody and @ ashkulz
-
+Thanks @jaredmoody and @ashkulz
 
 ## 2.0 (2022-11-10)
 
