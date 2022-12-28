@@ -5,7 +5,7 @@
         <CreateTime>2013-12-11T10:59:51-08:00</CreateTime>
         <LastUpdatedTime>2013-12-11T10:59:51-08:00</LastUpdatedTime>
     </MetaData>
-    <DisplayName>First TaxAgency</Name>
-    <TaxTrackedOnPurchases>false</Description>
-    <TaxTrackedOnSales>true</Active>
+    <DisplayName>First TaxAgency</DisplayName>
+    <TaxTrackedOnPurchases>false</TaxTrackedOnPurchases>
+    <TaxTrackedOnSales>true</TaxTrackedOnSales>
 </TaxAgency>
