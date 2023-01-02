@@ -119,6 +119,8 @@ def oauth_callback
 end
 ```
 
+Your Redirect URI needs to be publicly accessible. If you are still in development and running everything via `localhost` you will need to use a tool like [Ngrok](https://ngrok.com/product/secure-tunnels) to expose your localhost to a public URL with HTTPS.
+
 Most likely you will want to persist the OAuth access credentials so that users don't need to re-authorize your application in every session.
 
 An example database table could have fields likes:
