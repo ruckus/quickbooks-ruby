@@ -224,7 +224,7 @@ module Quickbooks
         if metadata
           standalone_prefix = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
           meta_data_xml = "#{standalone_prefix}\n#{metadata.to_xml_ns.to_s}"
-          param_part = UploadIO.new(StringIO.new(meta_data_xml), "application/xml")
+          param_part = Faraday::UploadIO.new(StringIO.new(meta_data_xml), "application/xml")
           body['file_metadata_0'] = param_part
         end
 
@@ -369,7 +369,7 @@ module Quickbooks
             body.each do |k,v|
               messages << 'BODY PART:'
               val_content = v.inspect
-              if v.is_a?(UploadIO)
+              if v.is_a?(Faraday::UploadIO)
                 if v.content_type == 'application/xml'
                   if v.io.is_a?(StringIO)
                     val_content = log_xml(v.io.string)

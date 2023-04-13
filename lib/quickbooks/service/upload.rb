@@ -9,7 +9,7 @@ module Quickbooks
       # attachable: Quickbooks::Model::Attachable meta-data details, can be null
       def upload(path_to_file, mime_type, attachable = nil)
         url = url_for_resource("upload")
-        uploadIO = class_for_io.new(path_to_file, mime_type)
+        uploadIO = Faraday::UploadIO.new(path_to_file, mime_type)
         response = do_http_file_upload(uploadIO, url, attachable)
         prefix = "AttachableResponse/xmlns:Attachable"
         if response.code.to_i == 200
@@ -17,10 +17,6 @@ module Quickbooks
         else
           nil
         end
-      end
-
-      def class_for_io
-        oauth.is_a?(OAuth2::AccessToken) ? Faraday::UploadIO : UploadIO
       end
 
       def download(uploadId)
