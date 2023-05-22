@@ -37,7 +37,7 @@ describe "Quickbooks::Service::Customer" do
 
     expect(customer.valid?).to eq(false)
     expect(customer.valid_for_create?).to eq(false)
-    expect(customer.errors.keys.include?(:display_name)).to eq(true)
+    expect(customer.errors.map(&:attribute).include?(:display_name)).to eq(true)
   end
 
   it "cannot create a customer with an invalid email" do
@@ -48,7 +48,7 @@ describe "Quickbooks::Service::Customer" do
     end.to raise_error(Quickbooks::InvalidModelException)
 
     expect(customer.valid?).to eq(false)
-    expect(customer.errors.keys.include?(:primary_email_address)).to eq(true)
+    expect(customer.errors.map(&:attribute).include?(:primary_email_address)).to eq(true)
   end
 
   it "can create a customer" do

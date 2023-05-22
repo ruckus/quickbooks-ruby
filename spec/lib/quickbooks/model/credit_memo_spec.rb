@@ -6,7 +6,7 @@ describe "Quickbooks::Model::CreditMemo" do
     credit_memo = Quickbooks::Model::CreditMemo.new
     expect(credit_memo.line_items).to be_kind_of(Array)
     expect(credit_memo.valid?).to be false
-    expect(credit_memo.errors.keys.include?(:line_items)).to be true
+    expect(credit_memo.errors.map(&:attribute).include?(:line_items)).to be true
   end
 
   it "should not be valid if empty line item" do

@@ -32,7 +32,7 @@ describe "Quickbooks::Service::Item" do
     end.to raise_error(Quickbooks::InvalidModelException)
 
     expect(item.valid?).to eq(false)
-    expect(item.errors.keys.include?(:name)).to eq(true)
+    expect(item.errors.map(&:attribute).include?(:name)).to eq(true)
   end
 
   it "can create an Item" do

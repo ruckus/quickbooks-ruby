@@ -1,8 +1,18 @@
+# Important: Potential Breaking Changes
+
+On Nov 10, 2022 version 2 was released which no longer supports Ruby 2.5.
+
+
+| quickbooks-ruby | branch     | ruby     |
+|-------------|------------|----------|
+| 1 | master     | <= 2.5 |
+| 2          | 2-stable  | >= 2.6.0 |
+
 # Quickbooks-Ruby
 
 [![Join the chat at https://gitter.im/ruckus/quickbooks-ruby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ruckus/quickbooks-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![Build Status](https://travis-ci.org/ruckus/quickbooks-ruby.png?branch=master)](https://travis-ci.org/ruckus/quickbooks-ruby)
+![Build Status](https://github.com/ruckus/quickbooks-ruby/actions/workflows/ci.yml/badge.svg)
 
 Integration with Quickbooks Online via the Intuit Data Services v3 REST API.
 
@@ -108,6 +118,8 @@ def oauth_callback
   end
 end
 ```
+
+Your Redirect URI needs to be publicly accessible. If you are still in development and running everything via `localhost` you will need to use a tool like [Ngrok](https://ngrok.com/product/secure-tunnels) to expose your localhost to a public URL with HTTPS.
 
 Most likely you will want to persist the OAuth access credentials so that users don't need to re-authorize your application in every session.
 
@@ -663,7 +675,7 @@ puts attach.temp_download_uri
 => "https://intuit-qbo-prod-29.s3.amazonaws.com/12345%2Fattachments%2Fmonkey-1423760870606.jpg?Expires=1423761772&AWSAcc ... snip ..."
 ```
 
-### Download PDF of an Invoice or SalesReceipt
+### Download PDF of an Invoice, SalesReceipt or Payment
 
 To download a PDF of an Invoice:
 
@@ -761,16 +773,19 @@ Quickbooks.log_xml_pretty_print = false
 
 While logging is helpful the best debugging (in my opinion) is available by using a HTTP proxy such as [Charles Proxy](https://www.charlesproxy.com/).
 
-To enable HTTP proxying you pass in `:http_proxy` when you generate your OAuth Consumer:
+To enable HTTP proxying, add something like the following `connection_opts` when you generate your OAuth Client:
 
 ```ruby
-$qb = OAuth::Consumer.new($consumer_key, $consumer_secret, {
-    :site                 => "https://oauth.intuit.com",
-    :request_token_path   => "/oauth/v1/get_request_token",
-    :authorize_path       => "/oauth/v1/get_access_token",
-    :access_token_path    => "/oauth/v1/get_access_token",
-    :proxy => "http://127.0.0.1:8888"
-})
+oauth_params = {
+  site: "https://appcenter.intuit.com/connect/oauth2",
+  authorize_url: "https://appcenter.intuit.com/connect/oauth2",
+  token_url: "https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer",
+  connection_opts: {
+    proxy: {uri: "http://127.0.0.1:8888"},
+    ssl: {verify: false}  # assuming a self-signed cert is used by your proxy
+  }
+}
+oauth2_client = OAuth2::Client.new(ENV['OAUTH_CLIENT_ID'], ENV['OAUTH_CLIENT_SECRET'], oauth_params)
 ```
 
 ## Entities Implemented
