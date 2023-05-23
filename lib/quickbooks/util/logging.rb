@@ -16,7 +16,7 @@ module Quickbooks
       end
 
       def log?
-        @log ||= ::Quickbooks.log?
+        defined?(@log) ? @log : ::Quickbooks.log?
       end
 
       def condense_logs?
