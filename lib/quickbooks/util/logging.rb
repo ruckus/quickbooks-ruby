@@ -2,6 +2,7 @@ module Quickbooks
   module Util
     module Logging
       attr_writer :log
+
       def log(msg)
         ::Quickbooks.log(msg) if log?
       end
