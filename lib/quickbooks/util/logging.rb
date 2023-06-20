@@ -1,8 +1,10 @@
 module Quickbooks
   module Util
     module Logging
+      attr_writer :log
+
       def log(msg)
-        ::Quickbooks.log(msg)
+        ::Quickbooks.log(msg) if log?
       end
 
       def log_multiple(messages)
@@ -14,7 +16,7 @@ module Quickbooks
       end
 
       def log?
-        ::Quickbooks.log?
+        defined?(@log) ? @log : ::Quickbooks.log?
       end
 
       def condense_logs?
