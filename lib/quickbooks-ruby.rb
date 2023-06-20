@@ -248,10 +248,8 @@ module Quickbooks
     end
 
     def log(msg)
-      if log?
-        logger.info(msg)
-        logger.flush if logger.respond_to?(:flush)
-      end
+      logger.info(msg)
+      logger.flush if logger.respond_to?(:flush)
     end
   end # << self
 
