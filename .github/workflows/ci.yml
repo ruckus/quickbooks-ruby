@@ -4,18 +4,25 @@ on: [push, pull_request]
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
-
     strategy:
       fail-fast: false
       matrix:
-        ruby: ["2.6", "2.7", "3.0", "3.1", ruby-head]
-        env:
-          - FARADAY_VERSION: "~> 2.0"
-          - FARADAY_VERSION: "~> 1.0"
-
-    env: ${{ matrix.env }}
+        ruby:
+          - "2.6"
+          - "2.7"
+          - "3.0"
+          - "3.1"
+          - "3.2"
+          - "ruby-head"
+          - "jruby-9.3"
+          - "jruby-9.4"
+          - "jruby-head"
+        faraday:
+          - "~> 1.0"
+          - "~> 2.0"
+    env:
+      FARADAY_VERSION: ${{ matrix.faraday }}
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
