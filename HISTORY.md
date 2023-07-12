@@ -1,3 +1,10 @@
+## 1.0.22 (2023-07-12)
+
+* Fintechqb 1967 enable service level logging (#600). Thanks @andymond
+* Add total_tax_specified xml_accessor to TransactionTaxDetail
+
+In a recent update to the QBO API, if a company that uses automated sales tax has an invoice that has no tax amount, we need to specify TotalTaxSpecified = false. Not passing this results in an error from QBO indicating that sales tax was miscalculated.
+
 ## 1.0.21 (2022-04-26)
 
 * Add ability to download PDF of a Payment. (#577). Thanks @anaulin
