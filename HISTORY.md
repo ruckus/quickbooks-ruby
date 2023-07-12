@@ -1,3 +1,7 @@
+## 2.0.2 (2023-07-12)
+
+cherry-picked `Fintechqb 1967 enable service level logging` from master
+
 ## 2.0.1 (2022-12-27)
 
 Faraday Versions (#593)
