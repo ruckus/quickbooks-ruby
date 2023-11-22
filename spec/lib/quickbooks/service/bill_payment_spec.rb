@@ -70,4 +70,17 @@ describe "Quickbooks::Service::BillPayment" do
 
     expect(response).to be true
   end
+
+  it 'can void a bill_payment' do
+    stub_http_request(:post,
+                 "#{@service.url_for_resource(resource)}?include=void",
+                 ["200", "OK"],
+                 fixture("bill_payment_void_response_success.xml"))
+
+    response = @service.void(bill_payment)
+
+    expect(response).to be_truthy
+    expect(response.private_note).to eq('Voided')
+    expect(response.total).to eq(0)
+  end
 end
