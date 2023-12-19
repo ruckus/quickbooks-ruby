@@ -758,9 +758,17 @@ JSON]( https://github.com/ruckus/quickbooks-ruby/issues/257#issuecomment-1268344
 
 ## Logging
 
+Set the default log enablement:
 ```ruby
 Quickbooks.log = true
 ```
+
+Configure a service instance to log (or not) independently:
+```ruby
+customer_service = Quickbooks::Service::Customer.new
+customer_service.log = true
+```
+
 By default, logging is directed at STDOUT, but another target may be defined, e.g. in Rails
 ```ruby
 Quickbooks.logger = Rails.logger
