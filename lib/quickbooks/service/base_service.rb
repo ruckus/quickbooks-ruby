@@ -433,8 +433,6 @@ module Quickbooks
         begin
           @last_response_xml.xpath("//xmlns:IntuitResponse/xmlns:Fault")[0] != nil
         rescue Nokogiri::XML::XPath::SyntaxError => exception
-          #puts @last_response_xml.to_xml.to_s
-          #puts "WTF: #{exception.inspect}:#{exception.backtrace.join("\n")}"
           true
         end
       end
@@ -443,20 +441,20 @@ module Quickbooks
         error = {:message => "", :detail => "", :type => nil, :code => 0, :intuit_tid => @last_response_intuit_tid}
         fault = @last_response_xml.xpath("//xmlns:IntuitResponse/xmlns:Fault")[0]
         if fault
-          error[:type] = fault.attributes['type'].value
+          error[:type] = fault.attributes['type'].try(:value)
 
           error_element = fault.xpath("//xmlns:Error")[0]
           if error_element
             code_attr = error_element.attributes['code']
             if code_attr
-              error[:code] = code_attr.value
+              error[:code] = code_attr.try(:value)
             end
             element_attr = error_element.attributes['element']
             if element_attr
-              error[:element] = code_attr.value
+              error[:element] = code_attr.try(:value)
             end
-            error[:message] = error_element.xpath("//xmlns:Message").text
-            error[:detail] = error_element.xpath("//xmlns:Detail").text
+            error[:message] = error_element.xpath("//xmlns:Message").try(:text)
+            error[:detail] = error_element.xpath("//xmlns:Detail").try(:text)
           end
         end
 

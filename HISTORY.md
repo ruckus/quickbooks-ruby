@@ -1,3 +1,7 @@
+## 1.0.23 (2024-02-12)
+
+Use Ruby try() to gracefully handle no method errors when parsing exceptions
+
 ## 1.0.22 (2023-07-12)
 
 * Fintechqb 1967 enable service level logging (#600). Thanks @andymond
