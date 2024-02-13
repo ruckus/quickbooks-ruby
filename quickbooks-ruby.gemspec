@@ -14,7 +14,7 @@ Gem::Specification.new do |gem|
 
   gem.files = Dir['lib/**/*']
 
-  gem.add_dependency 'oauth2', '~>1.4'
+  gem.add_dependency 'oauth2'
   gem.add_dependency 'roxml', '~> 4.2'
   gem.add_dependency 'activemodel', '> 4.0'
   gem.add_dependency 'net-http-persistent'
