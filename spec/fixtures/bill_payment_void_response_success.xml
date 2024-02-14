@@ -1,0 +1,20 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2023-11-22T11:47:55.316-08:00">
+  <BillPayment domain="QBO" sparse="false">
+    <Id>204</Id>
+    <SyncToken>1</SyncToken>
+    <MetaData>
+      <CreateTime>2023-10-10T11:56:09-07:00</CreateTime>
+      <LastUpdatedTime>2023-11-22T11:47:46-08:00</LastUpdatedTime>
+    </MetaData>
+    <TxnDate>2023-09-19</TxnDate>
+    <CurrencyRef name="United States Dollar">USD</CurrencyRef>
+    <PrivateNote>Voided</PrivateNote>
+    <VendorRef name="Vendor">71</VendorRef>
+    <PayType>Check</PayType>
+    <CheckPayment>
+      <BankAccountRef name="Bank Account">141</BankAccountRef>
+      <PrintStatus>NotSet</PrintStatus>
+    </CheckPayment>
+    <TotalAmt>0</TotalAmt>
+  </BillPayment>
+</IntuitResponse>
