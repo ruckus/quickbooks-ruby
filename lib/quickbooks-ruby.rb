@@ -275,7 +275,7 @@ module Quickbooks
   class UnsupportedOperation < Error; end
 
   class IntuitRequestException < Error
-    attr_accessor :message, :code, :detail, :type, :intuit_tid, :request_xml, :request_json
+    attr_accessor :message, :code, :detail, :element, :type, :intuit_tid, :request_xml, :request_json
 
     def initialize(msg)
       self.message = msg

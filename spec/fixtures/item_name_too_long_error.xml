@@ -1,0 +1,8 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2024-04-09T07:52:37.581-07:00">
+  <Fault type="ValidationFault">
+    <Error code="2050" element="Name">
+      <Message>String length is either shorter or longer than supported by specification</Message>
+      <Detail>String length specified does not match the supported length. Min:0 Max:100 supported. Supplied length:103</Detail>
+    </Error>
+  </Fault>
+</IntuitResponse>
