@@ -58,6 +58,19 @@ describe Quickbooks::Service::BaseService do
       expect { @service.send(:check_response, response) }.to raise_error(Quickbooks::IntuitRequestException)
     end
 
+    it "should parse all the error fields" do
+      xml = fixture('item_name_too_long_error.xml')
+      response = Struct.new(:code, :plain_body).new(400, xml)
+      expect { @service.send(:check_response, response, :request => xml) }.to raise_error { |error|
+        expect(error.type).to eq "ValidationFault"
+        expect(error.code).to eq "2050"
+        expect(error.element).to eq "Name"
+        expect(error.detail).to eq "String length specified does not match the supported length. Min:0 Max:100 supported. Supplied length:103"
+        expect(error.message).to include "String length is either shorter or longer than supported by specification"
+        expect(error.message).to include "String length specified does not match the supported length. Min:0 Max:100 supported. Supplied length:103"
+      }
+    end
+
     it "should add request xml to request exception" do
       xml = fixture('generic_error.xml')
       xml2 = fixture('customer.xml')
