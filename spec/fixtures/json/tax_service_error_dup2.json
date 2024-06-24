@@ -1,0 +1,16 @@
+{
+"fault": {
+  "error": [
+    {
+      "message": "Duplicate Name Exists Error",
+      "detail": "The name supplied already exists. : null",
+      "code": "6240"
+    }
+  ],
+  "type": "ValidationFault"
+},
+"batchItemResponse": [],
+"attachableResponse": [],
+"time": "1719142418269",
+"cdcresponse": []
+}
