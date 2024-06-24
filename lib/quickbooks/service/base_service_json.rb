@@ -31,7 +31,7 @@ module Quickbooks
         fault = dereference_response(resp, 'Fault')
         if fault.present?
           error[:type] = fault['type'] if fault.has_key?('type')
-          if fault_error = dereference_response(fault, 'Error')
+          if fault_error = dereference_response(fault, 'Error').first
             error[:message] = dereference_response(fault_error, 'Message')
             error[:detail] = dereference_response(fault_error, 'Detail')
             error[:code] = fault_error['code']
