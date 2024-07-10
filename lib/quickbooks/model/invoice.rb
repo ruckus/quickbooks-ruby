@@ -61,6 +61,7 @@ module Quickbooks
       xml_accessor :allow_online_ach_payment?, :from => 'AllowOnlineACHPayment'
       xml_accessor :deposit_to_account_ref, :from => 'DepositToAccountRef', :as => BaseReference
       xml_accessor :bill_email_cc, :from => 'BillEmailCc', :as => EmailAddress
+      xml_accessor :bill_email_bcc, :from => 'BillEmailBcc', :as => EmailAddress
 
 
       reference_setters
@@ -91,6 +92,10 @@ module Quickbooks
 
       def billing_email_cc_address=(email_address_string)
         self.bill_email_cc = EmailAddress.new(email_address_string)
+      end
+
+      def billing_email_bcc_address=(email_address_string)
+        self.bill_email_bcc = EmailAddress.new(email_address_string)
       end
 
       def wants_billing_email_sent!
