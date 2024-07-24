@@ -1,3 +1,7 @@
+## 2.0.4 (2024-07-23)
+
+* Loosen faraday-gzip to a version that can use > zlib-2.1.1 (#613). Thank you @technicalpickles
+
 ## 2.0.3 (2023-07-12)
 
 cherry-picked `Fintechqb 1967 enable service level logging` from master
