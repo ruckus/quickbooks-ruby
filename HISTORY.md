@@ -1,3 +1,7 @@
+## 2.0.5 (2024-07-25)
+
+* Added BCC field to Bill Model. Integrated the PR manually. https://github.com/ruckus/quickbooks-ruby/pull/614 Thanks @hammad-Ikhlaq-7vals
+
 ## 2.0.4 (2024-07-23)
 
 * Loosen faraday-gzip to a version that can use > zlib-2.1.1 (#613). Thank you @technicalpickles
