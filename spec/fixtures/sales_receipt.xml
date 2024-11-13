@@ -56,4 +56,14 @@
   <EmailStatus>NotSet</EmailStatus>
   <Balance>0</Balance>
   <DepositToAccountRef name="Cash and cash equivalents">28</DepositToAccountRef>
+  <ShipFromAddr>
+    <Id>5</Id>
+    <Line1>1040 East Tasman Drive.</Line1>
+    <City>Los Angeles</City>
+    <Country>USA</Country>
+    <CountrySubDivisionCode>CA</CountrySubDivisionCode>
+    <PostalCode>91123</PostalCode>
+    <Lat>33.739466</Lat>
+    <Long>-118.0395574</Long>
+  </ShipFromAddr>
 </SalesReceipt>

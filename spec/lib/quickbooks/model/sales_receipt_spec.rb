@@ -55,6 +55,17 @@ describe "Quickbooks::Model::SalesReceipt" do
     expect(sales_receipt.private_note).to eq("private")
 
     expect(sales_receipt.total).to eq(10.00)
+
+    ship_from_address = sales_receipt.ship_from_address
+    expect(ship_from_address).to_not be_nil
+    expect(ship_from_address.id).to eq "5"
+    expect(ship_from_address.line1).to eq "1040 East Tasman Drive."
+    expect(ship_from_address.city).to eq "Los Angeles"
+    expect(ship_from_address.country).to eq "USA"
+    expect(ship_from_address.country_sub_division_code).to eq "CA"
+    expect(ship_from_address.postal_code).to eq "91123"
+    expect(ship_from_address.lat).to eq "33.739466"
+    expect(ship_from_address.lon).to eq "-118.0395574"
   end
 
   it "should initialize line items as empty array" do
