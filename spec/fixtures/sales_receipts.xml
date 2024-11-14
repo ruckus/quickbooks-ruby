@@ -82,6 +82,16 @@
         <Lat>INVALID</Lat>
         <Long>INVALID</Long>
       </ShipAddr>
+      <ShipFromAddr>
+        <Id>5</Id>
+        <Line1>1040 East Tasman Drive.</Line1>
+        <City>Los Angeles</City>
+        <Country>USA</Country>
+        <CountrySubDivisionCode>CA</CountrySubDivisionCode>
+        <PostalCode>91123</PostalCode>
+        <Lat>33.739466</Lat>
+        <Long>-118.0395574</Long>
+      </ShipFromAddr>
       <GlobalTaxCalculation>NotApplicable</GlobalTaxCalculation>
       <TotalAmt>10.00</TotalAmt>
       <PrintStatus>NotSet</PrintStatus>
