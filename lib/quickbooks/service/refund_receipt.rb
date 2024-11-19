@@ -6,6 +6,12 @@ module Quickbooks
         delete_by_query_string(refund_receipt)
       end
 
+      def pdf(refund_receipt)
+        url = "#{url_for_resource(model::REST_RESOURCE)}/#{refund_receipt.id}/pdf"
+        response = do_http_raw_get(url, {}, {'Accept' => 'application/pdf'})
+        response.plain_body
+      end
+
       private
 
       def model
