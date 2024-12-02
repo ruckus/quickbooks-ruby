@@ -48,6 +48,15 @@ describe Quickbooks::Service::TaxService do
     }.to raise_error(Quickbooks::IntuitRequestException, /The name supplied already exists/)
   end
 
+  # Empirically observed alternate response from Intuit sandbox
+  it "catch exception if create tax code failed with alternate response" do
+    stub_http_request(:post, url, ["200", "OK"], json_fixture(:tax_service_error_dup2))
+    tax_service.tax_rate_details = tax_rate_details
+    expect {
+      subject.create(tax_service)
+    }.to raise_error(Quickbooks::IntuitRequestException, /The name supplied already exists/)
+  end
+
   it "can not create tax service without tax_code" do
     ts = model.new
     expect {
