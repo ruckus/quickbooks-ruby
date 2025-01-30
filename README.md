@@ -779,10 +779,8 @@ Quickbooks.log_xml_pretty_print = false
 
 ## Minorversion
 
-NOTE
------
+[!NOTE]
 The default is `75` due to Quickbooks ignoring all prior versions starting 2025-08-01 ([source](https://blogs.intuit.com/2025/01/21/changes-to-our-accounting-api-that-may-impact-your-application/)).
------
 
 You can change the minor version that is used on a global scale (like in an initializer file):
 
