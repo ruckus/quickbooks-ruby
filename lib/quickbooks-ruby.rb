@@ -191,7 +191,7 @@ require 'quickbooks/service/refund_receipt_change'
 module Quickbooks
   @@sandbox_mode = false
   @@logger = nil
-  @@minorversion = 47
+  @@minorversion = 75
   @@http_adapter = :net_http
 
   class << self

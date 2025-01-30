@@ -1,3 +1,8 @@
+## Unreleased (Unreleased)
+
+* Set minimum minor version to 75 per QB
+* Add minor version section via the readme
+
 ## 2.0.5 (2024-07-25)
 
 * Added BCC field to Bill Model. Integrated the PR manually. https://github.com/ruckus/quickbooks-ruby/pull/614 Thanks @hammad-Ikhlaq-7vals
