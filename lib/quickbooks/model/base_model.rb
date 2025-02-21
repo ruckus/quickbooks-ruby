@@ -30,6 +30,7 @@ module Quickbooks
 
       def as_json(options = nil)
         options = {} if options.nil?
+        options = options.dup if options.frozen?
         except_conditions = ["roxml_references"]
         except_conditions << options[:except]
         options[:except] = except_conditions.flatten.uniq.compact
