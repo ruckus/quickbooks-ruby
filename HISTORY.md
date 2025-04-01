@@ -1,3 +1,8 @@
+## 1.0.24 (2025-04-01)
+
+* Fix vendor and purchases preferences xml reader (#626). Thanks @katzenj
+* added pdf method to refund_receipt.rb (#617). Thanks @nicho1991
+
 ## 1.0.23 (2024-02-12)
 
 Use Ruby try() to gracefully handle no method errors when parsing exceptions
