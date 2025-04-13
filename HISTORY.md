@@ -1,3 +1,11 @@
+## 2.0.6 (2025-04-01)
+
+cherrypicking PRs from `master` branch. Releasing 2.0.6
+
+* Fix vendor and purchases preferences xml reader (#626). Thanks @katzenj
+* added pdf method to refund_receipt.rb (#617). Thanks @nicho1991
+
+
 ## 2.0.5 (2024-07-25)
 
 * Added BCC field to Bill Model. Integrated the PR manually. https://github.com/ruckus/quickbooks-ruby/pull/614 Thanks @hammad-Ikhlaq-7vals
