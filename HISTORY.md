@@ -1,6 +1,7 @@
 ## 2.0.7 (2025-04-14)
 
 * Add ship from address reference to sales receipt #616. Thanks @rchekaluk
+* Dup as_json options if frozen (#625) Thanks @chrisrbnelson
 
 ## 2.0.6 (2025-04-01)
 
