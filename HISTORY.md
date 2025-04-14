@@ -1,3 +1,7 @@
+## 2.0.7 (2025-04-14)
+
+* Add ship from address reference to sales receipt #616. Thanks @rchekaluk
+
 ## 2.0.6 (2025-04-01)
 
 cherrypicking PRs from `master` branch. Releasing 2.0.6
