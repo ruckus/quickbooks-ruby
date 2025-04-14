@@ -1,3 +1,8 @@
+## 1.0.25 (2025-04-14)
+
+* Add ship from address reference to sales receipt (#616). Thanks @rchekaluk
+* Dup as_json options if frozen (#625) Thanks @chrisrbnelson
+
 ## 1.0.24 (2025-04-01)
 
 * Fix vendor and purchases preferences xml reader (#626). Thanks @katzenj
