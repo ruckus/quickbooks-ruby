@@ -56,4 +56,33 @@
   <EmailStatus>NotSet</EmailStatus>
   <Balance>0</Balance>
   <DepositToAccountRef name="Cash and cash equivalents">28</DepositToAccountRef>
+  <BillAddr>
+    <Id>6</Id>
+    <Line1>Rebecca Clark</Line1>
+    <Line2>Sunset Bakery</Line2>
+    <Line3>1040 East Tasman Drive.</Line3>
+    <Line4>Los Angeles, CA  91123 USA</Line4>
+    <Lat>34.1426959</Lat>
+    <Long>-118.1568847</Long>
+  </BillAddr>
+  <ShipAddr>
+    <Id>3</Id>
+    <Line1>1040 East Tasman Drive.</Line1>
+    <City>Los Angeles</City>
+    <Country>USA</Country>
+    <CountrySubDivisionCode>CA</CountrySubDivisionCode>
+    <PostalCode>91123</PostalCode>
+    <Lat>33.739466</Lat>
+    <Long>-118.0395574</Long>
+  </ShipAddr>
+  <ShipFromAddr>
+    <Id>5</Id>
+    <Line1>1040 East Tasman Drive.</Line1>
+    <City>Los Angeles</City>
+    <Country>USA</Country>
+    <CountrySubDivisionCode>CA</CountrySubDivisionCode>
+    <PostalCode>91123</PostalCode>
+    <Lat>33.739466</Lat>
+    <Long>-118.0395574</Long>
+  </ShipFromAddr>
 </SalesReceipt>
