@@ -6,6 +6,8 @@ module Quickbooks
       include ActiveModel::Validations
       include Validator
       include ROXML
+      
+      MINORVERSION = 75
 
       xml_convention :camelcase
 

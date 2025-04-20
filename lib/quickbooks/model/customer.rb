@@ -16,7 +16,7 @@ module Quickbooks
       include NameEntity::Quality
       include NameEntity::PermitAlterations
 
-      MINORVERSION = 33
+      # MINORVERSION = 33
 
       xml_name XML_NODE
       xml_accessor :id, :from => 'Id'
