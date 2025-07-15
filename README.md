@@ -66,6 +66,15 @@ Or install it yourself as:
 
 `$ gem install quickbooks-ruby`
 
+## Minorversion
+
+As of July 2025 `75` is the minimum version supported. If not specified the QBO API will default to this version. You can specify another version of your choice via:
+
+```ruby
+Quickbooks.minorversion = 75
+```
+
+
 ## Sandbox Mode
 An API app provides two sets of OAuth key for production and development. Since October 22, 2014, only [Sandbox Companies](https://developer.intuit.com/docs/api/accounting)
 are allowed to connected to the QBO via the development key. The end-point for sandbox mode is https://sandbox-quickbooks.api.intuit.com.
