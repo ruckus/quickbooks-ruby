@@ -9,8 +9,9 @@ module Quickbooks
       xml_accessor :check_num, :from => 'CheckNum'
       xml_accessor :txn_type, :from => 'TxnType'
       xml_accessor :custom_fields, :from => 'CustomField', :as => [CustomField]
+      xml_accessor :tax_code_ref, :from => 'TaxCodeRef', :as => BaseReference
 
-      reference_setters :class_ref, :account_ref, :payment_method_ref, :entity_ref
+      reference_setters :class_ref, :account_ref, :payment_method_ref, :entity_ref, :tax_code_ref
 
     end
   end

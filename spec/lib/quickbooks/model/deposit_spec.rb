@@ -12,9 +12,9 @@ describe "Quickbooks::Model::Deposit" do
     expect(deposit.txn_date).to eq(Date.new(2015, 3, 7))
     expect(deposit.private_note).to eq("Deposit smoke test")
     expect(deposit.txn_status).to be_nil
-    expect(deposit.line_items.size).to eq(2)
+    expect(deposit.line_items.size).to eq(3)
     expect(deposit.deposit_to_account_ref.value).to eq("4")
-    expect(deposit.total).to eq(200.0)
+    expect(deposit.total).to eq(213.27)
     expect(deposit.currency_ref.value).to eq('USD')
     expect(deposit.exchange_rate).to be_nil
     expect(deposit.line_items[1].deposit_line_detail.entity_ref.type).to eq('CUSTOMER')
@@ -36,6 +36,19 @@ describe "Quickbooks::Model::Deposit" do
     expect(line_item2.deposit_line_detail.account_ref.name).to eq("Uncategorized Expense")
     expect(line_item2.deposit_line_detail.payment_method_ref.value).to eq("1")
     expect(line_item2.deposit_line_detail.payment_method_ref.name).to eq("Cash")
+
+    line_item3 = deposit.line_items[2]
+    expect(line_item3.id).to eq("2")
+    expect(line_item3.amount).to eq(13.77)
+    expect(line_item3.deposit_line_detail?).to eq(true)
+    expect(line_item3.deposit_line_detail.entity_ref.type).to eq('CUSTOMER')
+    expect(line_item3.deposit_line_detail.entity_ref.name).to eq('John Doe')
+    expect(line_item3.deposit_line_detail.entity_ref.value).to eq('59')
+    expect(line_item3.deposit_line_detail.account_ref.value).to eq("32")
+    expect(line_item3.deposit_line_detail.account_ref.name).to eq("Sales Income")
+    expect(line_item3.deposit_line_detail.payment_method_ref.value).to eq("2")
+    expect(line_item3.deposit_line_detail.payment_method_ref.name).to eq("Check")
+    expect(line_item3.deposit_line_detail.tax_code_ref.to_s).to eq('NON')
   end
 
   it "should require at least one line" do
