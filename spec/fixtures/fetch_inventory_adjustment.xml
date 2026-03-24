@@ -1,0 +1,21 @@
+<IntuitResponse xmlns="http://schema.intuit.com/finance/v3" time="2024-01-15T10:00:00.000-08:00">
+  <InventoryAdjustment domain="QBO" sparse="false">
+    <Id>1</Id>
+    <SyncToken>0</SyncToken>
+    <MetaData>
+      <CreateTime>2024-01-15T10:00:00-08:00</CreateTime>
+      <LastUpdatedTime>2024-01-15T10:00:00-08:00</LastUpdatedTime>
+    </MetaData>
+    <DocNumber>ADJ-1001</DocNumber>
+    <TxnDate>2024-01-15</TxnDate>
+    <PrivateNote>Damaged goods write-off</PrivateNote>
+    <AdjustAccountRef name="Cost of Goods Sold">80</AdjustAccountRef>
+
+    <Line>
+      <ItemAdjustmentLineDetail>
+        <ItemRef name="Widget A">42</ItemRef>
+        <QtyDiff>-15.00</QtyDiff>
+      </ItemAdjustmentLineDetail>
+    </Line>
+  </InventoryAdjustment>
+</IntuitResponse>

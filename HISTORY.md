@@ -1,3 +1,7 @@
+## 1.0.26 (2026-03-24)
+
+* Implementing Inventory Adjustment API
+
 ## 1.0.25 (2025-04-14)
 
 * Add ship from address reference to sales receipt (#616). Thanks @rchekaluk
