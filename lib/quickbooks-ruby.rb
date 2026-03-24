@@ -128,6 +128,9 @@ require 'quickbooks/model/purchase_change'
 require 'quickbooks/model/transfer'
 require 'quickbooks/model/change_data_capture'
 require 'quickbooks/model/refund_receipt_change'
+require 'quickbooks/model/item_adjustment_line_detail'
+require 'quickbooks/model/inventory_adjustment_line_item'
+require 'quickbooks/model/inventory_adjustment'
 
 #== Services
 require 'quickbooks/service/service_crud'
@@ -186,6 +189,7 @@ require 'quickbooks/service/purchase_change'
 require 'quickbooks/service/transfer'
 require 'quickbooks/service/change_data_capture'
 require 'quickbooks/service/refund_receipt_change'
+require 'quickbooks/service/inventory_adjustment'
 
 # Register Faraday Middleware
 Faraday::Middleware.register_middleware :gzip => lambda { Gzip }
