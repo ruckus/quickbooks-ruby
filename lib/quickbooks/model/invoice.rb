@@ -59,6 +59,7 @@ module Quickbooks
       xml_accessor :allow_online_payment?, :from => 'AllowOnlinePayment'
       xml_accessor :allow_online_credit_card_payment?, :from => 'AllowOnlineCreditCardPayment'
       xml_accessor :allow_online_ach_payment?, :from => 'AllowOnlineACHPayment'
+      xml_accessor :allow_online_paypal_payment?, :from => 'AllowOnlinePayPalPayment'
       xml_accessor :deposit_to_account_ref, :from => 'DepositToAccountRef', :as => BaseReference
       xml_accessor :bill_email_cc, :from => 'BillEmailCc', :as => EmailAddress
 
