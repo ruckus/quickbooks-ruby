@@ -1,0 +1,5 @@
+<Bill xmlns="http://schema.intuit.com/finance/v3">
+  <Id>1001</Id>
+  <DocNumber>2001</DocNumber>
+  <ClassRef name="Owner">qb-class-owner</ClassRef>
+</Bill>

@@ -1,0 +1,5 @@
+<VendorCredit xmlns="http://schema.intuit.com/finance/v3">
+  <Id>1003</Id>
+  <DocNumber>2003</DocNumber>
+  <ClassRef name="Owner">qb-class-owner</ClassRef>
+</VendorCredit>

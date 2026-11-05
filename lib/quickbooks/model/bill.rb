@@ -27,6 +27,7 @@ module Quickbooks
       xml_accessor :sales_term_ref, :from => 'SalesTermRef', :as => BaseReference
       xml_accessor :attachable_ref, :from => 'AttachableRef', :as => BaseReference
       xml_accessor :ap_account_ref, :from => 'APAccountRef', :as => BaseReference
+      xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
 
       xml_accessor :due_date, :from => 'DueDate', :as => Date
       xml_accessor :remit_to_address, :from => 'RemitToAddr', :as => PhysicalAddress
@@ -43,7 +44,7 @@ module Quickbooks
 
       validate :line_item_size
 
-      reference_setters :department_ref, :vendor_ref, :payer_ref, :sales_term_ref, :currency_ref, :attachable_ref, :ap_account_ref
+      reference_setters :department_ref, :vendor_ref, :payer_ref, :sales_term_ref, :currency_ref, :attachable_ref, :ap_account_ref, :class_ref
     end
   end
 end

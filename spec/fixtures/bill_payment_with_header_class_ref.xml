@@ -1,0 +1,5 @@
+<BillPayment xmlns="http://schema.intuit.com/finance/v3">
+  <Id>1002</Id>
+  <DocNumber>2002</DocNumber>
+  <ClassRef name="Owner">qb-class-owner</ClassRef>
+</BillPayment>
