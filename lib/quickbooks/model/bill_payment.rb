@@ -22,6 +22,7 @@ module Quickbooks
       xml_accessor :currency_ref, :from => 'CurrencyRef', :as => BaseReference
       xml_accessor :exchange_rate, :from => 'ExchangeRate', :as => BigDecimal, :to_xml => to_xml_big_decimal
       xml_accessor :ap_account_ref, :from => 'APAccountRef', :as => BaseReference
+      xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
       xml_accessor :pay_type, :from => 'PayType'
       xml_accessor :process_bill_payment?, :from => 'ProcessBillPayment'
 

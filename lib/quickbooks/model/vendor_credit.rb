@@ -23,6 +23,7 @@ module Quickbooks
       xml_accessor :line_items, :from => 'Line', :as => [PurchaseLineItem]
       xml_accessor :department_ref, :from => 'DepartmentRef', :as => BaseReference
       xml_accessor :ap_account_ref, :from => 'APAccountRef', :as => BaseReference
+      xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
       xml_accessor :vendor_ref, :from => 'VendorRef', :as => BaseReference
       xml_accessor :total, :from => 'TotalAmt', :as => BigDecimal, :to_xml => Proc.new { |val| val.to_f }
 
